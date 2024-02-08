@@ -258,7 +258,7 @@ public class SistemaRecomendacion {
 
         private void modificarTarea(Scanner sc) {
             if (listaDeTareas.isEmpty()) {
-                System.out.println("No hay tareas para modificar.");
+                System.out.println(Colores.ANSI_RED"No hay tareas para modificar.");
                 return;
             }
 
