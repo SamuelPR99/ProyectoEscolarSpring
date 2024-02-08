@@ -142,7 +142,7 @@ public class SistemaRecomendacion {
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("\nSeleccione una opción:\n1. Ver notas de alumnos\n2. Modificar nota de alumno\n3. Ver estadísticas\n4. Agregar nueva tarea\n5. Modificar tarea\n6. Salir del menú");
+            System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n1. Ver notas de alumnos\n2. Modificar nota de alumno\n3. Ver estadísticas\n4. Agregar nueva tarea\n5. Modificar tarea\n6. Salir del menú" + Colores.ANSI_RESET);
 
             int opcion = sc.nextInt();
             sc.nextLine();
@@ -206,7 +206,7 @@ public class SistemaRecomendacion {
             System.out.print("Introduzca la nueva nota para " + nombreAlumno + ": ");
             double nuevaNota = sc.nextDouble();
             alumnoEncontrado.setNota(nuevaNota);
-            System.out.println("Nota modificada correctamente para " + nombreAlumno);
+            System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente para " + nombreAlumno + Colores.ANSI_RESET);
         } else {
             System.err.println("Alumno no encontrado");
         }
@@ -240,9 +240,9 @@ public class SistemaRecomendacion {
 
             double promedio = sumaNotas / alumnos.size();
 
-            System.out.println("Promedio de notas: " + promedio);
+            System.out.println(Colores.ANSI_YELLOW + "Promedio de notas: " + promedio + Colores.ANSI_RESET);
             System.out.println(Colores.ANSI_GREEN + "Nota más alta: " + notaMaxima + Colores.ANSI_RESET);
-            System.out.println("Nota más baja: " + notaMinima);
+            System.out.println(Colores.ANSI_RED + "Nota más baja: " + notaMinima + Colores.ANSI_RESET);
         }
 
      // Método para agregar una nueva tarea
@@ -253,12 +253,12 @@ public class SistemaRecomendacion {
             Tarea nuevaTarea = new Tarea(tipoTarea);
             listaDeTareas.add(nuevaTarea);
 
-            System.out.println("Nueva tarea \"" + tipoTarea + "\" agregada correctamente.");
+            System.out.println(Colores.ANSI_GREEN + "Nueva tarea \"" + tipoTarea + "\" agregada correctamente." + Colores.ANSI_RESET);
         }
 
         private void modificarTarea(Scanner sc) {
             if (listaDeTareas.isEmpty()) {
-                System.out.println(Colores.ANSI_RED"No hay tareas para modificar.");
+                System.out.println(Colores.ANSI_RED + "No hay tareas para modificar." + Colores.ANSI_RESET);
                 return;
             }
 
@@ -281,9 +281,10 @@ public class SistemaRecomendacion {
                 Tarea tareaModificada = new Tarea(nuevoTipo);
                 listaDeTareas.set(numeroTarea - 1, tareaModificada);
 
-                System.out.println("Tarea modificada correctamente.");
+                System.out.println(Colores.ANSI_GREEN + "Tarea modificada correctamente." + Colores.ANSI_RESET);
             } else {
                 System.err.println("Número de tarea no válido.");
             }
         }
+        
 }
