@@ -3,6 +3,8 @@ package com.daw.proyectoescolar.servicios.recomendador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.repositorio.Colores;
+
 public class SistemaRecomendacion {
 	
 	// Atributos
@@ -215,7 +217,7 @@ public class SistemaRecomendacion {
             System.out.println("Estadísticas de los alumnos:");
 
             if (alumnos.isEmpty()) {
-                System.out.println("No hay alumnos para mostrar estadísticas.");
+                System.out.println(Colores.ANSI_RED + "No hay alumnos para mostrar estadísticas." + Colores.ANSI_RESET);
                 return;
             }
 
@@ -239,7 +241,7 @@ public class SistemaRecomendacion {
             double promedio = sumaNotas / alumnos.size();
 
             System.out.println("Promedio de notas: " + promedio);
-            System.out.println("Nota más alta: " + notaMaxima);
+            System.out.println(Colores.ANSI_GREEN + "Nota más alta: " + notaMaxima + Colores.ANSI_RESET);
             System.out.println("Nota más baja: " + notaMinima);
         }
 
