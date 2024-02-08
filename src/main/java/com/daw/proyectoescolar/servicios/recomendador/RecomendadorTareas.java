@@ -2,6 +2,8 @@ package com.daw.proyectoescolar.servicios.recomendador;
 
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.repositorio.Colores;
+
 public class RecomendadorTareas {
 
     public static void main(String[] args) {
@@ -9,7 +11,7 @@ public class RecomendadorTareas {
         Scanner sc = new Scanner(System.in);
         SistemaRecomendacion sistema = new SistemaRecomendacion();
 
-        System.out.println("Bienvenido al sistema de recomendación de tareas");
+        System.out.println(Colores.ANSI_CYAN + "Bienvenido al sistema de recomendación de tareas" + Colores.ANSI_RESET);
 
         Usuario usuario = sistema.login(sc);
 
