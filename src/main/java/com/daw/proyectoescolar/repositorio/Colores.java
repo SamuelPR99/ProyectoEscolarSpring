@@ -25,8 +25,6 @@ public class Colores {
     // Otros estilos
     public static final String ANSI_BOLD = "\u001B[1m"; // Negrita
     public static final String ANSI_UNDERLINE = "\u001B[4m"; // Subrayado
-    public static final String ANSI_REVERSE = "\u001B[7m"; // Reverso
-    public static final String ANSI_INVISIBLE = "\u001B[8m"; // Invisible
     
     // Reset
     public static final String ANSI_RESET = "\u001B[0m"; // Reiniciar
