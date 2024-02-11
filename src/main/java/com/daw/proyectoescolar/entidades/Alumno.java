@@ -2,7 +2,6 @@ package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
 
-import com.daw.proyectoescolar.servicios.recomendador.Tarea;
 import com.daw.proyectoescolar.servicios.recomendador.TareaAvanzada;
 import com.daw.proyectoescolar.servicios.recomendador.TareaBasica;
 import com.daw.proyectoescolar.servicios.recomendador.TareaIntermedia;

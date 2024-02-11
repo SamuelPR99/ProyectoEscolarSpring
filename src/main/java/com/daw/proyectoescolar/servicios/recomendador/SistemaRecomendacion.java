@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
+import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Usuario;
 import com.daw.proyectoescolar.repositorio.Colores;
 
@@ -15,7 +16,7 @@ public class SistemaRecomendacion {
 	private ArrayList<Usuario> usuarios;
     private ArrayList<Tarea> listaDeTareas = new ArrayList<>();
 
-    // Metodos
+    // Constructores
 
     public SistemaRecomendacion() {
     	
@@ -37,7 +38,9 @@ public class SistemaRecomendacion {
         usuarios.add(new Alumno("Carlos", "123", 3.0));
         
     }
-
+    
+    // Metodos
+    
     public Usuario login(Scanner sc) {
         System.out.print("Introduzca su usuario: ");
         String usuario = sc.nextLine();
@@ -61,7 +64,12 @@ public class SistemaRecomendacion {
             boolean salir = false;
 
             while (!salir) {
-                System.out.println("\nSeleccione una opción:\n1. Ver nota\n2. Recomendar tarea\n3. Consultar tareas pendientes\n4. Entregar tarea\n5. Salir del menú");
+                System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
+                		+ "1. Ver nota\n"
+                		+ "2. Recomendar tarea\n"
+                		+ "3. Consultar tareas pendientes\n"
+                		+ "4. Entregar tarea\n"
+                		+ "5. Salir del menú" + Colores.ANSI_RESET);
 
                 int opcion = sc.nextInt();
                 sc.nextLine();
@@ -85,7 +93,7 @@ public class SistemaRecomendacion {
 
                     case 5:
                         salir = true;
-                        System.out.println("Saliendo del menú de alumno...");
+                        System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de alumno..." + Colores.ANSI_RESET);
                         break;
 
                     default:
@@ -107,7 +115,7 @@ public class SistemaRecomendacion {
         ArrayList<Tarea> tareasPendientes = alumno.getTareasPendientes();
 
         if (tareasPendientes.isEmpty()) {
-            System.out.println("No tienes tareas pendientes.");
+            System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes." + Colores.ANSI_RESET);
         } else {
             System.out.println("Tareas Pendientes:");
             for (Tarea tarea : tareasPendientes) {
@@ -121,7 +129,7 @@ public class SistemaRecomendacion {
         ArrayList<Tarea> tareasPendientes = alumno.getTareasPendientes();
 
         if (tareasPendientes.isEmpty()) {
-            System.out.println("No tienes tareas pendientes para entregar.");
+            System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes para entregar." + Colores.ANSI_RESET);
         } else {
             System.out.println("Tareas Pendientes:");
             for (int i = 0; i < tareasPendientes.size(); i++) {
@@ -133,7 +141,7 @@ public class SistemaRecomendacion {
 
             if (numeroTarea >= 1 && numeroTarea <= tareasPendientes.size()) {
                 Tarea tareaEntregada = tareasPendientes.remove(numeroTarea - 1);
-                System.out.println("Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente.");
+                System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
             } else {
                 System.err.println("Número de tarea no válido.");
             }
@@ -147,7 +155,13 @@ public class SistemaRecomendacion {
             boolean salir = false;
 
             while (!salir) {
-                System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n1. Ver notas de alumnos\n2. Modificar nota de alumno\n3. Ver estadísticas\n4. Agregar nueva tarea\n5. Modificar tarea\n6. Salir del menú" + Colores.ANSI_RESET);
+                System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
+                		+ "1. Ver notas de alumnos\n"
+                		+ "2. Modificar nota de alumno\n"
+                		+ "3. Ver estadísticas\n"
+                		+ "4. Agregar nueva tarea\n"
+                		+ "5. Modificar tarea\n"
+                		+ "6. Salir del menú" + Colores.ANSI_RESET);
 
                 int opcion = sc.nextInt();
                 sc.nextLine();
@@ -175,7 +189,7 @@ public class SistemaRecomendacion {
 
                     case 6:
                         salir = true;
-                        System.out.println("Saliendo del menú de profesor...");
+                        System.out.println(Colores.ANSI_BOLD +"Saliendo del menú de profesor..." + Colores.ANSI_RESET);
                         break;
 
                     default:
@@ -253,7 +267,7 @@ public class SistemaRecomendacion {
 
         double promedio = sumaNotas / alumnos.size();
 
-        System.out.println(Colores.ANSI_YELLOW + "Promedio de notas: " + promedio + Colores.ANSI_RESET);
+        System.out.println(Colores.ANSI_PURPLE + "Promedio de notas: " + promedio + Colores.ANSI_RESET);
         System.out.println(Colores.ANSI_GREEN + "Nota más alta: " + notaMaxima + Colores.ANSI_RESET);
         System.out.println(Colores.ANSI_RED + "Nota más baja: " + notaMinima + Colores.ANSI_RESET);
     }
@@ -313,11 +327,11 @@ public class SistemaRecomendacion {
         
     }
     
-    
     // Metodo que va a ejecutar el Main
     public void EjecutarRecomendadorTareas(Scanner sc) {
     	
-        System.out.println(Colores.ANSI_BOLD + Colores.ANSI_CYAN + "Bienvenido al sistema de recomendación de tareas" + Colores.ANSI_RESET);
+    	System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_YELLOW_BACKGROUND + Colores.ANSI_BOLD + Colores.ANSI_CYAN + 
+    			"Bienvenido al sistema de recomendación de tareas" + Colores.ANSI_RESET);
 
         Usuario usuario = login(sc);
 
