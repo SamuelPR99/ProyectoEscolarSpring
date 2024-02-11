@@ -1,9 +1,14 @@
-package com.daw.proyectoescolar.servicios.recomendador;
+package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
 
-public class Alumno extends Usuario {
+import com.daw.proyectoescolar.servicios.recomendador.Tarea;
+import com.daw.proyectoescolar.servicios.recomendador.TareaAvanzada;
+import com.daw.proyectoescolar.servicios.recomendador.TareaBasica;
+import com.daw.proyectoescolar.servicios.recomendador.TareaIntermedia;
 
+public class Alumno extends UsuarioBase {
+	
 	// Atributos
 
     private double nota;
@@ -32,6 +37,11 @@ public class Alumno extends Usuario {
     }
     
     // Metodos
+    
+    @Override
+    public String getTipoUsuario() {
+        return "Alumno";
+    }
 
     public void agregarTareaPendiente(Tarea tarea) {
         tareasPendientes.add(tarea);
