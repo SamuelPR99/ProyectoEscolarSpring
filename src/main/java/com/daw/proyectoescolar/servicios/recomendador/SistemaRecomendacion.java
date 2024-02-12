@@ -336,7 +336,7 @@ public class SistemaRecomendacion {
         Usuario usuario = login(sc);
 
         if (usuario != null) {
-            System.out.println("\nBienvenido " + usuario.getTipoUsuario());
+            System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + Colores.ANSI_RESET);
 
             if (usuario instanceof Alumno) {
                 menuAlumno((Alumno) usuario, sc);

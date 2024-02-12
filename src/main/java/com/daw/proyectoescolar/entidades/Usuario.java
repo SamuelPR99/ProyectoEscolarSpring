@@ -8,8 +8,8 @@ public interface Usuario {
 	 * 
 	 */
 	
-	String getNombre();
-    String getContraseña();
-    String getTipoUsuario();
+	public abstract String getNombre();
+	public abstract String getContraseña();
+	public abstract String getTipoUsuario();
     
 }
