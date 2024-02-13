@@ -1,4 +1,4 @@
-package com.daw.proyectoescolar.servicios.recomendador;
+package com.daw.proyectoescolar.entidades;
 
 public class Tarea {
 	

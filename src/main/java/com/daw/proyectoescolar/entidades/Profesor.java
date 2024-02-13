@@ -1,16 +1,18 @@
-package com.daw.proyectoescolar.servicios.recomendador;
+package com.daw.proyectoescolar.entidades;
 
-public class Profesor extends Usuario {
+public class Profesor extends UsuarioBase {
 	
 	// Atributos
 
     // Constructores
 
-    public Profesor(String nombre, String contraseña) {
+	public Profesor(String nombre, String contraseña) {
         super(nombre, contraseña);
     }
 
     // Getters y setters
+	
+	// Metodos
 
     @Override
     public String getTipoUsuario() {
