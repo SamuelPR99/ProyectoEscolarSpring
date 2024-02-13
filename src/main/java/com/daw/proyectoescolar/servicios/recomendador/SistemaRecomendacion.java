@@ -1,97 +1,107 @@
 package com.daw.proyectoescolar.servicios.recomendador;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.entidades.Alumno;
+import com.daw.proyectoescolar.entidades.Profesor;
+import com.daw.proyectoescolar.entidades.Tarea;
+import com.daw.proyectoescolar.entidades.Usuario;
 import com.daw.proyectoescolar.repositorio.Colores;
 
 public class SistemaRecomendacion {
 	
 	// Atributos
 	
-    private ArrayList<Profesor> profesores;
-    private ArrayList<Alumno> alumnos;
+	private ArrayList<Usuario> usuarios;
     private ArrayList<Tarea> listaDeTareas = new ArrayList<>();
 
-    // Metodos
+    // Constructores
 
     public SistemaRecomendacion() {
     	
-        // Inicializar las listas de profesores y alumnos
-        profesores = new ArrayList<Profesor>();
-        alumnos = new ArrayList<Alumno>();
-        
+    	// Inicialización del ArrayList de usuarios
+        usuarios = new ArrayList<Usuario>();
+
         // Agregar algunos datos de ejemplo
         
         // Profesores
-        profesores.add(new Profesor("Guillamon", "pass1"));
-        profesores.add(new Profesor("Lidia", "pass2"));
-        profesores.add(new Profesor("David", "pass3"));
-        profesores.add(new Profesor("Paco", "pass4"));
+        usuarios.add(new Profesor("Guillamon", "pass1"));
+        usuarios.add(new Profesor("Lidia", "pass2"));
+        usuarios.add(new Profesor("David", "pass3"));
+        usuarios.add(new Profesor("Paco", "pass4"));
 
         // Alumnos
-        alumnos.add(new Alumno("Samuel", "123", 9.0));
-        alumnos.add(new Alumno("Hugo", "123", 5.0));
-        alumnos.add(new Alumno("Enrique", "123", 7.5));
-        alumnos.add(new Alumno("Carlos", "123", 3.0));
+        usuarios.add(new Alumno("Samuel", "123", 9.0));
+        usuarios.add(new Alumno("Hugo", "123", 5.0));
+        usuarios.add(new Alumno("Enrique", "123", 7.5));
+        usuarios.add(new Alumno("Carlos", "123", 3.0));
         
     }
-
+    
+    // Metodos
+    
     public Usuario login(Scanner sc) {
         System.out.print("Introduzca su usuario: ");
         String usuario = sc.nextLine();
         System.out.print("Introduzca su contraseña: ");
         String contraseña = sc.nextLine();
 
-        for (Profesor profesor : profesores) {
-            if (profesor.getNombre().equals(usuario) && profesor.getContraseña().equals(contraseña)) {
-                return profesor;
-            }
-        }
-
-        for (Alumno alumno : alumnos) {
-            if (alumno.getNombre().equals(usuario) && alumno.getContraseña().equals(contraseña)) {
-                return alumno;
+        for (Usuario u : usuarios) {
+            if (u.getNombre().equals(usuario) && u.getContraseña().equals(contraseña)) {
+                return u;
             }
         }
 
         return null;
     }
 
-    public void menuAlumno(Alumno alumno, Scanner sc) {
-        boolean salir = false;
 
-        while (!salir) {
-            System.out.println("\nSeleccione una opción:\n1. Ver nota\n2. Recomendar tarea\n3. Consultar tareas pendientes\n4. Entregar tarea\n5. Salir del menú");
+ // Método para el menú de un alumno
+    public void menuAlumno(Usuario usuario, Scanner sc) {
+        if (usuario instanceof Alumno) {
+            Alumno alumno = (Alumno) usuario;
+            boolean salir = false;
 
-            int opcion = sc.nextInt();
-            sc.nextLine();
+            while (!salir) {
+                System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
+                		+ "1. Ver nota\n"
+                		+ "2. Recomendar tarea\n"
+                		+ "3. Consultar tareas pendientes\n"
+                		+ "4. Entregar tarea\n"
+                		+ "5. Salir del menú" + Colores.ANSI_RESET);
 
-            switch (opcion) {
-                case 1:
-                    mostrarNota(alumno);
-                    break;
+                int opcion = sc.nextInt();
+                sc.nextLine();
 
-                case 2:
-                    alumno.recomendarTarea();
-                    break;
+                switch (opcion) {
+                    case 1:
+                        mostrarNota(alumno);
+                        break;
 
-                case 3:
-                    consultarTareasPendientes(alumno);
-                    break;
+                    case 2:
+                        alumno.recomendarTarea();
+                        break;
 
-                case 4:
-                    marcarTareaCompletada(alumno, sc);
-                    break;
+                    case 3:
+                        consultarTareasPendientes(alumno);
+                        break;
 
-                case 5:
-                    salir = true;
-                    System.out.println("Saliendo del menú de alumno...");
-                    break;
+                    case 4:
+                        marcarTareaCompletada(alumno, sc);
+                        break;
 
-                default:
-                    System.err.println("Opción no válida. Por favor, elige una opción válida.");
+                    case 5:
+                        salir = true;
+                        System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de alumno..." + Colores.ANSI_RESET);
+                        break;
+
+                    default:
+                        System.err.println("Opción no válida. Por favor, elige una opción válida.");
+                }
             }
+        } else {
+            System.err.println("Error: El usuario no es un alumno.");
         }
     }
 
@@ -99,13 +109,13 @@ public class SistemaRecomendacion {
     private void mostrarNota(Alumno alumno) {
         System.out.println("Nota de " + alumno.getNombre() + ": " + alumno.getNota());
     }
-
+    
     // Método para consultar tareas pendientes de un alumno
     private void consultarTareasPendientes(Alumno alumno) {
         ArrayList<Tarea> tareasPendientes = alumno.getTareasPendientes();
 
         if (tareasPendientes.isEmpty()) {
-            System.out.println("No tienes tareas pendientes.");
+            System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes." + Colores.ANSI_RESET);
         } else {
             System.out.println("Tareas Pendientes:");
             for (Tarea tarea : tareasPendientes) {
@@ -119,7 +129,7 @@ public class SistemaRecomendacion {
         ArrayList<Tarea> tareasPendientes = alumno.getTareasPendientes();
 
         if (tareasPendientes.isEmpty()) {
-            System.out.println("No tienes tareas pendientes para entregar.");
+            System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes para entregar." + Colores.ANSI_RESET);
         } else {
             System.out.println("Tareas Pendientes:");
             for (int i = 0; i < tareasPendientes.size(); i++) {
@@ -131,73 +141,88 @@ public class SistemaRecomendacion {
 
             if (numeroTarea >= 1 && numeroTarea <= tareasPendientes.size()) {
                 Tarea tareaEntregada = tareasPendientes.remove(numeroTarea - 1);
-                System.out.println("Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente.");
+                System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
             } else {
                 System.err.println("Número de tarea no válido.");
             }
         }
     }
 
-    public void menuProfesor(Profesor profesor, Scanner sc) {
-        boolean salir = false;
+    // Método para el menú de un profesor
+    public void menuProfesor(Usuario usuario, Scanner sc) {
+        if (usuario instanceof Profesor) {
+            Profesor profesor = (Profesor) usuario;
+            boolean salir = false;
 
-        while (!salir) {
-            System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n1. Ver notas de alumnos\n2. Modificar nota de alumno\n3. Ver estadísticas\n4. Agregar nueva tarea\n5. Modificar tarea\n6. Salir del menú" + Colores.ANSI_RESET);
+            while (!salir) {
+                System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
+                		+ "1. Ver notas de alumnos\n"
+                		+ "2. Modificar nota de alumno\n"
+                		+ "3. Ver estadísticas\n"
+                		+ "4. Agregar nueva tarea\n"
+                		+ "5. Modificar tarea\n"
+                		+ "6. Salir del menú" + Colores.ANSI_RESET);
 
-            int opcion = sc.nextInt();
-            sc.nextLine();
+                int opcion = sc.nextInt();
+                sc.nextLine();
 
-            switch (opcion) {
-                case 1:
-                    verNotasAlumnos(alumnos);
-                    break;
+                switch (opcion) {
+                    case 1:
+                        verNotasAlumnos();
+                        break;
 
-                case 2:
-                    modificarNotaAlumno(alumnos, sc);
-                    break;
+                    case 2:
+                        modificarNotaAlumno(sc);
+                        break;
 
-                case 3:
-                    verEstadisticas(alumnos);
-                    break;
+                    case 3:
+                        verEstadisticas();
+                        break;
 
-                case 4:
-                    agregarNuevaTarea(sc);
-                    break;
+                    case 4:
+                        agregarNuevaTarea(sc);
+                        break;
 
-                case 5:
-                    modificarTarea(sc);
-                    break;
+                    case 5:
+                        modificarTarea(sc);
+                        break;
 
-                case 6:
-                    salir = true;
-                    System.out.println("Saliendo del menú de profesor...");
-                    break;
+                    case 6:
+                        salir = true;
+                        System.out.println(Colores.ANSI_BOLD +"Saliendo del menú de profesor..." + Colores.ANSI_RESET);
+                        break;
 
-                default:
-                    System.err.println("Opción no válida. Por favor, elige una opción válida.");
+                    default:
+                        System.err.println("Opción no válida. Por favor, elige una opción válida.");
+                }
+            }
+        } else {
+            System.err.println("Error: El usuario no es un profesor.");
+        }
+    }
+
+    // Metodo para ver las notas de todos los alumnos
+    private void verNotasAlumnos() {
+        System.out.println("Notas de los alumnos:");
+
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Alumno) {
+                Alumno alumno = (Alumno) usuario;
+                System.out.println(alumno.getNombre() + ": " + alumno.getNota());
             }
         }
     }
 
-    // Método para ver las notas de todos los alumnos
-    private void verNotasAlumnos(ArrayList<Alumno> alumnos) {
-        System.out.println("Notas de los alumnos:");
-
-        for (Alumno alumno : alumnos) {
-            System.out.println(alumno.getNombre() + ": " + alumno.getNota());
-        }
-    }
-
- // Método para modificar la nota de un alumno
-    private void modificarNotaAlumno(ArrayList<Alumno> alumnos, Scanner sc) {
+    // Metodo para modificar la nota de un alumno
+    private void modificarNotaAlumno(Scanner sc) {
         System.out.print("Introduzca el nombre del alumno: ");
         String nombreAlumno = sc.nextLine();
 
         // Buscar al alumno por nombre
         Alumno alumnoEncontrado = null;
-        for (Alumno alumno : alumnos) {
-            if (alumno.getNombre().equals(nombreAlumno)) {
-                alumnoEncontrado = alumno;
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Alumno && usuario.getNombre().equals(nombreAlumno)) {
+                alumnoEncontrado = (Alumno) usuario;
                 break;
             }
         }
@@ -212,79 +237,116 @@ public class SistemaRecomendacion {
         }
     }
 
-        // Método para ver estadísticas de todos los alumnos
-        private void verEstadisticas(ArrayList<Alumno> alumnos) {
-            System.out.println("Estadísticas de los alumnos:");
+    // Metodo para ver estadísticas de todos los alumnos
+    private void verEstadisticas() {
+        System.out.println("Estadísticas de los alumnos:");
 
-            if (alumnos.isEmpty()) {
-                System.out.println(Colores.ANSI_RED + "No hay alumnos para mostrar estadísticas." + Colores.ANSI_RESET);
-                return;
-            }
+        ArrayList<Alumno> alumnos = obtenerAlumnos();
 
-            double sumaNotas = 0;
-            double notaMaxima = Double.MIN_VALUE;
-            double notaMinima = Double.MAX_VALUE;
-
-            for (Alumno alumno : alumnos) {
-                double nota = alumno.getNota();
-                sumaNotas += nota;
-
-                if (nota > notaMaxima) {
-                    notaMaxima = nota;
-                }
-
-                if (nota < notaMinima) {
-                    notaMinima = nota;
-                }
-            }
-
-            double promedio = sumaNotas / alumnos.size();
-
-            System.out.println(Colores.ANSI_YELLOW + "Promedio de notas: " + promedio + Colores.ANSI_RESET);
-            System.out.println(Colores.ANSI_GREEN + "Nota más alta: " + notaMaxima + Colores.ANSI_RESET);
-            System.out.println(Colores.ANSI_RED + "Nota más baja: " + notaMinima + Colores.ANSI_RESET);
+        if (alumnos.isEmpty()) {
+            System.out.println(Colores.ANSI_RED + "No hay alumnos para mostrar estadísticas." + Colores.ANSI_RESET);
+            return;
         }
 
-     // Método para agregar una nueva tarea
-        private void agregarNuevaTarea(Scanner sc) {
-            System.out.print("Introduzca el tipo de la nueva tarea: ");
-            String tipoTarea = sc.nextLine();
+        double sumaNotas = 0;
+        double notaMaxima = Double.MIN_VALUE;
+        double notaMinima = Double.MAX_VALUE;
 
-            Tarea nuevaTarea = new Tarea(tipoTarea);
-            listaDeTareas.add(nuevaTarea);
+        for (Alumno alumno : alumnos) {
+            double nota = alumno.getNota();
+            sumaNotas += nota;
 
-            System.out.println(Colores.ANSI_GREEN + "Nueva tarea \"" + tipoTarea + "\" agregada correctamente." + Colores.ANSI_RESET);
-        }
-
-        private void modificarTarea(Scanner sc) {
-            if (listaDeTareas.isEmpty()) {
-                System.out.println(Colores.ANSI_RED + "No hay tareas para modificar." + Colores.ANSI_RESET);
-                return;
+            if (nota > notaMaxima) {
+                notaMaxima = nota;
             }
 
-            System.out.println("Lista de tareas:");
-            for (int i = 0; i < listaDeTareas.size(); i++) {
-                System.out.println((i + 1) + ". " + listaDeTareas.get(i).getTipo());
-            }
-
-            System.out.print("Introduzca el número de la tarea a modificar: ");
-            int numeroTarea = sc.nextInt();
-
-            // Asumiendo que la numeración de tareas comienza desde 1
-            if (numeroTarea >= 1 && numeroTarea <= listaDeTareas.size()) {
-                sc.nextLine(); 
-
-                System.out.print("Introduzca el nuevo tipo de tarea: ");
-                String nuevoTipo = sc.nextLine();
-
-                // Modificar la tarea existente
-                Tarea tareaModificada = new Tarea(nuevoTipo);
-                listaDeTareas.set(numeroTarea - 1, tareaModificada);
-
-                System.out.println(Colores.ANSI_GREEN + "Tarea modificada correctamente." + Colores.ANSI_RESET);
-            } else {
-                System.err.println("Número de tarea no válido.");
+            if (nota < notaMinima) {
+                notaMinima = nota;
             }
         }
+
+        double promedio = sumaNotas / alumnos.size();
+
+        System.out.println(Colores.ANSI_PURPLE + "Promedio de notas: " + promedio + Colores.ANSI_RESET);
+        System.out.println(Colores.ANSI_GREEN + "Nota más alta: " + notaMaxima + Colores.ANSI_RESET);
+        System.out.println(Colores.ANSI_RED + "Nota más baja: " + notaMinima + Colores.ANSI_RESET);
+    }
+    
+    // Metodo para obtener la lista de alumnos
+    private ArrayList<Alumno> obtenerAlumnos() {
+        ArrayList<Alumno> alumnos = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Alumno) {
+                alumnos.add((Alumno) usuario);
+            }
+        }
+        return alumnos;
+    }
+
+    // Metodo para agregar una nueva tarea
+    private void agregarNuevaTarea(Scanner sc) {
+        System.out.print("Introduzca el tipo de la nueva tarea: ");
+        String tipoTarea = sc.nextLine();
+
+        Tarea nuevaTarea = new Tarea(tipoTarea);
+        listaDeTareas.add(nuevaTarea);
+
+        System.out.println(Colores.ANSI_GREEN + "Nueva tarea \"" + tipoTarea + "\" agregada correctamente." + Colores.ANSI_RESET);
+    }
+
+    // Metodo para modificar una tarea existente
+    private void modificarTarea(Scanner sc) {
+        if (listaDeTareas.isEmpty()) {
+            System.out.println(Colores.ANSI_RED + "No hay tareas para modificar." + Colores.ANSI_RESET);
+            return;
+        }
+
+        System.out.println("Lista de tareas:");
+        for (int i = 0; i < listaDeTareas.size(); i++) {
+            System.out.println((i + 1) + ". " + listaDeTareas.get(i).getTipo());
+        }
+
+        System.out.print("Introduzca el número de la tarea a modificar: ");
+        int numeroTarea = sc.nextInt();
+
+        // Asumiendo que la numeración de tareas comienza desde 1
+        if (numeroTarea >= 1 && numeroTarea <= listaDeTareas.size()) {
+            sc.nextLine();
+
+            System.out.print("Introduzca el nuevo tipo de tarea: ");
+            String nuevoTipo = sc.nextLine();
+
+            // Modificar la tarea existente
+            Tarea tareaModificada = new Tarea(nuevoTipo);
+            listaDeTareas.set(numeroTarea - 1, tareaModificada);
+
+            System.out.println(Colores.ANSI_GREEN + "Tarea modificada correctamente." + Colores.ANSI_RESET);
+        } else {
+            System.err.println("Número de tarea no válido.");
+        }
+        
+    }
+    
+    // Metodo que va a ejecutar el Main
+    public void EjecutarRecomendadorTareas(Scanner sc) {
+    	
+    	System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_YELLOW_BACKGROUND + Colores.ANSI_BOLD + Colores.ANSI_CYAN + 
+    			"Bienvenido al sistema de recomendación de tareas" + Colores.ANSI_RESET);
+
+        Usuario usuario = login(sc);
+
+        if (usuario != null) {
+            System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + Colores.ANSI_RESET);
+
+            if (usuario instanceof Alumno) {
+                menuAlumno((Alumno) usuario, sc);
+            } else if (usuario instanceof Profesor) {
+                menuProfesor((Profesor) usuario, sc);
+            }
+        } else {
+            System.err.println("Usuario o contraseña incorrectos");
+        }
+        
+    }
         
 }
