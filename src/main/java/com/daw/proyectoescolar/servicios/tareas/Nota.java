@@ -2,8 +2,17 @@ package com.daw.proyectoescolar.servicios.tareas;
 
 public class Nota {
 
+	//ATRIBUTOS
+	protected double nota;
+	
+	//CONSTRUCTOR
 	public Nota() {
-		// TODO Auto-generated constructor stub
+		
+	}
+	
+	//MÉTODOS
+	public Nota(double nota) {
+		this.nota=nota;
 	}
 
 }
