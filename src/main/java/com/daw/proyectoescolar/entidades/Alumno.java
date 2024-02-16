@@ -11,8 +11,8 @@ public class Alumno extends UsuarioBase {
 	
 	// Atributos
 
-    private double nota;
-    private ArrayList<Tarea> tareasPendientes;
+    protected double nota;
+    protected ArrayList<Tarea> tareasPendientes;
     
     // Constructores
 
