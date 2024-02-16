@@ -1,5 +1,7 @@
 package com.daw.proyectoescolar.entidades;
 
+import java.util.Scanner;
+
 public interface Usuario {
 	
 	/**
@@ -13,6 +15,6 @@ public interface Usuario {
 	public abstract String getTipoUsuario();
 
 	// En proceso
-	public abstract void verMenu();
+	public abstract void verMenu(Scanner sc);
     
 }

@@ -62,9 +62,10 @@ public class Profesor extends UsuarioBase {
         return "profesor";
     }
 
-    @Override
-    public void verMenu() { throw new UnsupportedOperationException(Colores.ANSI_RED + "Menu no implementado" + Colores.ANSI_RESET);
-
-        
-    }
+   
+	@Override
+	public void verMenu(Scanner sc) {
+		
+		
+	}
 }
