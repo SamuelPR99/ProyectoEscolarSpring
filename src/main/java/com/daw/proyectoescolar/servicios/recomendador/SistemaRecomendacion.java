@@ -150,7 +150,7 @@ public class SistemaRecomendacion {
     // Método para el menú de un profesor
     public void menuProfesor(Usuario usuario, Scanner sc) {
         if (usuario instanceof Profesor) {
-            Profesor profesor = (Profesor) usuario;
+       
             boolean salir = false;
 
             while (!salir) {
