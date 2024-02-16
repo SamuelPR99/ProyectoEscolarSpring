@@ -57,7 +57,6 @@ public class SistemaRecomendacion {
         return null;
     }
 
-
  // Método para el menú de un alumno
     public void menuAlumno(Usuario usuario, Scanner sc) {
         if (usuario instanceof Alumno) {

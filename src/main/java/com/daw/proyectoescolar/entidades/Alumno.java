@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.TareaAvanzada;
@@ -11,8 +12,8 @@ public class Alumno extends UsuarioBase {
 	
 	// Atributos
 
-    private double nota;
-    private ArrayList<Tarea> tareasPendientes;
+    protected double nota;
+    protected ArrayList<Tarea> tareasPendientes;
     
     // Constructores
 
@@ -65,8 +66,8 @@ public class Alumno extends UsuarioBase {
     }
 
     @Override
-    public void verMenu()  { throw new UnsupportedOperationException(Colores.ANSI_RED + "Menu no implementado" + Colores.ANSI_RESET);
-
+    public void verMenu(Scanner sc)  { throw new UnsupportedOperationException(Colores.ANSI_RED + "Menu no implementado" + Colores.ANSI_RESET);
+     
         
     }
 }
