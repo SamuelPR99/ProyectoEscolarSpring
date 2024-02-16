@@ -7,13 +7,14 @@ import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Usuario;
+import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
 
 public class SistemaRecomendacion {
 	
 	// Atributos
 	
-	private ArrayList<Usuario> usuarios;
+	private ArrayList<UsuarioBase> usuarios;
     private ArrayList<Tarea> listaDeTareas = new ArrayList<>();
 
     // Constructores
@@ -21,7 +22,7 @@ public class SistemaRecomendacion {
     public SistemaRecomendacion() {
     	
     	// Inicialización del ArrayList de usuarios
-        usuarios = new ArrayList<Usuario>();
+        usuarios = new ArrayList<UsuarioBase>();
 
         // Agregar algunos datos de ejemplo
         
@@ -56,7 +57,6 @@ public class SistemaRecomendacion {
         return null;
     }
 
-
  // Método para el menú de un alumno
     public void menuAlumno(Usuario usuario, Scanner sc) {
         if (usuario instanceof Alumno) {
@@ -69,29 +69,28 @@ public class SistemaRecomendacion {
                 		+ "2. Recomendar tarea\n"
                 		+ "3. Consultar tareas pendientes\n"
                 		+ "4. Entregar tarea\n"
-                		+ "5. Salir del menú" + Colores.ANSI_RESET);
+                		+ "5. Salir del menu" + Colores.ANSI_RESET);
 
-                int opcion = sc.nextInt();
-                sc.nextLine();
-
+                String opcion = sc.nextLine().toLowerCase();
+           
                 switch (opcion) {
-                    case 1:
+                    case "1", "ver nota":
                         mostrarNota(alumno);
                         break;
 
-                    case 2:
+                    case "2", "recomendar tarea":
                         alumno.recomendarTarea();
                         break;
 
-                    case 3:
+                    case "3", "consultar tareas pendientes":
                         consultarTareasPendientes(alumno);
                         break;
 
-                    case 4:
+                    case "4", "entregar tarea":
                         marcarTareaCompletada(alumno, sc);
                         break;
 
-                    case 5:
+                    case "5", "salir del menu":
                         salir = true;
                         System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de alumno..." + Colores.ANSI_RESET);
                         break;
@@ -161,33 +160,32 @@ public class SistemaRecomendacion {
                 		+ "3. Ver estadísticas\n"
                 		+ "4. Agregar nueva tarea\n"
                 		+ "5. Modificar tarea\n"
-                		+ "6. Salir del menú" + Colores.ANSI_RESET);
+                		+ "6. Salir del menu" + Colores.ANSI_RESET);
 
-                int opcion = sc.nextInt();
-                sc.nextLine();
-
+                String opcion = sc.nextLine().toLowerCase();
+                
                 switch (opcion) {
-                    case 1:
+                    case "1", "ver notas de alumnos":
                         verNotasAlumnos();
                         break;
 
-                    case 2:
+                    case "2", "modificar nota de alumno":
                         modificarNotaAlumno(sc);
                         break;
 
-                    case 3:
+                    case "3", "ver estadísticas":
                         verEstadisticas();
                         break;
 
-                    case 4:
+                    case "4", "agregar nueva tarea":
                         agregarNuevaTarea(sc);
                         break;
 
-                    case 5:
+                    case "5", "modificar tarea":
                         modificarTarea(sc);
                         break;
 
-                    case 6:
+                    case "6", "salir del menu":
                         salir = true;
                         System.out.println(Colores.ANSI_BOLD +"Saliendo del menú de profesor..." + Colores.ANSI_RESET);
                         break;
@@ -227,12 +225,14 @@ public class SistemaRecomendacion {
             }
         }
 
-        if (alumnoEncontrado != null) {
+       try {
             System.out.print("Introduzca la nueva nota para " + nombreAlumno + ": ");
             double nuevaNota = sc.nextDouble();
             alumnoEncontrado.setNota(nuevaNota);
             System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente para " + nombreAlumno + Colores.ANSI_RESET);
-        } else {
+        } 
+       
+       catch (NullPointerException e) {
             System.err.println("Alumno no encontrado");
         }
     }
@@ -284,7 +284,7 @@ public class SistemaRecomendacion {
     }
 
     // Metodo para agregar una nueva tarea
-    private void agregarNuevaTarea(Scanner sc) {
+    public void agregarNuevaTarea(Scanner sc) {
         System.out.print("Introduzca el tipo de la nueva tarea: ");
         String tipoTarea = sc.nextLine();
 
@@ -335,7 +335,7 @@ public class SistemaRecomendacion {
 
         Usuario usuario = login(sc);
 
-        if (usuario != null) {
+       try {
             System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + Colores.ANSI_RESET);
 
             if (usuario instanceof Alumno) {
@@ -343,7 +343,9 @@ public class SistemaRecomendacion {
             } else if (usuario instanceof Profesor) {
                 menuProfesor((Profesor) usuario, sc);
             }
-        } else {
+        } 
+       
+       catch (NullPointerException e) {
             System.err.println("Usuario o contraseña incorrectos");
         }
         
