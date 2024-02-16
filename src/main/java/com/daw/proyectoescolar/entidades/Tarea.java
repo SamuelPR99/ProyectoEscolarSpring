@@ -13,6 +13,10 @@ public class Tarea extends Tema{
 
     // Constructores
     
+    public Tarea(){
+    	
+    }
+    
     public Tarea(String tipo) {
         this.tipo = tipo;
       
