@@ -1,13 +1,12 @@
 package com.daw.proyectoescolar.servicios.registro;
 
 
-public class Usuario {
-    private String nombreUsuario;
-    private String contrasena;
+import java.util.Scanner;
 
-   public Usuario() {
-	   
-   }
+abstract class Usuario {
+    protected String nombreUsuario;
+    protected String contrasena;
+
     public Usuario(String nombreUsuario, String contrasena) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
@@ -17,11 +16,9 @@ public class Usuario {
         return nombreUsuario;
     }
 
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public boolean autenticar(String contrasena) {
+        return this.contrasena.equals(contrasena);
     }
 }
+
+
