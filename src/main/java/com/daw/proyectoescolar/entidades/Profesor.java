@@ -1,5 +1,7 @@
 package com.daw.proyectoescolar.entidades;
 
+import com.daw.proyectoescolar.repositorio.Colores;
+
 public class Profesor extends UsuarioBase {
 	
 	// Atributos
@@ -17,5 +19,11 @@ public class Profesor extends UsuarioBase {
     @Override
     public String getTipoUsuario() {
         return "profesor";
+    }
+
+    @Override
+    public void verMenu() { throw new UnsupportedOperationException(Colores.ANSI_RED + "Menu no implementado" + Colores.ANSI_RESET);
+
+        
     }
 }

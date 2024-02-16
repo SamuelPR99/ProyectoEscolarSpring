@@ -2,6 +2,7 @@ package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
 
+import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.TareaAvanzada;
 import com.daw.proyectoescolar.servicios.recomendador.TareaBasica;
 import com.daw.proyectoescolar.servicios.recomendador.TareaIntermedia;
@@ -61,5 +62,11 @@ public class Alumno extends UsuarioBase {
         System.out.println("Recomendación de tarea para " + getNombre() + ":");
         recomendacion.mostrarRecomendacion();
         agregarTareaPendiente(recomendacion);
+    }
+
+    @Override
+    public void verMenu()  { throw new UnsupportedOperationException(Colores.ANSI_RED + "Menu no implementado" + Colores.ANSI_RESET);
+
+        
     }
 }

@@ -11,5 +11,8 @@ public interface Usuario {
 	public abstract String getNombre();
 	public abstract String getContraseña();
 	public abstract String getTipoUsuario();
+
+	// En proceso
+	public abstract void verMenu();
     
 }
