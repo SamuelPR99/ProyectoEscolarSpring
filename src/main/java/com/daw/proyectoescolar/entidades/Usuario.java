@@ -14,7 +14,7 @@ public interface Usuario {
 	public abstract String getContraseña();
 	public abstract String getTipoUsuario();
 
-	// En proceso
+	// Implementa verMenu en los hijos del UsuarioBase
 	public abstract void verMenu(Scanner sc);
     
 }

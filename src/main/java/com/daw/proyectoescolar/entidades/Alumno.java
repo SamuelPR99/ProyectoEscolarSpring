@@ -1,9 +1,11 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
 import com.daw.proyectoescolar.servicios.recomendador.TareaAvanzada;
 import com.daw.proyectoescolar.servicios.recomendador.TareaBasica;
 import com.daw.proyectoescolar.servicios.recomendador.TareaIntermedia;
@@ -13,14 +15,23 @@ public class Alumno extends UsuarioBase {
 	// Atributos
 
     protected double nota;
+    protected String dni;
     protected ArrayList<Tarea> tareasPendientes;
     
     // Constructores
+    
+    public Alumno() {
+	}
 
     public Alumno(String nombre, String contraseña, double nota) {
         super(nombre, contraseña);
         this.nota = nota;
         this.tareasPendientes = new ArrayList<Tarea>();
+    }
+
+	public Alumno(String nombreUsuario, String contrasena, String dni) {
+        super(nombreUsuario, contrasena);
+        this.dni = dni;
     }
     
     // Getters y setters
@@ -64,10 +75,48 @@ public class Alumno extends UsuarioBase {
         recomendacion.mostrarRecomendacion();
         agregarTareaPendiente(recomendacion);
     }
-
+    
+    // Menu alumno
     @Override
-    public void verMenu(Scanner sc)  { throw new UnsupportedOperationException(Colores.ANSI_RED + "Menu no implementado" + Colores.ANSI_RESET);
-     
-        
+    public void verMenu(Scanner sc) {
+        SistemaRecomendacion sistema = new SistemaRecomendacion();
+        boolean salir = false;
+
+        while (!salir) {
+            System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
+                    + "1. Ver nota\n"
+                    + "2. Recomendar tarea\n"
+                    + "3. Consultar tareas pendientes\n"
+                    + "4. Entregar tarea\n"
+                    + "5. Salir del menú" + Colores.ANSI_RESET);
+
+            String opcion = sc.nextLine().toLowerCase();
+
+            switch (opcion) {
+                case "1", "ver nota":
+                    System.out.println("Nota actual: " + getNota());
+                    break;
+
+                case "2", "recomendar tarea":
+                    recomendarTarea();
+                    break;
+
+                case "3", "consultar tareas pendientes":
+                    sistema.consultarTareasPendientes(this);
+                    break;
+
+                case "4", "entregar tarea":
+                    sistema.marcarTareaCompletada(this, sc);
+                    break;
+
+                case "5", "salir del menú":
+                    salir = true;
+                    System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de alumno..." + Colores.ANSI_RESET);
+                    break;
+
+                default:
+                    System.err.println("Opción no válida. Por favor, elige una opción válida.");
+            }
+        }
     }
 }
