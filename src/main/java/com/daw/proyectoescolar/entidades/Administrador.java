@@ -26,6 +26,7 @@ public class Administrador extends UsuarioBase {
 		return "Administrador";
 	}
 
+	// Menu administrador
 	@Override
 	public void verMenu(Scanner sc) {
 

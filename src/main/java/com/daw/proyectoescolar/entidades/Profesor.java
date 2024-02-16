@@ -25,6 +25,8 @@ public class Profesor extends UsuarioBase {
 	
 	// Metodos
 	
+	
+	// Paula mueve las opciones de este menu al que esta abajo, asi lo tenemos todo en uno xd
 	public void mostrarMenu() {
 		
 		int opcion;
@@ -56,14 +58,11 @@ public class Profesor extends UsuarioBase {
 		
 	}
 	
-	
-
     @Override
     public String getTipoUsuario() {
         return "profesor";
     }
 
-   
     // Menu profesor
     @Override
     public void verMenu(Scanner sc) {

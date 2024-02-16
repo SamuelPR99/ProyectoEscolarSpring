@@ -35,9 +35,11 @@ public class SistemaRecomendacion {
 
         // Alumnos
         usuarios.add(new Alumno("Samuel", "123", 9.0));
-        usuarios.add(new Alumno("Hugo", "123", 5.0));
-        usuarios.add(new Alumno("Enrique", "123", 7.5));
-        usuarios.add(new Alumno("Carlos", "123", 3.0));
+        usuarios.add(new Alumno("Paula", "123", 5.0));
+        usuarios.add(new Alumno("Hugo", "123", 7.5));
+        usuarios.add(new Alumno("Zamudio", "123", 3.0));
+        
+        // Administradores
         
     }
     
@@ -56,11 +58,6 @@ public class SistemaRecomendacion {
         }
 
         return null;
-    }
-
-    // Método para mostrar la nota de un alumno
-    public void mostrarNota(Alumno alumno) {
-        System.out.println("Nota de " + alumno.getNombre() + ": " + alumno.getNota());
     }
     
     // Método para consultar tareas pendientes de un alumno

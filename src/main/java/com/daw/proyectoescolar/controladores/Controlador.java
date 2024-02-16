@@ -6,6 +6,7 @@ import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Usuario;
+import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
 
 public class Controlador {
@@ -25,7 +26,8 @@ public class Controlador {
         Usuario usuario = login_improvisao.login(sc);
 
         try {
-            System.out.println("\nBienvenido " + usuario.getTipoUsuario());
+        	
+            System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + Colores.ANSI_RESET);
 
             if (usuario instanceof Alumno) {
                 usuario.verMenu(sc);
@@ -36,6 +38,7 @@ public class Controlador {
             } else {
                 System.err.println("Usuario no reconocido");
             }
+            
         } catch (NullPointerException e) {
             System.err.println("Usuario o contraseña incorrectos");
     	
