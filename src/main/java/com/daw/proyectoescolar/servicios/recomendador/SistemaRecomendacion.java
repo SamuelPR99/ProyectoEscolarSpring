@@ -45,6 +45,8 @@ public class SistemaRecomendacion {
     
     // Metodos
     
+    
+    // Login improvisado
     public Usuario login(Scanner sc) {
         System.out.print("Introduzca su usuario: ");
         String usuario = sc.nextLine();
@@ -60,7 +62,7 @@ public class SistemaRecomendacion {
         return null;
     }
     
-    // Método para consultar tareas pendientes de un alumno
+    // Consultar tareas pendientes de un alumno
     public void consultarTareasPendientes(Alumno alumno) {
         ArrayList<Tarea> tareasPendientes = alumno.getTareasPendientes();
 
@@ -74,7 +76,7 @@ public class SistemaRecomendacion {
         }
     }
     
- // Método para marcar una tarea como completada
+    // Marcar una tarea como completada
     public void marcarTareaCompletada(Alumno alumno, Scanner sc) {
         ArrayList<Tarea> tareasPendientes = alumno.getTareasPendientes();
 
@@ -98,7 +100,7 @@ public class SistemaRecomendacion {
         }
     }
 
-    // Metodo para ver las notas de todos los alumnos
+    // Ver las notas de todos los alumnos
     public void verNotasAlumnos() {
         System.out.println("Notas de los alumnos:");
 
@@ -110,7 +112,7 @@ public class SistemaRecomendacion {
         }
     }
 
-    // Metodo para modificar la nota de un alumno
+    // Modificar la nota de un alumno
     public void modificarNotaAlumno(Scanner sc) {
         System.out.print("Introduzca el nombre del alumno: ");
         String nombreAlumno = sc.nextLine();
@@ -136,7 +138,7 @@ public class SistemaRecomendacion {
         }
     }
 
-    // Metodo para ver estadísticas de todos los alumnos
+    // Ver estadísticas de todos los alumnos
     public void verEstadisticas() {
         System.out.println("Estadísticas de los alumnos:");
 
@@ -171,7 +173,7 @@ public class SistemaRecomendacion {
         System.out.println(Colores.ANSI_RED + "Nota más baja: " + notaMinima + Colores.ANSI_RESET);
     }
     
-    // Metodo para obtener la lista de alumnos
+    // Crear la lista de alumnos mediante la lista usuarios
     public ArrayList<Alumno> obtenerAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
         for (Usuario usuario : usuarios) {
@@ -182,7 +184,7 @@ public class SistemaRecomendacion {
         return alumnos;
     }
 
-    // Metodo para agregar una nueva tarea
+    // Agregar una nueva tarea
     public void agregarNuevaTarea(Scanner sc) {
         System.out.print("Introduzca el tipo de la nueva tarea: ");
         String tipoTarea = sc.nextLine();
@@ -193,7 +195,7 @@ public class SistemaRecomendacion {
         System.out.println(Colores.ANSI_GREEN + "Nueva tarea \"" + tipoTarea + "\" agregada correctamente." + Colores.ANSI_RESET);
     }
 
-    // Metodo para modificar una tarea existente
+    // Modificar una tarea existente
     public void modificarTarea(Scanner sc) {
         if (listaDeTareas.isEmpty()) {
             System.out.println(Colores.ANSI_RED + "No hay tareas para modificar." + Colores.ANSI_RESET);
@@ -226,6 +228,4 @@ public class SistemaRecomendacion {
         
     }
     
-   
-        
 }
