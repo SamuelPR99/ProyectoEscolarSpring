@@ -8,7 +8,6 @@ import com.daw.proyectoescolar.servicios.tareas.Tema;
 
 
 public class Profesor extends UsuarioBase {
-	static Scanner sc= new Scanner(System.in);
 	// Atributos
 
     // Constructores
@@ -27,7 +26,7 @@ public class Profesor extends UsuarioBase {
 	
 	
 	// Paula mueve las opciones de este menu al que esta abajo, asi lo tenemos todo en uno xd
-	public void mostrarMenu() {
+	public void mostrarMenu(Scanner sc) {
 		
 		int opcion;
 		

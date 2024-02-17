@@ -17,7 +17,6 @@ public class Controlador {
 
         Scanner sc = new Scanner(System.in);
         
-        
         // AQUI IRIA LOGIN DE ZAMUDIO, DE MOMENTO USAR EL MIO
         SistemaRecomendacion login_improvisao = new SistemaRecomendacion();
         
