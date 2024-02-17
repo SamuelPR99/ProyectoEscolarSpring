@@ -110,7 +110,7 @@ public class Alumno extends UsuarioBase {
                     break;
 
                 case "5", "salir del menu":
-                    System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de alumno..." + Colores.ANSI_RESET);
+                    System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de alumno..." + Colores.ANSI_RESET);
                     break;
 
                 default:

@@ -104,7 +104,7 @@ public class Profesor extends UsuarioBase {
 	                break;
 
 	            case "6", "salir del menu":
-	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de profesor..." + Colores.ANSI_RESET);
+	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de profesor..." + Colores.ANSI_RESET);
 	                break;
 
 	            default:
