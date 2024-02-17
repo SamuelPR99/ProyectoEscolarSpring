@@ -64,51 +64,56 @@ public class Profesor extends UsuarioBase {
     }
 
     // Menu profesor
-    @Override
-    public void verMenu(Scanner sc) {
-        SistemaRecomendacion sistema = new SistemaRecomendacion();
-        boolean salir = false;
+	@Override
+	public void verMenu(Scanner sc) {
+	    SistemaRecomendacion sistema = new SistemaRecomendacion();
+	    String opcion;
 
-        while (!salir) {
-            System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
-                    + "1. Ver notas de alumnos\n"
-                    + "2. Modificar nota de alumno\n"
-                    + "3. Ver estadísticas\n"
-                    + "4. Agregar nueva tarea\n"
-                    + "5. Modificar tarea\n"
-                    + "6. Salir del menu" + Colores.ANSI_RESET);
+	    do {
+	    	
+	        System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
+	                + "1. Ver notas de alumnos\n"
+	                + "2. Modificar nota de alumno\n"
+	                + "3. Ver estadísticas\n"
+	                + "4. Agregar nueva tarea\n"
+	                + "5. Modificar tarea\n"
+	                + "6. Salir del menu" + Colores.ANSI_RESET);
 
-            String opcion = sc.nextLine().toLowerCase();
+	        opcion = sc.nextLine().toLowerCase();
 
-            switch (opcion) {
-                case "1", "ver notas de alumnos":
-                    sistema.verNotasAlumnos();
-                    break;
+	        switch (opcion) {
+	        
+	            case "1", "ver notas de alumnos":
+	                sistema.verNotasAlumnos();
+	                break;
 
-                case "2", "modificar nota de alumno":
-                    sistema.modificarNotaAlumno(sc);
-                    break;
+	            case "2", "modificar nota de alumno":
+	                sistema.modificarNotaAlumno(sc);
+	                break;
 
-                case "3", "ver estadísticas":
-                    sistema.verEstadisticas();
-                    break;
+	            case "3", "ver estadísticas":
+	                sistema.verEstadisticas();
+	                break;
 
-                case "4", "agregar nueva tarea":
-                    sistema.agregarNuevaTarea(sc);
-                    break;
+	            case "4", "agregar nueva tarea":
+	                sistema.agregarNuevaTarea(sc);
+	                break;
 
-                case "5", "modificar tarea":
-                    sistema.modificarTarea(sc);
-                    break;
+	            case "5", "modificar tarea":
+	                sistema.modificarTarea(sc);
+	                break;
 
-                case "6", "salir del menú":
-                    salir = true;
-                    System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de profesor..." + Colores.ANSI_RESET);
-                    break;
+	            case "6", "salir del menu":
+	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de profesor..." + Colores.ANSI_RESET);
+	                break;
 
-                default:
-                    System.err.println("Opción no válida. Por favor, elige una opción válida.");
-            }
-        }
-    }
+	            default:
+	                System.err.println("Opcion no valida. Por favor, elige una opción valida.");
+	                
+	        }
+	        
+	    } while (!opcion.equals("6") && !opcion.equals("salir del menu"));
+	    
+	}
+	
 }

@@ -80,17 +80,17 @@ public class Alumno extends UsuarioBase {
     @Override
     public void verMenu(Scanner sc) {
         SistemaRecomendacion sistema = new SistemaRecomendacion();
-        boolean salir = false;
+        String opcion;
 
-        while (!salir) {
-            System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
+        do {
+            System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
                     + "1. Ver nota\n"
                     + "2. Recomendar tarea\n"
                     + "3. Consultar tareas pendientes\n"
                     + "4. Entregar tarea\n"
-                    + "5. Salir del menú" + Colores.ANSI_RESET);
+                    + "5. Salir del menu" + Colores.ANSI_RESET);
 
-            String opcion = sc.nextLine().toLowerCase();
+            opcion = sc.nextLine().toLowerCase();
 
             switch (opcion) {
                 case "1", "ver nota":
@@ -109,14 +109,13 @@ public class Alumno extends UsuarioBase {
                     sistema.marcarTareaCompletada(this, sc);
                     break;
 
-                case "5", "salir del menú":
-                    salir = true;
+                case "5", "salir del menu":
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de alumno..." + Colores.ANSI_RESET);
                     break;
 
                 default:
-                    System.err.println("Opción no válida. Por favor, elige una opción válida.");
+                    System.err.println("Opcion no valida. Por favor, elige una opción valida.");
             }
-        }
+        } while (!opcion.equals("5") && !opcion.equals("salir del menu"));
     }
 }

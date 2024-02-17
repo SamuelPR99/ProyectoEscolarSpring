@@ -31,6 +31,8 @@ public class Administrador extends UsuarioBase {
 	public void verMenu(Scanner sc) {
 
 		
-	}
-
-}
+	}  
+       
+}      
+       
+       
