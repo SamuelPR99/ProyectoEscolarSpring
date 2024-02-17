@@ -32,6 +32,8 @@ public class Administrador extends UsuarioBase {
 	@Override
 	public void verMenu(Scanner sc) {
 
+		// Inicializar objeto que realize los metodos de administrador, etc.
+		
 	    String opcion;
 
 	    do {
