@@ -36,8 +36,14 @@ public class Administrador extends UsuarioBase {
 
 	    do {
 	    	
-	        System.out.println(Colores.ANSI_YELLOW + "lo que sea" + Colores.ANSI_RESET);
-
+	    	System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
+	                + "1. lo que sea\n"
+	                + "2. lo que sea2\n"
+	                + "3. lo que sea3\n"
+	                + "4. lo que sea4\n"
+	                + "5. lo que sea5\n"
+	                + "6. Salir del menu" + Colores.ANSI_RESET);
+	    	
 	        opcion = sc.nextLine().toLowerCase();
 
 	        switch (opcion) {
