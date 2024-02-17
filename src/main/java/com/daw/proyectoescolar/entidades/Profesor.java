@@ -8,6 +8,7 @@ import com.daw.proyectoescolar.servicios.tareas.Tema;
 
 
 public class Profesor extends UsuarioBase {
+	
 	// Atributos
 
     // Constructores
