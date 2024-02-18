@@ -101,7 +101,7 @@ public class Alumno extends UsuarioBase {
                     recomendarTarea();
                     break;
 
-                case "3", "consultar tareas pendientes":
+                case "3", "consultar tareas pendientes": 
                     sistema.consultarTareasPendientes(this);
                     break;
 
