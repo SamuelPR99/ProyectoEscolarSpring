@@ -13,7 +13,7 @@ import com.daw.proyectoescolar.servicios.recomendador.TareaIntermedia;
 public class Alumno extends UsuarioBase {
 	
 	// Atributos
-
+static Scanner sc= new Scanner(System.in);
     protected double nota;
     protected String dni;
     protected ArrayList<Tarea> tareasPendientes;
@@ -21,7 +21,13 @@ public class Alumno extends UsuarioBase {
     // Constructores
     
     public Alumno() {
+<<<<<<< Updated upstream
 	}
+=======
+    	
+    }
+
+>>>>>>> Stashed changes
 
     public Alumno(String nombre, String contraseña, double nota) {
         super(nombre, contraseña);
@@ -34,6 +40,28 @@ public class Alumno extends UsuarioBase {
         this.dni = dni;
     }
     
+    public void mostrarMenu() {
+    	int opcion;
+    	do {
+    		System.out.println("Bienvenido Alumno, seleccione una opcion: \n"
+    				+ "1. Ver listado de temas"
+    				+ "2. Salir");
+    		opcion= sc.nextInt();
+    		switch(opcion) {
+    		case 1:
+    			System.out.println("Listado de Temas");
+    			//new Tema().
+    		break;
+    		case 2: 
+    			System.out.println("Saliendo...");
+    			
+    		break;
+    		}
+    	
+    	
+    	
+    	}while(opcion!=2);
+    }
     // Getters y setters
 
     public double getNota() {

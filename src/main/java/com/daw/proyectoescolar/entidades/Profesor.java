@@ -32,10 +32,12 @@ public class Profesor extends UsuarioBase {
 		int opcion;
 		
 		do {
-			System.out.println("Bienvenido Profesor");
-			System.out.println("1. Ver Listado de Alumnos");
-			System.out.println("2. Ver Listado de Temas");
-			System.out.println("3. Salir");
+			System.out.println("Bienvenido Profesor \n"
+					+"1. Ver Listado de Alumnos \n"
+					+"2. Ver Listado de Temas \n"
+					+"3. Salir \n"
+					);
+			
 			opcion=sc.nextInt();
 		
 			switch(opcion) {
@@ -45,6 +47,9 @@ public class Profesor extends UsuarioBase {
 			case 2:
 				System.out.println("Lista temas y tareas");
 				new Tema().mostrarTemas();
+				System.out.println("Introduce numero del tema");
+				int opcionTema=sc.nextInt();
+				
 				new Tarea().mostrarTareas();
 				break;
 			case 3:

@@ -3,7 +3,7 @@ package com.daw.proyectoescolar.servicios.tareas;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Tema {
+public class Tema  {
 
 	protected String nombre;
 	protected ArrayList<Tarea>tareas;

@@ -8,6 +8,7 @@ public class Tarea extends Tema{
 	protected String nombre;
 	protected String descripcion;
 	protected ArrayList<Tarea>tareas;
+	protected 
 	
 	
 	//CONSTRUCTORES
