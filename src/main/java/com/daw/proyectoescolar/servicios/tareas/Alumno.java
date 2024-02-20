@@ -47,7 +47,7 @@ public class Alumno {
 			switch(opcion){
 			case 1:
 				System.out.println("Listado de Temas");
-				new Tema().mostrarTemas();
+				
 				break;
 			case 2:
 				 System.out.println("Saliendo...");

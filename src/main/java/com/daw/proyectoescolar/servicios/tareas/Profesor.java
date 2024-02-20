@@ -80,6 +80,9 @@ public class Profesor {
 			}
 		}
 		
+		public void mostrarListaAlumnos() {
+			
+		}
 		public void prueba() {
 			temas = new ArrayList<Tema>();
 			
