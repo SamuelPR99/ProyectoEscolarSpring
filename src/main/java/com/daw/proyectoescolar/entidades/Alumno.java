@@ -21,13 +21,7 @@ static Scanner sc= new Scanner(System.in);
     // Constructores
     
     public Alumno() {
-<<<<<<< Updated upstream
 	}
-=======
-    	
-    }
-
->>>>>>> Stashed changes
 
     public Alumno(String nombre, String contraseña, double nota) {
         super(nombre, contraseña);

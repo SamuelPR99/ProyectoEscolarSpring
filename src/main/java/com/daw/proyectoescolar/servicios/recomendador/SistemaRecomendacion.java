@@ -1,9 +1,9 @@
 package com.daw.proyectoescolar.servicios.recomendador;
 
 import java.util.ArrayList;
- 
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
@@ -40,20 +40,20 @@ public class SistemaRecomendacion {
         usuarios.add(new Alumno("Zamudio", "123", 3.0));
         
         // Administradores
-        
+        usuarios.add(new Administrador("Lolo", "pass1"));
     }
     
     // Metodos
     
     
     // Login improvisado
-    public Usuario login(Scanner sc) {
+    public UsuarioBase login(Scanner sc) {
         System.out.print("Introduzca su usuario: ");
         String usuario = sc.nextLine();
         System.out.print("Introduzca su contraseña: ");
         String contraseña = sc.nextLine();
 
-        for (Usuario u : usuarios) {
+        for (UsuarioBase u : usuarios) {
             if (u.getNombre().equals(usuario) && u.getContraseña().equals(contraseña)) {
                 return u;
             }

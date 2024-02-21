@@ -2,10 +2,7 @@ package com.daw.proyectoescolar.controladores;
 
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.entidades.Administrador;
-import com.daw.proyectoescolar.entidades.Alumno;
-import com.daw.proyectoescolar.entidades.Profesor;
-import com.daw.proyectoescolar.entidades.Usuario;
+import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
 
@@ -22,17 +19,17 @@ public class Controlador {
         
         System.out.println("Bienvenido a la aplicacion escolar");
 
-        Usuario usuario = login_improvisao.login(sc);
+        UsuarioBase usuario = login_improvisao.login(sc);
 
         try {
         	
             System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + Colores.ANSI_RESET);
 
-            if (usuario instanceof Alumno) {
+            if (usuario.getTipoUsuario().equals("Alumno")) {
                 usuario.verMenu(sc);
-            } else if (usuario instanceof Profesor) {
+            } else if (usuario.getTipoUsuario().equals("Profesor")) {
                 usuario.verMenu(sc);
-            } else if (usuario instanceof Administrador) {
+            } else if (usuario.getTipoUsuario().equals("Administrador")) {
             	usuario.verMenu(sc);
             } else {
                 System.err.println("Usuario no reconocido");

@@ -1,12 +1,12 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
 import com.daw.proyectoescolar.servicios.tareas.Tema;
-import com.daw.proyectoescolar.servicios.tareas.Profesor;
 
 
 public class Profesor extends UsuarioBase {
@@ -26,15 +26,10 @@ public class Profesor extends UsuarioBase {
     // Getters y setters
 	
 	// Metodos
-	
-	
-	// Paula mueve las opciones de este menu al que esta abajo, asi lo tenemos todo en uno xd
-	//oki
-	
-	
+		
     @Override
     public String getTipoUsuario() {
-        return "profesor";
+        return "Profesor";
     }
 
     // Menu profesor
@@ -64,7 +59,7 @@ public class Profesor extends UsuarioBase {
 	        		tema.mostrarTemas();
 	        		break;
 	            case "2", "ver lista de alumnos":
-	                a.mostrarListaAlumnos();
+	            	a.mostrarListaAlumnos();
 	            	sistema.verNotasAlumnos();
 	                break;
 
@@ -93,22 +88,25 @@ public class Profesor extends UsuarioBase {
 	                
 	        }
 	        
-	    } while (!opcion.equals("6") && !opcion.equals("salir del menu"));
+	    } while (!opcion.equals("7") && !opcion.equals("salir del menu"));
 	    
 	}
+	
 	private void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
 		// TODO Auto-generated method stub
 		System.out.println("Lista de alumnos:");
 		for (Alumno alumno : alumnos) {
-            System.out.println(alumno.getNombre());
-        }
+          System.out.println(alumno.getNombre());
+      }
+		
 	}
 	private Tema Tema(ArrayList<Tema> tema) {
 		// TODO Auto-generated method stub
 		System.out.println("Lista de temas:");
-        for (Tema tema : tema) {
-            System.out.println(tema.getTemas());
-        }
+	    for (Tema tema : tema) {
+	        System.out.println(tema.getTemas());
+	    }
+	    
 	}
 	
 }
