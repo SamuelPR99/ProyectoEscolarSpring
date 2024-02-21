@@ -12,6 +12,12 @@ public class TipoIncidencia extends Incidencias{
 	
 	public TipoIncidencia(int idIncidencia, String descripcion, TipoIncidencia tipoIncidencia) {
 		super(idIncidencia, descripcion, tipoIncidencia);
+		this.incidenciaAlumno = incidenciaAlumno
+		this.incidenciaProfesor = incidenciaProfesor
+		this.incidenciaAplicacion = incidenciaAplicacion
+		
 	}
+	
+	
 	
 }
