@@ -22,15 +22,15 @@ public class Controlador {
         UsuarioBase usuario = login_improvisao.login(sc);
 
         try {
-        	
+        	  	
             System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + Colores.ANSI_RESET);
 
-            if (usuario.getTipoUsuario().equals("Alumno")) {
+            if (usuario.getTipoUsuario().equals("Alumno") 
+            		|| usuario.getTipoUsuario().equals("Profesor") 
+            		|| usuario.getTipoUsuario().equals("Administrador")) {
+            	
                 usuario.verMenu(sc);
-            } else if (usuario.getTipoUsuario().equals("Profesor")) {
-                usuario.verMenu(sc);
-            } else if (usuario.getTipoUsuario().equals("Administrador")) {
-            	usuario.verMenu(sc);
+            
             } else {
                 System.err.println("Usuario no reconocido");
             }
