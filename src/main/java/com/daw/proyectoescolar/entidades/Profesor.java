@@ -42,7 +42,7 @@ public class Profesor extends UsuarioBase {
 
 	    do {
 	    	
-	        System.out.println(Colores.ANSI_YELLOW + "Bienvenido Profesor"+ "\nSeleccione una opcion:\n"
+	        System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
 	                + "1. Ver lista de temas"
 	        		+ "2. Ver lista de alumnos\n"
 	                + "3. Modificar nota de alumno\n"
@@ -59,7 +59,7 @@ public class Profesor extends UsuarioBase {
 	        		tema.mostrarTemas();
 	        		break;
 	            case "2", "ver lista de alumnos":
-	            	a.mostrarListaAlumnos();
+                    a.mostrarListaAlumnos();
 	            	sistema.verNotasAlumnos();
 	                break;
 
