@@ -21,7 +21,7 @@ static Scanner sc= new Scanner(System.in);
     // Constructores
     
     public Alumno() {
-	}
+    }
 
     public Alumno(String nombre, String contraseña, double nota) {
         super(nombre, contraseña);
@@ -138,6 +138,7 @@ static Scanner sc= new Scanner(System.in);
                 default:
                     System.err.println("Opcion no valida. Por favor, elige una opción valida.");
             }
+            
         } while (!opcion.equals("5") && !opcion.equals("salir del menu"));
     }
 }
