@@ -34,28 +34,7 @@ public class Alumno extends UsuarioBase {
         this.dni = dni;
     }
     
-    public void mostrarMenu(Scanner sc) {
-    	int opcion;
-    	do {
-    		System.out.println("Bienvenido Alumno, seleccione una opcion: \n"
-    				+ "1. Ver listado de temas"
-    				+ "2. Salir");
-    		opcion= sc.nextInt();
-    		switch(opcion) {
-    		case 1:
-    			System.out.println("Listado de Temas");
-    			//new Tema().
-    		break;
-    		case 2: 
-    			System.out.println("Saliendo...");
-    			
-    		break;
-    		}
-    	
-    	
-    	
-    	}while(opcion!=2);
-    }
+   
     // Getters y setters
 
     public double getNota() {
@@ -141,6 +120,30 @@ public class Alumno extends UsuarioBase {
             
         } while (!opcion.equals("5") && !opcion.equals("salir del menu"));
         
+    }
+    
+    //Menu de prueba de paula (no hacer caso)
+    public void mostrarMenu(Scanner sc) {
+    	int opcion;
+    	do {
+    		System.out.println("Bienvenido Alumno, seleccione una opcion: \n"
+    				+ "1. Ver listado de temas"
+    				+ "2. Salir");
+    		opcion= sc.nextInt();
+    		switch(opcion) {
+    		case 1:
+    			System.out.println("Listado de Temas");
+    			//new Tema().
+    		break;
+    		case 2: 
+    			System.out.println("Saliendo...");
+    			
+    		break;
+    		}
+    	
+    	
+    	
+    	}while(opcion!=2);
     }
     
 }
