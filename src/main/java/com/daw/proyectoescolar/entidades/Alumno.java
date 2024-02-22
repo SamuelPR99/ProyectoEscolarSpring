@@ -13,7 +13,7 @@ import com.daw.proyectoescolar.servicios.recomendador.TareaIntermedia;
 public class Alumno extends UsuarioBase {
 	
 	// Atributos
-static Scanner sc= new Scanner(System.in);
+	
     protected double nota;
     protected String dni;
     protected ArrayList<Tarea> tareasPendientes;
@@ -21,7 +21,7 @@ static Scanner sc= new Scanner(System.in);
     // Constructores
     
     public Alumno() {
-	}
+    }
 
     public Alumno(String nombre, String contraseña, double nota) {
         super(nombre, contraseña);
@@ -34,7 +34,7 @@ static Scanner sc= new Scanner(System.in);
         this.dni = dni;
     }
     
-    public void mostrarMenu() {
+    public void mostrarMenu(Scanner sc) {
     	int opcion;
     	do {
     		System.out.println("Bienvenido Alumno, seleccione una opcion: \n"
@@ -138,6 +138,9 @@ static Scanner sc= new Scanner(System.in);
                 default:
                     System.err.println("Opcion no valida. Por favor, elige una opción valida.");
             }
+            
         } while (!opcion.equals("5") && !opcion.equals("salir del menu"));
+        
     }
+    
 }
