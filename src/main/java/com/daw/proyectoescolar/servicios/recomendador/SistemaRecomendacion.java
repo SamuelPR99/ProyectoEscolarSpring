@@ -105,7 +105,7 @@ public class SistemaRecomendacion {
         System.out.println("Notas de los alumnos:");
 
         for (Usuario usuario : usuarios) {
-            if (usuario instanceof Alumno) {
+            if (usuario.getTipoUsuario().equals("Alumno")) {
                 Alumno alumno = (Alumno) usuario;
                 System.out.println(alumno.getNombre() + ": " + alumno.getNota());
             }
@@ -120,7 +120,7 @@ public class SistemaRecomendacion {
         // Buscar al alumno por nombre
         Alumno alumnoEncontrado = null;
         for (Usuario usuario : usuarios) {
-            if (usuario instanceof Alumno && usuario.getNombre().equals(nombreAlumno)) {
+            if (usuario.getTipoUsuario().equals("Alumno") && usuario.getNombre().equals(nombreAlumno)) {
                 alumnoEncontrado = (Alumno) usuario;
                 break;
             }
@@ -177,7 +177,7 @@ public class SistemaRecomendacion {
     public ArrayList<Alumno> obtenerAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
         for (Usuario usuario : usuarios) {
-            if (usuario instanceof Alumno) {
+            if (usuario.getTipoUsuario().equals("Alumno")) {
                 alumnos.add((Alumno) usuario);
             }
         }

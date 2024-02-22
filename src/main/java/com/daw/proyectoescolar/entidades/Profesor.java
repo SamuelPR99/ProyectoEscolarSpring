@@ -59,7 +59,7 @@ public class Profesor extends UsuarioBase {
 	        		tema.mostrarTemas();
 	        		break;
 	            case "2", "ver lista de alumnos":
-                    a.mostrarListaAlumnos();
+                    //a.mostrarListaAlumnos();
 	            	sistema.verNotasAlumnos();
 	                break;
 
