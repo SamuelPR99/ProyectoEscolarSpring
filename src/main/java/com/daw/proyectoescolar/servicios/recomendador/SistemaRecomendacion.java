@@ -46,7 +46,6 @@ public class SistemaRecomendacion {
     
     // Metodos
     
-    
     // Login improvisado
     public UsuarioBase login(Scanner sc) {
     	
