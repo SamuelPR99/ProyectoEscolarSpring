@@ -60,6 +60,7 @@ public class AñadirIncidencia {
                 System.err.println("Has introducido una opción inválida.");
 
                 
+                
 			}
 				
 		} while (!opcion.equals("4") && !opcion.equals("salir"));
