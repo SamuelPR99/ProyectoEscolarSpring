@@ -39,13 +39,11 @@ public class Menu {
 			
 			case "4", "salir":
 				System.out.println(Colores.ANSI_RED + "Saliendo de la aplicación..." + Colores.ANSI_RESET);
-				salir = true;
-				System.exit(0);
 			break;
 			}
 			
 			
-		}while(salir);
+		} while (!opcion.equals("4") && !opcion.equals("salir"));
 		
 	}
 
