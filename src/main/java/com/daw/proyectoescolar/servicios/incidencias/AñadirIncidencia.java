@@ -55,26 +55,16 @@ public class AñadirIncidencia {
             case "4", "salir":
             	
                 System.out.println("Saliendo de la aplicación...");
-                System.exit(0);
+            	salir = true;
                 break;
                 
             default:
                 System.err.println("Has introducido una opción inválida.");
-                salir = true;
-                break;
+                
+                
         }
-			System.out.println("¿Quieres añadir más incidencias?");
-			String respuesta = sc.next().toLowerCase();
-			if(respuesta.equals("si")) {
-				System.out.println("\n1 - Incidencia de alumno\n2 - Incidencia de profesor\n3 - Incidencia de aplicación\n4 - Salir");
-				opcion = sc.nextLine().toLowerCase();
-			} else {
-				salir = true;
-			}
-					
 			
-
-    } while (salir);
+    } while (!salir);
 		
 		
 		
