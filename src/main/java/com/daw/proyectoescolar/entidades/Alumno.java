@@ -10,7 +10,7 @@ public class Alumno extends UsuarioBase {
     
     // Atributos
     protected double nota;
-    protected ArrayList<Tarea> tareasAsignadas = new ArrayList<>();
+    protected ArrayList<Tarea> tareasAsignadas = new ArrayList<Tarea>();
 
     // Constructores
     public Alumno() {
