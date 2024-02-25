@@ -15,7 +15,6 @@ public class AñadirIncidencia {
 		
 		listaIncidencias = new ArrayList<Incidencias>();
 		String opcion;
-		boolean salir = false;
 		
 		do {
 		
@@ -55,7 +54,6 @@ public class AñadirIncidencia {
             case "4", "salir":
             	
                 System.out.println("Saliendo de la aplicación...");
-            	salir = true;
                 break;
                 
             default:
@@ -64,7 +62,7 @@ public class AñadirIncidencia {
                 
 			}
 				
-    } while (!salir);
+		} while (!opcion.equals("4") && !opcion.equals("salir"));
 		
 		
 		
