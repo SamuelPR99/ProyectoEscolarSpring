@@ -15,12 +15,12 @@ public class AñadirIncidencia {
 		
 		listaIncidencias = new ArrayList<Incidencias>();
 		String opcion;
-		boolean salir = false;
+		boolean volver = false;
 		
 		do {
 		
 			System.out.println("¿Qué tipo de incidencia quieres añadir?");
-			System.out.println("\n1 - Incidencia de alumno\n2 - Incidencia de profesor\n3 - Incidencia de aplicación\n4 - Salir");
+			System.out.println("\n1 - Incidencia de alumno\n2 - Incidencia de profesor\n3 - Incidencia de aplicación\n4 - Volver");
 			opcion = sc.nextLine().toLowerCase();
 			
 			switch (opcion) {
@@ -52,23 +52,21 @@ public class AñadirIncidencia {
                 
                 break;
                 
-            case "4", "salir":
+            case "4", "volver":
             	
-                System.out.println("Saliendo de la aplicación...");
-            	salir = true;
+            	volver = true;
+            
                 break;
                 
             default:
-                System.err.println("Has introducido una opción inválida.");
+            	
+            	System.err.println("Has introducido una opción inválida.");
 
-                
 			}
 				
-    } while (!salir);
-		
-		
+    } while (!opcion.equals("4") && !opcion.equals("volver"));
 		
 		
 	}
-
+	
 }
