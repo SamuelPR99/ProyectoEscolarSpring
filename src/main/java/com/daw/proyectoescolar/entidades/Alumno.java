@@ -60,22 +60,7 @@ public class Alumno extends UsuarioBase {
         tareasPendientes.add(tarea);
     }
 
-    public void recomendarTarea() {
-        // Lógica para recomendar tarea según la nota del alumno
-        Tarea recomendacion;
-
-        if (nota >= 7.0) {
-            recomendacion = new TareaAvanzada();
-        } else if (nota >= 5.0) {
-            recomendacion = new TareaIntermedia();
-        } else {
-            recomendacion = new TareaBasica();
-        }
-
-        System.out.println("Recomendación de tarea para " + getNombre() + ":");
-        recomendacion.mostrarRecomendacion();
-        agregarTareaPendiente(recomendacion);
-    }
+    
     
     // Menu alumno
     @Override
@@ -99,7 +84,7 @@ public class Alumno extends UsuarioBase {
                     break;
 
                 case "2", "recomendar tarea":
-                    recomendarTarea();
+                    sistema.recomendarTarea(this);
                     break;
 
                 case "3", "consultar tareas pendientes": 

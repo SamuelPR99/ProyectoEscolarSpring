@@ -228,4 +228,21 @@ public class SistemaRecomendacion {
         
     }
     
+	public void recomendarTarea(Alumno alumno) {
+		// Lógica para recomendar tarea según la nota del alumno
+		Tarea recomendacion;
+
+		if (alumno.getNota() >= 7.0) {
+			recomendacion = new Tarea("Avanzada");
+		} else if (alumno.getNota() >= 5.0) {
+			recomendacion = new Tarea("Intermedia");
+		} else {
+			recomendacion = new Tarea("Básica");
+		}
+
+		System.out.println("Recomendación de tarea para " + alumno.getNombre() + ":");
+		recomendacion.mostrarRecomendacion();
+		alumno.agregarTareaPendiente(recomendacion);
+	}
+    
 }
