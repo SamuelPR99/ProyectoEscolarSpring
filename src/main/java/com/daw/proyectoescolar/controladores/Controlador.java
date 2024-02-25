@@ -23,7 +23,7 @@ public class Controlador {
 
         try {
         	  	
-            System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + Colores.ANSI_RESET);
+            System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + ", " + usuario.getNombre() + Colores.ANSI_RESET);
 
             if (usuario.getTipoUsuario().equals("Alumno") 
             		|| usuario.getTipoUsuario().equals("Profesor") 

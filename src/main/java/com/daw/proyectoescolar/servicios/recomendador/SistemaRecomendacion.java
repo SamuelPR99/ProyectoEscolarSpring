@@ -154,7 +154,7 @@ public class SistemaRecomendacion {
         ArrayList<Alumno> alumnos = obtenerAlumnos();
 
         if (alumnos.isEmpty()) {
-            System.out.println(Colores.ANSI_RED + "No hay alumnos para mostrar estadísticas." + Colores.ANSI_RESET);
+            System.err.println("No hay alumnos para mostrar estadísticas.");
             return;
         }
 
@@ -211,7 +211,7 @@ public class SistemaRecomendacion {
     public void modificarTarea(Scanner sc) {
     	
         if (listaDeTareas.isEmpty()) {
-            System.out.println(Colores.ANSI_RED + "No hay tareas para modificar." + Colores.ANSI_RESET);
+            System.err.println("No hay tareas para modificar.");
             return;
         }
 
