@@ -228,7 +228,9 @@ public class SistemaRecomendacion {
         
     }
     
+    // Recomendar tarea a un alumno
 	public void recomendarTarea(Alumno alumno) {
+		
 		Tarea recomendacion;
 
 		if (alumno.getNota() >= 7.0) {
