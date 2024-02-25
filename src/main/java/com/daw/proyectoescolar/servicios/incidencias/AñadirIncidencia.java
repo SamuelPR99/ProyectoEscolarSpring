@@ -60,10 +60,9 @@ public class AñadirIncidencia {
                 
             default:
                 System.err.println("Has introducido una opción inválida.");
-                
-                
-        }
-			
+
+			}
+				
     } while (!salir);
 		
 		
