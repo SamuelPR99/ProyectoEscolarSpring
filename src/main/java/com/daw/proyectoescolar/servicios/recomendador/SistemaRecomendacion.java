@@ -229,7 +229,6 @@ public class SistemaRecomendacion {
     }
     
 	public void recomendarTarea(Alumno alumno) {
-		// Lógica para recomendar tarea según la nota del alumno
 		Tarea recomendacion;
 
 		if (alumno.getNota() >= 7.0) {
