@@ -47,7 +47,8 @@ public class Alumno extends UsuarioBase {
         tareasAsignadas.remove(tarea);
     }
         
-    // Métodos
+    // Metodos
+    
     @Override
     public String getTipoUsuario() {
         return "Alumno";

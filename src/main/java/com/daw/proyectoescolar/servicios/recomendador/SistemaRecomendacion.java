@@ -92,7 +92,7 @@ public class SistemaRecomendacion {
 
             System.out.print("Seleccione el número de la tarea que va a entregar: ");
             int numeroTarea = sc.nextInt();
-            sc.nextLine(); // si no pongo esto, el scanner no lee bien el siguiente string
+            sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
             
             if (numeroTarea >= 1 && numeroTarea <= tareasAsignadas.size()) {
                 Tarea tareaEntregada = tareasAsignadas.remove(numeroTarea - 1);
@@ -138,6 +138,8 @@ public class SistemaRecomendacion {
             alumnoEncontrado.setNota(nuevaNota);
             System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente para " + nombreAlumno + Colores.ANSI_RESET);
             
+            sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
+          
         } 
        
        catch (NullPointerException e) {
@@ -224,7 +226,7 @@ public class SistemaRecomendacion {
 
         // Asumiendo que la numeración de tareas comienza desde 1
         if (numeroTarea >= 1 && numeroTarea <= listaDeTareas.size()) {
-            sc.nextLine(); // si no pongo esto, el scanner no lee bien el siguiente string
+            sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
 
             System.out.print("Introduzca el nuevo tipo de tarea: ");
             String nuevoTipo = sc.nextLine();
