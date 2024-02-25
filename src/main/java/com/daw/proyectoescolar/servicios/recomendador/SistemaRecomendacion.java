@@ -253,7 +253,7 @@ public class SistemaRecomendacion {
 		} else if (nota >= 7.0) {
 			tipoTarea = "Intermedia";
 		} else {
-			tipoTarea = "Básica";
+			tipoTarea = "Basica";
 		}
 
 		// Buscar la primera tarea del tipo recomendado
