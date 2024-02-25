@@ -16,7 +16,7 @@ public class SistemaRecomendacion {
 	// Atributos
 	
 	protected ArrayList<UsuarioBase> usuarios;
-    protected ArrayList<Tarea> listaDeTareas = new ArrayList<>();
+    protected ArrayList<Tarea> listaDeTareas;
 
     // Constructores
 
@@ -24,6 +24,7 @@ public class SistemaRecomendacion {
     	
     	// Inicialización del ArrayList de usuarios
         usuarios = new ArrayList<UsuarioBase>();
+        listaDeTareas = Tarea.obtenerTodasLasTareas();
 
         // Agregar algunos datos de ejemplo
         
@@ -48,6 +49,7 @@ public class SistemaRecomendacion {
     
     // Login improvisado
     public UsuarioBase login(Scanner sc) {
+    	
         System.out.print("Introduzca su usuario: ");
         String usuario = sc.nextLine();
         System.out.print("Introduzca su contraseña: ");
@@ -62,37 +64,38 @@ public class SistemaRecomendacion {
         return null;
     }
     
-    // Consultar tareas pendientes de un alumno
+    // Consultar la tarea pendiente del alumno
     public void consultarTareasPendientes(Alumno alumno) {
-        ArrayList<Tarea> tareasPendientes = alumno.getTareasPendientes();
+        ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
 
-        if (tareasPendientes.isEmpty()) {
+        if (tareasAsignadas.isEmpty()) {
             System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes." + Colores.ANSI_RESET);
         } else {
             System.out.println("Tareas Pendientes:");
-            for (Tarea tarea : tareasPendientes) {
+            for (Tarea tarea : tareasAsignadas) {
                 System.out.println("Tipo: " + tarea.getTipo());
             }
         }
     }
-    
-    // Marcar una tarea como completada
-    public void marcarTareaCompletada(Alumno alumno, Scanner sc) {
-        ArrayList<Tarea> tareasPendientes = alumno.getTareasPendientes();
 
-        if (tareasPendientes.isEmpty()) {
+    // Marcar la tarea actual del alumno como completada
+    public void marcarTareaCompletada(Alumno alumno, Scanner sc) {
+        ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
+
+        if (tareasAsignadas.isEmpty()) {
             System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes para entregar." + Colores.ANSI_RESET);
         } else {
             System.out.println("Tareas Pendientes:");
-            for (int i = 0; i < tareasPendientes.size(); i++) {
-                System.out.println((i + 1) + ". Tipo: " + tareasPendientes.get(i).getTipo());
+            for (int i = 0; i < tareasAsignadas.size(); i++) {
+                System.out.println((i + 1) + ". Tipo: " + tareasAsignadas.get(i).getTipo());
             }
 
             System.out.print("Seleccione el número de la tarea que va a entregar: ");
             int numeroTarea = sc.nextInt();
-
-            if (numeroTarea >= 1 && numeroTarea <= tareasPendientes.size()) {
-                Tarea tareaEntregada = tareasPendientes.remove(numeroTarea - 1);
+            sc.nextLine(); // si no pongo esto, el scanner no lee bien el siguiente string
+            
+            if (numeroTarea >= 1 && numeroTarea <= tareasAsignadas.size()) {
+                Tarea tareaEntregada = tareasAsignadas.remove(numeroTarea - 1);
                 System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
             } else {
                 System.err.println("Número de tarea no válido.");
@@ -102,6 +105,7 @@ public class SistemaRecomendacion {
 
     // Ver las notas de todos los alumnos
     public void verNotasAlumnos() {
+    	
         System.out.println("Notas de los alumnos:");
 
         for (Usuario usuario : usuarios) {
@@ -114,6 +118,7 @@ public class SistemaRecomendacion {
 
     // Modificar la nota de un alumno
     public void modificarNotaAlumno(Scanner sc) {
+    	
         System.out.print("Introduzca el nombre del alumno: ");
         String nombreAlumno = sc.nextLine();
 
@@ -127,10 +132,12 @@ public class SistemaRecomendacion {
         }
 
        try {
+    	   
             System.out.print("Introduzca la nueva nota para " + nombreAlumno + ": ");
             double nuevaNota = sc.nextDouble();
             alumnoEncontrado.setNota(nuevaNota);
             System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente para " + nombreAlumno + Colores.ANSI_RESET);
+            
         } 
        
        catch (NullPointerException e) {
@@ -140,6 +147,7 @@ public class SistemaRecomendacion {
 
     // Ver estadísticas de todos los alumnos
     public void verEstadisticas() {
+    	
         System.out.println("Estadísticas de los alumnos:");
 
         ArrayList<Alumno> alumnos = obtenerAlumnos();
@@ -175,17 +183,20 @@ public class SistemaRecomendacion {
     
     // Crear la lista de alumnos mediante la lista usuarios
     public ArrayList<Alumno> obtenerAlumnos() {
-        ArrayList<Alumno> alumnos = new ArrayList<>();
+    	
+        ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
         for (Usuario usuario : usuarios) {
             if (usuario.getTipoUsuario().equals("Alumno")) {
                 alumnos.add((Alumno) usuario);
             }
         }
+        
         return alumnos;
     }
 
     // Agregar una nueva tarea
     public void agregarNuevaTarea(Scanner sc) {
+    	
         System.out.print("Introduzca el tipo de la nueva tarea: ");
         String tipoTarea = sc.nextLine();
 
@@ -197,6 +208,7 @@ public class SistemaRecomendacion {
 
     // Modificar una tarea existente
     public void modificarTarea(Scanner sc) {
+    	
         if (listaDeTareas.isEmpty()) {
             System.out.println(Colores.ANSI_RED + "No hay tareas para modificar." + Colores.ANSI_RESET);
             return;
@@ -212,7 +224,7 @@ public class SistemaRecomendacion {
 
         // Asumiendo que la numeración de tareas comienza desde 1
         if (numeroTarea >= 1 && numeroTarea <= listaDeTareas.size()) {
-            sc.nextLine();
+            sc.nextLine(); // si no pongo esto, el scanner no lee bien el siguiente string
 
             System.out.print("Introduzca el nuevo tipo de tarea: ");
             String nuevoTipo = sc.nextLine();
@@ -223,27 +235,55 @@ public class SistemaRecomendacion {
 
             System.out.println(Colores.ANSI_GREEN + "Tarea modificada correctamente." + Colores.ANSI_RESET);
         } else {
-            System.err.println("Número de tarea no válido.");
+            System.err.println("Numero de tarea no valido.");
         }
         
     }
     
     // Recomendar tarea a un alumno
-	public void recomendarTarea(Alumno alumno) {
-		
-		Tarea recomendacion;
+	public Tarea recomendarTarea(Alumno alumno) {
 
-		if (alumno.getNota() >= 7.0) {
-			recomendacion = new Tarea("Avanzada");
-		} else if (alumno.getNota() >= 5.0) {
-			recomendacion = new Tarea("Intermedia");
+		double nota = alumno.getNota();
+		String tipoTarea;
+
+		if (nota >= 9.0) {
+			tipoTarea = "Avanzada";
+		} else if (nota >= 7.0) {
+			tipoTarea = "Intermedia";
 		} else {
-			recomendacion = new Tarea("Básica");
+			tipoTarea = "Básica";
 		}
 
-		System.out.println("Recomendación de tarea para " + alumno.getNombre() + ":");
-		recomendacion.mostrarRecomendacion();
-		alumno.agregarTareaPendiente(recomendacion);
+		// Buscar la primera tarea del tipo recomendado
+		for (Tarea tarea : listaDeTareas) {
+			if (tarea.getTipo().equals(tipoTarea)) {
+				alumno.agregarTarea(tarea);
+				return tarea;
+				
+			}
+		}
+
+		// Si no hay tareas del tipo que se recomienda, busca la primera tarea de cualquier tipo
+		if (!listaDeTareas.isEmpty()) {
+			Tarea tareaRecomendada = listaDeTareas.get(0);
+	        alumno.agregarTarea(tareaRecomendada);
+			return listaDeTareas.get(0);
+		}
+
+		// Si no hay tareas, pos error
+		return null;
 	}
-    
+
+	// Metodo para simplificar el menu en una sola opcion
+	public void recomendarTareaYMostrar(Alumno alumno) {
+		
+        Tarea tareaRecomendada = recomendarTarea(alumno);
+        tareaRecomendada.mostrarRecomendacion();
+        
+    }
+	  
 }
+        
+
+
+

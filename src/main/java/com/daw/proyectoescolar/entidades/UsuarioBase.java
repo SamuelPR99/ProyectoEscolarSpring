@@ -13,6 +13,7 @@ public abstract class UsuarioBase implements Usuario {
 		
 	    protected String nombre;
 	    protected String contraseña;
+	    protected String dni;
 	    
 	    // Constructores
 	    
@@ -23,6 +24,12 @@ public abstract class UsuarioBase implements Usuario {
 	        this.nombre = nombre;
 	        this.contraseña = contraseña;
 	    }
+	    
+		public UsuarioBase(String nombreUsuario, String contrasena, String dni) {
+			this.nombre = nombreUsuario;
+			this.contraseña = contrasena;
+			this.dni = dni;
+		}
 		
 		// Getters y setters
 
@@ -42,6 +49,14 @@ public abstract class UsuarioBase implements Usuario {
 
 		public void setContraseña(String contraseña) {
 			this.contraseña = contraseña;
+		}
+		
+		public String getDni() {
+			return dni;
+		}
+		
+		public void setDni(String dni) {
+			this.dni = dni;
 		}
 		
 		// Metodos

@@ -1,68 +1,58 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
-import com.daw.proyectoescolar.servicios.recomendador.TareaAvanzada;
-import com.daw.proyectoescolar.servicios.recomendador.TareaBasica;
-import com.daw.proyectoescolar.servicios.recomendador.TareaIntermedia;
 
 public class Alumno extends UsuarioBase {
-	
-	// Atributos
-	
+    
+    // Atributos
     protected double nota;
-    protected String dni;
-    protected ArrayList<Tarea> tareasPendientes;
-    
+    protected ArrayList<Tarea> tareasAsignadas = new ArrayList<>();
+
     // Constructores
-    
     public Alumno() {
     }
 
     public Alumno(String nombre, String contraseña, double nota) {
         super(nombre, contraseña);
         this.nota = nota;
-        this.tareasPendientes = new ArrayList<Tarea>();
     }
 
-	public Alumno(String nombreUsuario, String contrasena, String dni) {
+    public Alumno(String nombreUsuario, String contrasena, String dni) {
         super(nombreUsuario, contrasena);
         this.dni = dni;
     }
     
-   
     // Getters y setters
-
     public double getNota() {
         return nota;
     }
+
+    public void setNota(double nota) {
+        this.nota = nota;
+    }
     
-    public void setNota(double nuevaNota) {
-        this.nota = nuevaNota;
+    public ArrayList<Tarea> getTareasAsignadas() {
+        return tareasAsignadas;
     }
 
-    public ArrayList<Tarea> getTareasPendientes() {
-        return tareasPendientes;
+    public void agregarTarea(Tarea tarea) {
+        tareasAsignadas.add(tarea);
     }
-    
-    // Metodos
-    
+
+    public void eliminarTarea(Tarea tarea) {
+        tareasAsignadas.remove(tarea);
+    }
+        
+    // Métodos
     @Override
     public String getTipoUsuario() {
         return "Alumno";
     }
 
-    public void agregarTareaPendiente(Tarea tarea) {
-        tareasPendientes.add(tarea);
-    }
-
-    
-    
-    // Menu alumno
     @Override
     public void verMenu(Scanner sc) {
         SistemaRecomendacion sistema = new SistemaRecomendacion();
@@ -84,7 +74,7 @@ public class Alumno extends UsuarioBase {
                     break;
 
                 case "2", "recomendar tarea":
-                    sistema.recomendarTarea(this);
+                    sistema.recomendarTareaYMostrar(this);
                     break;
 
                 case "3", "consultar tareas pendientes": 
@@ -100,35 +90,10 @@ public class Alumno extends UsuarioBase {
                     break;
 
                 default:
-                    System.err.println("Opcion no valida. Por favor, elige una opción valida.");
+                    System.err.println("Opcion no valida. Por favor, elige una opcion valida.");
             }
             
         } while (!opcion.equals("5") && !opcion.equals("salir del menu"));
-        
     }
-    
-    //Menu de prueba de paula (no hacer caso)
-    public void mostrarMenu(Scanner sc) {
-    	int opcion;
-    	do {
-    		System.out.println("Bienvenido Alumno, seleccione una opcion: \n"
-    				+ "1. Ver listado de temas"
-    				+ "2. Salir");
-    		opcion= sc.nextInt();
-    		switch(opcion) {
-    		case 1:
-    			System.out.println("Listado de Temas");
-    			//new Tema().
-    		break;
-    		case 2: 
-    			System.out.println("Saliendo...");
-    			
-    		break;
-    		}
-    	
-    	
-    	
-    	}while(opcion!=2);
-    }
-    
+
 }

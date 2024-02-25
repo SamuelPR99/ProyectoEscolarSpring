@@ -21,11 +21,16 @@ public class Colores {
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-
+    
     // Otros estilos
     public static final String ANSI_BOLD = "\u001B[1m"; // Negrita
     public static final String ANSI_UNDERLINE = "\u001B[4m"; // Subrayado
-    
+    public static final String ANSI_REVERSE = "\u001B[7m"; // Inverso
+    public static final String ANSI_INVISIBLE = "\u001B[8m"; // Invisible
+    public static final String ANSI_STRIKETHROUGH = "\u001B[9m"; // Tachado
+
     // Reset
     public static final String ANSI_RESET = "\u001B[0m"; // Reiniciar
+    
+    
 }

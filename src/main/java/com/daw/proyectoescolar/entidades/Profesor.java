@@ -1,7 +1,6 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
@@ -22,7 +21,6 @@ public class Profesor extends UsuarioBase {
         super(nombre, contraseña);
     }
 	
-
     // Getters y setters
 	
 	// Metodos

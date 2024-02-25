@@ -4,22 +4,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tema {
-	static Scanner sc= new Scanner(System.in);
+	
+	// Atributos
  
 	protected String nombre;
 	protected String descripcion;
 	protected Tarea tarea;
-	protected ArrayList<Tarea>tareas;
-	protected ArrayList<Tema>temas;
+	protected ArrayList<Tema> temas;
+	
+	// Constructores
 	
 	public Tema() {
 		
-	
-}
-	public Tema(String nombre) {
-		this.nombre= nombre;
-		tareas= new ArrayList<>();
 	}
+	
+	
+	
+	// Getters y setters
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -38,15 +40,11 @@ public class Tema {
 	public void setTarea(Tarea tarea) {
 		this.tarea = tarea;
 	}
-	public ArrayList<Tarea> getTareas() {
-		return tareas;
-	}
-	public void setTareas(ArrayList<Tarea> tareas) {
-		this.tareas = tareas;
-	}
 	
-	public void mostrarTemas() {
-		temas= new ArrayList<Tema>();
+	// Metodos
+	public void mostrarTemas(Scanner sc) {
+		
+		temas = new ArrayList<Tema>();
 		
 		Tema t1 = new Tema(" 1: Teoría de la Probabilidad Estocástica");
 		temas.add(t1);
