@@ -11,9 +11,13 @@ public class Listado {
     ArrayList<Incidencias> verIncidencias;
     ArrayList<Incidencias> listaIncidencias = new AñadirIncidencia().listaIncidencias;
     
+    public Listado() {
+    	
+    }
+    
     public void menuListado() {
     	
-    	verIncidencias = new AñadirIncidencia().obtenerLista(listaIncidencias);
+    	verIncidencias = new AñadirIncidencia().añadirIncidencia(listaIncidencias);
     	
     	Scanner sc = new Scanner(System.in);
 		boolean volver = false;
