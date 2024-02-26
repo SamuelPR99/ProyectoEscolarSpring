@@ -34,7 +34,7 @@ public class Profesor extends UsuarioBase {
 	@Override
 	public void verMenu(Scanner sc) {
 	    SistemaRecomendacion sistema = new SistemaRecomendacion();
-	    Tema tema= new Tema();
+	    Tema t= new Tema();
 	    Profesor a = new Profesor();
 	    String opcion;
 
@@ -54,7 +54,7 @@ public class Profesor extends UsuarioBase {
 	        switch (opcion) {
 	        
 	        	case "1", "ver listado de temas":
-	        		tema.mostrarTemas();
+	        		t.mostrarTemas();
 	        		break;
 	            case "2", "ver lista de alumnos":
                     //a.mostrarListaAlumnos();
@@ -98,10 +98,10 @@ public class Profesor extends UsuarioBase {
       }
 		
 	}
-	public Tema Tema(ArrayList<Tema> tema) {
+	public void mostrarTemas(ArrayList<Tema> temas) {
 		// TODO Auto-generated method stub
 		System.out.println("Lista de temas:");
-	    for (Tema t : tema) {
+	    for (Tema tema : temas) {
 	        System.out.println(tema.getNombre());
 	    }
 	    

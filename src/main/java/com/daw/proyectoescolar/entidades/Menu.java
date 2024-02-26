@@ -14,9 +14,9 @@ public class Menu {
 		+" Ingresa 1 siendo profesor o 2 siendo alumno ");
 		String respuesta= sc.nextLine();
 		
-		if(respuesta=="profesor") {
+		if(respuesta.equals("1")) {
 			new Profesor().verMenu(sc);
-		}else if (respuesta=="alumno") {
+		}else if (respuesta.equals("2")) {
 			new Alumno().verMenu(sc);
 		}else {
 			System.out.println("Error de selección");
