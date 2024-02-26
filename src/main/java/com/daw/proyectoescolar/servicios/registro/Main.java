@@ -7,10 +7,6 @@ public class Main {
     private static GestorUsuarios gestorUsuarios = new GestorUsuarios();
 
     public static void main(String[] args) {
-        iniciarSesion();
-    }
-
-    public static void iniciarSesion() {
-        // Aquí puedes agregar la lógica de inicio de sesión
+        gestorUsuarios.ejecutarGestionUsuarios();
     }
 }

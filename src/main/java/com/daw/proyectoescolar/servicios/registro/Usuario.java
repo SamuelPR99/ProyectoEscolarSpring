@@ -19,6 +19,12 @@ abstract class Usuario {
     public boolean autenticar(String contrasena) {
         return this.contrasena.equals(contrasena);
     }
+
+    public abstract boolean validarNombreUsuario(String usuario);
+    public abstract boolean validarContrasena(String contrasena);
+    public abstract void cambiarContrasena(String nuevaContrasena);
+    public abstract void mostrarInformacion();
 }
+
 
 
