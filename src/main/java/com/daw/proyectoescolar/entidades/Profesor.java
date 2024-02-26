@@ -1,11 +1,12 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
-import com.daw.proyectoescolar.servicios.tareas.Tema;
+
 
 
 public class Profesor extends UsuarioBase {
@@ -54,7 +55,7 @@ public class Profesor extends UsuarioBase {
 	        switch (opcion) {
 	        
 	        	case "1", "ver listado de temas":
-	        		t.mostrarTemas();
+	        		t.mostrarTemas(sc);
 	        		break;
 	            case "2", "ver lista de alumnos":
                     //a.mostrarListaAlumnos();
