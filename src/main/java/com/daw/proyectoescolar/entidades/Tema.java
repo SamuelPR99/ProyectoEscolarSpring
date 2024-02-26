@@ -55,12 +55,15 @@ public class Tema {
 	public void mostrarTemas(Scanner sc) {
 		
 		ArrayList<Tema> temas = obtenerTemas();
+		
 		int i = 1;
+		
 		for (Tema t : temas) {
 			System.out.println(i + ". " + t.getNombre());
 			i++;
 		}
-		System.out.println("Selecciona el numero del tema");
+		
+		System.out.print("Selecciona el numero del tema: ");
 		int opcion = sc.nextInt();
 	    sc.nextLine(); // // Si no pongo esto, el scanner no lee bien el siguiente string
 
