@@ -71,7 +71,7 @@ public class Tarea {
 
 	
     // Obtener array de tareas
-    public ArrayList<Tarea> obtenerTodasLasTareas() {
+    public static ArrayList<Tarea> obtenerTodasLasTareas() {
         ArrayList<Tarea> tareas = new ArrayList<Tarea>();
 
         tareas.add(new Tarea("Avanzada", "Tarea 1: Simulación de Monte Carlo ", "Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π."));
