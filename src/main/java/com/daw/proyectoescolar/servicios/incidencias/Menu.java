@@ -7,7 +7,7 @@ import com.daw.proyectoescolar.repositorio.Colores;
 import java.util.ArrayList;
 
 public class Menu {
-
+	
 	public Menu() {
 		
 		Scanner sc = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class Menu {
 			break;
 			
 			case "2", "listar incidencias", "listar":
-				new Listado();
+				new Listado().menuListado();
 			break;
 			
 			case "3", "eliminar", "eliminar incidencias":
@@ -46,5 +46,7 @@ public class Menu {
 		} while (!opcion.equals("4") && !opcion.equals("salir"));
 		
 	}
-
+	
+	
+	
 }

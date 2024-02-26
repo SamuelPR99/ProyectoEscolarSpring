@@ -25,6 +25,11 @@ public class Incidencias {
 	public void setIncidencia(String incidencia) {
 		this.incidencia = incidencia;
 	}
+
+	@Override
+	public String toString() {
+		return "Incidencias [incidencia=" + incidencia + "]";
+	}
 	
 	
 	
