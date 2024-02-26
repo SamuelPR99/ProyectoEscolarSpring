@@ -3,8 +3,6 @@ package com.daw.proyectoescolar.servicios.incidencias;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.repositorio.Colores;
-
 public class AñadirIncidencia {
 
 	ArrayList<Incidencias> listaIncidencias;
