@@ -9,10 +9,11 @@ public class Listado {
 
    
     ArrayList<Incidencias> verIncidencias;
+    ArrayList<Incidencias> listaIncidencias = new AñadirIncidencia().listaIncidencias;
     
     public void menuListado() {
     	
-    	verIncidencias = new AñadirIncidencia().obtenerLista(verIncidencias);
+    	verIncidencias = new AñadirIncidencia().obtenerLista(listaIncidencias);
     	
     	Scanner sc = new Scanner(System.in);
 		boolean volver = false;
