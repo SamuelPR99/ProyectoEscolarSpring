@@ -10,4 +10,11 @@ public class IncidenciaAplicacion extends Incidencias{
 		super(incidencia);
 	}
 
+	@Override
+	public String toString() {
+		return "IncidenciaAplicacion [incidencia=" + incidencia + "]";
+	}
+
+	
+	
 }

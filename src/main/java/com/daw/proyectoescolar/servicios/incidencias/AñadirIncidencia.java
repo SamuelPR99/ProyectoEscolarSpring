@@ -3,6 +3,8 @@ package com.daw.proyectoescolar.servicios.incidencias;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.repositorio.Colores;
+
 public class AñadirIncidencia {
 
 	ArrayList<Incidencias> listaIncidencias;
@@ -58,13 +60,20 @@ public class AñadirIncidencia {
                 
             default:
             	
-            	System.err.println("Has introducido una opción inválida.");
+            	System.out.println(Colores.ANSI_RED + "Has introducido una opción inválida." + Colores.ANSI_RESET);
 
 			}
 				
     } while (!opcion.equals("4") && !opcion.equals("volver"));
 		
 		
+		
+	}
+	
+	public ArrayList<Incidencias> obtenerLista(ArrayList<Incidencias> listaIncidencias){
+		
+		ArrayList<Incidencias> devolverLista = listaIncidencias;
+		return listaIncidencias;
 	}
 	
 }

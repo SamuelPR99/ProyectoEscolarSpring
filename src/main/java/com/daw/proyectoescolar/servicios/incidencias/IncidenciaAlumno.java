@@ -9,6 +9,11 @@ public class IncidenciaAlumno extends Incidencias{
 	public IncidenciaAlumno(String incidencia) {
 		super(incidencia);
 	}
+
+	@Override
+	public String toString() {
+		return "IncidenciaAlumno [incidencia=" + incidencia + "]";
+	}
 	
 	
 	
