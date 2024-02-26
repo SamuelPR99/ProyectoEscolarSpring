@@ -69,7 +69,7 @@ public class Tema {
 		// Seleccionar tema
 		System.out.print("Selecciona el numero del tema: ");
 		int opcion = sc.nextInt();
-	    sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
+	    sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string y se buguea 3 veces el menu
 
 	    // Mostrar tarea del tema seleccionado
 		temas.get(opcion - 1).mostrarTarea();
