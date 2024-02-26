@@ -90,7 +90,7 @@ public class Profesor extends UsuarioBase {
 	    
 	}
 	
-	private void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
+	public void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
 		// TODO Auto-generated method stub
 		System.out.println("Lista de alumnos:");
 		for (Alumno alumno : alumnos) {
@@ -98,11 +98,11 @@ public class Profesor extends UsuarioBase {
       }
 		
 	}
-	private Tema Tema(ArrayList<Tema> tema) {
+	public Tema Tema(ArrayList<Tema> tema) {
 		// TODO Auto-generated method stub
 		System.out.println("Lista de temas:");
-	    for (Tema tema : tema) {
-	        System.out.println(tema.getTemas());
+	    for (Tema t : tema) {
+	        System.out.println(tema.getNombre());
 	    }
 	    
 	}

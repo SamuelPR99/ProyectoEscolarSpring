@@ -17,7 +17,11 @@ public class Tema {
 	public Tema() {
 		
 	}
-	
+	public Tema(String nombre, String descripcion) {
+		this.nombre=nombre;
+		this.descripcion=descripcion;
+		
+	}
 	
 	
 	// Getters y setters
@@ -46,22 +50,22 @@ public class Tema {
 		
 		temas = new ArrayList<Tema>();
 		
-		Tema t1 = new Tema(" 1: Teoría de la Probabilidad Estocástica");
+		Tema t1 = new Tema("1:"," Teoría de la Probabilidad Estocástica");
 		temas.add(t1);
 		
-		Tema t2= new Tema(" 2: Teoría de Números Avanzada");
+		Tema t2= new Tema("2:"," Teoría de Números Avanzada");
 		temas.add(t2);
 		
-		Tema t3= new Tema(" 3: Análisis Funcional");
+		Tema t3= new Tema("3:"," Análisis Funcional");
 		temas.add(t3);
 		
-		Tema t4= new Tema(" 4: Topología Algebraica");
+		Tema t4= new Tema("4:"," Topología Algebraica");
 		temas.add(t4);
 		
-		Tema t5= new Tema(" 5: Teoría de Representación de Grupos");
+		Tema t5= new Tema("5:"," Teoría de Representación de Grupos");
 		temas.add(t5);
 		
-		Tema t6= new Tema(" 6: Teoría de la Aproximación y Funciones Especiales");
+		Tema t6= new Tema("6:"," Teoría de la Aproximación y Funciones Especiales");
 		temas.add(t6);
 	
 		System.out.println("Selecciona el número del tema");
@@ -70,7 +74,7 @@ public class Tema {
 		
 		for(Tema t : temas) {
 			if(opcion<=6 && opcion>=1) {
-				new Tarea().mostrarTareas();
+				new Tarea().mostrarTareas(sc);
 				
 			}else {
 				System.out.println("Error del elección");

@@ -15,13 +15,12 @@ public class Menu {
 		String respuesta= sc.nextLine();
 		
 		if(respuesta=="profesor") {
-			new Profesor().mostrarMenu();
+			new Profesor().verMenu(sc);
 		}else if (respuesta=="alumno") {
-			new Alumno().mostrarMenu();
+			new Alumno().verMenu(sc);
 		}else {
 			System.out.println("Error de selección");
 		}
-		
-		
+	
 	}
 }
