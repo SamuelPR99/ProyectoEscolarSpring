@@ -69,12 +69,14 @@ public class Alumno extends UsuarioBase {
         String opcion;
 
         do {
+        	
             System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
                     + "1. Ver nota\n"
                     + "2. Recomendar tarea\n"
                     + "3. Consultar tareas pendientes\n"
                     + "4. Entregar tarea\n"
-                    + "5. Salir del menu" + Colores.ANSI_RESET);
+                    + "5. Cambiar contraseña\n"
+                    + "6. Salir del menu" + Colores.ANSI_RESET);
 
             opcion = sc.nextLine().toLowerCase();
 

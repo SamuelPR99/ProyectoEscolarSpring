@@ -54,7 +54,8 @@ public class Profesor extends UsuarioBase {
 	                + "4. Ver estadísticas\n"
 	                + "5. Agregar nueva tarea\n"
 	                + "6. Modificar tarea\n"
-	                + "7. Salir del menu" + Colores.ANSI_RESET);
+	                + "7. Cambiar contraseña\n"
+	                + "8. Salir del menu" + Colores.ANSI_RESET);
 
 	        opcion = sc.nextLine().toLowerCase();
 
