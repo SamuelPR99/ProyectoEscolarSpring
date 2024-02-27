@@ -1,11 +1,11 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
+import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
 
 
 
@@ -18,9 +18,14 @@ public class Profesor extends UsuarioBase {
 	public Profesor() {
 		
 	}
+	
 	public Profesor(String nombre, String contraseña) {
         super(nombre, contraseña);
     }
+	
+	public Profesor(String nombre, String contraseña, String dni) {
+		super(nombre, contraseña, dni);
+	}
 	
     // Getters y setters
 	
@@ -36,6 +41,7 @@ public class Profesor extends UsuarioBase {
 	public void verMenu(Scanner sc) {
 		
 	    SistemaRecomendacion sistema = new SistemaRecomendacion();
+	    GestorUsuarios gestor = new GestorUsuarios();
 	    Tema tema = new Tema();
 	    String opcion;
 
@@ -48,7 +54,8 @@ public class Profesor extends UsuarioBase {
 	                + "4. Ver estadísticas\n"
 	                + "5. Agregar nueva tarea\n"
 	                + "6. Modificar tarea\n"
-	                + "7. Salir del menu" + Colores.ANSI_RESET);
+	                + "7. Cambiar contraseña\n"
+	                + "8. Salir del menu" + Colores.ANSI_RESET);
 
 	        opcion = sc.nextLine().toLowerCase();
 
@@ -78,7 +85,11 @@ public class Profesor extends UsuarioBase {
 	                sistema.modificarTarea(sc);
 	                break;
 
-	            case "7", "salir del menu":
+	            case "7", "Cambiar contraseña":
+	            	gestor.cambiarContraseña(sc, this);
+                	break;
+	                
+	            case "8", "salir del menu":
 	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de profesor..." + Colores.ANSI_RESET);
 	                break;
 
@@ -87,12 +98,12 @@ public class Profesor extends UsuarioBase {
 	                
 	        }
 	        
-	    } while (!opcion.equals("7") && !opcion.equals("salir del menu"));
+	    } while (!opcion.equals("8") && !opcion.equals("salir del menu"));
 	    
 	}
 	
 	public void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Lista de alumnos:");
 		for (Alumno alumno : alumnos) {
           System.out.println(alumno.getNombre());
@@ -100,7 +111,7 @@ public class Profesor extends UsuarioBase {
 		
 	}
 	public void mostrarTemas(ArrayList<Tema> temas) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Lista de temas:");
 	    for (Tema tema : temas) {
 	        System.out.println(tema.getNombre());

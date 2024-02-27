@@ -60,8 +60,5 @@ public abstract class UsuarioBase implements Usuario {
 		}
 		
 		// Metodos
-		
-		
-		
 }
 

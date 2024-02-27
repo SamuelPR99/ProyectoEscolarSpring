@@ -2,9 +2,7 @@ package com.daw.proyectoescolar.controladores;
 
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.entidades.UsuarioBase;
-import com.daw.proyectoescolar.repositorio.Colores;
-import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
+import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
 
 public class Controlador {
 
@@ -14,31 +12,14 @@ public class Controlador {
 
         Scanner sc = new Scanner(System.in);
         
-        // AQUI IRIA LOGIN DE ZAMUDIO, DE MOMENTO USAR EL MIO
-        SistemaRecomendacion login_improvisao = new SistemaRecomendacion();
+        new GestorUsuarios().inicio(sc);
         
-        System.out.println("Bienvenido a la aplicacion escolar");
-
-        UsuarioBase usuario = login_improvisao.login(sc);
-
-        try {
-        	  	
-            System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + ", " + usuario.getNombre() + Colores.ANSI_RESET);
-
-            if (usuario.getTipoUsuario().equals("Alumno") 
-            		|| usuario.getTipoUsuario().equals("Profesor") 
-            		|| usuario.getTipoUsuario().equals("Administrador")) {
-            	
-                usuario.verMenu(sc);
-            
-            } else {
-                System.err.println("Usuario no reconocido");
-            }
-            
-        } catch (NullPointerException e) {
-            System.err.println("Usuario o contraseña incorrectos");
-    	
-        }
+        /*
+         * Por cuestiones de seguridad no puedes registrarte como un usario administrador
+         * Para loguearte como administrador puedes usar los siguientes datos:
+         * Usuario: Lolo
+         * Contraseña: pass1
+         */
         
         sc.close();
        

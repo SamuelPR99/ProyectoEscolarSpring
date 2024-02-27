@@ -3,9 +3,7 @@ package com.daw.proyectoescolar.servicios.recomendador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
-import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Usuario;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
@@ -23,45 +21,11 @@ public class SistemaRecomendacion {
     public SistemaRecomendacion() {
     	
     	// Inicialización del ArrayList de usuarios
-        usuarios = new ArrayList<UsuarioBase>();
         listaDeTareas = Tarea.obtenerTodasLasTareas();
 
-        // Agregar algunos datos de ejemplo
-        
-        // Profesores
-        usuarios.add(new Profesor("Guillamon", "pass1"));
-        usuarios.add(new Profesor("Lidia", "pass2"));
-        usuarios.add(new Profesor("David", "pass3"));
-        usuarios.add(new Profesor("Paco", "pass4"));
-
-        // Alumnos
-        usuarios.add(new Alumno("Samuel", "123", 9.0));
-        usuarios.add(new Alumno("Paula", "123", 5.0));
-        usuarios.add(new Alumno("Hugo", "123", 7.5));
-        usuarios.add(new Alumno("Zamudio", "123", 3.0));
-        
-        // Administradores
-        usuarios.add(new Administrador("Lolo", "pass1"));
     }
     
     // Metodos
-    
-    // Login improvisado
-    public UsuarioBase login(Scanner sc) {
-    	
-        System.out.print("Introduzca su usuario: ");
-        String usuario = sc.nextLine();
-        System.out.print("Introduzca su contraseña: ");
-        String contraseña = sc.nextLine();
-
-        for (UsuarioBase u : usuarios) {
-            if (u.getNombre().equals(usuario) && u.getContraseña().equals(contraseña)) {
-                return u;
-            }
-        }
-
-        return null;
-    }
     
     // Consultar la tarea pendiente del alumno
     public void consultarTareasPendientes(Alumno alumno) {

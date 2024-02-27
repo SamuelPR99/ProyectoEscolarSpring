@@ -3,6 +3,7 @@ package com.daw.proyectoescolar.entidades;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
 
 public class Administrador extends UsuarioBase {
 	
@@ -18,10 +19,14 @@ public class Administrador extends UsuarioBase {
         super(nombre, contraseña);
     }
 	
+	public Administrador(String nombre, String contraseña, String dni) {
+		super(nombre, contraseña, dni);
+	}
+	
 	// Getters y setters
 	
 	//Metodos
-
+	
 	@Override
 	public String getTipoUsuario() {
 		
@@ -33,16 +38,17 @@ public class Administrador extends UsuarioBase {
 	public void verMenu(Scanner sc) {
 
 		// Inicializar objeto que realize los metodos de administrador, etc.
+		GestorUsuarios gestor = new GestorUsuarios();
 		
 	    String opcion;
 
 	    do {
 	    	
 	    	System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
-	                + "1. lo que sea\n"
-	                + "2. lo que sea2\n"
-	                + "3. lo que sea3\n"
-	                + "4. lo que sea4\n"
+	                + "1. Mostrar usuarios registrados\n"
+	                + "2. Crear un usuario de forma manual\n"
+	                + "3. Borrar un usuario\n"
+	                + "4. Cambiar contraseña\n"
 	                + "5. lo que sea5\n"
 	                + "6. Salir del menu" + Colores.ANSI_RESET);
 	    	
@@ -50,20 +56,20 @@ public class Administrador extends UsuarioBase {
 
 	        switch (opcion) {
 	        
-	            case "1", "lo que sea":
-	            
+	            case "1", "Mostrar usuarios registrados":
+	            	gestor.mostrarUsuarios();
 	                break;
 
-	            case "2", "lo que sea2":
-	               
+	            case "2", "Crear un usuario de forma manual":
+	                gestor.crearUsuario(sc);
 	                break;
 
-	            case "3", "lo que sea3":
-	               
+	            case "3", "Borrar un usuario":
+	            	gestor.borrarUsuario(sc);
 	                break;
 
-	            case "4", "lo que sea4":
-	               
+	            case "4", "Cambiar contraseña":
+	            	gestor.cambiarContraseña(sc, this);
 	                break;
 
 	            case "5", "lo que sea5":

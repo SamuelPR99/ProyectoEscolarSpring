@@ -16,5 +16,5 @@ public interface Usuario {
 
 	// Implementa verMenu en los hijos del UsuarioBase
 	public abstract void verMenu(Scanner sc);
-    
+	
 }
