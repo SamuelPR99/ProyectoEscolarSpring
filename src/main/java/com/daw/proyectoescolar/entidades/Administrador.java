@@ -48,7 +48,7 @@ public class Administrador extends UsuarioBase {
 	                + "1. Mostrar usuarios registrados\n"
 	                + "2. Crear un usuario de forma manual\n"
 	                + "3. Borrar un usuario\n"
-	                + "4. lo que sea4\n"
+	                + "4. Cambiar contraseña\n"
 	                + "5. lo que sea5\n"
 	                + "6. Salir del menu" + Colores.ANSI_RESET);
 	    	
@@ -57,27 +57,19 @@ public class Administrador extends UsuarioBase {
 	        switch (opcion) {
 	        
 	            case "1", "Mostrar usuarios registrados":
-	            	
 	            	gestor.mostrarUsuarios();
-	            
 	                break;
 
 	            case "2", "Crear un usuario de forma manual":
-	            	
 	                gestor.crearUsuario(sc);
-	            
 	                break;
 
 	            case "3", "Borrar un usuario":
-	               
 	            	gestor.borrarUsuario(sc);
-	            	
 	                break;
 
-	            case "4", "lo que sea4":
-	            	
+	            case "4", "Cambiar contraseña":
 	            	gestor.cambiarContraseña(sc, this);
-	               
 	                break;
 
 	            case "5", "lo que sea5":

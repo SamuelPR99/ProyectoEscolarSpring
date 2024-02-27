@@ -1,11 +1,11 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
+import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
 
 
 
@@ -41,6 +41,7 @@ public class Profesor extends UsuarioBase {
 	public void verMenu(Scanner sc) {
 		
 	    SistemaRecomendacion sistema = new SistemaRecomendacion();
+	    GestorUsuarios gestor = new GestorUsuarios();
 	    Tema tema = new Tema();
 	    String opcion;
 
@@ -83,7 +84,11 @@ public class Profesor extends UsuarioBase {
 	                sistema.modificarTarea(sc);
 	                break;
 
-	            case "7", "salir del menu":
+	            case "7", "Cambiar contraseña":
+	            	gestor.cambiarContraseña(sc, this);
+                	break;
+	                
+	            case "8", "salir del menu":
 	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de profesor..." + Colores.ANSI_RESET);
 	                break;
 
@@ -92,7 +97,7 @@ public class Profesor extends UsuarioBase {
 	                
 	        }
 	        
-	    } while (!opcion.equals("7") && !opcion.equals("salir del menu"));
+	    } while (!opcion.equals("8") && !opcion.equals("salir del menu"));
 	    
 	}
 	

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
+import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
 
 public class Alumno extends UsuarioBase {
     
@@ -62,7 +63,9 @@ public class Alumno extends UsuarioBase {
 
     @Override
     public void verMenu(Scanner sc) {
+    	
         SistemaRecomendacion sistema = new SistemaRecomendacion();
+        GestorUsuarios gestor = new GestorUsuarios();
         String opcion;
 
         do {
@@ -76,6 +79,7 @@ public class Alumno extends UsuarioBase {
             opcion = sc.nextLine().toLowerCase();
 
             switch (opcion) {
+            
                 case "1", "ver nota":
                     System.out.println("Nota actual: " + getNota());
                     break;
@@ -91,8 +95,12 @@ public class Alumno extends UsuarioBase {
                 case "4", "entregar tarea":
                     sistema.marcarTareaCompletada(this, sc);
                     break;
+                    
+                case "5", "Cambiar contraseña":
+	            	gestor.cambiarContraseña(sc, this);
+                	break;
 
-                case "5", "salir del menu":
+                case "6", "salir del menu":
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de alumno..." + Colores.ANSI_RESET);
                     break;
 
@@ -100,7 +108,7 @@ public class Alumno extends UsuarioBase {
                     System.err.println("Opcion no valida. Por favor, elige una opcion valida.");
             }
             
-        } while (!opcion.equals("5") && !opcion.equals("salir del menu"));
+        } while (!opcion.equals("6") && !opcion.equals("salir del menu"));
     }
     
 }
