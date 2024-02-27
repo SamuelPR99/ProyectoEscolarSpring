@@ -17,11 +17,6 @@ public interface Usuario {
 	// Implementa verMenu en los hijos del UsuarioBase
 	public abstract void verMenu(Scanner sc);
 	
-	
-	// Zamudio
-	public abstract boolean validarNombreUsuario(String usuario);
-    public abstract boolean validarContrasena(String contrasena);
-    public abstract void cambiarContrasena(String nuevaContrasena);
     public abstract void mostrarInformacion();
     
 }

@@ -114,27 +114,8 @@ public class Profesor extends UsuarioBase {
 	}
 	
 	// Zamudio
-	
-	@Override
-    public boolean validarNombreUsuario(String nombre) {
-        // Implementación de la validación del nombre de usuario para un profesor
-        return nombre.length() >= 2; // Ejemplo de validación
-    }
 
-    @Override
-    public boolean validarContrasena(String contraseña) {
-        // Implementación de la validación de la contraseña para un profesor
-        return contraseña.length() >= 8; // Ejemplo de validación
-    }
-	
 	@Override
-    public void cambiarContrasena(String nuevaContraseña) {
-        // Implementación del cambio de contraseña para un profesor
-        this.contraseña = nuevaContraseña;
-    }
-	
-	@Override
-	
     public void mostrarInformacion() {
         // Implementación para mostrar la información de un profesor
         System.out.println("Nombre de usuario: " + nombre);

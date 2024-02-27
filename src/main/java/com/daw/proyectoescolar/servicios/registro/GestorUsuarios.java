@@ -71,7 +71,7 @@ public class GestorUsuarios {
         
         // Validar la contraseña
         
-        while (!validarContrasena(contraseña)) {
+        while (!validarContraseña(contraseña)) {
             System.err.println("Contraseña no válida. Inténtalo de nuevo.");
             System.out.print("Introduzca su contraseña: ");
             contraseña = sc.nextLine();
@@ -119,20 +119,9 @@ public class GestorUsuarios {
 		}
 	
 	public void borrarUsuario(Scanner sc) {
+
+	
 		
-		System.out.println("Lista de usuarios y contraseñas:");
-		for (UsuarioBase u : usuarios) {
-			System.out.println("Usuario: " + u.getNombre() + ", Contraseña: " + u.getContraseña());
-		}
-		System.out.print("Introduzca el nombre del usuario que desea borrar: ");
-		String usuario = sc.nextLine();
-		int indiceUsuario = buscarUsuario(usuario);
-		if (indiceUsuario != -1) {
-			usuarios.remove(indiceUsuario);
-			System.out.println("Usuario borrado con éxito.");
-		} else {
-			System.err.println("Usuario no encontrado. Inténtalo de nuevo.");
-		}
 	}
 
     public boolean validarDNI(String dni) {
@@ -173,14 +162,14 @@ public class GestorUsuarios {
         
     }
 
-    public boolean validarContrasena(String contrasena) {
+    public boolean validarContraseña(String contraseña) {
     	
-        if (contrasena.length() >= 6 && !contrasena.contains(" ")) {
+        if (contraseña.length() >= 6 && !contraseña.contains(" ")) {
             boolean tieneMayuscula = false;
             boolean tieneEspecial = false;
 
-            for (int i = 0; i < contrasena.length(); i++) {
-                char c = contrasena.charAt(i);
+            for (int i = 0; i < contraseña.length(); i++) {
+                char c = contraseña.charAt(i);
 
                 if ((c >= 65 && c <= 90) || (c >= 192 && c <= 223)) {
                     tieneMayuscula = true;
@@ -208,54 +197,39 @@ public class GestorUsuarios {
         
     }
 
-    public void cambiarContrasena(Scanner sc) {
+	public void cambiarContrasenaDelUsuarioQueSeLoguee(Scanner sc, UsuarioBase usuario) {
+
+		System.out.print("Introduzca su nueva contraseña: ");
+		String nuevaContrasena = sc.nextLine();
+
+		if (validarContraseña(nuevaContrasena)) {
+			usuario.setContraseña(nuevaContrasena);
+			System.out.println("Contraseña cambiada con éxito.");
+		} else {
+			System.err.println(
+					"La nueva contraseña no cumple con los requisitos, "
+					+ "debe tener al menos 6 caracteres, "
+					+ "incluir al menos 1 mayúscula y 1 carácter especial. "
+					+ "Inténtalo de nuevo.");
+		}
+
+	}
     	
-        System.out.print("Ingresa tu nombre de usuario: ");
-        String usuario = sc.nextLine();
+    public void buscarUsuario(Scanner sc) {
 
-        int indiceUsuario = buscarUsuario(usuario);
+		System.out.print("Introduzca el nombre del usuario que desea buscar: ");
+		String usuario = sc.nextLine();
+		int indiceUsuario = buscarUsuario(usuario);
+		if (indiceUsuario != -1) {
+			System.out.println("Usuario encontrado: " + usuarios.get(indiceUsuario).getNombre());
+		} else {
+			System.err.println("Usuario no encontrado.");
+		}
 
-        if (indiceUsuario != -1) {
-            cambiarContrasenaLogica(indiceUsuario, sc);
-        } else {
-            System.err.println("Usuario no encontrado. Inténtalo de nuevo.");
-        }
-        
-    }
+	}
 
-    public void cambiarContrasenaLogica(int indiceUsuario, Scanner sc) {
+	}	
     	
-        System.out.print("Ingresa tu nueva contraseña: ");
-        String nuevaContrasena = sc.nextLine();
-
-        if (validarContrasena(nuevaContrasena)) {
-            usuarios[indiceUsuario][2] = nuevaContrasena;
-            System.out.println("Contraseña cambiada con éxito.");
-        } else {
-            System.err.println("La nueva contraseña no cumple con los requisitos, "
-            		+ "debe tener al menos 6 caracteres, incluir al menos 1 mayúscula y 1 carácter especial. "
-            		+ "Inténtalo de nuevo.");
-        }
-        
-    }
-
-    public boolean usuarioExistente(String usuario) {
-    	
-        for (int i = 0; i < numUsuarios; i++) {
-            if (usuarios[i][0].equals(usuario)) {
-                return true;
-            }
-        }
-        
-        return false;
-        
-    }
-
-    public int buscarUsuario(String usuario) {
-    	
-       
-    }
-
     public void mostrarUsuariosRegistrados() {
     	
         System.out.println("Usuarios registrados:");

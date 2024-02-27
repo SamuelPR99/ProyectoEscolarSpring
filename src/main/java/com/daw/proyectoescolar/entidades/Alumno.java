@@ -103,25 +103,6 @@ public class Alumno extends UsuarioBase {
         } while (!opcion.equals("5") && !opcion.equals("salir del menu"));
     }
     
-    // Zamudio
-    
-    @Override
-    public boolean validarNombreUsuario(String usuario) {
-        // Implementación de la validación del nombre de usuario para un alumno
-        return usuario.length() >= 3;
-    }
-
-    @Override
-    public boolean validarContrasena(String contrasena) {
-        // Implementación de la validación de la contraseña para un alumno
-        return contrasena.length() >= 6 && !contrasena.contains(" ");
-    }
-
-    @Override
-    public void cambiarContrasena(String nuevaContrasena) {
-        // Implementación del cambio de contraseña para un alumno
-        this.contraseña = nuevaContrasena;
-    }
 
     @Override
     public void mostrarInformacion() {
