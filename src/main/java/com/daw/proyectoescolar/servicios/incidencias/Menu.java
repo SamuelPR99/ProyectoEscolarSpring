@@ -10,6 +10,8 @@ public class Menu {
 	
 	public Menu() {
 		
+		// MENÚ PRINCIPAL \\
+		
 		Scanner sc = new Scanner(System.in);
 		
 		String opcion;

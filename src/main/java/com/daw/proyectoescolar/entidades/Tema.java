@@ -17,9 +17,18 @@ public class Tema {
 	public Tema() {
 		
 	}
-	
-	
-	
+
+	public Tema(String nombre, String descripcion) {
+		this.nombre=nombre;
+		this.descripcion=descripcion;
+	}
+
+	public Tema(String nombre, String descripcion, Tarea tarea) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.tarea = tarea;
+	}
+
 	// Getters y setters
 	
 	public String getNombre() {
@@ -42,43 +51,87 @@ public class Tema {
 	}
 	
 	// Metodos
+	
+	// Muestra los temas y sus tareas correspondientes
 	public void mostrarTemas(Scanner sc) {
 		
-		temas = new ArrayList<Tema>();
+		// inicializar array de abajo
+		ArrayList<Tema> temas = obtenerTemas();
 		
-		Tema t1 = new Tema(" 1: Teoría de la Probabilidad Estocástica");
-		temas.add(t1);
+		int i = 1;
 		
-		Tema t2= new Tema(" 2: Teoría de Números Avanzada");
-		temas.add(t2);
+		// Mostrar los temas
+		for (Tema t : temas) {
+			System.out.println(i + ". " + t.getNombre());
+			i++;
+		}
 		
-		Tema t3= new Tema(" 3: Análisis Funcional");
-		temas.add(t3);
-		
-		Tema t4= new Tema(" 4: Topología Algebraica");
-		temas.add(t4);
-		
-		Tema t5= new Tema(" 5: Teoría de Representación de Grupos");
-		temas.add(t5);
-		
-		Tema t6= new Tema(" 6: Teoría de la Aproximación y Funciones Especiales");
-		temas.add(t6);
-	
-		System.out.println("Selecciona el número del tema");
+		// Seleccionar tema
+		System.out.print("\nSelecciona el numero del tema: ");
+		int opcion = sc.nextInt();
+	    sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string y se buguea 3 veces el menu
 
-		int opcion=sc.nextInt();
-		
-		for(Tema t : temas) {
-			if(opcion<=6 && opcion>=1) {
-				new Tarea().mostrarTareas();
-				
-			}else {
-				System.out.println("Error del elección");
-			}
-		
-		
+	    // Mostrar tarea del tema seleccionado
+		temas.get(opcion - 1).mostrarTarea();
 		
 	}
+		
+	// Muestra tarea y sus atributos	
+    public void mostrarTarea() {
+    	
+        System.out.println("\nNombre del tema: " + this.getNombre() 
+    + "\nDescripción: " + this.getDescripcion() + "\n" 
+    + "\nTarea:\n" + this.getTarea().getNombre() 
+    + "\nDescripción de la tarea: " + this.getTarea().getDescripcion());
+        
+    }
+		
+    // Array de temas con sus tareas
+	public static ArrayList<Tema> obtenerTemas() {
+		
+		ArrayList<Tema> temas = new ArrayList<Tema>();
+        ArrayList<Tarea> tareas = Tarea.obtenerTodasLasTareas();
+        
+        Tema tema = new Tema();
+        tema.setNombre("Teoría de la Probabilidad Estocástica");
+        tema.setDescripcion("Estudio de la probabilidad en un espacio de probabilidad");
+        tema.setTarea(tareas.get(0)); // Tarea 1
+        temas.add(tema);
+        
+        tema = new Tema();
+        tema.setNombre("Teoría de Números Avanzada");
+        tema.setDescripcion("Estudio de los números enteros y sus propiedades");
+        tema.setTarea(tareas.get(1)); // Tarea 2
+        temas.add(tema);
+        
+        tema = new Tema();
+        tema.setNombre("Análisis Funcional");
+        tema.setDescripcion("Estudio de espacios vectoriales normados y sus propiedades");
+        tema.setTarea(tareas.get(2)); // Tarea 3
+        temas.add(tema);
+        
+        tema = new Tema();
+        tema.setNombre("Topología Algebraica");
+        tema.setDescripcion("Estudio de la topología y sus propiedades");
+        tema.setTarea(tareas.get(3)); // Tarea 4
+        temas.add(tema);
+        
+        tema = new Tema();
+        tema.setNombre("Teoría de Representación de Grupos");
+        tema.setDescripcion("Estudio de la teoría de grupos y sus propiedades");
+        tema.setTarea(tareas.get(4)); // Tarea 5
+        temas.add(tema);
+        
+        tema = new Tema();
+        tema.setNombre("Teoría de la Aproximación y Funciones Especiales");
+        tema.setDescripcion("Estudio de la aproximación de funciones y sus propiedades");
+        tema.setTarea(tareas.get(5)); // Tarea 6
+        temas.add(tema);
+        
+        return temas;
+    }
+			
 }
+
 	
-}
+

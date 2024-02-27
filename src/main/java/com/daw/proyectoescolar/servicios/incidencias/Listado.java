@@ -11,9 +11,13 @@ public class Listado {
     ArrayList<Incidencias> verIncidencias;
     ArrayList<Incidencias> listaIncidencias = new AñadirIncidencia().listaIncidencias;
     
+    public Listado() {
+    	
+    }
+    
     public void menuListado() {
     	
-    	verIncidencias = new AñadirIncidencia().obtenerLista(listaIncidencias);
+    	verIncidencias = new AñadirIncidencia().añadirIncidencia(listaIncidencias);
     	
     	Scanner sc = new Scanner(System.in);
 		boolean volver = false;
@@ -21,8 +25,9 @@ public class Listado {
 		
 		do {
 			
-			System.out.println("Elige qué lista de incidencias quieres desplegar");
-			System.out.println("\n1 - Incidencias de Alumno\n2 - Incidencias de Profesor\n3 - Incidencias de Aplicación\n4 - Volver");
+			System.out.println("Elige qué lista de incidencias quieres desplegar\n");
+			
+			System.out.println("\n1 - Incidencias de Alumnos\n2 - Incidencias de Profesores\n3 - Incidencias de Aplicación\n4 - Volver");
 			opcion = sc.nextInt();
 			
 			if (opcion == 1) {
@@ -31,7 +36,7 @@ public class Listado {
 				verIncidenciaProfesor();
 			} else if (opcion == 3) {
 				verIncidenciaAplicacion();
-			} else if (opcion == 4){
+			} else if (opcion == 4) {
 				volver = true;
 			} else {
 				System.out.println(Colores.ANSI_RED + "Has introducido una opción inválida" + Colores.ANSI_RESET);

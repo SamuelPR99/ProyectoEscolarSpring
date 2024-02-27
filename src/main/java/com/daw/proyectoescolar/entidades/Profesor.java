@@ -1,11 +1,12 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
-import com.daw.proyectoescolar.servicios.tareas.Tema;
+
 
 
 public class Profesor extends UsuarioBase {
@@ -33,9 +34,9 @@ public class Profesor extends UsuarioBase {
     // Menu profesor
 	@Override
 	public void verMenu(Scanner sc) {
+		
 	    SistemaRecomendacion sistema = new SistemaRecomendacion();
-	    Tema tema= new Tema();
-	    Profesor a = new Profesor();
+	    Tema tema = new Tema();
 	    String opcion;
 
 	    do {
@@ -54,7 +55,7 @@ public class Profesor extends UsuarioBase {
 	        switch (opcion) {
 	        
 	        	case "1", "ver listado de temas":
-	        		tema.mostrarTemas();
+	        		tema.mostrarTemas(sc);
 	        		break;
 	            case "2", "ver lista de alumnos":
                     //a.mostrarListaAlumnos();
@@ -90,7 +91,7 @@ public class Profesor extends UsuarioBase {
 	    
 	}
 	
-	private void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
+	public void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
 		// TODO Auto-generated method stub
 		System.out.println("Lista de alumnos:");
 		for (Alumno alumno : alumnos) {
@@ -98,11 +99,11 @@ public class Profesor extends UsuarioBase {
       }
 		
 	}
-	private Tema Tema(ArrayList<Tema> tema) {
+	public void mostrarTemas(ArrayList<Tema> temas) {
 		// TODO Auto-generated method stub
 		System.out.println("Lista de temas:");
-	    for (Tema tema : tema) {
-	        System.out.println(tema.getTemas());
+	    for (Tema tema : temas) {
+	        System.out.println(tema.getNombre());
 	    }
 	    
 	}

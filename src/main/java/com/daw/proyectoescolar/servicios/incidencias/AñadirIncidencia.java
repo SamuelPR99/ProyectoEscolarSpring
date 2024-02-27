@@ -9,13 +9,25 @@ public class AñadirIncidencia {
 
 	ArrayList<Incidencias> listaIncidencias;
 	
-	public AñadirIncidencia() {
+		//Constructores
+	
+	public AñadirIncidencia() { 
+		
+	}
+	
+	//Métodos
+	public ArrayList<Incidencias> añadirIncidencia(ArrayList<Incidencias> listaIncidencias) { 
+		
+		/*Este método hace que el usuario pueda añadir todas las incidencias del tipo que desee hasta que introduzca
+	 		la opción de "Volver" que lo retornará hasta el menú principal*/
 		
 		Scanner sc = new Scanner(System.in);
 		
 		listaIncidencias = new ArrayList<Incidencias>();
 		String opcion;
 		boolean volver = false;
+		
+		//Submenú para añadir las incidencias que el usuario desee
 		
 		do {
 		
@@ -66,14 +78,10 @@ public class AñadirIncidencia {
 				
     } while (!opcion.equals("4") && !opcion.equals("volver"));
 		
-		
+		return listaIncidencias;
 		
 	}
 	
-	public ArrayList<Incidencias> obtenerLista(ArrayList<Incidencias> listaIncidencias){
-		
-		ArrayList<Incidencias> devolverLista = listaIncidencias;
-		return listaIncidencias;
-	}
+	
 	
 }

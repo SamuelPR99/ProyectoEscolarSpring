@@ -1,5 +1,7 @@
 package com.daw.proyectoescolar.servicios.incidencias;
 
+import com.daw.proyectoescolar.repositorio.Colores;
+
 public class IncidenciaAlumno extends Incidencias{
 
 	public IncidenciaAlumno() {
@@ -12,7 +14,7 @@ public class IncidenciaAlumno extends Incidencias{
 
 	@Override
 	public String toString() {
-		return "IncidenciaAlumno [incidencia=" + incidencia + "]";
+		return Colores.ANSI_CYAN + "Incidencias de Alumnos: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_RESET;
 	}
 	
 	
