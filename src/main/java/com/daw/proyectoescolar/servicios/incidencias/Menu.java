@@ -19,11 +19,13 @@ public class Menu {
 		
 		System.out.println("Bienvenido a la gestión de incidencias de nuestra aplicación!!!!!!!!!!!!!!!!!!!!!!!!!");
 		
+		
+		
 		do {
 			
 			System.out.println("1 - Añadir una incidencia\n2 - Listar incidencias\n3 - Eliminar incidencias\n4 - Salir del menú de incidencias");
 			System.out.println("Introduce una opción:");
-			opcion = sc.nextLine().toLowerCase();
+			opcion = sc.nextLine();
 			
 			switch(opcion) {
 			
@@ -43,7 +45,6 @@ public class Menu {
 				System.out.println(Colores.ANSI_RED + "Saliendo de la aplicación..." + Colores.ANSI_RESET);
 			break;
 			}
-			
 			
 		} while (!opcion.equals("4") && !opcion.equals("salir"));
 		
