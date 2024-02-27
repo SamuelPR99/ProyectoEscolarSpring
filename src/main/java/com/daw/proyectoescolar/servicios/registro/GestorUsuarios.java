@@ -79,7 +79,7 @@ public class GestorUsuarios {
             contraseña = sc.nextLine();
                 }
         
-        System.out.print("¿Es profesor o alumno: ");
+        System.out.print("¿Es profesor o alumno?: ");
         String tipo = sc.nextLine();
         
         if (tipo.equalsIgnoreCase("profesor")) {
@@ -101,7 +101,7 @@ public class GestorUsuarios {
 
 		if (usuarios.isEmpty()) {
 			
-			System.err.println("La lista de usuarios está " + Colores.ANSI_UNDERLINE + "vacia" + Colores.ANSI_RESET + ". Por favor, cree un usuario.");
+			System.err.println("La lista de usuarios esta " + Colores.ANSI_UNDERLINE + "vacia" + Colores.ANSI_RESET + ". Por favor, cree un usuario.");
 			crearUsuario(sc);
 			
 		} else {
@@ -126,7 +126,7 @@ public class GestorUsuarios {
 
 		if (usuario != null) {
 			usuarios.remove(usuario);
-			System.out.println(Colores.ANSI_GREEN + "Usuario eliminado con éxito." + Colores.ANSI_RESET);
+			System.out.println(Colores.ANSI_GREEN + "Usuario eliminado con exito." + Colores.ANSI_RESET);
 		} else {
 			System.err.println("Usuario no encontrado.");
 		}
@@ -151,10 +151,10 @@ public class GestorUsuarios {
 			System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada con éxito." + Colores.ANSI_RESET);
 		} else {
 			System.err.println(
-					"La nueva contraseña no cumple con los requisitos, "
-					+ "debe tener al menos 6 caracteres, "
-					+ "incluir al menos 1 mayúscula y 1 carácter especial. "
-					+ "Inténtalo de nuevo.");
+					"La nueva contraseña no cumple con los requisitos.\n "
+					+ "Debe tener al menos 6 caracteres.\n"
+					+ "Incluir al menos 1 mayúscula y 1 caracter especial. "
+					+ "Intentalo de nuevo.");
 		}
 
 	}
@@ -205,7 +205,7 @@ public class GestorUsuarios {
         if (usuario.length() >= 3) {
             return true;
         } else {
-            System.err.println("Error: El nombre de usuario debe tener al menos 3 caracteres. Inténtalo de nuevo.");
+            System.err.println("Error: El nombre de usuario debe tener al menos 3 caracteres. Intentalo de nuevo.");
             return false;
         }
         
@@ -236,15 +236,15 @@ public class GestorUsuarios {
             if (tieneMayuscula && tieneEspecial) {
                 return true;
             } else {
-                System.err.println("Error: La contraseña debe tener al menos 6 caracteres, "
-                		+ "incluir al menos 1 mayúscula y 1 carácter especial. "
-                		+ "Inténtalo de nuevo.");
+                System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n "
+                		+ "incluir al menos 1 mayúscula y 1 carácter especial.\n"
+                		+ "Intentalo de nuevo.");
                 return false;
             }
         } else {
-            System.err.println("Error: La contraseña debe tener al menos 6 caracteres y "
-            		+ "no debe contener espacios. "
-            		+ "Inténtalo de nuevo.");
+            System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
+            		+ "no debe contener espacios.\n"
+            		+ "Intentalo de nuevo.");
             return false;
         }
         
@@ -292,7 +292,7 @@ public class GestorUsuarios {
                     System.out.println("Hasta luego. (⌐■_■)");
                     break;
                 default:
-                    System.err.println("Opción no válida. Inténtalo de nuevo.");
+                    System.err.println("Opción no valida. Intentalo de nuevo.");
             }
             
         } while (!opcion.equals("3"));
