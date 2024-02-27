@@ -83,6 +83,9 @@ public class Tarea {
         tareas.add(new Tarea("Avanzada", "Tarea 1: Espacios de Sobolev", "Estudiar la teoría de espacios de Sobolev y su relación con problemas de valores en la frontera."));
         tareas.add(new Tarea("Intermedia", "Tarea 2: Operadores Lineales y Teorema del Punto Fijo", "Demostrar el Teorema del Punto Fijo de Banach para operadores lineales en espacios de Banach."));
         tareas.add(new Tarea("Basica", "Tarea 3: Conceptos básicos de álgebra", "Repasar conceptos fundamentales de álgebra como ecuaciones lineales y factorización."));
+        
+        
+        
         // Agregar mas tareas
 
         return tareas;
