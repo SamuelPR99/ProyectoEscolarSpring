@@ -14,13 +14,14 @@ public class Controlador {
 
         Scanner sc = new Scanner(System.in);
         
-        GestorUsuarios gestionUsuario = new GestorUsuarios();
-                
-        gestionUsuario.inicio(sc);
-        // Por cuestiones de seguridad no puedes crear un usario administrador
-        // Para loguearte como administrador puedes usar los siguientes datos:
-        // Usuario: Lolo
-        // Contraseña: pass1
+        new GestorUsuarios().inicio(sc);
+        
+        /*
+         * Por cuestiones de seguridad no puedes crear un usario administrador
+         * Para loguearte como administrador puedes usar los siguientes datos:
+         * Usuario: Lolo
+         * Contraseña: pass1
+         */
         
         sc.close();
        
