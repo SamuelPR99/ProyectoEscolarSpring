@@ -16,7 +16,8 @@ public class GestorUsuarios {
 	
 	protected ArrayList<UsuarioBase> usuarios;
 
-    // CONSTRUCTOR
+    // CONSTRUCTORES
+	
     public GestorUsuarios() {
      
     	// Inicialización del ArrayList de usuarios
@@ -51,7 +52,7 @@ public class GestorUsuarios {
         
         // Validar nombre
 		while (!validarNombreUsuario(nombre)) {
-			System.err.println("Nombre de usuario no válido. Inténtalo de nuevo: ");
+			System.err.println("Nombre de usuario no valido. Intentalo de nuevo: ");
 			System.out.print("Introduzca su nombre: ");
 			nombre = sc.nextLine();
 		}
@@ -62,7 +63,7 @@ public class GestorUsuarios {
         // Validar el DNI
         
 		while (!validarDNI(dni)) {
-			System.err.println("DNI no válido. Inténtalo de nuevo: ");
+			System.err.println("DNI no valido. Intentalo de nuevo: ");
 			System.out.print("Introduzca su DNI: ");
 			dni = sc.nextLine();
 		}
@@ -73,21 +74,20 @@ public class GestorUsuarios {
         // Validar la contraseña
         
         while (!validarContraseña(contraseña)) {
-            System.err.println("Contraseña no válida. Inténtalo de nuevo: ");
+            System.err.println("Contraseña no valida. Intentalo de nuevo: ");
             System.out.print("Introduzca su contraseña: ");
             contraseña = sc.nextLine();
                 }
         
         System.out.print("¿Es profesor o alumno: ");
         String tipo = sc.nextLine();
-        UsuarioBase usuario1 = null;
         
-		if (tipo.equalsIgnoreCase("profesor")) {
-			usuario1 = new Profesor(nombre, contraseña, dni);
+        if (tipo.equalsIgnoreCase("profesor")) {
+			new Profesor(nombre, contraseña, dni);
 		} else if (tipo.equalsIgnoreCase("alumno")) {
-			usuario1 = new Alumno(nombre, contraseña, dni);
+			new Alumno(nombre, contraseña, dni);
 		} else {
-			System.err.println("Tipo de usuario no válido. Inténtalo de nuevo.");
+			System.err.println("Tipo de usuario no valido. Intentalo de nuevo.");
 		}
 
 	}
@@ -101,7 +101,7 @@ public class GestorUsuarios {
 
 		if (usuarios.isEmpty()) {
 			
-			System.out.println("La lista de usuarios está vacía. Por favor, cree un usuario.");
+			System.err.println("La lista de usuarios está " + Colores.ANSI_UNDERLINE + "vacia" + Colores.ANSI_RESET + ". Por favor, cree un usuario.");
 			crearUsuario(sc);
 			
 		} else {
@@ -126,7 +126,7 @@ public class GestorUsuarios {
 
 		if (usuario != null) {
 			usuarios.remove(usuario);
-			System.out.println("Usuario eliminado con éxito.");
+			System.out.println(Colores.ANSI_GREEN + "Usuario eliminado con éxito." + Colores.ANSI_RESET);
 		} else {
 			System.err.println("Usuario no encontrado.");
 		}
@@ -148,7 +148,7 @@ public class GestorUsuarios {
 
 		if (validarContraseña(nuevaContraseña)) {
 			usuario.setContraseña(nuevaContraseña);
-			System.out.println("Contraseña cambiada con éxito.");
+			System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada con éxito." + Colores.ANSI_RESET);
 		} else {
 			System.err.println(
 					"La nueva contraseña no cumple con los requisitos, "
@@ -161,7 +161,7 @@ public class GestorUsuarios {
     	
     public UsuarioBase buscarUsuario(Scanner sc) {
 
-		System.out.print("Introduzca el nombre del usuario que quiere " + Colores.ANSI_RED + "eliminar: " + Colores.ANSI_RESET);
+		System.out.print("Introduzca el nombre del usuario que quiere " + Colores.ANSI_RED + Colores.ANSI_UNDERLINE + "eliminar: " + Colores.ANSI_RESET);
 		String nombre = sc.nextLine();
 
 		for (UsuarioBase u : usuarios) {
@@ -268,13 +268,20 @@ public class GestorUsuarios {
             switch (opcion) {
             
                 case "1":
+                	
                     UsuarioBase usuario = login(sc);
+                    
                     if (usuario != null) {
-                        System.out.println("Bienvenido " + usuario.getTipoUsuario() + ", " + usuario.getNombre());
+                        System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD 
+                        		+ usuario.getTipoUsuario() + Colores.ANSI_RESET 
+                        		+ ", " + usuario.getNombre());
+                        
                         usuario.verMenu(sc);
+                        
                     } else {
                         System.err.println("Usuario o contraseña incorrectos.");
                     }
+                    
                     break;
                 case "2":
                 	// Cuando cree un usuario vuelva a login
@@ -282,7 +289,7 @@ public class GestorUsuarios {
                     
                     break;
                 case "3":
-                    System.out.println("Hasta luego.");
+                    System.out.println("Hasta luego. (⌐■_■)");
                     break;
                 default:
                     System.err.println("Opción no válida. Inténtalo de nuevo.");
