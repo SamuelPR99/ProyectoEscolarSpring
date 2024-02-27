@@ -3,6 +3,7 @@ package com.daw.proyectoescolar.entidades;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
 
 public class Administrador extends UsuarioBase {
 	
@@ -18,9 +19,39 @@ public class Administrador extends UsuarioBase {
         super(nombre, contraseña);
     }
 	
+	public Administrador(String nombre, String contraseña, String dni) {
+		super(nombre, contraseña, dni);
+	}
+	
 	// Getters y setters
 	
 	//Metodos
+	
+	// Zamudio
+	
+	@Override
+	public boolean validarNombreUsuario(String usuario) {
+	     // Implementación de la validación del nombre de usuario para un administrador
+	     return usuario.equals("admin"); // Ejemplo de validación
+	 }
+	
+	@Override
+	public boolean validarContrasena(String contrasena) {
+	     // Implementación de la validación de la contraseña para un administrador
+	     return contraseña.equals("admin123"); // Ejemplo de validación
+	 }
+	
+	@Override
+	public void cambiarContrasena(String nuevaContrasena) {
+	     // Implementación del cambio de contraseña para un administrador
+	     this.contraseña = nuevaContrasena;
+	 }
+	
+	@Override
+	public void mostrarInformacion() {
+	     // Implementación para mostrar la información de un administrador
+	     System.out.println("Nombre de usuario: " + nombre);
+	 }
 
 	@Override
 	public String getTipoUsuario() {
@@ -33,15 +64,16 @@ public class Administrador extends UsuarioBase {
 	public void verMenu(Scanner sc) {
 
 		// Inicializar objeto que realize los metodos de administrador, etc.
+		GestorUsuarios gestor = new GestorUsuarios();
 		
 	    String opcion;
 
 	    do {
 	    	
 	    	System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
-	                + "1. lo que sea\n"
-	                + "2. lo que sea2\n"
-	                + "3. lo que sea3\n"
+	                + "1. Mostrar usuarios registrados\n"
+	                + "2. Crear un usuario de forma manual\n"
+	                + "3. Borrar un usuario\n"
 	                + "4. lo que sea4\n"
 	                + "5. lo que sea5\n"
 	                + "6. Salir del menu" + Colores.ANSI_RESET);
@@ -50,16 +82,22 @@ public class Administrador extends UsuarioBase {
 
 	        switch (opcion) {
 	        
-	            case "1", "lo que sea":
+	            case "1", "Mostrar usuarios registrados":
+	            	
+	            	gestor.mostrarUsuariosRegistrados();
 	            
 	                break;
 
-	            case "2", "lo que sea2":
-	               
+	            case "2", "Crear un usuario de forma manual":
+	            	
+	                gestor.crearUsuario(sc);
+	            
 	                break;
 
-	            case "3", "lo que sea3":
+	            case "3", "Borrar un usuario":
 	               
+	            	gestor.borrarUsuario(sc);
+	            	
 	                break;
 
 	            case "4", "lo que sea4":

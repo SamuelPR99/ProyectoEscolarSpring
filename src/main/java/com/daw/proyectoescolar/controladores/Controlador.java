@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
-import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
+import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
 
 public class Controlador {
 
@@ -15,11 +15,12 @@ public class Controlador {
         Scanner sc = new Scanner(System.in);
         
         // AQUI IRIA LOGIN DE ZAMUDIO, DE MOMENTO USAR EL MIO
-        SistemaRecomendacion login_improvisao = new SistemaRecomendacion();
+        GestorUsuarios gestionUsuario = new GestorUsuarios();
         
         System.out.println("Bienvenido a la aplicacion escolar");
 
-        UsuarioBase usuario = login_improvisao.login(sc);
+        
+        UsuarioBase usuario = gestionUsuario.login(sc);
 
         try {
         	  	

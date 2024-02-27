@@ -42,6 +42,7 @@ public class SistemaRecomendacion {
         
         // Administradores
         usuarios.add(new Administrador("Lolo", "pass1"));
+        
     }
     
     // Metodos
