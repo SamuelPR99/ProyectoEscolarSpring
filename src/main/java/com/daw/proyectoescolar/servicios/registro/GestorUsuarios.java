@@ -8,6 +8,7 @@ import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
+import com.daw.proyectoescolar.repositorio.Colores;
 
 public class GestorUsuarios {
 	
@@ -15,7 +16,7 @@ public class GestorUsuarios {
 	
 	protected ArrayList<UsuarioBase> usuarios;
 
-    //CONSTRUCTOR
+    // CONSTRUCTOR
     public GestorUsuarios() {
      
     	// Inicialización del ArrayList de usuarios
@@ -41,7 +42,7 @@ public class GestorUsuarios {
     }
 
     
-    //METODOS
+    // METODOS
     
     public void crearUsuario(Scanner sc) {
     	
@@ -50,7 +51,7 @@ public class GestorUsuarios {
         
         // Validar nombre
 		while (!validarNombreUsuario(nombre)) {
-			System.err.println("Nombre de usuario no válido. Inténtalo de nuevo.");
+			System.err.println("Nombre de usuario no válido. Inténtalo de nuevo: ");
 			System.out.print("Introduzca su nombre: ");
 			nombre = sc.nextLine();
 		}
@@ -61,7 +62,7 @@ public class GestorUsuarios {
         // Validar el DNI
         
 		while (!validarDNI(dni)) {
-			System.err.println("DNI no válido. Inténtalo de nuevo.");
+			System.err.println("DNI no válido. Inténtalo de nuevo: ");
 			System.out.print("Introduzca su DNI: ");
 			dni = sc.nextLine();
 		}
@@ -72,12 +73,12 @@ public class GestorUsuarios {
         // Validar la contraseña
         
         while (!validarContraseña(contraseña)) {
-            System.err.println("Contraseña no válida. Inténtalo de nuevo.");
+            System.err.println("Contraseña no válida. Inténtalo de nuevo: ");
             System.out.print("Introduzca su contraseña: ");
             contraseña = sc.nextLine();
                 }
         
-        System.out.print("¿Es profesor, alumno o administrador?: ");
+        System.out.print("¿Es profesor o alumno: ");
         String tipo = sc.nextLine();
         UsuarioBase usuario1 = null;
         
@@ -85,8 +86,6 @@ public class GestorUsuarios {
 			usuario1 = new Profesor(nombre, contraseña, dni);
 		} else if (tipo.equalsIgnoreCase("alumno")) {
 			usuario1 = new Alumno(nombre, contraseña, dni);
-		} else if (tipo.equalsIgnoreCase("administrador")) {
-			usuario1 = new Administrador(nombre, contraseña, dni);
 		} else {
 			System.err.println("Tipo de usuario no válido. Inténtalo de nuevo.");
 		}
@@ -105,11 +104,13 @@ public class GestorUsuarios {
 			System.out.println("La lista de usuarios está vacía. Por favor, cree un usuario.");
 			crearUsuario(sc);
 			
-		} else {  
+		} else {
+			
 			for (UsuarioBase u : usuarios) {
 				if (u.getNombre().equals(usuario) && u.getContraseña().equals(contraseña)) {
 					return u;
 				}
+				
 			}
     
 		}
@@ -119,9 +120,57 @@ public class GestorUsuarios {
 		}
 	
 	public void borrarUsuario(Scanner sc) {
-
-	
 		
+		mostrarUsuarios();
+		UsuarioBase usuario = buscarUsuario(sc);
+
+		if (usuario != null) {
+			usuarios.remove(usuario);
+			System.out.println("Usuario eliminado con éxito.");
+		} else {
+			System.err.println("Usuario no encontrado.");
+		}
+	}
+
+	public void mostrarUsuarios() {
+
+		System.out.println("Usuarios registrados:");
+		for (UsuarioBase u : usuarios) {
+			System.out.println(u.getNombre() + " - " + u.getTipoUsuario());
+		}
+		
+	}
+	
+	public void cambiarContraseña(Scanner sc, UsuarioBase usuario) {
+
+		System.out.print("Introduzca su nueva contraseña: ");
+		String nuevaContraseña = sc.nextLine();
+
+		if (validarContraseña(nuevaContraseña)) {
+			usuario.setContraseña(nuevaContraseña);
+			System.out.println("Contraseña cambiada con éxito.");
+		} else {
+			System.err.println(
+					"La nueva contraseña no cumple con los requisitos, "
+					+ "debe tener al menos 6 caracteres, "
+					+ "incluir al menos 1 mayúscula y 1 carácter especial. "
+					+ "Inténtalo de nuevo.");
+		}
+
+	}
+    	
+    public UsuarioBase buscarUsuario(Scanner sc) {
+
+		System.out.print("Introduzca el nombre del usuario que quiere " + Colores.ANSI_RED + "eliminar: " + Colores.ANSI_RESET);
+		String nombre = sc.nextLine();
+
+		for (UsuarioBase u : usuarios) {
+			if (u.getNombre().equals(nombre)) {
+				return u;
+			}
+		}
+
+		return null;
 	}
 
     public boolean validarDNI(String dni) {
@@ -187,57 +236,60 @@ public class GestorUsuarios {
             if (tieneMayuscula && tieneEspecial) {
                 return true;
             } else {
-                System.err.println("Error: La contraseña debe tener al menos 6 caracteres, incluir al menos 1 mayúscula y 1 carácter especial. Inténtalo de nuevo.");
+                System.err.println("Error: La contraseña debe tener al menos 6 caracteres, "
+                		+ "incluir al menos 1 mayúscula y 1 carácter especial. "
+                		+ "Inténtalo de nuevo.");
                 return false;
             }
         } else {
-            System.err.println("Error: La contraseña debe tener al menos 6 caracteres y no debe contener espacios. Inténtalo de nuevo.");
+            System.err.println("Error: La contraseña debe tener al menos 6 caracteres y "
+            		+ "no debe contener espacios. "
+            		+ "Inténtalo de nuevo.");
             return false;
         }
         
     }
-
-	public void cambiarContrasenaDelUsuarioQueSeLoguee(Scanner sc, UsuarioBase usuario) {
-
-		System.out.print("Introduzca su nueva contraseña: ");
-		String nuevaContrasena = sc.nextLine();
-
-		if (validarContraseña(nuevaContrasena)) {
-			usuario.setContraseña(nuevaContrasena);
-			System.out.println("Contraseña cambiada con éxito.");
-		} else {
-			System.err.println(
-					"La nueva contraseña no cumple con los requisitos, "
-					+ "debe tener al menos 6 caracteres, "
-					+ "incluir al menos 1 mayúscula y 1 carácter especial. "
-					+ "Inténtalo de nuevo.");
-		}
-
-	}
-    	
-    public void buscarUsuario(Scanner sc) {
-
-		System.out.print("Introduzca el nombre del usuario que desea buscar: ");
-		String usuario = sc.nextLine();
-		int indiceUsuario = buscarUsuario(usuario);
-		if (indiceUsuario != -1) {
-			System.out.println("Usuario encontrado: " + usuarios.get(indiceUsuario).getNombre());
-		} else {
-			System.err.println("Usuario no encontrado.");
-		}
-
-	}
-
-	}	
-    	
-    public void mostrarUsuariosRegistrados() {
-    	
-        System.out.println("Usuarios registrados:");
-
+    
+	public void inicio(Scanner sc) {
+		
+        System.out.println("Bienvenido a la aplicacion escolar");
+		
+		String opcion;
+        
+        do {
+            
+            System.out.println("Seleccione una opción:\n"
+                    + "1. Iniciar sesión\n"
+                    + "2. Registrarse\n"
+                    + "3. Salir");
+            
+            opcion = sc.nextLine();
+            
+            switch (opcion) {
+            
+                case "1":
+                    UsuarioBase usuario = login(sc);
+                    if (usuario != null) {
+                        System.out.println("Bienvenido " + usuario.getTipoUsuario() + ", " + usuario.getNombre());
+                        usuario.verMenu(sc);
+                    } else {
+                        System.err.println("Usuario o contraseña incorrectos.");
+                    }
+                    break;
+                case "2":
+                	// Cuando cree un usuario vuelva a login
+                    crearUsuario(sc);
+                    
+                    break;
+                case "3":
+                    System.out.println("Hasta luego.");
+                    break;
+                default:
+                    System.err.println("Opción no válida. Inténtalo de nuevo.");
+            }
+            
+        } while (!opcion.equals("3"));
         
     }
-
-    
+	
 }
-
-

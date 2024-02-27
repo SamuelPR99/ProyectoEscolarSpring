@@ -27,14 +27,6 @@ public class Administrador extends UsuarioBase {
 	
 	//Metodos
 	
-	// Zamudio
-	
-	@Override
-	public void mostrarInformacion() {
-	     // Implementación para mostrar la información de un administrador
-	     System.out.println("Nombre de usuario: " + nombre);
-	 }
-
 	@Override
 	public String getTipoUsuario() {
 		
@@ -66,7 +58,7 @@ public class Administrador extends UsuarioBase {
 	        
 	            case "1", "Mostrar usuarios registrados":
 	            	
-	            	gestor.mostrarUsuariosRegistrados();
+	            	gestor.mostrarUsuarios();
 	            
 	                break;
 
@@ -84,7 +76,7 @@ public class Administrador extends UsuarioBase {
 
 	            case "4", "lo que sea4":
 	            	
-	            	
+	            	gestor.cambiarContraseña(sc, this);
 	               
 	                break;
 

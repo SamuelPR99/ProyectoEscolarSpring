@@ -103,12 +103,4 @@ public class Alumno extends UsuarioBase {
         } while (!opcion.equals("5") && !opcion.equals("salir del menu"));
     }
     
-
-    @Override
-    public void mostrarInformacion() {
-        // Implementación para mostrar la información de un alumno
-        System.out.println("Nombre de usuario: " + nombre);
-        System.out.println("DNI: " + dni);
-    }
-
 }

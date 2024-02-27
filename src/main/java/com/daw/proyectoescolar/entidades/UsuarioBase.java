@@ -60,12 +60,5 @@ public abstract class UsuarioBase implements Usuario {
 		}
 		
 		// Metodos
-		
-		 public boolean autenticar(String contraseña) {
-			 
-			 return this.contraseña.equals(contraseña);
-			 
-		    }
-		
 }
 

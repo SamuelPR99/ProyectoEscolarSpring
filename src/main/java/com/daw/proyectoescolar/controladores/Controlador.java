@@ -14,32 +14,9 @@ public class Controlador {
 
         Scanner sc = new Scanner(System.in);
         
-        // AQUI IRIA LOGIN DE ZAMUDIO, DE MOMENTO USAR EL MIO
         GestorUsuarios gestionUsuario = new GestorUsuarios();
-        
-        System.out.println("Bienvenido a la aplicacion escolar");
-
-        
-        UsuarioBase usuario = gestionUsuario.login(sc);
-
-        try {
-        	  	
-            System.out.println("\nBienvenido " + Colores.ANSI_BOLD + usuario.getTipoUsuario() + ", " + usuario.getNombre() + Colores.ANSI_RESET);
-
-            if (usuario.getTipoUsuario().equals("Alumno") 
-            		|| usuario.getTipoUsuario().equals("Profesor") 
-            		|| usuario.getTipoUsuario().equals("Administrador")) {
-            	
-                usuario.verMenu(sc);
-            
-            } else {
-                System.err.println("Usuario no reconocido");
-            }
-            
-        } catch (NullPointerException e) {
-            System.err.println("Usuario o contraseña incorrectos");
-    	
-        }
+                
+        gestionUsuario.inicio(sc);
         
         sc.close();
        

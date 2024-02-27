@@ -97,7 +97,7 @@ public class Profesor extends UsuarioBase {
 	}
 	
 	public void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Lista de alumnos:");
 		for (Alumno alumno : alumnos) {
           System.out.println(alumno.getNombre());
@@ -105,7 +105,7 @@ public class Profesor extends UsuarioBase {
 		
 	}
 	public void mostrarTemas(ArrayList<Tema> temas) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Lista de temas:");
 	    for (Tema tema : temas) {
 	        System.out.println(tema.getNombre());
@@ -113,12 +113,4 @@ public class Profesor extends UsuarioBase {
 	    
 	}
 	
-	// Zamudio
-
-	@Override
-    public void mostrarInformacion() {
-        // Implementación para mostrar la información de un profesor
-        System.out.println("Nombre de usuario: " + nombre);
-        System.out.println("dni: " + dni);
-    }
 }
