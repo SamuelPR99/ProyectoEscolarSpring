@@ -20,6 +20,8 @@ public class GestionadorUsuarios {
 		 
 		    ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
 		    String opcionInicio;
+		    
+		    System.out.println("Bienvenido al sistema de gestión de usuarios.");
 
 		    do {
 
