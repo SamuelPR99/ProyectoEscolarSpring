@@ -22,7 +22,7 @@ public class GestionadorUsuarios {
 		    String opcion;
 		    
 		    System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al" 
-		    + Colores.ANSI_YELLOW_BACKGROUND + " campus virtual " 
+		    + Colores.ANSI_YELLOW_BACKGROUND + " Campus Virtual " 
 		    + Colores.ANSI_BLUE_BACKGROUND + " del IES Murcia." + Colores.ANSI_RESET);
 
 		    do {
