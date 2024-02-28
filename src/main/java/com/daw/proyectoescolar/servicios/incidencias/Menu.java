@@ -22,8 +22,6 @@ public class Menu {
 		
 		System.out.println("Bienvenido a la gestión de incidencias de nuestra aplicación!!!!!!!!!!!!!!!!!!!!!!!!!");
 		
-		
-		
 		do {
 			
 			System.out.println("1 - Añadir una incidencia\n2 - Listar incidencias\n3 - Eliminar incidencias\n4 - Salir del menú de incidencias");
