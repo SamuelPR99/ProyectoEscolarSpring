@@ -1,12 +1,10 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
-import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
-import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
+import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
 
 
@@ -41,9 +39,8 @@ public class Profesor extends UsuarioBase {
 	@Override
 	public void verMenu(Scanner sc) {
 		
-	    GestorUsuarios gestor = new GestorUsuarios();
-        ArrayList<UsuarioBase> usuarios = gestor.usuarios;
-	    SistemaRecomendacion sistema = new SistemaRecomendacion(usuarios);
+	    GestionadorUsuarios gestor = new GestionadorUsuarios();
+  
 	    Tema tema = new Tema();
 	    
 	    String opcion;
@@ -69,23 +66,23 @@ public class Profesor extends UsuarioBase {
 	        		break;
 	            case "2", "ver lista de alumnos":
                     //a.mostrarListaAlumnos();
-	            	sistema.verNotasAlumnos();
+	            	gestor.verNotasAlumnos();
 	                break;
 
 	            case "3", "modificar nota de alumno":
-	                sistema.modificarNotaAlumno(sc);
+	                gestor.modificarNotaAlumno(sc);
 	                break;
 
 	            case "4", "ver estadísticas":
-	                sistema.verEstadisticas();
+	                gestor.verEstadisticas();
 	                break;
 
 	            case "5", "agregar nueva tarea":
-	                sistema.agregarNuevaTarea(sc);
+	                gestor.agregarNuevaTarea(sc);
 	                break;
 
 	            case "6", "modificar tarea":
-	                sistema.modificarTarea(sc);
+	                gestor.modificarTarea(sc);
 	                break;
 
 	            case "7", "cambiar contraseña":

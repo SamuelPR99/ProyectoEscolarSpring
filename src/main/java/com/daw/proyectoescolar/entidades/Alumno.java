@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
-import com.daw.proyectoescolar.servicios.recomendador.SistemaRecomendacion;
-import com.daw.proyectoescolar.servicios.registro.GestorUsuarios;
+import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
 public class Alumno extends UsuarioBase {
     
@@ -70,10 +69,8 @@ public class Alumno extends UsuarioBase {
     @Override
     public void verMenu(Scanner sc) {
     	
-        GestorUsuarios gestor = new GestorUsuarios();
-        ArrayList<UsuarioBase> usuarios = gestor.usuarios;
-	    SistemaRecomendacion sistema = new SistemaRecomendacion(usuarios);
-	    
+        GestionadorUsuarios gestor = new GestionadorUsuarios();
+ 
         String opcion;
 
         do {
@@ -95,15 +92,15 @@ public class Alumno extends UsuarioBase {
                     break;
 
                 case "2", "recomendar tarea":
-                    sistema.recomendarTareaYMostrar(this);
+                    gestor.recomendarTareaYMostrar(this);
                     break;
 
                 case "3", "consultar tareas pendientes": 
-                    sistema.consultarTareasPendientes(this);
+                    gestor.consultarTareasPendientes(this);
                     break;
 
                 case "4", "entregar tarea":
-                    sistema.marcarTareaCompletada(this, sc);
+                    gestor.marcarTareaCompletada(this, sc);
                     break;
                     
                 case "5", "Cambiar contraseña":

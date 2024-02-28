@@ -45,6 +45,10 @@ public class Tarea {
         return tipo;
     }
 
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
     // Metodos
     public void mostrarRecomendacion() {
         System.out.println("Recomendación: Tarea " + tipo + "\nDescripción: " + descripcion);
