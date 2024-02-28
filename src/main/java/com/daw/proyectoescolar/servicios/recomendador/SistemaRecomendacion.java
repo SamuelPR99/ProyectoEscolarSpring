@@ -147,7 +147,7 @@ public class SistemaRecomendacion {
     }
     
     // Crear la lista de alumnos mediante la lista usuarios
-    public ArrayList<Alumno> obtenerAlumnos() {
+    private ArrayList<Alumno> obtenerAlumnos() {
     	
         ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
         for (Usuario usuario : usuarios) {
@@ -206,7 +206,7 @@ public class SistemaRecomendacion {
     }
     
     // Recomendar tarea a un alumno
-	public Tarea recomendarTarea(Alumno alumno) {
+	private Tarea recomendarTarea(Alumno alumno) {
 
 		double nota = alumno.getNota();
 		String tipoTarea;
