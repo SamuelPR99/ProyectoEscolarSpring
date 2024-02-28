@@ -175,23 +175,23 @@ public class GestionadorUsuarios {
         
     }
 	
-private boolean validarDNI(String dni) {
-    	
-		if (dni.length() == 9) {
-			for (int i = 0; i < 8; i++) {
-				if (!Character.isDigit(dni.charAt(i))) {
+	private boolean validarDNI(String dni) {
+	    	
+			if (dni.length() == 9) {
+				for (int i = 0; i < 8; i++) {
+					if (!Character.isDigit(dni.charAt(i))) {
+						return false;
+					}
+				}
+	
+				if (!Character.isLetter(dni.charAt(8))) {
 					return false;
 				}
+	
+				return true;
 			}
-
-			if (!Character.isLetter(dni.charAt(8))) {
-				return false;
-			}
-
-			return true;
-		}
-        return false;
-    }
+	        return false;
+	    }
 
     private boolean validarNombreUsuario(String usuario) {
     	
