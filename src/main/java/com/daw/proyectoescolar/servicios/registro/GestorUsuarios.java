@@ -173,7 +173,7 @@ public class GestorUsuarios {
 		return null;
 	}
 
-    public boolean validarDNI(String dni) {
+    private boolean validarDNI(String dni) {
     	
         if (dni.length() == 9) {
             for (int i = 0; i < 8; i++) {
@@ -190,7 +190,7 @@ public class GestorUsuarios {
         
     }
 
-    public boolean validarNombreUsuario(String usuario) {
+    private boolean validarNombreUsuario(String usuario) {
     	
         // Eliminar espacios al principio
         while (usuario.length() > 0 && usuario.charAt(0) == ' ') {
@@ -211,7 +211,7 @@ public class GestorUsuarios {
         
     }
 
-    public boolean validarContraseña(String contraseña) {
+    private boolean validarContraseña(String contraseña) {
     	
         if (contraseña.length() >= 6 && !contraseña.contains(" ")) {
             boolean tieneMayuscula = false;
@@ -236,14 +236,14 @@ public class GestorUsuarios {
             if (tieneMayuscula && tieneEspecial) {
                 return true;
             } else {
-                System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n "
+                System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
                 		+ "incluir al menos 1 mayúscula y 1 carácter especial.\n"
                 		+ "Intentalo de nuevo.");
                 return false;
             }
         } else {
             System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
-            		+ "no debe contener espacios.\n"
+            		+ "No debe contener espacios.\n"
             		+ "Intentalo de nuevo.");
             return false;
         }
@@ -258,44 +258,50 @@ public class GestorUsuarios {
         
         do {
             
-            System.out.println("Seleccione una opción:\n"
+            System.out.println("Seleccione una opcion:\n"
                     + "1. Iniciar sesión\n"
                     + "2. Registrarse\n"
                     + "3. Salir");
             
-            opcion = sc.nextLine();
+            opcion = sc.nextLine().toLowerCase();
             
             switch (opcion) {
             
-                case "1":
+                case "1", "iniciar sesion":
                 	
                     UsuarioBase usuario = login(sc);
                     
-                    if (usuario != null) {
+                    try {
+                    	
                         System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD 
                         		+ usuario.getTipoUsuario() + Colores.ANSI_RESET 
                         		+ ", " + usuario.getNombre());
                         
                         usuario.verMenu(sc);
                         
-                    } else {
+                    } 
+                    
+                    catch (NullPointerException e) {
                         System.err.println("Usuario o contraseña incorrectos.");
                     }
                     
                     break;
-                case "2":
+                    
+                case "2", "registrarse":
                 	// Cuando cree un usuario vuelva a login
                     crearUsuario(sc);
-                    
                     break;
-                case "3":
+                    
+                case "3", "salir":
                     System.out.println("Hasta luego. (⌐■_■)");
                     break;
+                    
                 default:
-                    System.err.println("Opción no valida. Intentalo de nuevo.");
+                    System.err.println("Opcion no valida. Intentalo de nuevo.");
+                    
             }
             
-        } while (!opcion.equals("3"));
+        } while (!opcion.equals("3") && !opcion.equals("salir"));
         
     }
 	
