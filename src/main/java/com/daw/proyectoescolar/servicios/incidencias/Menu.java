@@ -31,15 +31,15 @@ public class Menu {
 			switch(opcion) {
 			
 			case "1", "añadir incidencia", "añadir una incidencia":
-				new AñadirIncidencia();
+				new AñadirIncidencia().obtenerIncidencias();
 			break;
 			
 			case "2", "listar incidencias", "listar":
-				claseListado.menuListado();
+				claseAñadirIncidencia.verIncidencias(null);
 			break;
 			
 			case "3", "eliminar", "eliminar incidencias":
-				System.out.println("Elimina incidencia");
+				System.out.println(Colores.ANSI_RED + "Elimina incidencia" + Colores.ANSI_RESET);
 			break;
 			
 			case "4", "salir":
