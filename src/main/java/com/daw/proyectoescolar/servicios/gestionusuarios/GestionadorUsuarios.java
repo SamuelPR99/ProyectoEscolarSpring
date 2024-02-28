@@ -88,9 +88,11 @@ public class GestionadorUsuarios {
         
         // Validar nombre
 		while (!validarNombreUsuario(nombre)) {
+			
 			System.err.println("Nombre de usuario no valido. Intentalo de nuevo: ");
 			System.out.print("Introduzca su nombre: ");
 			nombre = sc.nextLine();
+			
 		}
         
         System.out.print("Introduzca su DNI: ");
@@ -99,9 +101,11 @@ public class GestionadorUsuarios {
         // Validar el DNI
         
 		while (!validarDNI(dni)) {
+			
 			System.err.println("DNI no valido. Intentalo de nuevo: ");
 			System.out.print("Introduzca su DNI: ");
 			dni = sc.nextLine();
+			
 		}
         
         System.out.print("Introduzca su contraseña: ");
@@ -110,10 +114,12 @@ public class GestionadorUsuarios {
         // Validar la contraseña
         
         while (!validarContraseña(contraseña)) {
+        	
             System.err.println("Contraseña no valida. Intentalo de nuevo: ");
             System.out.print("Introduzca su contraseña: ");
             contraseña = sc.nextLine();
-                }
+            
+        }
         
         System.out.print("¿Es profesor o alumno?: ");
         String tipo = sc.nextLine();
