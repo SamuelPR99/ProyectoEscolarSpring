@@ -23,7 +23,7 @@ public class GestionDeIncidencias {
 		
 		String opcion;
 		
-		System.out.println("\nBienvenido a la gestión de incidencias de nuestra aplicación!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+		System.out.println(Colores.ANSI_PURPLE + "\nBienvenido a la gestión de incidencias de nuestra aplicación!\n" + Colores.ANSI_RESET);
 		
 		do {
 			
