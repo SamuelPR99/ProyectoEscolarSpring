@@ -1,48 +1,26 @@
 package com.daw.proyectoescolar.servicios.registro;
 
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.ListadoUsuarios;
 
 public class GestorUsuarios {
 	
 	// ATRIBUTOS
 	
-	protected ArrayList<UsuarioBase> usuarios;
+	public ArrayList<UsuarioBase> usuarios;
 
     // CONSTRUCTORES
 	
-    public GestorUsuarios() {
-     
-    	// Inicialización del ArrayList de usuarios
-        usuarios = new ArrayList<UsuarioBase>();
-       
-        // Agregar algunos datos de ejemplo
-        
-        // Profesores
-        usuarios.add(new Profesor("Guillamon", "pass1"));
-        usuarios.add(new Profesor("Lidia", "pass2"));
-        usuarios.add(new Profesor("David", "pass3"));
-        usuarios.add(new Profesor("Paco", "pass4"));
+	public GestorUsuarios() {
+		this.usuarios = ListadoUsuarios.obtenerUsuarios();
+	}
 
-        // Alumnos
-        usuarios.add(new Alumno("Samuel", "123", 9.0));
-        usuarios.add(new Alumno("Paula", "123", 5.0));
-        usuarios.add(new Alumno("Hugo", "123", 7.5));
-        usuarios.add(new Alumno("Zamudio", "123", 3.0));
-        
-        // Administradores
-        usuarios.add(new Administrador("Lolo", "pass1"));
-    	
-    }
-
-    
     // METODOS
     
     public void crearUsuario(Scanner sc) {
@@ -85,7 +63,7 @@ public class GestorUsuarios {
         if (tipo.equalsIgnoreCase("profesor")) {
         	usuarios.add(new Profesor(nombre, contraseña, dni));
 		} else if (tipo.equalsIgnoreCase("alumno")) {
-			usuarios.add(new Alumno(nombre, contraseña, dni));
+			usuarios.add(new Alumno(nombre, contraseña, dni, 0.0));
 		} else {
 			System.err.println("Tipo de usuario no valido. Intentalo de nuevo.");
 		}
@@ -254,24 +232,24 @@ public class GestorUsuarios {
 		
         System.out.println("Bienvenido a la aplicacion escolar");
 		
-		String opcion;
+		String opcionInicio;
         
         do {
             
-            System.out.println("Seleccione una opcion:\n"
-                    + "1. Iniciar sesión\n"
+            System.out.println("\nSeleccione una opcion:\n"
+                    + "1. Iniciar sesion\n"
                     + "2. Registrarse\n"
                     + "3. Salir");
             
-            opcion = sc.nextLine().toLowerCase();
+            opcionInicio = sc.nextLine().toLowerCase();
             
-            switch (opcion) {
+            switch (opcionInicio) {
             
                 case "1", "iniciar sesion":
                 	
                     UsuarioBase usuario = login(sc);
                     
-                    try {
+                    if (usuario != null) {
                     	
                         System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD 
                         		+ usuario.getTipoUsuario() + Colores.ANSI_RESET 
@@ -279,12 +257,10 @@ public class GestorUsuarios {
                         
                         usuario.verMenu(sc);
                         
-                    } 
-                    
-                    catch (NullPointerException e) {
+                    } else {
                         System.err.println("Usuario o contraseña incorrectos.");
                     }
-                    
+                                 
                     break;
                     
                 case "2", "registrarse":
@@ -301,7 +277,7 @@ public class GestorUsuarios {
                     
             }
             
-        } while (!opcion.equals("3") && !opcion.equals("salir"));
+        } while (!opcionInicio.equals("3") && !opcionInicio.equals("salir"));
         
     }
 	

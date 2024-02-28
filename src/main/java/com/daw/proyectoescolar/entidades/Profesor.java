@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
@@ -40,9 +41,11 @@ public class Profesor extends UsuarioBase {
 	@Override
 	public void verMenu(Scanner sc) {
 		
-	    SistemaRecomendacion sistema = new SistemaRecomendacion();
 	    GestorUsuarios gestor = new GestorUsuarios();
+        ArrayList<UsuarioBase> usuarios = gestor.usuarios;
+	    SistemaRecomendacion sistema = new SistemaRecomendacion(usuarios);
 	    Tema tema = new Tema();
+	    
 	    String opcion;
 
 	    do {
@@ -51,7 +54,7 @@ public class Profesor extends UsuarioBase {
 	                + "1. Ver lista de temas\n"
 	        		+ "2. Ver lista de alumnos\n"
 	                + "3. Modificar nota de alumno\n"
-	                + "4. Ver estadísticas\n"
+	                + "4. Ver estadisticas\n"
 	                + "5. Agregar nueva tarea\n"
 	                + "6. Modificar tarea\n"
 	                + "7. Cambiar contraseña\n"
@@ -85,7 +88,7 @@ public class Profesor extends UsuarioBase {
 	                sistema.modificarTarea(sc);
 	                break;
 
-	            case "7", "Cambiar contraseña":
+	            case "7", "cambiar contraseña":
 	            	gestor.cambiarContraseña(sc, this);
                 	break;
 	                
@@ -110,13 +113,5 @@ public class Profesor extends UsuarioBase {
       }
 		
 	}
-	public void mostrarTemas(ArrayList<Tema> temas) {
-		
-		System.out.println("Lista de temas:");
-	    for (Tema tema : temas) {
-	        System.out.println(tema.getNombre());
-	    }
-	    
-	}
-	
+
 }

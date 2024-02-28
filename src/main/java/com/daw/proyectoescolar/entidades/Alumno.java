@@ -27,6 +27,12 @@ public class Alumno extends UsuarioBase {
         
     }
     
+    public Alumno(String nombre, String contraseña, String dni, double nota) {
+        super(nombre, contraseña, dni);
+        this.nota = nota;
+        
+    }
+    
     // Getters y setters
     public double getNota() {
         return nota;
@@ -64,8 +70,10 @@ public class Alumno extends UsuarioBase {
     @Override
     public void verMenu(Scanner sc) {
     	
-        SistemaRecomendacion sistema = new SistemaRecomendacion();
         GestorUsuarios gestor = new GestorUsuarios();
+        ArrayList<UsuarioBase> usuarios = gestor.usuarios;
+	    SistemaRecomendacion sistema = new SistemaRecomendacion(usuarios);
+	    
         String opcion;
 
         do {

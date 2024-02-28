@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Tarea;
-import com.daw.proyectoescolar.entidades.Usuario;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.ListadoUsuarios;
 
 public class SistemaRecomendacion {
 	
@@ -19,10 +19,15 @@ public class SistemaRecomendacion {
     // Constructores
 
     public SistemaRecomendacion() {
-    	
-    	// Inicialización del ArrayList de usuarios
+    	this.usuarios = ListadoUsuarios.obtenerUsuarios();
+        this.listaDeTareas = Tarea.obtenerTodasLasTareas();
+    }
+    
+    public SistemaRecomendacion(ArrayList<UsuarioBase> usuarios) {
+        this.usuarios = usuarios;
+        
+     // Inicialización del ArrayList de tareas
         listaDeTareas = Tarea.obtenerTodasLasTareas();
-
     }
     
     // Metodos
@@ -68,47 +73,53 @@ public class SistemaRecomendacion {
 
     // Ver las notas de todos los alumnos
     public void verNotasAlumnos() {
-    	
-        System.out.println("Notas de los alumnos:");
 
-        for (Usuario usuario : usuarios) {
-            if (usuario.getTipoUsuario().equals("Alumno")) {
-                Alumno alumno = (Alumno) usuario;
-                System.out.println(alumno.getNombre() + ": " + alumno.getNota());
-            }
-        }
-    }
+		System.out.println("Notas de los alumnos:");
+		ArrayList<Alumno> alumnos = obtenerAlumnos();
+
+		if (alumnos.isEmpty()) {
+			System.err.println("No hay alumnos para mostrar notas.");
+			return;
+		}
+
+		for (Alumno alumno : alumnos) {
+			System.out.println(alumno.getNombre() + " - Nota: " + alumno.getNota());
+		}
+    	
+		}
+    
 
     // Modificar la nota de un alumno
     public void modificarNotaAlumno(Scanner sc) {
-    	
-        System.out.print("Introduzca el nombre del alumno: ");
-        String nombreAlumno = sc.nextLine();
 
-        // Buscar al alumno por nombre
-        Alumno alumnoEncontrado = null;
-        for (Usuario usuario : usuarios) {
-            if (usuario.getTipoUsuario().equals("Alumno") && usuario.getNombre().equals(nombreAlumno)) {
-                alumnoEncontrado = (Alumno) usuario;
-                break;
-            }
-        }
+		System.out.println("Lista de alumnos:");
+		ArrayList<Alumno> alumnos = obtenerAlumnos();
 
-       try {
-    	   
-            System.out.print("Introduzca la nueva nota para " + Colores.ANSI_UNDERLINE + nombreAlumno + Colores.ANSI_RESET + ": ");
-            double nuevaNota = sc.nextDouble();
-            alumnoEncontrado.setNota(nuevaNota);
-            System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente para " + Colores.ANSI_UNDERLINE + nombreAlumno + Colores.ANSI_RESET);
-            
-            sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
-          
-        } 
-       
-       catch (NullPointerException e) {
-            System.err.println("Alumno no encontrado");
-        }
+		if (alumnos.isEmpty()) {
+			System.err.println("No hay alumnos para modificar notas.");
+			return;
+		}
+
+		for (int i = 0; i < alumnos.size(); i++) {
+			System.out.println((i + 1) + ". " + alumnos.get(i).getNombre());
+		}
+
+		System.out.print("Introduzca el numero del alumno a modificar: ");
+		int numeroAlumno = sc.nextInt();
+		sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
+
+		if (numeroAlumno >= 1 && numeroAlumno <= alumnos.size()) {
+			System.out.print("Introduzca la nueva nota: ");
+			double nuevaNota = sc.nextDouble();
+			sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
+
+			alumnos.get(numeroAlumno - 1).setNota(nuevaNota);
+			System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente." + Colores.ANSI_RESET);
+		} else {
+			System.err.println("Numero de alumno no valido.");
+		}
     }
+    
 
     // Ver estadísticas de todos los alumnos
     public void verEstadisticas() {
@@ -147,16 +158,17 @@ public class SistemaRecomendacion {
     }
     
     // Crear la lista de alumnos mediante la lista usuarios
-    private ArrayList<Alumno> obtenerAlumnos() {
-    	
-        ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
-        for (Usuario usuario : usuarios) {
-            if (usuario.getTipoUsuario().equals("Alumno")) {
-                alumnos.add((Alumno) usuario);
-            }
-        }
-        
-        return alumnos;
+    public ArrayList<Alumno> obtenerAlumnos() {
+    
+		ArrayList<Alumno> alumnos = new ArrayList<>();
+
+		for (UsuarioBase usuario : usuarios) {
+			if (usuario.getTipoUsuario().equals("Alumno")) {
+				alumnos.add((Alumno) usuario);
+			}
+		}
+
+		return alumnos;
     }
 
     // Agregar una nueva tarea
@@ -206,7 +218,7 @@ public class SistemaRecomendacion {
     }
     
     // Recomendar tarea a un alumno
-	private Tarea recomendarTarea(Alumno alumno) {
+	public Tarea recomendarTarea(Alumno alumno) {
 
 		double nota = alumno.getNota();
 		String tipoTarea;
