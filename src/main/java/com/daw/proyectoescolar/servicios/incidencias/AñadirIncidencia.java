@@ -13,6 +13,8 @@ public class AñadirIncidencia {
 	
 	public AñadirIncidencia() { 
 		
+		listaIncidencias = new ArrayList<Incidencias>();
+		
 	}
 	
 	//Métodos
@@ -23,7 +25,6 @@ public class AñadirIncidencia {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		listaIncidencias = new ArrayList<Incidencias>();
 		String opcion;
 		boolean volver = false;
 		

@@ -175,14 +175,14 @@ public class GestorUsuarios {
 
     public boolean validarDNI(String dni) {
     	
-        if (dni.length() == 9) {
-            for (int i = 0; i < 8; i++) {
+        if (dni.length() == 10) {
+            for (int i = 0; i < 9; i++) {
                 char c = dni.charAt(i);
                 if (c < '0' || c > '9') {
                     return false;
                 }
             }
-            char lastChar = dni.charAt(8);
+            char lastChar = dni.charAt(9);
             return lastChar >= 'A' && lastChar <= 'Z';
         } else {
             return false;

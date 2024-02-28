@@ -85,7 +85,7 @@ public class Administrador extends UsuarioBase {
 	                
 	        }
 	        
-	    } while (!opcion.equals("6") && !opcion.equals("salir del menu"));
+	    } while (!opcion.equals("6") && !opcion.equals("salir del menu") && !opcion.equals("salir"));
 		
 	}  
        

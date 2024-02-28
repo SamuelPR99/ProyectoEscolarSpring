@@ -10,6 +10,9 @@ public class Menu {
 	
 	public Menu() {
 		
+		AñadirIncidencia claseAñadirIncidencia = new AñadirIncidencia();
+		Listado claseListado = new Listado();
+		
 		// MENÚ PRINCIPAL \\
 		
 		Scanner sc = new Scanner(System.in);
@@ -34,11 +37,11 @@ public class Menu {
 			break;
 			
 			case "2", "listar incidencias", "listar":
-				new Listado().menuListado();
+				claseListado.menuListado();
 			break;
 			
 			case "3", "eliminar", "eliminar incidencias":
-				
+				System.out.println("Elimina incidencia");
 			break;
 			
 			case "4", "salir":
