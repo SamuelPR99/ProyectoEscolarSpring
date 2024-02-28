@@ -40,7 +40,7 @@ public class Administrador extends UsuarioBase {
 
         do {
         	
-            System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
+            System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opción:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
                     + "1. Mostrar usuarios registrados\n"
                     + "2. Crear un usuario de forma manual\n"
                     + "3. Borrar un usuario\n"

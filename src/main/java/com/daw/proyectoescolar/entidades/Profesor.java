@@ -46,7 +46,7 @@ public class Profesor extends UsuarioBase {
 
 	    do {
 	    	
-	        System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
+	        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opción:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
 	                + "1. Ver lista de temas\n"
 	        		+ "2. Ver lista de alumnos\n"
 	                + "3. Modificar nota de alumno\n"
@@ -64,7 +64,6 @@ public class Profesor extends UsuarioBase {
 	        		tema.mostrarTemas(sc);
 	        		break;
 	            case "2", "ver lista de alumnos":
-                    //a.mostrarListaAlumnos();
 	            	gestor.verNotasAlumnos(usuarios);
 	                break;
 
@@ -101,13 +100,4 @@ public class Profesor extends UsuarioBase {
 	    
 	}
 	
-	public void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
-		
-		System.out.println("Lista de alumnos:");
-		for (Alumno alumno : alumnos) {
-          System.out.println(alumno.getNombre());
-      }
-		
-	}
-
 }

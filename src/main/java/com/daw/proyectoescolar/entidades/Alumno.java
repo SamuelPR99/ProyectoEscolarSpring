@@ -75,7 +75,7 @@ public class Alumno extends UsuarioBase {
 
         do {
         	
-            System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
+            System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opción:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
                     + "1. Ver nota\n"
                     + "2. Recomendar tarea\n"
                     + "3. Consultar tareas pendientes\n"

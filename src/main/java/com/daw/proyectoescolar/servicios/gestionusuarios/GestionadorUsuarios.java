@@ -19,19 +19,21 @@ public class GestionadorUsuarios {
 	 public void iniciar(Scanner sc) {
 		 
 		    ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
-		    String opcionInicio;
+		    String opcion;
 		    
-		    System.out.println("Bienvenido al sistema de gestión de usuarios.");
+		    System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al" 
+		    + Colores.ANSI_YELLOW_BACKGROUND + " sistema de gestion" 
+		    + Colores.ANSI_BLUE_BACKGROUND + " de usuarios." + Colores.ANSI_RESET);
 
 		    do {
 
-		        System.out.println("\nSeleccione una opcion:\n"
-		                + "1. Iniciar sesion\n"
-		                + "2. Salir");
+		        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET
+		                + Colores.ANSI_YELLOW +"1. Iniciar sesion\n"
+		                + "2. Salir" + Colores.ANSI_RESET);
 
-		        opcionInicio = sc.nextLine().toLowerCase();
+		        opcion = sc.nextLine().toLowerCase();
 
-		        switch (opcionInicio) {
+		        switch (opcion) {
 
 		            case "1", "iniciar sesion":
 		                UsuarioBase usuario = login(sc, usuarios);
@@ -50,7 +52,7 @@ public class GestionadorUsuarios {
 		                break;
 
 		            case "2", "salir":
-		                System.out.println("Hasta luego. (⌐■_■)");
+		                System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
 		                break;
 
 		            default:
@@ -58,7 +60,7 @@ public class GestionadorUsuarios {
 
 		        }
 
-		    } while (!opcionInicio.equals("2") && !opcionInicio.equals("salir"));
+		    } while (!opcion.equals("2") && !opcion.equals("salir"));
 
 		}
  
@@ -167,6 +169,135 @@ public class GestionadorUsuarios {
         
     }
 	
+private boolean validarDNI(String dni) {
+    	
+		if (dni.length() == 9) {
+			for (int i = 0; i < 8; i++) {
+				if (!Character.isDigit(dni.charAt(i))) {
+					return false;
+				}
+			}
+
+			if (!Character.isLetter(dni.charAt(8))) {
+				return false;
+			}
+
+			return true;
+		}
+        return false;
+    }
+
+    private boolean validarNombreUsuario(String usuario) {
+    	
+		if (usuario.length() >= 6) {
+			return true;
+		}
+
+    	return false;
+    }
+
+    private boolean validarContraseña(String contraseña) {
+    	
+    	 if (contraseña.length() >= 6 && !contraseña.contains(" ")) {
+             boolean tieneMayuscula = false;
+             boolean tieneEspecial = false;
+
+             for (int i = 0; i < contraseña.length(); i++) {
+                 char c = contraseña.charAt(i);
+
+                 if ((c >= 65 && c <= 90) || (c >= 192 && c <= 223)) {
+                     tieneMayuscula = true;
+                 }
+
+                 if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96) || (c >= 123 && c <= 126)) {
+                     tieneEspecial = true;
+                 }
+
+                 if (tieneMayuscula && tieneEspecial) {
+                     break;
+                 }
+             }
+
+             if (tieneMayuscula && tieneEspecial) {
+                 return true;
+             } else {
+                 System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
+                 		+ "incluir al menos 1 mayúscula y 1 carácter especial.\n"
+                 		+ "Intentalo de nuevo.");
+                 return false;
+             }
+         } else {
+             System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
+             		+ "No debe contener espacios.\n"
+             		+ "Intentalo de nuevo.");
+             return false;
+         }
+         
+     }
+    
+    public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
+
+        // Inicialización del ArrayList de usuarios
+        ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<UsuarioBase>();
+
+        // Agregar usuarios registrados al ArrayList de usuarios por defecto
+        usuariosDefecto.addAll(usuariosRegistrados);
+
+        // Agregar algunos datos de ejemplo en caso de que no se hayan registrado usuarios aún
+
+        // Profesores
+        usuariosDefecto.add(new Profesor("Guillamon", "pass1", "76429580M"));
+        usuariosDefecto.add(new Profesor("Lidia", "pass2", "76429581M"));
+        usuariosDefecto.add(new Profesor("David", "pass3", "76429582M"));
+        usuariosDefecto.add(new Profesor("Paco", "pass4", "76429583M"));
+
+        // Alumnos
+        usuariosDefecto.add(new Alumno("Samuel", "123", "76429584M", 9.0));
+        usuariosDefecto.add(new Alumno("Paula", "123", "76429585M", 5.0));
+        usuariosDefecto.add(new Alumno("Hugo", "123", "76429586M", 7.5));
+        usuariosDefecto.add(new Alumno("Zamudio", "123", "76429587M", 3.0));
+
+        // Administradores
+        usuariosDefecto.add(new Administrador("Lolo", "pass1", "76429588M"));
+
+        return usuariosDefecto;
+    }
+    
+    /*---------------------------------------------------------------------------------------------------------*/
+	
+	public Tarea recomendarTarea(Alumno alumno) {
+			
+			double nota = alumno.getNota();
+			String tipoTarea;
+	
+			if (nota >= 9.0) {
+				tipoTarea = "Avanzada";
+			} else if (nota >= 7.0) {
+				tipoTarea = "Intermedia";
+			} else {
+				tipoTarea = "Basica";
+			}
+	
+			// Buscar la primera tarea del tipo recomendado
+			for (Tarea tarea : listaDeTareas) {
+				if (tarea.getTipo().equals(tipoTarea)) {
+					alumno.agregarTarea(tarea);
+					return tarea;
+					
+				}
+			}
+	
+			// Si no hay tareas del tipo que se recomienda, busca la primera tarea de cualquier tipo
+			if (!listaDeTareas.isEmpty()) {
+				Tarea tareaRecomendada = listaDeTareas.get(0);
+		        alumno.agregarTarea(tareaRecomendada);
+				return listaDeTareas.get(0);
+			}
+	
+			// Si no hay tareas, pos error
+			return null;
+		}
+		
 	public void verEstadisticas(ArrayList<UsuarioBase> usuarios) {
 		
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
@@ -213,46 +344,6 @@ public class GestionadorUsuarios {
             return alumnos;
         
 	}
-	
-	public Tarea recomendarTarea(Alumno alumno) {
-		
-		double nota = alumno.getNota();
-		String tipoTarea;
-
-		if (nota >= 9.0) {
-			tipoTarea = "Avanzada";
-		} else if (nota >= 7.0) {
-			tipoTarea = "Intermedia";
-		} else {
-			tipoTarea = "Basica";
-		}
-
-		// Buscar la primera tarea del tipo recomendado
-		for (Tarea tarea : listaDeTareas) {
-			if (tarea.getTipo().equals(tipoTarea)) {
-				alumno.agregarTarea(tarea);
-				return tarea;
-				
-			}
-		}
-
-		// Si no hay tareas del tipo que se recomienda, busca la primera tarea de cualquier tipo
-		if (!listaDeTareas.isEmpty()) {
-			Tarea tareaRecomendada = listaDeTareas.get(0);
-	        alumno.agregarTarea(tareaRecomendada);
-			return listaDeTareas.get(0);
-		}
-
-		// Si no hay tareas, pos error
-		return null;
-	}
-	
-	public void recomendarTareaYMostrar(Alumno alumno) {
-		
-		 Tarea tareaRecomendada = recomendarTarea(alumno);
-	     tareaRecomendada.mostrarRecomendacion();
-	        
-    }
 	
 	// Consultar la tarea pendiente del alumno
     public void consultarTareasPendientes(Alumno alumno) {
@@ -364,101 +455,12 @@ public class GestionadorUsuarios {
         }
         
     }
-    
-    private boolean validarDNI(String dni) {
-    	
-		if (dni.length() == 9) {
-			for (int i = 0; i < 8; i++) {
-				if (!Character.isDigit(dni.charAt(i))) {
-					return false;
-				}
-			}
-
-			if (!Character.isLetter(dni.charAt(8))) {
-				return false;
-			}
-
-			return true;
-		}
-        return false;
-    }
-
-    private boolean validarNombreUsuario(String usuario) {
-    	
-		if (usuario.length() >= 6) {
-			return true;
-		}
-
-    	return false;
-    }
-
-    private boolean validarContraseña(String contraseña) {
-    	
-    	 if (contraseña.length() >= 6 && !contraseña.contains(" ")) {
-             boolean tieneMayuscula = false;
-             boolean tieneEspecial = false;
-
-             for (int i = 0; i < contraseña.length(); i++) {
-                 char c = contraseña.charAt(i);
-
-                 if ((c >= 65 && c <= 90) || (c >= 192 && c <= 223)) {
-                     tieneMayuscula = true;
-                 }
-
-                 if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96) || (c >= 123 && c <= 126)) {
-                     tieneEspecial = true;
-                 }
-
-                 if (tieneMayuscula && tieneEspecial) {
-                     break;
-                 }
-             }
-
-             if (tieneMayuscula && tieneEspecial) {
-                 return true;
-             } else {
-                 System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
-                 		+ "incluir al menos 1 mayúscula y 1 carácter especial.\n"
-                 		+ "Intentalo de nuevo.");
-                 return false;
-             }
-         } else {
-             System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
-             		+ "No debe contener espacios.\n"
-             		+ "Intentalo de nuevo.");
-             return false;
-         }
-         
-     }
-    
-    public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
-
-        // Inicialización del ArrayList de usuarios
-        ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<UsuarioBase>();
-
-        // Agregar usuarios registrados al ArrayList de usuarios por defecto
-        usuariosDefecto.addAll(usuariosRegistrados);
-
-        // Agregar algunos datos de ejemplo en caso de que no se hayan registrado usuarios aún
-
-        // Profesores
-        usuariosDefecto.add(new Profesor("Guillamon", "pass1", "76429580M"));
-        usuariosDefecto.add(new Profesor("Lidia", "pass2", "76429581M"));
-        usuariosDefecto.add(new Profesor("David", "pass3", "76429582M"));
-        usuariosDefecto.add(new Profesor("Paco", "pass4", "76429583M"));
-
-        // Alumnos
-        usuariosDefecto.add(new Alumno("Samuel", "123", "76429584M", 9.0));
-        usuariosDefecto.add(new Alumno("Paula", "123", "76429585M", 5.0));
-        usuariosDefecto.add(new Alumno("Hugo", "123", "76429586M", 7.5));
-        usuariosDefecto.add(new Alumno("Zamudio", "123", "76429587M", 3.0));
-
-        // Administradores
-        usuariosDefecto.add(new Administrador("Lolo", "pass1", "76429588M"));
-
-        return usuariosDefecto;
+	
+	public void recomendarTareaYMostrar(Alumno alumno) {
+		
+		 Tarea tareaRecomendada = recomendarTarea(alumno);
+	     tareaRecomendada.mostrarRecomendacion();
+	        
     }
 	
-	
-    
 }
