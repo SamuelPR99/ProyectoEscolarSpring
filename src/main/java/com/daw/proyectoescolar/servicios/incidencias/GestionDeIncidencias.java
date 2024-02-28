@@ -3,6 +3,7 @@ package com.daw.proyectoescolar.servicios.incidencias;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
 
 public class GestionDeIncidencias {
@@ -41,7 +42,7 @@ public class GestionDeIncidencias {
 			break;
 			
 			case "3", "eliminar", "eliminar incidencias":
-				System.out.println(Colores.ANSI_RED + "Elimina incidencia" + Colores.ANSI_RESET);
+				eliminarIncidencias();
 			break;
 			
 			case "4", "salir":
@@ -51,8 +52,12 @@ public class GestionDeIncidencias {
 			
 		} while (!opcion.equals("4") && !opcion.equals("salir"));
 	
-}
+	}
 
+	
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	
 	public ArrayList<Incidencias> añadirIncidencia() {
 		
 		/*Este método hace que el usuario pueda añadir todas las incidencias del tipo que desee hasta que introduzca
@@ -76,27 +81,33 @@ public class GestionDeIncidencias {
         case "1", "incidencia de alumno":
         	
             Incidencias incidenciaAlumno = new IncidenciaAlumno();
-            System.out.println("Introduzca la incidencia: ");
+            System.out.println("Introduzca la incidencia de alumno: ");
             incidenciaAlumno.setIncidencia(sc.nextLine());
             listaIncidencias.add(incidenciaAlumno);
+            
+            System.out.println(Colores.ANSI_GREEN + "Incidencia de alumno añadida con éxito!" + Colores.ANSI_RESET);
             
             break;
             
         case "2" , "incidencia de profesor":
         	
             Incidencias incidenciaProfesor = new IncidenciaProfesor();
-            System.out.println("Introduzca la incidencia: ");
+            System.out.println("Introduzca la incidencia de profesor: ");
             incidenciaProfesor.setIncidencia(sc.nextLine());
             listaIncidencias.add(incidenciaProfesor);
+            
+            System.out.println(Colores.ANSI_GREEN + "Incidencia de profesor añadida con éxito!" + Colores.ANSI_RESET);
             
             break;
             
         case "3", "incidencia de aplicación":
         	
             Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
-            System.out.println("Introduzca la incidencia: ");
+            System.out.println("Introduzca la incidencia aplicación: ");
             incidenciaAplicacion.setIncidencia(sc.nextLine());
             listaIncidencias.add(incidenciaAplicacion);
+            
+            System.out.println(Colores.ANSI_GREEN + "Incidencia de aplicación añadida con éxito!" + Colores.ANSI_RESET);
             
             break;
             
@@ -122,7 +133,7 @@ public class GestionDeIncidencias {
 	}
 	
 	
-	/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	
 	
 	public void Listado() {
@@ -173,6 +184,10 @@ public class GestionDeIncidencias {
 		
 	}
 	
+	
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	
    public void verIncidenciaAlumno() { // Método encargado de imprimir las incidencias de tipo Alumno. \\
         
         if(listaIncidencias.isEmpty()) {
@@ -212,7 +227,7 @@ public class GestionDeIncidencias {
         }
     }
 	    
-	    public void verIncidenciasGenerales() { // Método encargado de imprimir todas las incidencias, sin filtrar por tipo. \\
+	public void verIncidenciasGenerales() { // Método encargado de imprimir todas las incidencias, sin filtrarlas por su tipo. \\
 	    	
 	if(listaIncidencias.isEmpty()) {
 		System.out.println(Colores.ANSI_RED + "Lo siento. No existe ningún tipo de incidencia registrado" + Colores.ANSI_RESET);
@@ -223,4 +238,55 @@ public class GestionDeIncidencias {
     }
   }
 	
+    public void eliminarIncidencias() { // Método encargado de eliminar las incidencias registradas. \\
+    									//	Se eliminan por tipo. \\
+		
+	if(listaIncidencias.isEmpty()) {
+		System.out.println(Colores.ANSI_RED + "Lo siento. No existe ningún tipo de incidencia registrado" + Colores.ANSI_RESET);
+		
+		} else {
+	
+		System.out.println("Introduce qué tipo de incidencia que quieres eliminar:\n ");
+		System.out.println("1 - Alumno\n2 - Profesor\n3 - Aplicación");
+		String eliminarIncidencia = sc.nextLine().toLowerCase();
+			
+	for (Incidencias incidencia : listaIncidencias) {
+		
+		if (eliminarIncidencia.equals("alumno") || eliminarIncidencia.equals("1")) {
+			
+			if(incidencia instanceof IncidenciaAlumno) {
+	        	
+	            listaIncidencias.remove(incidencia);
+	            System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno eliminada correctamente." + Colores.ANSI_RESET);
+	                    return;
+	        	} 
+            
+		}
+                
+        else if (eliminarIncidencia.equals("profesor") || eliminarIncidencia.equals("2")) {
+        	
+        	if(incidencia instanceof IncidenciaProfesor) {
+            	
+                listaIncidencias.remove(incidencia);
+                System.out.println(Colores.ANSI_GREEN + "\nIncidencia de profesor eliminada correctamente." + Colores.ANSI_RESET);
+                        return;
+            	} 
+            
+		}
+	
+        else if (eliminarIncidencia.equals("aplicacion") || eliminarIncidencia.equals("aplicación")
+        		|| eliminarIncidencia.equals("3")) {
+        	
+        	if(incidencia instanceof IncidenciaAplicacion) {
+        	
+            listaIncidencias.remove(incidencia);
+            System.out.println(Colores.ANSI_GREEN + "\nIncidencia de aplicación eliminada correctamente." + Colores.ANSI_RESET);
+                    return;
+        	}
+          }
+		}
+      }
+	}
+    
+	    
 }
