@@ -37,17 +37,16 @@ public class Profesor extends UsuarioBase {
 
     // Menu profesor
 	@Override
-	public void verMenu(Scanner sc) {
+	public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
 		
 	    GestionadorUsuarios gestor = new GestionadorUsuarios();
-  
 	    Tema tema = new Tema();
 	    
 	    String opcion;
 
 	    do {
 	    	
-	        System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opcion:\n"
+	        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opción:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
 	                + "1. Ver lista de temas\n"
 	        		+ "2. Ver lista de alumnos\n"
 	                + "3. Modificar nota de alumno\n"
@@ -65,16 +64,15 @@ public class Profesor extends UsuarioBase {
 	        		tema.mostrarTemas(sc);
 	        		break;
 	            case "2", "ver lista de alumnos":
-                    //a.mostrarListaAlumnos();
-	            	gestor.verNotasAlumnos();
+	            	gestor.verNotasAlumnos(usuarios);
 	                break;
 
 	            case "3", "modificar nota de alumno":
-	                gestor.modificarNotaAlumno(sc);
+	                gestor.modificarNotaAlumno(sc, alumnos);
 	                break;
 
 	            case "4", "ver estadísticas":
-	                gestor.verEstadisticas();
+	                gestor.verEstadisticas(usuarios);
 	                break;
 
 	            case "5", "agregar nueva tarea":
@@ -102,13 +100,4 @@ public class Profesor extends UsuarioBase {
 	    
 	}
 	
-	public void mostrarListaAlumnos(ArrayList<Alumno> alumnos) {
-		
-		System.out.println("Lista de alumnos:");
-		for (Alumno alumno : alumnos) {
-          System.out.println(alumno.getNombre());
-      }
-		
-	}
-
 }
