@@ -75,7 +75,7 @@ public class SistemaRecomendacion {
     public void verNotasAlumnos() {
 
 		System.out.println("Notas de los alumnos:");
-		ArrayList<Alumno> alumnos = obtenerAlumnos();
+		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
 
 		if (alumnos.isEmpty()) {
 			System.err.println("No hay alumnos para mostrar notas.");
@@ -93,7 +93,7 @@ public class SistemaRecomendacion {
     public void modificarNotaAlumno(Scanner sc) {
 
 		System.out.println("Lista de alumnos:");
-		ArrayList<Alumno> alumnos = obtenerAlumnos();
+		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
 
 		if (alumnos.isEmpty()) {
 			System.err.println("No hay alumnos para modificar notas.");
@@ -126,7 +126,7 @@ public class SistemaRecomendacion {
     	
         System.out.println("Estadísticas de los alumnos:");
 
-        ArrayList<Alumno> alumnos = obtenerAlumnos();
+        ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
 
         if (alumnos.isEmpty()) {
             System.err.println("No hay alumnos para mostrar estadísticas.");
@@ -158,7 +158,7 @@ public class SistemaRecomendacion {
     }
     
     // Crear la lista de alumnos mediante la lista usuarios
-    public ArrayList<Alumno> obtenerAlumnos() {
+    public ArrayList<Alumno> obtenerAlumnos(ArrayList<UsuarioBase> usuarios) {
     
 		ArrayList<Alumno> alumnos = new ArrayList<>();
 
@@ -169,7 +169,7 @@ public class SistemaRecomendacion {
 		}
 
 		return alumnos;
-    }
+	}
 
     // Agregar una nueva tarea
     public void agregarNuevaTarea(Scanner sc) {

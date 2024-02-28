@@ -77,10 +77,24 @@ public class AñadirIncidencia {
 		
 	}
 	
-	public void verIncidencias(ArrayList<Incidencias> verIncidencias) {
+	public void verIncidencias(ArrayList<Incidencias> listaIncidencias) {
+
 		
-		for(Incidencias incidencia : verIncidencias) {
-			System.out.println(incidencia.getIncidencia());
+
+		if (listaIncidencias.size() > 0) {
+
+			System.out.println("Estas son las incidencias que has añadido: ");
+
+			for (Incidencias incidencia : listaIncidencias) {
+
+				System.out.println(incidencia.getIncidencia() + ": " + incidencia.getIncidencia());
+
+			}
+
+		} else {
+
+			System.out.println("No has añadido ninguna incidencia.");
+
 		}
 		
 	}
