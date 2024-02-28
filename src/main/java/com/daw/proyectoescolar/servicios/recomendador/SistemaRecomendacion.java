@@ -61,7 +61,7 @@ public class SistemaRecomendacion {
                 Tarea tareaEntregada = tareasAsignadas.remove(numeroTarea - 1);
                 System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
             } else {
-                System.err.println("Número de tarea no válido.");
+                System.err.println("Numero de tarea no válido.");
             }
         }
     }
@@ -96,10 +96,10 @@ public class SistemaRecomendacion {
 
        try {
     	   
-            System.out.print("Introduzca la nueva nota para " + nombreAlumno + ": ");
+            System.out.print("Introduzca la nueva nota para " + Colores.ANSI_UNDERLINE + nombreAlumno + Colores.ANSI_RESET + ": ");
             double nuevaNota = sc.nextDouble();
             alumnoEncontrado.setNota(nuevaNota);
-            System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente para " + nombreAlumno + Colores.ANSI_RESET);
+            System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente para " + Colores.ANSI_UNDERLINE + nombreAlumno + Colores.ANSI_RESET);
             
             sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
           
