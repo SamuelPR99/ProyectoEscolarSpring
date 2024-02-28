@@ -22,8 +22,8 @@ public class GestionadorUsuarios {
 		    String opcion;
 		    
 		    System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al" 
-		    + Colores.ANSI_YELLOW_BACKGROUND + " sistema de gestion" 
-		    + Colores.ANSI_BLUE_BACKGROUND + " de usuarios." + Colores.ANSI_RESET);
+		    + Colores.ANSI_YELLOW_BACKGROUND + " campus virtual " 
+		    + Colores.ANSI_BLUE_BACKGROUND + " del IES Murcia." + Colores.ANSI_RESET);
 
 		    do {
 
@@ -38,14 +38,15 @@ public class GestionadorUsuarios {
 		            case "1", "iniciar sesion":
 		                UsuarioBase usuario = login(sc, usuarios);
 
-		                if (usuario != null) {
+		                try {
+		                	
 		                    System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD
 		                            + usuario.getTipoUsuario() + Colores.ANSI_RESET
 		                            + ", " + usuario.getNombre());
 
 		                    usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
-		                } else {
+		                } catch (NullPointerException excepcion) {
 		                    System.err.println("Usuario o contraseña incorrectos.");
 		                }
 
@@ -125,7 +126,7 @@ public class GestionadorUsuarios {
         String tipo = sc.nextLine();
         UsuarioBase nuevoUsuario = null;
 
-        
+        // Crear el usuario dependiendo del tipo
         if (tipo.equalsIgnoreCase("profesor")) {
         	nuevoUsuario = new Profesor(nombre, contraseña, dni);
 		} else if (tipo.equalsIgnoreCase("alumno")) {
@@ -137,7 +138,7 @@ public class GestionadorUsuarios {
         // Agregar el nuevo usuario al ArrayList de usuarios
         usuarios.add(nuevoUsuario);
 
-        System.out.println("Usuario creado correctamente.");
+        System.out.println(Colores.ANSI_GREEN + "Usuario creado correctamente." + Colores.ANSI_RESET);
         
 	}
 	
@@ -149,7 +150,7 @@ public class GestionadorUsuarios {
 		for (UsuarioBase usuario : usuarios) {
 			if (usuario.getNombre().equals(nombre)) {
                 usuarios.remove(usuario);
-                System.out.println("Usuario borrado correctamente.");
+                System.out.println(Colores.ANSI_GREEN + "Usuario borrado correctamente." + Colores.ANSI_RESET);
                 return;
             }
         }
@@ -157,21 +158,23 @@ public class GestionadorUsuarios {
     
 	public void mostrarUsuarios(ArrayList<UsuarioBase> usuarios) {
 
-		if (usuarios.isEmpty()) {
-			System.err.println("La lista de usuarios esta vacia.");
-		} else {
-			for (UsuarioBase usuario : usuarios) {
-				System.out.println(usuario.getNombre() + "\n" + usuario.getTipoUsuario() + "\n" + usuario.getDni() + "\n" + usuario.getContraseña() + "\n");
-			}
+		for (UsuarioBase usuario : usuarios) {
+			System.out.println("\nNombre: " + usuario.getNombre() 
+			+ "\nTipo: " + usuario.getTipoUsuario() 
+			+ "\nDNI: " + usuario.getDni() 
+			+ "\nContraseña: " + usuario.getContraseña());
+			System.out.println(Colores.ANSI_BOLD + "_______________________________" + Colores.ANSI_RESET);
 		}
+	
 	}
 	
 	public void cambiarContraseña(Scanner sc, UsuarioBase usuario) {
 		    
             System.out.println("Introduce tu nueva contraseña:");
             String nuevaContraseña = sc.nextLine();
+            
             usuario.setContraseña(nuevaContraseña);
-            System.out.println("Contraseña cambiada correctamente.");
+            System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
         
     }
 	
@@ -202,43 +205,15 @@ public class GestionadorUsuarios {
     	return false;
     }
 
+    // Debe contener 6 caracteres, no puede tener espacios, y debe contener minimo un caracter especial
     private boolean validarContraseña(String contraseña) {
     	
-    	 if (contraseña.length() >= 6 && !contraseña.contains(" ")) {
-             boolean tieneMayuscula = false;
-             boolean tieneEspecial = false;
-
-             for (int i = 0; i < contraseña.length(); i++) {
-                 char c = contraseña.charAt(i);
-
-                 if ((c >= 65 && c <= 90) || (c >= 192 && c <= 223)) {
-                     tieneMayuscula = true;
-                 }
-
-                 if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96) || (c >= 123 && c <= 126)) {
-                     tieneEspecial = true;
-                 }
-
-                 if (tieneMayuscula && tieneEspecial) {
-                     break;
-                 }
-             }
-
-             if (tieneMayuscula && tieneEspecial) {
-                 return true;
-             } else {
-                 System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
-                 		+ "incluir al menos 1 mayúscula y 1 carácter especial.\n"
-                 		+ "Intentalo de nuevo.");
-                 return false;
-             }
-         } else {
-             System.err.println("Error: La contraseña debe tener al menos 6 caracteres.\n"
-             		+ "No debe contener espacios.\n"
-             		+ "Intentalo de nuevo.");
-             return false;
-         }
-         
+        if (contraseña.length() >= 6 && !contraseña.contains(" ") && contraseña.matches(".*[!@#$%^&*].*")) {
+			return true;
+		}
+        
+        return false;
+    
      }
     
     public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
@@ -271,7 +246,8 @@ public class GestionadorUsuarios {
     
     /*---------------------------------------------------------------------------------------------------------*/
 	
-	public Tarea recomendarTarea(Alumno alumno) {
+    // Recomendar una tarea al alumno
+	private Tarea recomendarTarea(Alumno alumno) {
 			
 			double nota = alumno.getNota();
 			String tipoTarea;
@@ -304,6 +280,7 @@ public class GestionadorUsuarios {
 			return null;
 		}
 		
+	// Ver estadisticas de los alumnos
 	public void verEstadisticas(ArrayList<UsuarioBase> usuarios) {
 		
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
@@ -337,7 +314,8 @@ public class GestionadorUsuarios {
         System.out.println(Colores.ANSI_RED + "Nota más baja: " + notaMinima + Colores.ANSI_RESET);
     }
 	
-	public ArrayList<Alumno> obtenerAlumnos(ArrayList<UsuarioBase> usuarios) {
+	// Obtener los alumnos del ArrayList de usuarios
+	private ArrayList<Alumno> obtenerAlumnos(ArrayList<UsuarioBase> usuarios) {
 		    
             ArrayList<Alumno> alumnos = new ArrayList<>();
 
@@ -390,6 +368,7 @@ public class GestionadorUsuarios {
         }
     }
     
+    // Ver las notas de los alumnos
     public void verNotasAlumnos(ArrayList<UsuarioBase> usuarios) {
 
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
@@ -400,6 +379,7 @@ public class GestionadorUsuarios {
 		
     }
     
+    // Modificar la nota de un alumno, esto tambien sirve para ponerle la nota a un alumno que cree el administrador
     public void modificarNotaAlumno(Scanner sc,  ArrayList<Alumno> alumnos) {
     	
 		System.out.println("Lista de alumnos:");
@@ -428,6 +408,7 @@ public class GestionadorUsuarios {
 
     }
     
+    // Agregar una nueva tarea del tipo que se quiera
     public void agregarNuevaTarea(Scanner sc) {
     	
         System.out.print("Introduzca el tipo de la nueva tarea: ");
@@ -440,6 +421,7 @@ public class GestionadorUsuarios {
         
     }
     
+    // Modificar el tipo de una tarea
     public void modificarTarea(Scanner sc) {
     	
         System.out.println("Lista de tareas:");
@@ -462,6 +444,7 @@ public class GestionadorUsuarios {
         
     }
 	
+    // Recomendar una tarea al alumno y mostrarla
 	public void recomendarTareaYMostrar(Alumno alumno) {
 		
 		 Tarea tareaRecomendada = recomendarTarea(alumno);

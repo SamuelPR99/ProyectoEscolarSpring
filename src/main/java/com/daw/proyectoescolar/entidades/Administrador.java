@@ -40,13 +40,13 @@ public class Administrador extends UsuarioBase {
 
         do {
         	
-            System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opción:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
+            System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
                     + "1. Mostrar usuarios registrados\n"
-                    + "2. Crear un usuario de forma manual\n"
+                    + "2. Crear un usuario\n"
                     + "3. Borrar un usuario\n"
                     + "4. Cambiar contraseña\n"
                     + "5. lo que sea5\n"
-                    + "6. Salir del menú" + Colores.ANSI_RESET);
+                    + "6. Salir del menu" + Colores.ANSI_RESET);
             
             opcion = sc.nextLine().toLowerCase();
 
@@ -55,7 +55,7 @@ public class Administrador extends UsuarioBase {
                     gestor.mostrarUsuarios(usuarios);
                     break;
 
-                case "2", "crear un usuario de forma manual":
+                case "2", "crear un usuario":
                     gestor.registro(sc, usuarios);
                     break;
 
@@ -71,14 +71,14 @@ public class Administrador extends UsuarioBase {
                 	
                     break;
 
-                case "6", "salir del menú":
-                    System.out.println(Colores.ANSI_BOLD + "Saliendo del menú de administrador..." + Colores.ANSI_RESET);
+                case "6", "salir del menu":
+                    System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de administrador..." + Colores.ANSI_RESET);
                     break;
 
                 default:
-                    System.err.println("Opción no válida. Por favor, elige una opción válida.");
+                    System.err.println("Opción no valida. Por favor, elige una opción valida.");
             }
             
-        } while (!opcion.equals("6") && !opcion.equals("salir del menú") && !opcion.equals("salir"));
+        } while (!opcion.equals("6") && !opcion.equals("salir del menu") && !opcion.equals("salir"));
     }
 }

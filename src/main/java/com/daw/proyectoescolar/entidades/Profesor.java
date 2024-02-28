@@ -46,7 +46,7 @@ public class Profesor extends UsuarioBase {
 
 	    do {
 	    	
-	        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opción:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
+	        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
 	                + "1. Ver lista de temas\n"
 	        		+ "2. Ver lista de alumnos\n"
 	                + "3. Modificar nota de alumno\n"
