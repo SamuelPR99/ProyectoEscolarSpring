@@ -83,9 +83,9 @@ public class GestorUsuarios {
         String tipo = sc.nextLine();
         
         if (tipo.equalsIgnoreCase("profesor")) {
-			new Profesor(nombre, contraseña, dni);
+        	usuarios.add(new Profesor(nombre, contraseña, dni));
 		} else if (tipo.equalsIgnoreCase("alumno")) {
-			new Alumno(nombre, contraseña, dni);
+			usuarios.add(new Alumno(nombre, contraseña, dni));
 		} else {
 			System.err.println("Tipo de usuario no valido. Intentalo de nuevo.");
 		}
