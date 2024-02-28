@@ -67,10 +67,10 @@ public class Alumno extends UsuarioBase {
     }
 
     @Override
-    public void verMenu(Scanner sc) {
+    public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
     	
         GestionadorUsuarios gestor = new GestionadorUsuarios();
- 
+        
         String opcion;
 
         do {

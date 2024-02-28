@@ -1,5 +1,6 @@
 package com.daw.proyectoescolar.entidades;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
@@ -32,13 +33,13 @@ public class Administrador extends UsuarioBase {
 
     // Menu administrador
     @Override
-    public void verMenu(Scanner sc) {
+    public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
     	
     	GestionadorUsuarios gestor = new GestionadorUsuarios();
-    	
         String opcion;
 
         do {
+        	
             System.out.println(Colores.ANSI_YELLOW + "\nSeleccione una opción:\n"
                     + "1. Mostrar usuarios registrados\n"
                     + "2. Crear un usuario de forma manual\n"
@@ -51,15 +52,15 @@ public class Administrador extends UsuarioBase {
 
             switch (opcion) {
                 case "1", "mostrar usuarios registrados":
-                    gestor.mostrarUsuarios();
+                    gestor.mostrarUsuarios(usuarios);
                     break;
 
                 case "2", "crear un usuario de forma manual":
-                    gestor.crearUsuario(sc);
+                    gestor.registro(sc, usuarios);
                     break;
 
                 case "3", "borrar un usuario":
-                    gestor.borrarUsuario(sc);
+                    gestor.borrarUsuario(sc, usuarios);
                     break;
 
                 case "4", "cambiar contraseña":
@@ -67,6 +68,7 @@ public class Administrador extends UsuarioBase {
                     break;
 
                 case "5", "lo que sea5":
+                	
                     break;
 
                 case "6", "salir del menú":

@@ -12,83 +12,73 @@ import com.daw.proyectoescolar.repositorio.Colores;
 
 public class GestionadorUsuarios {
 
- private ArrayList<UsuarioBase> usuarios;
  private ArrayList<Tarea> listaDeTareas = Tarea.obtenerTodasLasTareas();
  
-	 public GestionadorUsuarios() {
-		 this.usuarios = new ArrayList<>();
-
-	    }
+	 public GestionadorUsuarios() {}
 	 
 	 public void iniciar(Scanner sc) {
 		 
-	        String opcionInicio;
-	        
-	        do {
-	            
-	            System.out.println("\nSeleccione una opcion:\n"
-	                    + "1. Iniciar sesion\n"
-	                    + "2. Registrarse\n"
-	                    + "3. Salir");
-	            
-	            opcionInicio = sc.nextLine().toLowerCase();
-	            
-	            switch (opcionInicio) {
-	            
-	                case "1", "iniciar sesion":
-	                    UsuarioBase usuario = login(sc);
-	                    
-	                    if (usuario != null) {
-	                        System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD 
-	                        		+ usuario.getTipoUsuario() + Colores.ANSI_RESET 
-	                        		+ ", " + usuario.getNombre());
-	                        
-	                        usuario.verMenu(sc);
-	                        
-	                    } else {
-	                        System.err.println("Usuario o contraseña incorrectos.");
-	                    }
-	                                 
-	                    break;
-	                    
-	                case "2", "registrarse":
-	                    crearUsuario(sc);
-	                    break;
-	                    
-	                case "3", "salir":
-	                    System.out.println("Hasta luego. (⌐■_■)");
-	                    break;
-	                    
-	                default:
-	                    System.err.println("Opcion no valida. Intentalo de nuevo.");
-	                    
-	            }
-	            
-	        } while (!opcionInicio.equals("3") && !opcionInicio.equals("salir"));
-	        
-	    }
- 
-	public UsuarioBase login(Scanner sc) {
-		
-		System.out.println("Introduce tu nombre de usuario:");
-		String nombre = sc.nextLine();
+		    ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+		    String opcionInicio;
 
-		System.out.println("Introduce tu contraseña:");
-		String contraseña = sc.nextLine();
+		    do {
 
-		for (UsuarioBase usuario : usuarios) {
-			if (usuario.getNombre().equals(nombre) && usuario.getContraseña().equals(contraseña)) {
-				return usuario;
-			}
+		        System.out.println("\nSeleccione una opcion:\n"
+		                + "1. Iniciar sesion\n"
+		                + "2. Salir");
+
+		        opcionInicio = sc.nextLine().toLowerCase();
+
+		        switch (opcionInicio) {
+
+		            case "1", "iniciar sesion":
+		                UsuarioBase usuario = login(sc, usuarios);
+
+		                if (usuario != null) {
+		                    System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD
+		                            + usuario.getTipoUsuario() + Colores.ANSI_RESET
+		                            + ", " + usuario.getNombre());
+
+		                    usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
+
+		                } else {
+		                    System.err.println("Usuario o contraseña incorrectos.");
+		                }
+
+		                break;
+
+		            case "2", "salir":
+		                System.out.println("Hasta luego. (⌐■_■)");
+		                break;
+
+		            default:
+		                System.err.println("Opcion no valida. Intentalo de nuevo.");
+
+		        }
+
+		    } while (!opcionInicio.equals("2") && !opcionInicio.equals("salir"));
+
 		}
+ 
+	 public UsuarioBase login(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 
-		return null;
-	}
+		    System.out.println("Introduce tu nombre de usuario:");
+		    String nombre = sc.nextLine();
+
+		    System.out.println("Introduce tu contraseña:");
+		    String contraseña = sc.nextLine();
+
+		    for (UsuarioBase usuario : usuarios) {
+		        if (usuario.getNombre().equals(nombre) && usuario.getContraseña().equals(contraseña)) {
+		            return usuario;
+		        }
+		    }
+
+		    return null;
+		}
 	
-	public void crearUsuario(Scanner sc) {
+	public void registro(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 		
-		usuariosPrueba();
-
 		System.out.print("Introduzca su nombre: ");
         String nombre = sc.nextLine();
         
@@ -123,18 +113,25 @@ public class GestionadorUsuarios {
         
         System.out.print("¿Es profesor o alumno?: ");
         String tipo = sc.nextLine();
+        UsuarioBase nuevoUsuario = null;
+
         
         if (tipo.equalsIgnoreCase("profesor")) {
-        	usuarios.add(new Profesor(nombre, contraseña, dni));
+        	nuevoUsuario = new Profesor(nombre, contraseña, dni);
 		} else if (tipo.equalsIgnoreCase("alumno")) {
-			usuarios.add(new Alumno(nombre, contraseña, dni, 0.0));
+			nuevoUsuario = new Alumno(nombre, contraseña, dni, 0.0);
 		} else {
 			System.err.println("Tipo de usuario no valido. Intentalo de nuevo.");
 		}
+        
+        // Agregar el nuevo usuario al ArrayList de usuarios
+        usuarios.add(nuevoUsuario);
 
+        System.out.println("Usuario creado correctamente.");
+        
 	}
 	
-	public void borrarUsuario(Scanner sc) {
+	public void borrarUsuario(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 		
 		System.out.println("Introduce el nombre de usuario que quieres borrar:");
 		String nombre = sc.nextLine();
@@ -148,7 +145,7 @@ public class GestionadorUsuarios {
         }
 	}
     
-	public void mostrarUsuarios() {
+	public void mostrarUsuarios(ArrayList<UsuarioBase> usuarios) {
 
 		if (usuarios.isEmpty()) {
 			System.err.println("La lista de usuarios esta vacia.");
@@ -168,7 +165,7 @@ public class GestionadorUsuarios {
         
     }
 	
-	public void verEstadisticas() {
+	public void verEstadisticas(ArrayList<UsuarioBase> usuarios) {
 		
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
         
@@ -294,7 +291,7 @@ public class GestionadorUsuarios {
         }
     }
     
-    public void verNotasAlumnos() {
+    public void verNotasAlumnos(ArrayList<UsuarioBase> usuarios) {
 
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
 
@@ -304,30 +301,35 @@ public class GestionadorUsuarios {
 		
     }
     
-    public void modificarNotaAlumno(Scanner sc) {
+    public void modificarNotaAlumno(Scanner sc,  ArrayList<Alumno> alumnos) {
     	
-		System.out.println("Introduce el nombre del alumno:");
-		String nombre = sc.nextLine();
-
-		for (UsuarioBase usuario : usuarios) {
-			if (usuario.getNombre().equals(nombre)) {
-				if (usuario.getTipoUsuario().equals("Alumno")) {
-					Alumno alumno = (Alumno) usuario;
-					System.out.println("Introduce la nueva nota:");
-					double nota = sc.nextDouble();
-					alumno.setNota(nota);
-					System.out.println("Nota modificada correctamente.");
-					return;
-				}
-			}
+		System.out.println("Lista de alumnos:");
+		for (int i = 0; i < alumnos.size(); i++) {
+			System.out.println((i + 1) + ". " + alumnos.get(i).getNombre());
 		}
 
-		System.err.println("No se ha encontrado el alumno.");
+		System.out.print("Introduzca el numero del alumno a modificar: ");
+		int numeroAlumno = sc.nextInt();
+		sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
+
+		if (numeroAlumno >= 1 && numeroAlumno <= alumnos.size()) {
+			
+			System.out.print("Introduzca la nueva nota del alumno: ");
+			double nuevaNota = sc.nextDouble();
+			sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
+			
+			alumnos.get(numeroAlumno - 1).setNota(nuevaNota);
+			
+			System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente." + Colores.ANSI_RESET);
+			
+		} else {
+			System.err.println("Numero de alumno no valido.");
+		}
+    	
 
     }
     
     public void agregarNuevaTarea(Scanner sc) {
-    	
     	
         System.out.print("Introduzca el tipo de la nueva tarea: ");
         String tipoTarea = sc.nextLine();
@@ -427,28 +429,34 @@ public class GestionadorUsuarios {
          
      }
     
-	public void usuariosPrueba () {
-	
-			// Inicializacion del ArrayList de usuarios
-	        ArrayList<UsuarioBase> usuarios = new ArrayList<UsuarioBase>();
-	        
-	        // Agregar algunos datos de ejemplo
-	        
-	        // Profesores
-	        usuarios.add(new Profesor("Guillamon", "pass1", "76429580M"));
-	        usuarios.add(new Profesor("Lidia", "pass2", "76429581M"));
-	        usuarios.add(new Profesor("David", "pass3", "76429582M"));
-	        usuarios.add(new Profesor("Paco", "pass4", "76429583M"));
-	
-	        // Alumnos
-	        usuarios.add(new Alumno("Samuel", "123", "76429584M", 9.0));
-	        usuarios.add(new Alumno("Paula", "123", "76429585M",5.0));
-	        usuarios.add(new Alumno("Hugo", "123", "76429586M" , 7.5));
-	        usuarios.add(new Alumno("Zamudio", "123", "76429587M", 3.0));
-	        
-	        // Administradores
-	        usuarios.add(new Administrador("Lolo", "pass1"));
-	        	    		
-	}
+    public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
 
+        // Inicialización del ArrayList de usuarios
+        ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<UsuarioBase>();
+
+        // Agregar usuarios registrados al ArrayList de usuarios por defecto
+        usuariosDefecto.addAll(usuariosRegistrados);
+
+        // Agregar algunos datos de ejemplo en caso de que no se hayan registrado usuarios aún
+
+        // Profesores
+        usuariosDefecto.add(new Profesor("Guillamon", "pass1", "76429580M"));
+        usuariosDefecto.add(new Profesor("Lidia", "pass2", "76429581M"));
+        usuariosDefecto.add(new Profesor("David", "pass3", "76429582M"));
+        usuariosDefecto.add(new Profesor("Paco", "pass4", "76429583M"));
+
+        // Alumnos
+        usuariosDefecto.add(new Alumno("Samuel", "123", "76429584M", 9.0));
+        usuariosDefecto.add(new Alumno("Paula", "123", "76429585M", 5.0));
+        usuariosDefecto.add(new Alumno("Hugo", "123", "76429586M", 7.5));
+        usuariosDefecto.add(new Alumno("Zamudio", "123", "76429587M", 3.0));
+
+        // Administradores
+        usuariosDefecto.add(new Administrador("Lolo", "pass1", "76429588M"));
+
+        return usuariosDefecto;
+    }
+	
+	
+    
 }
