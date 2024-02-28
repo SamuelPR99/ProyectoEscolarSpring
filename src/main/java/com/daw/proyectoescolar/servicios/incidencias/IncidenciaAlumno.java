@@ -6,17 +6,19 @@ public class IncidenciaAlumno extends Incidencias{
 
 	public IncidenciaAlumno() {
 		
+		// CONSTRUCTOR VACÍO \\
+		
 	}
 
-	public IncidenciaAlumno(String incidencia) {
+	public IncidenciaAlumno(String incidencia) { // Constructor con llamada al constructor de la superclase "Incidencias" \\
 		super(incidencia);
 	}
 
 	@Override
-	public String toString() {
+	public String toString() { // Método "toString" que imprime cada incidencia que se va añadiendo al ArrayList. \\
+		
 		return Colores.ANSI_CYAN + "Incidencias de Alumnos: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_RESET;
+		
 	}
-	
-	
 	
 }
