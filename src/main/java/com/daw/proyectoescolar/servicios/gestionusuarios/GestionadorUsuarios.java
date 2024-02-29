@@ -346,6 +346,7 @@ public class GestionadorUsuarios {
             System.out.println("Tareas Pendientes:");
             for (Tarea tarea : tareasAsignadas) {
                 System.out.println("Tipo: " + tarea.getTipo());
+               
             }
         }
     }

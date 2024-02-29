@@ -11,6 +11,7 @@ public class Tema {
 	protected String descripcion;
 	protected Tarea tarea;
 	protected ArrayList<Tema> temas;
+	protected ArrayList<Tarea> tareas;
 	
 	// Constructores
 	
@@ -22,6 +23,13 @@ public class Tema {
 		this.descripcion = descripcion;
 		
 	}
+	public ArrayList<Tarea> getTareas() {
+        return tareas;
+    }
+	  public void setTareas(ArrayList<Tarea> tareas) {
+	        this.tareas = tareas;
+	}
+	 
 	
 	public Tema(String nombre, String descripcion, Tarea tarea) {
 		this.nombre = nombre;
@@ -72,7 +80,10 @@ public class Tema {
 	    sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string y se buguea 3 veces el menu
 
 	    // Mostrar tarea del tema seleccionado
-		temas.get(opcion - 1).mostrarTarea();
+	    Tema temaSeleccionado = temas.get(opcion - 1);
+	    for (Tarea tarea : temaSeleccionado.getTareas()) {
+	        tarea.mostrarTareas(sc);
+	    }
 		
 	}
 	
