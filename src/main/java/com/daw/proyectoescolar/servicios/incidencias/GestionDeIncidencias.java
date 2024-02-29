@@ -3,12 +3,10 @@ package com.daw.proyectoescolar.servicios.incidencias;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
 
 public class GestionDeIncidencias {
 
-	static Scanner sc = new Scanner(System.in);
 	ArrayList<Incidencias> listaIncidencias = new ArrayList<Incidencias>();
 	
 	public GestionDeIncidencias() {
@@ -17,7 +15,7 @@ public class GestionDeIncidencias {
 		
 	}
 	
-	public void menuPrincipal() {
+	public void menuPrincipal(Scanner sc) {
 		
 	// MENÚ PRINCIPAL DE LA GESTIÓN DE INCIDENCIAS \\
 		
@@ -34,15 +32,15 @@ public class GestionDeIncidencias {
 			switch(opcion) {
 			
 			case "1", "añadir incidencia", "añadir una incidencia":
-				añadirIncidencia();
+				añadirIncidencia(sc);
 			break;
 			
 			case "2", "listar incidencias", "listar":
-				Listado();
+				listado(sc);
 			break;
 			
 			case "3", "eliminar", "eliminar incidencias":
-				eliminarIncidencias();
+				eliminarIncidencias(sc);
 			break;
 			
 			case "4", "salir":
@@ -58,7 +56,7 @@ public class GestionDeIncidencias {
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	
 	
-	public ArrayList<Incidencias> añadirIncidencia() {
+	public ArrayList<Incidencias> añadirIncidencia(Scanner sc) {
 		
 		/*Este método hace que el usuario pueda añadir todas las incidencias del tipo que desee hasta que introduzca
  		la opción de "Volver" que lo retornará hasta el menú principal*/
@@ -66,7 +64,7 @@ public class GestionDeIncidencias {
 	
 	
 	String opcion;
-	boolean volver = false;
+	
 	
 	// Submenú para añadir las incidencias que el usuario desee \\
 	
@@ -113,9 +111,7 @@ public class GestionDeIncidencias {
             
         case "4", "volver":
         	
-        	volver = true;
-        
-            break;
+        	break;
             
         default:
         	
@@ -136,7 +132,7 @@ public class GestionDeIncidencias {
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	
 	
-	public void Listado() {
+	public void listado(Scanner sc) {
 		
 		
 		/* Este método se encarga de clasificar las incidencias que se añaden al ArrayList por los tres tipos de incidencias que hay y luego imprimirlas las imprime*/
@@ -180,7 +176,7 @@ public class GestionDeIncidencias {
 				
 			}
 			
-		}while(!volver);
+		} while(!volver);
 		
 	}
 	
@@ -194,7 +190,7 @@ public class GestionDeIncidencias {
         	System.out.println(Colores.ANSI_RED + "Lo siento. No hay incidencias de alumnos registradas." + Colores.ANSI_RESET);
     } else {
     	for(Incidencias incidencia : listaIncidencias) {
-    		if(incidencia instanceof IncidenciaAlumno) {
+    		if(incidencia.getTipoIncidencia().equals("Alumno")) {
 	            System.out.println(incidencia);
     		}
     	}
@@ -207,7 +203,7 @@ public class GestionDeIncidencias {
         	System.out.println(Colores.ANSI_RED + "Lo siento. No hay incidencias de profesores registradas." + Colores.ANSI_RESET);
         } else {
         	for(Incidencias incidencia : listaIncidencias) {
-        		if(incidencia instanceof IncidenciaProfesor) {
+        		if(incidencia.getTipoIncidencia().equals("Profesor")) {
     	            System.out.println(incidencia);
         		}
         	}
@@ -220,7 +216,7 @@ public class GestionDeIncidencias {
         	System.out.println(Colores.ANSI_RED + "Lo siento. No hay incidencias de aplicación registradas." + Colores.ANSI_RESET);
         } else {
         	for(Incidencias incidencia : listaIncidencias) {
-        		if(incidencia instanceof IncidenciaAplicacion) {
+        		if(incidencia.getTipoIncidencia().equals("Aplicacion")) {
     	            System.out.println(incidencia);
         		}
         	}
@@ -238,8 +234,8 @@ public class GestionDeIncidencias {
     }
   }
 	
-    public void eliminarIncidencias() { // Método encargado de eliminar las incidencias registradas. \\
-    									//	Se eliminan por tipo. \\
+    public void eliminarIncidencias(Scanner sc) { // Método encargado de eliminar las incidencias registradas. \\
+    											 //	Se eliminan por tipo. \\
 		
 	if(listaIncidencias.isEmpty()) {
 		System.out.println(Colores.ANSI_RED + "Lo siento. No existe ningún tipo de incidencia registrado" + Colores.ANSI_RESET);
@@ -254,7 +250,7 @@ public class GestionDeIncidencias {
 		
 		if (eliminarIncidencia.equals("alumno") || eliminarIncidencia.equals("1")) {
 			
-			if(incidencia instanceof IncidenciaAlumno) {
+			if(incidencia.getTipoIncidencia().equals("Alumno")) {
 	        	
 	            listaIncidencias.remove(incidencia);
 	            System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno eliminada correctamente." + Colores.ANSI_RESET);
@@ -265,7 +261,7 @@ public class GestionDeIncidencias {
                 
         else if (eliminarIncidencia.equals("profesor") || eliminarIncidencia.equals("2")) {
         	
-        	if(incidencia instanceof IncidenciaProfesor) {
+        	if(incidencia.getTipoIncidencia().equals("Profesor")) {
             	
                 listaIncidencias.remove(incidencia);
                 System.out.println(Colores.ANSI_GREEN + "\nIncidencia de profesor eliminada correctamente." + Colores.ANSI_RESET);
@@ -277,7 +273,7 @@ public class GestionDeIncidencias {
         else if (eliminarIncidencia.equals("aplicacion") || eliminarIncidencia.equals("aplicación")
         		|| eliminarIncidencia.equals("3")) {
         	
-        	if(incidencia instanceof IncidenciaAplicacion) {
+        	if(incidencia.getTipoIncidencia().equals("Aplicacion")) {
         	
             listaIncidencias.remove(incidencia);
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de aplicación eliminada correctamente." + Colores.ANSI_RESET);
@@ -288,5 +284,4 @@ public class GestionDeIncidencias {
       }
 	}
     
-	    
 }

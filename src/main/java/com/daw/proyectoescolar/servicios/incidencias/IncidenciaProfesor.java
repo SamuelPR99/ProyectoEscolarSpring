@@ -13,6 +13,11 @@ public class IncidenciaProfesor extends Incidencias{
 	public IncidenciaProfesor(String incidencia) { // Constructor con llamada al constructor de la superclase "Incidencias" \\
 		super(incidencia);
 	}
+	
+	@Override
+	public String getTipoIncidencia() {
+		return "Profesor";
+	}
 
 	@Override
 	public String toString() { // Método "toString" que imprime cada incidencia que se va añadiendo al ArrayList. \\

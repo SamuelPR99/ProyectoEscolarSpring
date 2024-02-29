@@ -11,6 +11,7 @@ public class Alumno extends UsuarioBase {
     // Atributos
     protected double nota;
     protected ArrayList<Tarea> tareasAsignadas = new ArrayList<Tarea>();
+    
 
     // Constructores
     public Alumno() {
@@ -65,17 +66,17 @@ public class Alumno extends UsuarioBase {
     public String getTipoUsuario() {
         return "Alumno";
     }
-
+       
     @Override
     public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
     	
         GestionadorUsuarios gestor = new GestionadorUsuarios();
-        
+       
         String opcion;
 
         do {
         	
-            System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opción:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
+            System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
                     + "1. Ver nota\n"
                     + "2. Recomendar tarea\n"
                     + "3. Consultar tareas pendientes\n"
@@ -107,7 +108,7 @@ public class Alumno extends UsuarioBase {
 	            	gestor.cambiarContraseña(sc, this);
                 	break;
 
-                case "6", "salir del menu":
+                case "6", "salir del menu", "salir", "salir del":
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de alumno..." + Colores.ANSI_RESET);
                     break;
 
@@ -115,7 +116,7 @@ public class Alumno extends UsuarioBase {
                     System.err.println("Opcion no valida. Por favor, elige una opcion valida.");
             }
             
-        } while (!opcion.equals("6") && !opcion.equals("salir del menu"));
+        } while (!opcion.equals("6") && !opcion.contains("salir"));
     }
-    
+
 }

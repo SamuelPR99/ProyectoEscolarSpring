@@ -15,6 +15,11 @@ public class IncidenciaAplicacion extends Incidencias{
 	}
 
 	@Override
+	public String getTipoIncidencia() {
+		return "Aplicacion";
+	}
+	
+	@Override
 	public String toString() { // Método "toString" que imprime cada incidencia que se va añadiendo al ArrayList. \\
 		
 		return Colores.ANSI_CYAN + "Incidencias de Aplicación: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_RESET;

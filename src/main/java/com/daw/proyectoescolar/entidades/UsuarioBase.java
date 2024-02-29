@@ -58,7 +58,7 @@ public abstract class UsuarioBase implements Usuario {
 		public void setDni(String dni) {
 			this.dni = dni;
 		}
-		
+
 		// Metodos
 }
 

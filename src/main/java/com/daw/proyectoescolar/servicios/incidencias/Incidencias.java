@@ -31,6 +31,8 @@ public abstract class Incidencias {
 		return "Incidencias [incidencia=" + incidencia + "]";
 	}
 	
+	public abstract String getTipoIncidencia();
+	
 	
 	
 }

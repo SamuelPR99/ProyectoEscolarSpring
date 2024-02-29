@@ -9,6 +9,7 @@ import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
 
 public class GestionadorUsuarios {
 
@@ -29,7 +30,8 @@ public class GestionadorUsuarios {
 
 		        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET
 		                + Colores.ANSI_YELLOW +"1. Iniciar sesion\n"
-		                + "2. Salir" + Colores.ANSI_RESET);
+		                + "2. Gestion de incidencias\n"
+		                + "3. Salir" + Colores.ANSI_RESET);
 
 		        opcion = sc.nextLine().toLowerCase();
 
@@ -51,8 +53,13 @@ public class GestionadorUsuarios {
 		                }
 
 		                break;
+		                
+		            case "2", "gestion de incidencias":
+	            	    GestionDeIncidencias gestionadorIncidencias = new GestionDeIncidencias();
+                        gestionadorIncidencias.menuPrincipal(sc);    	
+		                break;
 
-		            case "2", "salir":
+		            case "3", "salir":
 		                System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
 		                break;
 

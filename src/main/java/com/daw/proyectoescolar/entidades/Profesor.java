@@ -6,8 +6,6 @@ import java.util.Scanner;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
-
-
 public class Profesor extends UsuarioBase {
 	
 	// Atributos
@@ -34,7 +32,7 @@ public class Profesor extends UsuarioBase {
     public String getTipoUsuario() {
         return "Profesor";
     }
-
+    
     // Menu profesor
 	@Override
 	public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
@@ -86,8 +84,8 @@ public class Profesor extends UsuarioBase {
 	            case "7", "cambiar contraseña":
 	            	gestor.cambiarContraseña(sc, this);
                 	break;
-	                
-	            case "8", "salir del menu":
+                   
+	            case "8", "salir del menu", "salir", "salir del":
 	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de profesor..." + Colores.ANSI_RESET);
 	                break;
 
@@ -96,7 +94,7 @@ public class Profesor extends UsuarioBase {
 	                
 	        }
 	        
-	    } while (!opcion.equals("8") && !opcion.equals("salir del menu"));
+	    } while (!opcion.equals("8") && !opcion.contains("salir"));
 	    
 	}
 	
