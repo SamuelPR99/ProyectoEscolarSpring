@@ -68,7 +68,7 @@ public class GestionadorUsuarios {
 
 		        }
 
-		    } while (!opcion.equals("2") && !opcion.equals("salir"));
+		    } while (!opcion.equals("3") && !opcion.equals("salir"));
 
 		}
  
