@@ -72,8 +72,7 @@ public class Tarea {
             
         }
     }
-
-	
+    	
     // Obtener array de tareas
     public static ArrayList<Tarea> obtenerTodasLasTareas() {
         ArrayList<Tarea> tareas = new ArrayList<Tarea>();
