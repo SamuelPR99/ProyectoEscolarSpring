@@ -23,13 +23,6 @@ public class Tema {
 		this.descripcion = descripcion;
 		
 	}
-	public ArrayList<Tarea> getTareas() {
-        return tareas;
-    }
-	  public void setTareas(ArrayList<Tarea> tareas) {
-	        this.tareas = tareas;
-	}
-	 
 	
 	public Tema(String nombre, String descripcion, Tarea tarea) {
 		this.nombre = nombre;
@@ -59,6 +52,14 @@ public class Tema {
 		this.tarea = tarea;
 	}
 	
+	public ArrayList<Tarea> getTareas() {
+        return tareas;
+    }
+	
+    public void setTareas(ArrayList<Tarea> tareas) {
+        this.tareas = tareas;
+    }
+	
 	// Metodos
 	
 	public void mostrarTemas(Scanner sc) {
@@ -79,7 +80,7 @@ public class Tema {
 		int opcion = sc.nextInt();
 	    sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string y se buguea 3 veces el menu
 
-	    // Mostrar tarea del tema seleccionado
+	    // Mostrar tareas del tema seleccionado
 	    Tema temaSeleccionado = temas.get(opcion - 1);
 	    for (Tarea tarea : temaSeleccionado.getTareas()) {
 	        tarea.mostrarTareas(sc);
@@ -92,8 +93,8 @@ public class Tema {
     	
         System.out.println("\nNombre del tema: " + this.getNombre()
         + "\nDescripción: " + this.getDescripcion() + "\n" 
-        		+ "\nTarea:\n" + this.getTarea().getNombre() 
-        		+ "\nDescripción de la tarea: " + this.getTarea().getDescripcion());
+		+ "\nTarea:\n" + this.getTarea().getNombre() 
+		+ "\nDescripción de la tarea: " + this.getTarea().getDescripcion());
         
     }
 	

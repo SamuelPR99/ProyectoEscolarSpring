@@ -49,7 +49,7 @@ public class GestionadorUsuarios {
 		                    usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
 		                } catch (NullPointerException excepcion) {
-		                    System.err.println("Usuario o contraseña incorrectos.");
+		                    System.err.println("Error: Null pointer exception.");
 		                }
 
 		                break;
@@ -382,7 +382,7 @@ public class GestionadorUsuarios {
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
 
 		for (Alumno alumno : alumnos) {
-			System.out.println("Nombre: " + alumno.getNombre() + " Nota: " + alumno.getNota());
+			System.out.println("Nombre: " + alumno.getNombre() + "/ Nota: " + alumno.getNota());
 		}
 		
     }
