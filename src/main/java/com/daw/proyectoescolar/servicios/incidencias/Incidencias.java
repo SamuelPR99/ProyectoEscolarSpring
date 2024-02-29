@@ -1,6 +1,6 @@
 package com.daw.proyectoescolar.servicios.incidencias;
 
-public class Incidencias {
+public abstract class Incidencias {
 
 	protected String incidencia;
 	

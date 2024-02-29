@@ -81,33 +81,33 @@ public class GestionDeIncidencias {
         case "1", "incidencia de alumno":
         	
             Incidencias incidenciaAlumno = new IncidenciaAlumno();
-            System.out.println("Introduzca la incidencia de alumno: ");
+            System.out.println("\nIntroduzca la incidencia de alumno: ");
             incidenciaAlumno.setIncidencia(sc.nextLine());
             listaIncidencias.add(incidenciaAlumno);
             
-            System.out.println(Colores.ANSI_GREEN + "Incidencia de alumno añadida con éxito!" + Colores.ANSI_RESET);
+            System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con éxito!" + Colores.ANSI_RESET);
             
             break;
             
         case "2" , "incidencia de profesor":
         	
             Incidencias incidenciaProfesor = new IncidenciaProfesor();
-            System.out.println("Introduzca la incidencia de profesor: ");
+            System.out.println("\nIntroduzca la incidencia de profesor: ");
             incidenciaProfesor.setIncidencia(sc.nextLine());
             listaIncidencias.add(incidenciaProfesor);
             
-            System.out.println(Colores.ANSI_GREEN + "Incidencia de profesor añadida con éxito!" + Colores.ANSI_RESET);
+            System.out.println(Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con éxito!" + Colores.ANSI_RESET);
             
             break;
             
         case "3", "incidencia de aplicación":
         	
             Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
-            System.out.println("Introduzca la incidencia aplicación: ");
+            System.out.println("\nIntroduzca la incidencia aplicación: ");
             incidenciaAplicacion.setIncidencia(sc.nextLine());
             listaIncidencias.add(incidenciaAplicacion);
             
-            System.out.println(Colores.ANSI_GREEN + "Incidencia de aplicación añadida con éxito!" + Colores.ANSI_RESET);
+            System.out.println(Colores.ANSI_GREEN + "\nIncidencia de aplicación añadida con éxito!" + Colores.ANSI_RESET);
             
             break;
             
