@@ -9,6 +9,7 @@ public class Tarea {
     protected String tipo;
     protected String nombre;
     protected String descripcion;
+    
 
     // Constructores
     public Tarea() {

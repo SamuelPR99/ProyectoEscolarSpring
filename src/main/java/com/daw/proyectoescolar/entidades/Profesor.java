@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.GestionTemas;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
 public class Profesor extends UsuarioBase {
 	
 	// Atributos
 
+	
     // Constructores
 
 	public Profesor() {
@@ -38,7 +40,7 @@ public class Profesor extends UsuarioBase {
 	public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
 		
 	    GestionadorUsuarios gestor = new GestionadorUsuarios();
-	    Tema tema = new Tema();
+	    GestionTemas temitas = new GestionTemas();
 	    
 	    String opcion;
 
@@ -56,10 +58,10 @@ public class Profesor extends UsuarioBase {
 
 	        opcion = sc.nextLine().toLowerCase();
 
+	     
 	        switch (opcion) {
-	        
 	        	case "1", "ver listado de temas":
-	        		tema.mostrarTemas(sc);
+	        		temitas.menuTemas(sc);
 	        		break;
 	            case "2", "ver lista de alumnos":
 	            	gestor.verNotasAlumnos(usuarios);
