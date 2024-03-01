@@ -205,7 +205,7 @@ public class GestionadorUsuarios {
 
     private boolean validarNombreUsuario(String usuario) {
     	
-		if (usuario.length() >= 6) {
+		if (usuario.length() >= 3) {
 			return true;
 		}
 
@@ -317,8 +317,8 @@ public class GestionadorUsuarios {
         double promedio = sumaNotas / alumnos.size();
         
         System.out.println(Colores.ANSI_PURPLE + "Promedio de notas: " + promedio + Colores.ANSI_RESET);
-        System.out.println(Colores.ANSI_GREEN + "Nota más alta: " + notaMaxima + Colores.ANSI_RESET);
-        System.out.println(Colores.ANSI_RED + "Nota más baja: " + notaMinima + Colores.ANSI_RESET);
+        System.out.println(Colores.ANSI_GREEN + "Nota mas alta: " + notaMaxima + Colores.ANSI_RESET);
+        System.out.println(Colores.ANSI_RED + "Nota mas baja: " + notaMinima + Colores.ANSI_RESET);
     }
 	
 	// Obtener los alumnos del ArrayList de usuarios

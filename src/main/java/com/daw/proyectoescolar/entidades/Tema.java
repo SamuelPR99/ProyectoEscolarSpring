@@ -81,10 +81,14 @@ public class Tema {
 	    sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string y se buguea 3 veces el menu
 
 	    // Mostrar tareas del tema seleccionado
+	    temas.get(opcion - 1).mostrarTarea();
+	    
+	    /*
 	    Tema temaSeleccionado = temas.get(opcion - 1);
 	    for (Tarea tarea : temaSeleccionado.getTareas()) {
 	        tarea.mostrarTareas(sc);
 	    }
+	    */
 		
 	}
 	
@@ -107,7 +111,6 @@ public class Tema {
         Tema tema = new Tema();
         tema.setNombre("Teoría de la Probabilidad Estocástica");
         tema.setDescripcion("Estudio de la probabilidad en un espacio de probabilidad");
-        // Añadir 3 tarea al tema
         tema.setTarea(tareas.get(0)); // Tarea 1  
         temas.add(tema);
         
