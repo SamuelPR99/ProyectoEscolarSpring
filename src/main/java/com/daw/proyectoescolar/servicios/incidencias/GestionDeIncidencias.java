@@ -182,16 +182,25 @@ public class GestionDeIncidencias {
 	
 	
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 	
+	boolean noImprimeIncidencias = false; /* Este boolean se encarga de mostrar un mensaje de error cuando el usuario trata de listar 
+	 										un tipo de incidencia que no está registrado.	*/
 	
    public void verIncidenciaAlumno() { // Método encargado de imprimir las incidencias de tipo Alumno. \\
         
+	   
+	   
         if(listaIncidencias.isEmpty()) {
         	System.out.println(Colores.ANSI_RED + "Lo siento. No hay incidencias de alumnos registradas." + Colores.ANSI_RESET);
     } else {
     	for(Incidencias incidencia : listaIncidencias) {
     		if(incidencia.getTipoIncidencia().equals("Alumno")) {
 	            System.out.println(incidencia);
+    		} else {
+    			noImprimeIncidencias = true;
+    			System.err.println("\nLo siento. Se eliminaron todas las incidencias de alumno.\n");
+    			return;
     		}
     	}
     }
@@ -205,6 +214,10 @@ public class GestionDeIncidencias {
         	for(Incidencias incidencia : listaIncidencias) {
         		if(incidencia.getTipoIncidencia().equals("Profesor")) {
     	            System.out.println(incidencia);
+        		} else {
+        			noImprimeIncidencias = true;
+        			System.err.println("\nLo siento. Se eliminaron todas las incidencias de profesor.\n");
+        			return;
         		}
         	}
         }
@@ -218,6 +231,10 @@ public class GestionDeIncidencias {
         	for(Incidencias incidencia : listaIncidencias) {
         		if(incidencia.getTipoIncidencia().equals("Aplicacion")) {
     	            System.out.println(incidencia);
+        		} else {
+        			noImprimeIncidencias = true;
+        			System.err.println("\nLo siento. Se eliminaron todas las incidencias de aplicación.\n");
+        			return;
         		}
         	}
         }
@@ -230,13 +247,17 @@ public class GestionDeIncidencias {
     	} else {
     	for(Incidencias incidencia : listaIncidencias) {
     		System.out.println(incidencia);
-    	}
-    }
+    	
+		}
+    } 
   }
 	
     public void eliminarIncidencias(Scanner sc) { // Método encargado de eliminar las incidencias registradas. \\
     											 //	Se eliminan por tipo. \\
 		
+    	boolean noHayIncidencias = false; /* Este boolean se encarga de mostrar un mensaje de error cuando el usuario trata de
+    	 									de eliminar un tipo de incidencia que no está registrado.	*/
+    	
 	if(listaIncidencias.isEmpty()) {
 		System.out.println(Colores.ANSI_RED + "Lo siento. No existe ningún tipo de incidencia registrado" + Colores.ANSI_RESET);
 		
@@ -255,9 +276,13 @@ public class GestionDeIncidencias {
 	            listaIncidencias.remove(incidencia);
 	            System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno eliminada correctamente." + Colores.ANSI_RESET);
 	                    return;
-	        	} 
+	        	} else {
+	        		noHayIncidencias = true;
+	        		System.err.println("\nNo hay incidencias de alumnos registradas.\n");
+	        		return;
+	        	}
             
-		}
+		} 
                 
         else if (eliminarIncidencia.equals("profesor") || eliminarIncidencia.equals("2")) {
         	
@@ -266,7 +291,11 @@ public class GestionDeIncidencias {
                 listaIncidencias.remove(incidencia);
                 System.out.println(Colores.ANSI_GREEN + "\nIncidencia de profesor eliminada correctamente." + Colores.ANSI_RESET);
                         return;
-            	} 
+            	} else {
+            		noHayIncidencias = true;
+            		System.err.println("\nNo hay incidencias de profesores registradas.\n");
+            		return;
+            	}
             
 		}
 	
@@ -278,6 +307,10 @@ public class GestionDeIncidencias {
             listaIncidencias.remove(incidencia);
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de aplicación eliminada correctamente." + Colores.ANSI_RESET);
                     return;
+        	} else {
+        		noHayIncidencias = true;
+        		System.err.println("\nNo hay incidencias de aplicación registradas.\n");
+        		return;
         	}
           }
 		}
