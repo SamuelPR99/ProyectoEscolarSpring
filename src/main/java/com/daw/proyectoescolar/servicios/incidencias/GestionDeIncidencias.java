@@ -184,24 +184,18 @@ public class GestionDeIncidencias {
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 	
-	boolean noImprimeIncidencias = false; /* Este boolean se encarga de mostrar un mensaje de error cuando el usuario trata de listar 
+	 /* Este boolean se encarga de mostrar un mensaje de error cuando el usuario trata de listar 
 	 										un tipo de incidencia que no está registrado.	*/
 	
    public void verIncidenciaAlumno() { // Método encargado de imprimir las incidencias de tipo Alumno. \\
-        
-	   
 	   
         if(listaIncidencias.isEmpty()) {
-        	System.out.println(Colores.ANSI_RED + "Lo siento. No hay incidencias de alumnos registradas." + Colores.ANSI_RESET);
+        	System.out.println(Colores.ANSI_RED + "\nLo siento. No hay incidencias de alumnos registradas.\n" + Colores.ANSI_RESET);
     } else {
     	for(Incidencias incidencia : listaIncidencias) {
     		if(incidencia.getTipoIncidencia().equals("Alumno")) {
 	            System.out.println(incidencia);
-    		} else {
-    			noImprimeIncidencias = true;
-    			System.err.println("\nLo siento. Se eliminaron todas las incidencias de alumno.\n");
-    			return;
-    		}
+    		} 
     	}
     }
 }
@@ -209,16 +203,12 @@ public class GestionDeIncidencias {
     public void verIncidenciaProfesor() { // Método encargado de imprimir las incidencias de tipo Profesor. \\
     	
 	 if(listaIncidencias.isEmpty()) {
-        	System.out.println(Colores.ANSI_RED + "Lo siento. No hay incidencias de profesores registradas." + Colores.ANSI_RESET);
+        	System.out.println(Colores.ANSI_RED + "\nLo siento. No hay incidencias de profesores registradas.\n" + Colores.ANSI_RESET);
         } else {
         	for(Incidencias incidencia : listaIncidencias) {
         		if(incidencia.getTipoIncidencia().equals("Profesor")) {
     	            System.out.println(incidencia);
-        		} else {
-        			noImprimeIncidencias = true;
-        			System.err.println("\nLo siento. Se eliminaron todas las incidencias de profesor.\n");
-        			return;
-        		}
+        		} 
         	}
         }
     }
@@ -226,16 +216,12 @@ public class GestionDeIncidencias {
     public void verIncidenciaAplicacion() { // Método encargado de imprimir las incidencias de tipo Aplicación. \\
     	
 	 if(listaIncidencias.isEmpty()) {
-        	System.out.println(Colores.ANSI_RED + "Lo siento. No hay incidencias de aplicación registradas." + Colores.ANSI_RESET);
+        	System.out.println(Colores.ANSI_RED + "\nLo siento. No hay incidencias de aplicación registradas.\n" + Colores.ANSI_RESET);
         } else {
         	for(Incidencias incidencia : listaIncidencias) {
         		if(incidencia.getTipoIncidencia().equals("Aplicacion")) {
     	            System.out.println(incidencia);
-        		} else {
-        			noImprimeIncidencias = true;
-        			System.err.println("\nLo siento. Se eliminaron todas las incidencias de aplicación.\n");
-        			return;
-        		}
+        		} 
         	}
         }
     }
@@ -243,7 +229,7 @@ public class GestionDeIncidencias {
 	public void verIncidenciasGenerales() { // Método encargado de imprimir todas las incidencias, sin filtrarlas por su tipo. \\
 	    	
 	if(listaIncidencias.isEmpty()) {
-		System.out.println(Colores.ANSI_RED + "Lo siento. No existe ningún tipo de incidencia registrado" + Colores.ANSI_RESET);
+		System.out.println(Colores.ANSI_RED + "\nLo siento. No existe ningún tipo de incidencia registrado\n" + Colores.ANSI_RESET);
     	} else {
     	for(Incidencias incidencia : listaIncidencias) {
     		System.out.println(incidencia);
@@ -259,7 +245,7 @@ public class GestionDeIncidencias {
     	 									de eliminar un tipo de incidencia que no está registrado.	*/
     	
 	if(listaIncidencias.isEmpty()) {
-		System.out.println(Colores.ANSI_RED + "Lo siento. No existe ningún tipo de incidencia registrado" + Colores.ANSI_RESET);
+		System.out.println(Colores.ANSI_RED + "\nLo siento. No existe ningún tipo de incidencia registrado\n" + Colores.ANSI_RESET);
 		
 		} else {
 	
