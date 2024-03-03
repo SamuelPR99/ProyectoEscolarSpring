@@ -253,7 +253,7 @@ public class GestionDeIncidencias {
   }
 	
 	// Metodo encargado de eliminar las incidencias registradas. \\
-	//	Se eliminan por tipo de incidencia. \\
+	// Se eliminan por tipo de incidencia. \\
 	public void eliminarIncidencias(Scanner sc) { 
 		
     	String opcion;
