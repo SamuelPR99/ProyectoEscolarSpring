@@ -6,10 +6,11 @@ import java.util.Scanner;
 import com.daw.proyectoescolar.entidades.Temas;
 
 public class GestionTemas {
-	protected static Scanner sc;
+	
 	protected static ListaDeTemas gestion;
 	
 	public void menuTemas (Scanner sc) {
+		
 		gestion = new ListaDeTemas();
 		gestion.temasIniciados();
 		
@@ -59,7 +60,6 @@ public class GestionTemas {
 				}
 		
 	}
-		
 		
 	private static void recorroArray(Temas tema) {
 		
