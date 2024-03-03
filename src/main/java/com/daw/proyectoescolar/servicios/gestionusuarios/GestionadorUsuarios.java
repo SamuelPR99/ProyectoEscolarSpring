@@ -17,6 +17,7 @@ public class GestionadorUsuarios {
  
 	 public GestionadorUsuarios() {}
 	 
+	 // Iniciar el menu principal
 	 public void iniciar(Scanner sc) {
 		 
 		    ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
@@ -75,6 +76,7 @@ public class GestionadorUsuarios {
 
 		}
  
+	 // Iniciar sesion
 	 public UsuarioBase login(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 
 		    System.out.println("Introduce tu nombre de usuario:");
@@ -92,6 +94,7 @@ public class GestionadorUsuarios {
 		    return null;
 		}
 	
+	// Registro de un nuevo usuario
 	public void registro(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 		
 		System.out.print("Introduzca su nombre: ");
@@ -152,6 +155,7 @@ public class GestionadorUsuarios {
         
 	}
 	
+	// Borrar un usuario
 	public void borrarUsuario(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 		
 		System.out.println("Introduce el nombre de usuario que quieres borrar:");
@@ -166,6 +170,7 @@ public class GestionadorUsuarios {
         }
 	}
     
+	// Mostrar los usuarios registrados
 	public void mostrarUsuarios(ArrayList<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
@@ -178,6 +183,7 @@ public class GestionadorUsuarios {
 	
 	}
 	
+	// Cambiar la contraseña
 	public void cambiarContraseña(Scanner sc, UsuarioBase usuario) {
 		    
             System.out.println("Introduce tu nueva contraseña:");
@@ -197,6 +203,7 @@ public class GestionadorUsuarios {
         
     }
 	
+	// Validar el DNI
 	private boolean validarDNI(String dni) {
 	    	
 			if (dni.length() == 9) {
@@ -214,7 +221,8 @@ public class GestionadorUsuarios {
 			}
 	        return false;
 	    }
-
+	
+	// Validar el nombre del usuario
     private boolean validarNombreUsuario(String usuario) {
     	
 		if (usuario.length() >= 3) {
@@ -235,6 +243,7 @@ public class GestionadorUsuarios {
     
      }
     
+    // Crear un ArrayList de usuarios por defecto y los usuarios registrados
     public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
 
         // Inicialización del ArrayList de usuarios
