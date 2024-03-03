@@ -1,12 +1,8 @@
 package com.daw.proyectoescolar.repositorio;
+
 import com.daw.proyectoescolar.entidades.Temas;
 
 import java.util.ArrayList;
-
-
-
-
-
 
 public class ListaDeTemas {
 	
@@ -14,7 +10,6 @@ public class ListaDeTemas {
 	
 	public ListaDeTemas() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ListaDeTemas(ArrayList<Temas> listaDeTemas) {
@@ -190,5 +185,4 @@ public class ListaDeTemas {
 			ListaDeTemas.add(tema63);
 	}
 	
-	
-	}
+}

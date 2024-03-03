@@ -15,7 +15,7 @@ public class GestionTemas {
 		
 		Temas tema = null;
 		
-		System.out.println(Colores.ANSI_PURPLE + Colores.ANSI_UNDERLINE + "\n¿Que tipo de tema quieres?:\n" + Colores.ANSI_RESET + Colores.ANSI_PURPLE
+		System.out.println(Colores.ANSI_PURPLE + Colores.ANSI_UNDERLINE + "\n¿Que tema quieres?:\n" + Colores.ANSI_RESET + Colores.ANSI_PURPLE
 		+ "Tema 1\n" 
 		+ "Tema 2\n" 
 		+ "Tema 3\n" 
@@ -61,21 +61,22 @@ public class GestionTemas {
 	}
 		
 		
-		public static void recorroArray(Temas tema) {
+	private static void recorroArray(Temas tema) {
+		
+		ArrayList<Temas> ListaDeTemas = gestion.getListaDeTemas();
+		
+		for(int i =0;i<ListaDeTemas.size();i++) {
+			Temas c = ListaDeTemas.get(i);
 			
-			ArrayList<Temas> ListaDeTemas = gestion.getListaDeTemas();
-			
-			for(int i =0;i<ListaDeTemas.size();i++) {
-				Temas c = ListaDeTemas.get(i);
-				
-				if (c.getClass() == tema.getClass()) {  //mirar mal esto que es importante
-					System.out.println("\nNombre: "+ c.getNombre() 
-					+ "\nDescripcion: " + c.getDescripcion() 
-					+ "\nContenido: "+ c.getContenidoTarea() + "\n");
+			if (c.getClass() == tema.getClass()) {  //mirar mal esto que es importante
+				System.out.println("\nNombre: "+ c.getNombre() 
+				+ "\nDescripcion: " + c.getDescripcion() 
+				+ "\nContenido: "+ c.getContenidoTarea() + "\n");
 					
-				}
-				
 			}
+				
+		}
 
 	}
+	
 }
