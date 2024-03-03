@@ -28,10 +28,11 @@ public class GestionadorUsuarios {
 
 		    do {
 
-		        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET
-		                + Colores.ANSI_YELLOW +"1. Iniciar sesion\n"
+		        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW 
+		        		+ "1. Iniciar sesion\n"
 		                + "2. Gestion de incidencias\n"
-		                + "3. Salir" + Colores.ANSI_RESET);
+		                + "3. Salir"
+		                + Colores.ANSI_RESET);
 
 		        opcion = sc.nextLine().toLowerCase();
 
@@ -49,8 +50,10 @@ public class GestionadorUsuarios {
 		                    usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
 		                } catch (NullPointerException excepcion) {
-		                    System.err.println("Error: Null pointer exception.");
-		                }
+		                    System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
+						} catch (Exception excepcion) {
+							System.err.println("Ha ocurrido un error. Intentalo de nuevo.");
+						}
 
 		                break;
 		                
@@ -283,7 +286,6 @@ public class GestionadorUsuarios {
 				return listaDeTareas.get(0);
 			}
 	
-			// Si no hay tareas, pos error
 			return null;
 		}
 		
@@ -293,7 +295,7 @@ public class GestionadorUsuarios {
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
         
         if (alumnos.isEmpty()) {
-            System.err.println("No hay alumnos para mostrar estadísticas.");
+            System.err.println("No hay alumnos para mostrar estadisticas.");
             return;
         }
         
@@ -338,6 +340,7 @@ public class GestionadorUsuarios {
 	
 	// Consultar la tarea pendiente del alumno
     public void consultarTareasPendientes(Alumno alumno) {
+    	
         ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
 
         if (tareasAsignadas.isEmpty()) {
@@ -363,7 +366,7 @@ public class GestionadorUsuarios {
                 System.out.println((i + 1) + ". Tipo: " + tareasAsignadas.get(i).getTipo());
             }
 
-            System.out.print("Seleccione el número de la tarea que va a entregar: ");
+            System.out.print("Seleccione el numero de la tarea que va a entregar: ");
             int numeroTarea = sc.nextInt();
             sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
             
@@ -371,7 +374,7 @@ public class GestionadorUsuarios {
                 Tarea tareaEntregada = tareasAsignadas.remove(numeroTarea - 1);
                 System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
             } else {
-                System.err.println("Numero de tarea no válido.");
+                System.err.println("Numero de tarea no valido.");
             }
         }
     }
@@ -382,7 +385,7 @@ public class GestionadorUsuarios {
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
 
 		for (Alumno alumno : alumnos) {
-			System.out.println("Nombre: " + alumno.getNombre() + "/ Nota: " + alumno.getNota());
+			System.out.println("Nombre: " + alumno.getNombre() + " / Nota: " + alumno.getNota());
 		}
 		
     }
@@ -413,7 +416,6 @@ public class GestionadorUsuarios {
 			System.err.println("Numero de alumno no valido.");
 		}
     	
-
     }
     
     // Agregar una nueva tarea del tipo que se quiera
