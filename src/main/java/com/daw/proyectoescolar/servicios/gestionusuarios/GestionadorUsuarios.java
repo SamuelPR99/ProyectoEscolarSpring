@@ -183,6 +183,15 @@ public class GestionadorUsuarios {
             System.out.println("Introduce tu nueva contraseña:");
             String nuevaContraseña = sc.nextLine();
             
+            // Validar la contraseña
+			while (!validarContraseña(nuevaContraseña)) {
+
+				System.err.println("Contraseña no valida. Intentalo de nuevo: ");
+				System.out.print("Introduce tu nueva contraseña: ");
+				nuevaContraseña = sc.nextLine();
+
+			}
+            
             usuario.setContraseña(nuevaContraseña);
             System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
         
