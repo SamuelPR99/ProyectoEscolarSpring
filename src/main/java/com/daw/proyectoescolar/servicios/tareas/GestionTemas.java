@@ -1,9 +1,17 @@
-package com.daw.proyectoescolar.repositorio;
+package com.daw.proyectoescolar.servicios.tareas;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.Temas;
+import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.ListaDeTemas;
+import com.daw.proyectoescolar.repositorio.Tema1;
+import com.daw.proyectoescolar.repositorio.Tema2;
+import com.daw.proyectoescolar.repositorio.Tema3;
+import com.daw.proyectoescolar.repositorio.Tema4;
+import com.daw.proyectoescolar.repositorio.Tema5;
+import com.daw.proyectoescolar.repositorio.Tema6;
 
 public class GestionTemas {
 	
