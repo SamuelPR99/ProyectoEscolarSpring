@@ -76,8 +76,12 @@ public class GestionDeIncidencias {
 	
 	do {
 	
-		System.out.println("¿Qué tipo de incidencia quieres añadir?");
-		System.out.println("\n1 - Incidencia de alumno\n2 - Incidencia de profesor\n3 - Incidencia de aplicacion\n4 - Volver");
+		System.out.println("¿Que tipo de incidencia quieres añadir?\n" 
+		+ "1 - Incidencia de alumno\n"
+		+ "2 - Incidencia de profesor\n"
+		+ "3 - Incidencia de aplicacion\n"
+		+ "4 - Volver");
+		
 		opcion = sc.nextLine().toLowerCase();
 		
 		switch (opcion) {
