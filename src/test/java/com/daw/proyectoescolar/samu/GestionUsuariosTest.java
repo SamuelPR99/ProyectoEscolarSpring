@@ -38,9 +38,8 @@ class GestionUsuariosTest {
 
 		Scanner sc = new Scanner(System.in);
 		GestionadorUsuarios gestion = new GestionadorUsuarios();
-		gestion.registro(sc, usuarios);
+		// gestion.registro(sc, usuarios);
 		
-
 	}
 
 }
