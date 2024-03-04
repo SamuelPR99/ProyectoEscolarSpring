@@ -1,21 +1,30 @@
-package com.daw.proyectoescolar.repositorio;
+package com.daw.proyectoescolar.servicios.tareas;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.Temas;
+import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.ListaDeTemas;
+import com.daw.proyectoescolar.repositorio.Tema1;
+import com.daw.proyectoescolar.repositorio.Tema2;
+import com.daw.proyectoescolar.repositorio.Tema3;
+import com.daw.proyectoescolar.repositorio.Tema4;
+import com.daw.proyectoescolar.repositorio.Tema5;
+import com.daw.proyectoescolar.repositorio.Tema6;
 
 public class GestionTemas {
-	protected static Scanner sc;
+	
 	protected static ListaDeTemas gestion;
 	
 	public void menuTemas (Scanner sc) {
+		
 		gestion = new ListaDeTemas();
 		gestion.temasIniciados();
 		
 		Temas tema = null;
 		
-		System.out.println(Colores.ANSI_PURPLE + Colores.ANSI_UNDERLINE + "\n¿Que tipo de tema quieres?:\n" + Colores.ANSI_RESET + Colores.ANSI_PURPLE
+		System.out.println(Colores.ANSI_PURPLE + Colores.ANSI_UNDERLINE + "\n¿Que tema quieres?:\n" + Colores.ANSI_RESET + Colores.ANSI_PURPLE
 		+ "Tema 1\n" 
 		+ "Tema 2\n" 
 		+ "Tema 3\n" 
@@ -60,9 +69,14 @@ public class GestionTemas {
 		
 	}
 		
+	private static void recorroArray(Temas tema) {
 		
-		public static void recorroArray(Temas tema) {
+		ArrayList<Temas> ListaDeTemas = gestion.getListaDeTemas();
+		
+		for(int i =0;i<ListaDeTemas.size();i++) {
+			Temas c = ListaDeTemas.get(i);
 			
+<<<<<<< HEAD:src/main/java/com/daw/proyectoescolar/repositorio/GestionTemas.java
 			ArrayList<Temas> ListaDeTemas = gestion.getListaDeTemas();
 			
 			for(int i =0;i<ListaDeTemas.size();i++) {
@@ -72,10 +86,17 @@ public class GestionTemas {
 					System.out.println("\nNombre: "+ c.getNombre() 
 					+ "\nDescripcion: " + c.getDescripcion() 
 					+ "\nContenido: "+ c.getContenidoTarea() + "\n");
+=======
+			if (c.getClass() == tema.getClass()) {  //mirar mal esto que es importante
+				System.out.println("\nNombre: "+ c.getNombre() 
+				+ "\nDescripcion: " + c.getDescripcion() 
+				+ "\nContenido: "+ c.getContenidoTarea() + "\n");
+>>>>>>> dbe09d5db0e32f8400d35f723c89818b96636afe:src/main/java/com/daw/proyectoescolar/servicios/tareas/GestionTemas.java
 					
-				}
-				
 			}
+				
+		}
 
 	}
+	
 }
