@@ -13,8 +13,8 @@ public class Tarea {
 
     // Constructores
     public Tarea() {
+
     }
-    
     public Tarea(String tipo) {
         this.tipo = tipo;
     }
