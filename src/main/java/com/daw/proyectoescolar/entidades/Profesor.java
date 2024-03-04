@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
-import com.daw.proyectoescolar.repositorio.GestionTemas;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
+import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
 
 public class Profesor extends UsuarioBase {
 	

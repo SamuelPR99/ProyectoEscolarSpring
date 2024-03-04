@@ -17,6 +17,7 @@ public class GestionadorUsuarios {
  
 	 public GestionadorUsuarios() {}
 	 
+	 // Iniciar el menu principal
 	 public void iniciar(Scanner sc) {
 		 
 		    ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
@@ -28,10 +29,11 @@ public class GestionadorUsuarios {
 
 		    do {
 
-		        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET
-		                + Colores.ANSI_YELLOW +"1. Iniciar sesion\n"
+		        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW 
+		        		+ "1. Iniciar sesion\n"
 		                + "2. Gestion de incidencias\n"
-		                + "3. Salir" + Colores.ANSI_RESET);
+		                + "3. Salir"
+		                + Colores.ANSI_RESET);
 
 		        opcion = sc.nextLine().toLowerCase();
 
@@ -49,8 +51,10 @@ public class GestionadorUsuarios {
 		                    usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
 		                } catch (NullPointerException excepcion) {
-		                    System.err.println("Error: Null pointer exception.");
-		                }
+		                    System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
+						} catch (Exception excepcion) {
+							System.err.println("Ha ocurrido un error. Intentalo de nuevo.");
+						}
 
 		                break;
 		                
@@ -72,6 +76,7 @@ public class GestionadorUsuarios {
 
 		}
  
+	 // Iniciar sesion
 	 public UsuarioBase login(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 
 		    System.out.println("Introduce tu nombre de usuario:");
@@ -89,6 +94,7 @@ public class GestionadorUsuarios {
 		    return null;
 		}
 	
+	// Registro de un nuevo usuario
 	public void registro(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 		
 		System.out.print("Introduzca su nombre: ");
@@ -149,6 +155,7 @@ public class GestionadorUsuarios {
         
 	}
 	
+	// Borrar un usuario
 	public void borrarUsuario(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 		
 		System.out.println("Introduce el nombre de usuario que quieres borrar:");
@@ -163,6 +170,7 @@ public class GestionadorUsuarios {
         }
 	}
     
+	// Mostrar los usuarios registrados
 	public void mostrarUsuarios(ArrayList<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
@@ -175,16 +183,27 @@ public class GestionadorUsuarios {
 	
 	}
 	
+	// Cambiar la contraseña
 	public void cambiarContraseña(Scanner sc, UsuarioBase usuario) {
 		    
             System.out.println("Introduce tu nueva contraseña:");
             String nuevaContraseña = sc.nextLine();
+            
+            // Validar la contraseña
+			while (!validarContraseña(nuevaContraseña)) {
+
+				System.err.println("Contraseña no valida. Intentalo de nuevo: ");
+				System.out.print("Introduce tu nueva contraseña: ");
+				nuevaContraseña = sc.nextLine();
+
+			}
             
             usuario.setContraseña(nuevaContraseña);
             System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
         
     }
 	
+	// Validar el DNI
 	private boolean validarDNI(String dni) {
 	    	
 			if (dni.length() == 9) {
@@ -202,7 +221,8 @@ public class GestionadorUsuarios {
 			}
 	        return false;
 	    }
-
+	
+	// Validar el nombre del usuario
     private boolean validarNombreUsuario(String usuario) {
     	
 		if (usuario.length() >= 3) {
@@ -223,6 +243,7 @@ public class GestionadorUsuarios {
     
      }
     
+    // Crear un ArrayList de usuarios por defecto y los usuarios registrados
     public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
 
         // Inicialización del ArrayList de usuarios
@@ -283,7 +304,6 @@ public class GestionadorUsuarios {
 				return listaDeTareas.get(0);
 			}
 	
-			// Si no hay tareas, pos error
 			return null;
 		}
 		
@@ -293,7 +313,7 @@ public class GestionadorUsuarios {
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
         
         if (alumnos.isEmpty()) {
-            System.err.println("No hay alumnos para mostrar estadísticas.");
+            System.err.println("No hay alumnos para mostrar estadisticas.");
             return;
         }
         
@@ -338,6 +358,7 @@ public class GestionadorUsuarios {
 	
 	// Consultar la tarea pendiente del alumno
     public void consultarTareasPendientes(Alumno alumno) {
+    	
         ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
 
         if (tareasAsignadas.isEmpty()) {
@@ -363,7 +384,7 @@ public class GestionadorUsuarios {
                 System.out.println((i + 1) + ". Tipo: " + tareasAsignadas.get(i).getTipo());
             }
 
-            System.out.print("Seleccione el número de la tarea que va a entregar: ");
+            System.out.print("Seleccione el numero de la tarea que va a entregar: ");
             int numeroTarea = sc.nextInt();
             sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
             
@@ -371,7 +392,7 @@ public class GestionadorUsuarios {
                 Tarea tareaEntregada = tareasAsignadas.remove(numeroTarea - 1);
                 System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
             } else {
-                System.err.println("Numero de tarea no válido.");
+                System.err.println("Numero de tarea no valido.");
             }
         }
     }
@@ -382,7 +403,7 @@ public class GestionadorUsuarios {
 		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
 
 		for (Alumno alumno : alumnos) {
-			System.out.println("Nombre: " + alumno.getNombre() + "/ Nota: " + alumno.getNota());
+			System.out.println("Nombre: " + alumno.getNombre() + " / Nota: " + alumno.getNota());
 		}
 		
     }
@@ -413,7 +434,6 @@ public class GestionadorUsuarios {
 			System.err.println("Numero de alumno no valido.");
 		}
     	
-
     }
     
     // Agregar una nueva tarea del tipo que se quiera
