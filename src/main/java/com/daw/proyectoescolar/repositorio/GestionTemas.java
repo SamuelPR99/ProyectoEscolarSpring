@@ -68,7 +68,7 @@ public class GestionTemas {
 			for(int i =0;i<ListaDeTemas.size();i++) {
 				Temas c = ListaDeTemas.get(i);
 				
-				if (c.getClass() == tema.getClass()) {  //mirar mal esto que es importante
+				if (c.getClass() == tema.getClass()) {  
 					System.out.println("\nNombre: "+ c.getNombre() 
 					+ "\nDescripcion: " + c.getDescripcion() 
 					+ "\nContenido: "+ c.getContenidoTarea() + "\n");

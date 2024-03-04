@@ -12,7 +12,7 @@ public class Tarea {
     
 
     // Constructores
-    public Tarea() {
+    public Tarea() {__
     }
     
     public Tarea(String tipo) {
