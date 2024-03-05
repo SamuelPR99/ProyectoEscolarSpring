@@ -1,16 +1,12 @@
 package com.daw.proyectoescolar.hugo;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.servicios.incidencias.IncidenciaAlumno;
-import com.daw.proyectoescolar.servicios.incidencias.IncidenciaProfesor;
-import com.daw.proyectoescolar.servicios.incidencias.IncidenciaAplicacion;
-import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
-import com.daw.proyectoescolar.servicios.incidencias.Incidencias;
+import com.daw.proyectoescolar.servicios.incidencias.*;
 
 class IncidenciasTest {
 
@@ -30,7 +26,7 @@ class IncidenciasTest {
 		
 		assert(incidenciaAlumno.getIncidencia().equals(incidenciaAlumno));
 		
-		fail("Zamudio no sabe programar");
+		fail("ERROR");
 		
 	}
 	
@@ -43,7 +39,7 @@ class IncidenciasTest {
 		
 		assert(incidenciaProfesor.getIncidencia().equals(incidenciaProfesor));
 		
-		fail("Zamudio no sabe programar");
+		fail("ERROR");
 		
 	}
 	
@@ -56,7 +52,7 @@ class IncidenciasTest {
 		
 		assert(incidenciaAplicacion.getIncidencia().equals(incidenciaAplicacion));
 		
-		fail("Zamudio no sabe programar");
+		fail("ERROR");
 		
 	}
 	
