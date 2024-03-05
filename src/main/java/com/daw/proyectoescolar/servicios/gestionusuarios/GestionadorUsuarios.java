@@ -92,7 +92,6 @@ public class GestionadorUsuarios {
 	 
 	 public UsuarioBase login(String nombre, String contrasenia, ArrayList<UsuarioBase> usuarios) {
 
-		    
 		    for (UsuarioBase usuario : usuarios) {
 		        if (usuario.getNombre().equals(nombre) && usuario.getContraseña().equals(contrasenia)) {
 		            return usuario;
@@ -103,72 +102,76 @@ public class GestionadorUsuarios {
 		}
 
 	
+	 // Registro de un nuevo usuario
+	 public void registro(Scanner sc, ArrayList<UsuarioBase> usuarios) {
+		 
+		    System.out.print("Introduzca su nombre: ");
+		    String nombre = sc.nextLine();
+		    
+		    // Validar nombre
+		    while (!validarNombreUsuario(nombre)) {
+		        System.err.println("Nombre de usuario no valido. Intentalo de nuevo: ");
+		        System.out.print("Introduzca su nombre: ");
+		        nombre = sc.nextLine();
+		    }
+
+		    System.out.print("Introduzca su DNI: ");
+		    String dni = sc.nextLine();
+		    
+		    // Validar el DNI
+		    while (!validarDNI(dni)) {
+		        System.err.println("DNI no valido. Intentalo de nuevo: ");
+		        System.out.print("Introduzca su DNI: ");
+		        dni = sc.nextLine();
+		    }
+
+		    System.out.print("Introduzca su contraseña: ");
+		    String contraseña = sc.nextLine();
+		    
+		    // Validar la contraseña
+		    while (!validarContraseña(contraseña)) {
+		        System.err.println("Contraseña no valida. Intentalo de nuevo: ");
+		        System.out.print("Introduzca su contraseña: ");
+		        contraseña = sc.nextLine();
+		    }
+
+		    System.out.print("¿Es profesor o alumno?: ");
+		    String tipo = sc.nextLine();
+		    
+		    // Validar el tipo de usuario
+			while (!tipo.equalsIgnoreCase("profesor") && !tipo.equalsIgnoreCase("alumno")) {
+				System.err.println("Tipo de usuario no valido. Intentalo de nuevo: ");
+				System.out.print("¿Es profesor o alumno?: ");
+				tipo = sc.nextLine();
+			}
+
+		  
+		    registro(nombre, dni, contraseña, tipo, usuarios);
+		}
+	
 	// Registro de un nuevo usuario
-	public void registro(Scanner sc, ArrayList<UsuarioBase> usuarios) {
-		
-		System.out.print("Introduzca su nombre: ");
-        String nombre = sc.nextLine();
-        
-        // Validar nombre
-		while (!validarNombreUsuario(nombre)) {
-			
-			System.err.println("Nombre de usuario no valido. Intentalo de nuevo: ");
-			System.out.print("Introduzca su nombre: ");
-			nombre = sc.nextLine();
-			
-		}
-        
-        System.out.print("Introduzca su DNI: ");
-        String dni = sc.nextLine();
-        
-        // Validar el DNI
-        
-		while (!validarDNI(dni)) {
-			
-			System.err.println("DNI no valido. Intentalo de nuevo: ");
-			System.out.print("Introduzca su DNI: ");
-			dni = sc.nextLine();
-			
-		}
-        
-        System.out.print("Introduzca su contraseña: ");
-        String contraseña = sc.nextLine();
-        
-        // Validar la contraseña
-        
-        while (!validarContraseña(contraseña)) {
-        	
-            System.err.println("Contraseña no valida. Intentalo de nuevo: ");
-            System.out.print("Introduzca su contraseña: ");
-            contraseña = sc.nextLine();
-            
-        }
-        
-        System.out.print("¿Es profesor o alumno?: ");
-        String tipo = sc.nextLine();
-        UsuarioBase nuevoUsuario = null;
+	public void registro(String nombre, String dni, String contraseña, String tipo, ArrayList<UsuarioBase> usuarios) {
 
-        // Crear el usuario dependiendo del tipo
-        if (tipo.equalsIgnoreCase("profesor")) {
-        	nuevoUsuario = new Profesor(nombre, contraseña, dni);
-		} else if (tipo.equalsIgnoreCase("alumno")) {
-			nuevoUsuario = new Alumno(nombre, contraseña, dni, 0.0);
-		} else {
-			System.err.println("Tipo de usuario no valido. Intentalo de nuevo.");
-		}
-        
-        // Agregar el nuevo usuario al ArrayList de usuarios
-        usuarios.add(nuevoUsuario);
+	    UsuarioBase nuevoUsuario = null;
 
-        System.out.println(Colores.ANSI_GREEN + "Usuario creado correctamente." + Colores.ANSI_RESET);
-        
+	    // Crear el usuario dependiendo del tipo
+	    if (tipo.equalsIgnoreCase("profesor")) {
+	        nuevoUsuario = new Profesor(nombre, contraseña, dni);
+	    } else if (tipo.equalsIgnoreCase("alumno")) {
+	        nuevoUsuario = new Alumno(nombre, contraseña, dni, 0.0);
+	    } else {
+	        System.out.println("Tipo de usuario no valido.");
+	        return;
+	    }
+
+	    // Agregar el nuevo usuario al ArrayList de usuarios
+	    usuarios.add(nuevoUsuario);
+
+	    System.out.println(Colores.ANSI_GREEN + "Usuario creado correctamente." + Colores.ANSI_RESET);
 	}
 	
 	// Borrar un usuario
-	public void borrarUsuario(Scanner sc, ArrayList<UsuarioBase> usuarios) {
-		
-		System.out.println("Introduce el nombre de usuario que quieres borrar:");
-		String nombre = sc.nextLine();
+	public void borrarUsuario(String nombre, ArrayList<UsuarioBase> usuarios) {
 		
 		for (UsuarioBase usuario : usuarios) {
 			if (usuario.getNombre().equals(nombre)) {
@@ -177,6 +180,15 @@ public class GestionadorUsuarios {
                 return;
             }
         }
+	}
+	
+	// Borrar un usuario utilizando Scanner
+	public void borrarUsuario(Scanner sc, ArrayList<UsuarioBase> usuarios) {
+		
+	    System.out.println("Introduce el nombre de usuario que quieres borrar:");
+	    String nombre = sc.nextLine();
+	    borrarUsuario(nombre, usuarios);
+	    
 	}
     
 	// Mostrar los usuarios registrados
@@ -195,22 +207,26 @@ public class GestionadorUsuarios {
 	// Cambiar la contraseña
 	public void cambiarContraseña(Scanner sc, UsuarioBase usuario) {
 		    
-            System.out.println("Introduce tu nueva contraseña:");
-            String nuevaContraseña = sc.nextLine();
-            
-            // Validar la contraseña
-			while (!validarContraseña(nuevaContraseña)) {
+		System.out.println("Introduce tu nueva contraseña:");
+	    String nuevaContraseña = sc.nextLine();
 
-				System.err.println("Contraseña no valida. Intentalo de nuevo: ");
-				System.out.print("Introduce tu nueva contraseña: ");
-				nuevaContraseña = sc.nextLine();
+	    // Validar la contraseña
+	    while (!validarContraseña(nuevaContraseña)) {
+	        System.err.println("Contraseña no valida. Intentalo de nuevo: ");
+	        System.out.print("Introduce tu nueva contraseña: ");
+	        nuevaContraseña = sc.nextLine();
+	    }
 
-			}
-            
-            usuario.setContraseña(nuevaContraseña);
-            System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
+	    cambiarContraseña(nuevaContraseña, usuario);
         
     }
+	
+	public void cambiarContraseña(String nuevaContraseña, UsuarioBase usuario) {
+		
+		usuario.setContraseña(nuevaContraseña);
+	    System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
+	    
+	}
 	
 	// Validar el DNI
 	private boolean validarDNI(String dni) {
@@ -351,7 +367,7 @@ public class GestionadorUsuarios {
     }
 	
 	// Obtener los alumnos del ArrayList de usuarios
-	private ArrayList<Alumno> obtenerAlumnos(ArrayList<UsuarioBase> usuarios) {
+	public ArrayList<Alumno> obtenerAlumnos(ArrayList<UsuarioBase> usuarios) {
 		    
             ArrayList<Alumno> alumnos = new ArrayList<>();
 
