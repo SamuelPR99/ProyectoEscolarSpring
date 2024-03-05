@@ -131,6 +131,7 @@ class GestionUsuariosTest {
         gestion.registro("Alumno2", "12345678B", "contraseña2", "alumno", usuarios);
         
         assertDoesNotThrow(() -> gestion.verEstadisticas(usuarios));
+        
     }
     
     @Test
@@ -142,6 +143,7 @@ class GestionUsuariosTest {
         alumnos.add(alumno);
         
         assertDoesNotThrow(() -> gestion.consultarTareasPendientes(alumno));
+        
     }
     
 }
