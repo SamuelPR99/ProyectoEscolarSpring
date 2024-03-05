@@ -2,10 +2,9 @@ package com.daw.proyectoescolar.samu;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 import java.util.ArrayList;
 
-import org.assertj.core.api.Assertions.*;
+import  org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,9 @@ import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
-import com.daw.proyectoescolar.servicios.tareas.Tarea;
+import com.daw.proyectoescolar.entidades.Tarea;
+@SuppressWarnings("unused")
+
 
 class GestionUsuariosTest {
 	
@@ -125,23 +126,21 @@ class GestionUsuariosTest {
     
     @Test
     public void testVerEstadisticas() {
-        // Agregar algunos alumnos al ArrayList
+    	
         gestion.registro("Alumno1", "12345678A", "contraseña1", "alumno", usuarios);
         gestion.registro("Alumno2", "12345678B", "contraseña2", "alumno", usuarios);
         
-        // Comprobar que se muestran correctamente las estadísticas
         assertDoesNotThrow(() -> gestion.verEstadisticas(usuarios));
     }
     
     @Test
     public void testConsultarTareasPendientes() {
-        // Agregar un alumno con tareas pendientes
+    	
         Alumno alumno = new Alumno("Alumno1", "contraseña", "12345678A", 0.0);
-        alumno.agregarTarea(new Tarea("Tarea1"));
-        alumno.agregarTarea(new Tarea("Tarea2"));
+        alumno.agregarTarea(new Tarea("Tarea Avanzada"));
+        alumno.agregarTarea(new Tarea("Tarea Basica"));
         alumnos.add(alumno);
         
-        // Comprobar que se muestran correctamente las tareas pendientes
         assertDoesNotThrow(() -> gestion.consultarTareasPendientes(alumno));
     }
     
