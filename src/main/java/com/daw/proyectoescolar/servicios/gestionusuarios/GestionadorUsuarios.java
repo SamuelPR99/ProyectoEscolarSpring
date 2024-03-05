@@ -85,14 +85,23 @@ public class GestionadorUsuarios {
 		    System.out.println("Introduce tu contraseña:");
 		    String contraseña = sc.nextLine();
 
+		    
+		    return login(nombre, contraseña, usuarios);
+		}
+	 
+	 
+	 public UsuarioBase login(String nombre, String contrasenia, ArrayList<UsuarioBase> usuarios) {
+
+		    
 		    for (UsuarioBase usuario : usuarios) {
-		        if (usuario.getNombre().equals(nombre) && usuario.getContraseña().equals(contraseña)) {
+		        if (usuario.getNombre().equals(nombre) && usuario.getContraseña().equals(contrasenia)) {
 		            return usuario;
 		        }
 		    }
 
 		    return null;
 		}
+
 	
 	// Registro de un nuevo usuario
 	public void registro(Scanner sc, ArrayList<UsuarioBase> usuarios) {
