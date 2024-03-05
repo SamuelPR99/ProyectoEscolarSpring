@@ -2,31 +2,84 @@ package com.daw.proyectoescolar.hugo;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.servicios.incidencias.*;
 
+import java.util.ArrayList;
+
 class IncidenciasTest {
 
-	static Scanner sc = new Scanner(System.in);
+	private ArrayList<Incidencias> listaIncidencias;
+	private GestionDeIncidencias gestionDeIncidencias;
 	
-	@Test
-	void test() {
-		fail("Not yet implemented");
+	@BeforeEach
+	public void setUp() {
+		
+		gestionDeIncidencias = new GestionDeIncidencias();
+		listaIncidencias = new ArrayList<Incidencias>();
+		
+		Incidencias inciAlumno1 = new IncidenciaAlumno("Samu me ha pegao");
+		Incidencias inciAlumno2 = new IncidenciaAlumno("Samu me ha pegao otra ve");
+		listaIncidencias.add(inciAlumno1);
+		listaIncidencias.add(inciAlumno2);
+		
+		Incidencias inciProfesor1 = new IncidenciaProfesor("Guillamón me tiene manía");
+		Incidencias inciProfesor2 = new IncidenciaProfesor("Guillamón me tiene manía, el retorno");
+		listaIncidencias.add(inciProfesor1);
+		listaIncidencias.add(inciProfesor2);
+		
+		Incidencias inciApp1 = new IncidenciaAplicacion("La aplicación me crasheó intentando iniciar sesión");
+		Incidencias inciApp2 = new IncidenciaAplicacion("La aplicación me crasheó intentando borrar un usuario");
+		listaIncidencias.add(inciApp1);
+		listaIncidencias.add(inciApp2);
+		
+		
+		
 	}
 
 	@Test
+	void ComprobarTamañoArrayList() {
+		
+		// He añadido 6 incidencias al ArrayList desde el BeforeEach, por lo que tendría 5 posiciones.
+		
+		assertEquals(5, listaIncidencias.size());
+		
+	}
+	
+	@Test
+	void ComprobarAñadirIncidencia() {
+		
+		Incidencias inciAlumnoPrueba = new IncidenciaAlumno("Esto es un test.");
+		listaIncidencias.add(inciAlumnoPrueba);
+		
+		assertEquals(6, listaIncidencias.size());
+		
+	}
+	
+	@Test
+	void testListarIncidenciaAlumno() {
+		
+		for(Incidencias incidencia : listaIncidencias) {
+			if(incidencia.getTipoIncidencia().equalsIgnoreCase("Alumno")) {
+			
+			
+				
+			}
+			
+		} 
+		
+		
+		
+	}
+	
+	@Test
 	void testComprobarIncidenciaAlumno() {
 		
-		Incidencias incidenciaAlumno = new IncidenciaAlumno();
 		
-		incidenciaAlumno.setIncidencia(sc.nextLine());
-		
-		assert(incidenciaAlumno.getIncidencia().equals(incidenciaAlumno));
-		
-		fail("ERROR");
 		
 	}
 	
@@ -35,7 +88,7 @@ class IncidenciasTest {
 		
 		Incidencias incidenciaProfesor = new IncidenciaProfesor();
 		
-		incidenciaProfesor.setIncidencia(sc.nextLine());
+		incidenciaProfesor.setIncidencia();
 		
 		assert(incidenciaProfesor.getIncidencia().equals(incidenciaProfesor));
 		
@@ -48,7 +101,7 @@ class IncidenciasTest {
 		
 		Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
 		
-		incidenciaAplicacion.setIncidencia(sc.nextLine());
+		incidenciaAplicacion.setIncidencia();
 		
 		assert(incidenciaAplicacion.getIncidencia().equals(incidenciaAplicacion));
 		

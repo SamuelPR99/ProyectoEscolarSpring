@@ -9,6 +9,7 @@ public class GestionDeIncidencias {
 	
 	// ATRIBUTOS DE LA CLASE \\
 
+	ArrayList<Incidencias> incidenciasBase = new ArrayList<Incidencias>();
 	ArrayList<Incidencias> listaIncidencias = new ArrayList<Incidencias>();
 	
 	// CONSTRUCTOREES \\
