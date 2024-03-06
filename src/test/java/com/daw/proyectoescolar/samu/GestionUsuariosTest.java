@@ -2,6 +2,7 @@ package com.daw.proyectoescolar.samu;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.util.ArrayList;
 
 import  org.assertj.core.api.Assertions.*;
@@ -60,8 +61,8 @@ class GestionUsuariosTest {
     	
         UsuarioBase usuario = gestion.login("Guillamon", "pass1", usuarios);
         
-        Assertions.assertNotNull(usuario);
-        Assertions.assertEquals("Profesor", usuario.getTipoUsuario());
+        assertNotNull(usuario);
+        assertEquals("Profesor", usuario.getTipoUsuario());
         
     }
 
@@ -69,7 +70,7 @@ class GestionUsuariosTest {
     public void testLoginUsuarioNoRegistrado() {
     	
         UsuarioBase usuario = gestion.login("test-usuario", "test-contraseña", usuarios);
-        Assertions.assertNull(usuario);
+        assertNull(usuario);
         
     }
     
@@ -87,6 +88,7 @@ class GestionUsuariosTest {
 
         assertNotNull(usuarioRegistrado);
         assertEquals("Alumno", usuarioRegistrado.getTipoUsuario());
+        
     }
     
     @Test
@@ -100,7 +102,7 @@ class GestionUsuariosTest {
         assertNull(usuarioBorrado);
         
     }
-    
+
     @Test
     public void testModificarContraseña() {
     	
@@ -111,6 +113,16 @@ class GestionUsuariosTest {
 
         UsuarioBase usuarioModificado = gestion.login("Guillamon", "NuevaContraseña", usuarios);
         assertNotNull(usuarioModificado);
+        
+    }
+    
+    @Test
+    public void testCambiarContraseñaUsuarioNoExistente() {
+    	
+        UsuarioBase usuario = new Profesor("UsuarioConContraseña", "contraseña", "12345678A");
+        gestion.cambiarContraseña("NuevaContraseña", usuario);
+        UsuarioBase usuarioModificado = gestion.login("UsuarioConContraseña", "NuevaContraseña", usuarios);
+        assertNull(usuarioModificado);
         
     }
         
