@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.paula;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,11 +12,14 @@ import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
+import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
+import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
 
 class TareasTest {
 
 	protected  ArrayList<UsuarioBase> usuarios;
 	protected ArrayList<Alumno> alumnos;
+	protected String menuInput="8";
 	//1
 	@Test
 	void testTareaBasica() {
@@ -73,12 +77,22 @@ class TareasTest {
 		}
 		
 	//7
-		@Test
-		void test7() {
-			//
-			
-		}
-	//8
+		
+
+	//testVerMenuProfesor
+	 @Test
+	    public void testVerMenu() {
+	        String input = menuInput;
+	        // Simula la entrada del usuario
+	        ByteArrayInputStream inContent = new ByteArrayInputStream(input.getBytes());
+	        System.setIn(inContent);
+
+	        // Crea instancias de las clases necesarias
+	        GestionadorUsuarios gestorUsuarios = new GestionadorUsuarios();
+	        GestionTemas gestorTemas = new GestionTemas();
+	 }
+	
+	//8 
 		@Test
 		void test8() {
 			//
