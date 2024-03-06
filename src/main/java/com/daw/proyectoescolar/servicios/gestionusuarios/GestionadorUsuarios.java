@@ -300,7 +300,7 @@ public class GestionadorUsuarios {
     /*---------------------------------------------------------------------------------------------------------*/
 	
     // Recomendar una tarea al alumno
-	private Tarea recomendarTarea(Alumno alumno) {
+	public Tarea recomendarTarea(Alumno alumno) {
 			
 			double nota = alumno.getNota();
 			String tipoTarea;
@@ -413,12 +413,18 @@ public class GestionadorUsuarios {
             int numeroTarea = sc.nextInt();
             sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
             
-            if (numeroTarea >= 1 && numeroTarea <= tareasAsignadas.size()) {
-                Tarea tareaEntregada = tareasAsignadas.remove(numeroTarea - 1);
-                System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
-            } else {
-                System.err.println("Numero de tarea no valido.");
-            }
+            marcarTareaCompletada(alumno, numeroTarea - 1);
+        }
+    }
+
+    public void marcarTareaCompletada(Alumno alumno, int indiceTarea) {
+        ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
+
+        if (indiceTarea >= 0 && indiceTarea < tareasAsignadas.size()) {
+            Tarea tareaEntregada = tareasAsignadas.remove(indiceTarea);
+            System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
+        } else {
+            System.err.println("Numero de tarea no valido.");
         }
     }
     
