@@ -16,8 +16,6 @@ import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
-
-
 class GestionUsuariosTest {
 	
 	private GestionadorUsuarios gestion;
