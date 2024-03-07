@@ -1,5 +1,6 @@
 package com.daw.proyectoescolar.paula;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -14,8 +15,10 @@ import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Temas;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.ListaDeTemas;
+import com.daw.proyectoescolar.repositorio.Tema1;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
+import com.daw.proyectoescolar.servicios.tareas.Tema;
 
 
 class TareasTest {
@@ -70,8 +73,8 @@ class TareasTest {
 		@Test
 	    public void testConstructorListaDeTemas() {
 	        ArrayList<Temas> listaDeTemas = new ArrayList<>();
-	        listaDeTemas.add(new Temas("Matemáticas", "Este tema cubre varios conceptos matemáticos.", "Contenido de tarea 1"));
-	        listaDeTemas.add(new Temas("Física", "Este tema cubre varios conceptos de física.", "Contenido de tarea 2"));
+	        listaDeTemas.add(new Tema("Matemáticas", "Este tema cubre varios conceptos matemáticos.", null, "Contenido de tarea 1"));
+	        listaDeTemas.add(new Tema("Física", "Este tema cubre varios conceptos de física.", null, "Contenido de tarea 2"));
 
 	        ListaDeTemas lista = new ListaDeTemas(listaDeTemas);
 
@@ -130,7 +133,7 @@ class TareasTest {
 	 }
 	 
 		//8
-	 @Test
+	 	@Test
 	    public void testMostrarTareaValida() {
 	        ArrayList<Tarea> tareas = new ArrayList<>();
 	        assertEquals("Tarea 1", "Hacer algo");
@@ -164,7 +167,7 @@ class TareasTest {
 	//10
 	 @Test
 	    public void testObtenerTodasLasTareas() {
-	        ArrayList<Tareas> tareas = Tareas.obtenerTodasLasTareas();
+	        ArrayList<Tarea> tareas = Tarea.obtenerTodasLasTareas();
 	        
 	        // Verificar que la lista de tareas no sea nula
 	        assertNotNull(tareas);
@@ -193,7 +196,7 @@ class TareasTest {
 	        String descripcion = "Este tema cubre varios conceptos matemáticos.";
 	        String contenidoTarea = "Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π.";
 
-	        Temas tema = new Temas(nombre, descripcion, contenidoTarea);
+	        Temas tema = new Tema1(nombre, descripcion, contenidoTarea);
 
 	        // Verificar que los valores se establecen correctamente
 	        assertEquals(nombre, tema.getNombre());
@@ -205,7 +208,7 @@ class TareasTest {
 	//12
 	 @Test
 	    public void testGetSetNombre() {
-	        Temas tema = new Temas();
+	        Temas tema = new Tema1();
 	        String nombre = "Matemáticas";
 	        
 	        tema.setNombre(nombre);
@@ -217,7 +220,7 @@ class TareasTest {
 	//13
 	 @Test
 	    public void testGetSetDescripcion() {
-	        Temas tema = new Temas();
+	        Temas tema = new Tema1();
 	        String descripcion = "Este tema cubre varios conceptos matemáticos.";
 	        
 	        tema.setDescripcion(descripcion);
@@ -229,7 +232,7 @@ class TareasTest {
 	//14
 	 @Test
 	    public void testGetSetContenidoTarea() {
-	        Temas tema = new Temas();
+	        Temas tema = new Tema1();
 	        String contenidoTarea = "Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π.";
 	        
 	        tema.setContenidoTarea(contenidoTarea);
