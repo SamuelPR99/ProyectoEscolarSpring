@@ -11,17 +11,12 @@ import org.junit.jupiter.api.Test;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
+import com.daw.proyectoescolar.entidades.Temas;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
+import com.daw.proyectoescolar.repositorio.ListaDeTemas;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
 
-
-
-// generar una libreria que se pueda utilizar en toda la aplicacion, una especie de clase que yo voy a ir llamando desde cada uno de mis metodos
-//escribir log(""), le pase una cadena de texto y yo le pase el archivo
-//estoy saliendo de mi menu alta usuario
-//un log guarda la informacion de cada usuario que entra en la pagina
-//
 
 class TareasTest {
 
@@ -30,11 +25,11 @@ class TareasTest {
 	protected String menuInput="8";
 	GestionadorUsuarios gestorUsuarios = new GestionadorUsuarios();
     GestionTemas gestorTemas = new GestionTemas();
+    protected ArrayList<Tarea> tareas;
 	//1
 	@Test
 	void testTareaBasica() {
-		//si pulsas tema 1, te tiene que aparecer el tema con el nombre y la descripcion y sus tareas
-	//Si la tarea es basica y del tema 1, tiene que coincidir con la descripcion de dicha tarea
+	
 		Tarea tarea = new Tarea("Básica","Tema 1","Descripción de la tarea");
 		 assertEquals("Básica",tarea.getTipo());
 		 assertEquals("Tarea 1", tarea.getNombre());
@@ -45,7 +40,6 @@ class TareasTest {
 		@Test
 		void test2() {
 		
-		//si entras como profesor te tiene que salir su menu
 		Scanner sc= new Scanner(System.in);
 		Profesor profesor= new Profesor();
 		profesor.verMenu(sc, usuarios, alumnos);
@@ -74,17 +68,50 @@ class TareasTest {
 	//5
 		
 		@Test
-		void test5() {
-			//si en el menu de profesor pulsas ver lista de alumnos te tiene q salir la lista de alumnos
-			
-		}
+	    public void testConstructorListaDeTemas() {
+	        ArrayList<Temas> listaDeTemas = new ArrayList<>();
+	        listaDeTemas.add(new Temas("Matemáticas", "Este tema cubre varios conceptos matemáticos.", "Contenido de tarea 1"));
+	        listaDeTemas.add(new Temas("Física", "Este tema cubre varios conceptos de física.", "Contenido de tarea 2"));
+
+	        ListaDeTemas lista = new ListaDeTemas(listaDeTemas);
+
+	        // Verificar que la lista de temas no sea nula
+	        assertNotNull(lista.getListaDeTemas());
+	        
+	        // Verificar que la lista de temas se establece correctamente
+	        assertEquals(listaDeTemas.size(), lista.getListaDeTemas().size());
+	        assertEquals(listaDeTemas.get(0).getNombre(), lista.getListaDeTemas().get(0).getNombre());
+	        assertEquals(listaDeTemas.get(1).getDescripcion(), lista.getListaDeTemas().get(1).getDescripcion());
+	        assertEquals(listaDeTemas.get(1).getContenidoTarea(), lista.getListaDeTemas().get(1).getContenidoTarea());
+	    }
+	
 	//6
-		
 		@Test
-		void test6() {
-			//si entras en ver el listado de temas en alumnos te tiene que salir el listado de temas
-			
-		}
+	    public void testTemasIniciados() {
+	        ListaDeTemas listaDeTemas = new ListaDeTemas();
+	        listaDeTemas.temasIniciados();
+
+	        ArrayList<Temas> temas = listaDeTemas.getListaDeTemas();
+
+	        // Verificar que la lista de temas no sea nula
+	        assertEquals(12, temas.size()); // Comprueba si se han añadido las 12 tareas
+
+	        // Verificar algunas tareas específicas
+	        assertEquals("Teoría de la Probabilidad Estocástica", temas.get(0).getNombre());
+	        assertEquals("Basica: Tarea 1: Simulación de Monte Carlo 🡺 Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π.", temas.get(0).getContenidoTarea());
+
+	        assertEquals("Teoría de Números Avanzada", temas.get(3).getNombre());
+	        assertEquals("Intermedia: Tarea 2: Congruencia de Euler y Criptografía RSA 🡺 Investigar y demostrar la congruencia de Euler y su aplicación en criptografía RSA.", temas.get(3).getContenidoTarea());
+
+	        assertEquals("Análisis Funcional", temas.get(6).getNombre());
+	        assertEquals("Avanzada: Tarea 3: Teorema de Representación de Riesz en Espacios de Hilbert 🡺 Investigar y demostrar el teorema de representación de Riesz sobre espacios de Hilbert.", temas.get(6).getContenidoTarea());
+
+	        assertEquals("Topología Algebraica", temas.get(9).getNombre());
+	        assertEquals("Intermedia: Tarea 2:Teorema de la Invariancia de la Dimensión y Propiedades Topológicas 🡺 Investigar y aplicar el teorema de la invariancia de la dimensión para demostrar propiedades topológicas de variedades.", temas.get(9).getContenidoTarea());
+
+	        assertEquals("Teoría de la Aproximación y Funciones Especiales", temas.get(11).getNombre());
+	        assertEquals("AvanzadaTarea 3: Conceptos básicos de álgebra 🡺 Repasar conceptos fundamentales de álgebra como ecuaciones lineales y factorización.", temas.get(11).getContenidoTarea());
+	    }
 		
 	//7
 		
@@ -101,70 +128,115 @@ class TareasTest {
 	        // Crea instancias de las clases necesarias
 	        
 	 }
-	
-	//8 
+	 
+		//8
 	 @Test
-	    public void testMostrarRecomendacion() {
-	        // Crear una instancia de la clase que contiene el método mostrarRecomendacion
-	        Tarea tarea = new Tarea("Tarea de prueba", "Realizar pruebas unitarias");
+	    public void testMostrarTareaValida() {
+	        ArrayList<Tarea> tareas = new ArrayList<>();
+	        assertEquals("Tarea 1", "Hacer algo");
+	        assertEquals("Tarea 2", "Hacer otra cosa");
+	        
+	        // Seleccionamos la tarea número 1
+	        Tarea tareaSeleccionada = mostrarTarea.(tareas, 1);
+	       // Tarea tareaseleccionada = mostrarTarea.mostradorTarea(tareas ,1);
+	        // Verificamos que la tarea seleccionada sea la tarea número 1
+	        assertEquals("Tarea 1", tareaSeleccionada.getNombre());
+	        assertEquals("Hacer algo", tareaSeleccionada.getDescripcion());
+	    }
+	
+	 
 
-	        // Llamar al método que se va a probar
-	        tarea.mostrarRecomendacion();
-
-	        // Capturar la salida del método
-	        String output = outputContent.toString().trim();
-
-	        // Definir la salida esperada
-	        String expectedOutput = "Recomendación: Tarea Tarea de prueba\nDescripción: Realizar pruebas unitarias";
-
-	        // Afirmar que la salida esperada es igual a la salida del método
-	        Assertions.assertEquals(expectedOutput, output);
+	
+	//9 
+	 @Test
+	    public void testMostrarTareaInvalida() {
+	        ArrayList<Tarea> tareas = new ArrayList<>();
+	        assertEquals("Tarea 1", "Hacer algo");
+	        assertEquals("Tarea 2", "Hacer otra cosa");
+	        
+	        
+	        // Verificamos que la tarea seleccionada sea nula
+	        assertEquals(null, tareas);
 	    }
 	
 	
-	//9
-		
-		@Test
-		void test9() {
-		
-		
-		}
-		
+
 	//10
-		@Test
-		void test10() {
-		
-		
-		}
-		
+	 @Test
+	    public void testObtenerTodasLasTareas() {
+	        ArrayList<Tareas> tareas = Tareas.obtenerTodasLasTareas();
+	        
+	        // Verificar que la lista de tareas no sea nula
+	        assertNotNull(tareas);
+	        
+	        // Verificar que la cantidad de tareas es correcta
+	        assertEquals(21, tareas.size());
+	        
+	        // Verificar algunas tareas específicas
+	        assertEquals("Basica", tareas.get(0).getDificultad());
+	        assertEquals("Tarea 1: Simulación de Monte Carlo", tareas.get(0).getTitulo());
+	        assertEquals("Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π.", tareas.get(0).getDescripcion());
+
+	        assertEquals("Intermedia", tareas.get(7).getDificultad());
+	        assertEquals("Tarea 3: Teorema de Representación de Riesz en Espacios de Hilbert", tareas.get(11).getTitulo());
+	        assertEquals("Investigar y demostrar el teorema de representación de Riesz sobre espacios de Hilbert.", tareas.get(11).getDescripcion());
+
+	        assertEquals("Avanzada", tareas.get(20).getDificultad());
+	        assertEquals("Tarea 3: Conceptos básicos de álgebra", tareas.get(20).getTitulo());
+	        assertEquals("Repasar conceptos fundamentales de álgebra como ecuaciones lineales y factorización.", tareas.get(20).getDescripcion());
+	    }
+	 
 	//11
-		@Test
-		void test11() {
-		
-		
-		}
+	 @Test
+	    public void testConstructorTemas() {
+	        String nombre = "Matemáticas";
+	        String descripcion = "Este tema cubre varios conceptos matemáticos.";
+	        String contenidoTarea = "Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π.";
+
+	        Temas tema = new Temas(nombre, descripcion, contenidoTarea);
+
+	        // Verificar que los valores se establecen correctamente
+	        assertEquals(nombre, tema.getNombre());
+	        assertEquals(descripcion, tema.getDescripcion());
+	        assertEquals(contenidoTarea, tema.getContenidoTarea());
+	    }
+	
 		
 	//12
-		
-		@Test
-		void test12() {
-		
-		
-		}
+	 @Test
+	    public void testGetSetNombre() {
+	        Temas tema = new Temas();
+	        String nombre = "Matemáticas";
+	        
+	        tema.setNombre(nombre);
+	        
+	        // Verificar si el método getNombre retorna el nombre correctamente
+	        assertEquals(nombre, tema.getNombre());
+	    }
 		
 	//13
-		@Test
-		void test13() {
-		
-		
-		}
+	 @Test
+	    public void testGetSetDescripcion() {
+	        Temas tema = new Temas();
+	        String descripcion = "Este tema cubre varios conceptos matemáticos.";
+	        
+	        tema.setDescripcion(descripcion);
+	        
+	        // Verificar si el método getDescripcion retorna la descripcion correctamente
+	        assertEquals(descripcion, tema.getDescripcion());
+	    }
 		
 	//14
-		@Test
-		void test14() {
-		
-		
-		}
+	 @Test
+	    public void testGetSetContenidoTarea() {
+	        Temas tema = new Temas();
+	        String contenidoTarea = "Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π.";
+	        
+	        tema.setContenidoTarea(contenidoTarea);
+	        
+	        // Verificar si el método getContenidoTarea retorna el contenidoTarea correctamente
+	        assertEquals(contenidoTarea, tema.getContenidoTarea());
+	    }
 		
 	//15
 		@Test
