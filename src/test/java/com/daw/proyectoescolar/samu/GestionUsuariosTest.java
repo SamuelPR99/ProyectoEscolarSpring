@@ -1,80 +1,82 @@
 package com.daw.proyectoescolar.samu;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 
-import  org.assertj.core.api.Assertions.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
+import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
-import com.daw.proyectoescolar.entidades.Tarea;
-@SuppressWarnings("unused")
-
 
 class GestionUsuariosTest {
 	
 	private GestionadorUsuarios gestion;
     private ArrayList<UsuarioBase> usuarios;
     private ArrayList<Alumno> alumnos;
+    private ArrayList<Tarea> listaDeTareas;
 
     @BeforeEach
     public void setUp() {
         gestion = new GestionadorUsuarios();
         usuarios = GestionadorUsuarios.usuarios(new ArrayList<>());
         alumnos = gestion.obtenerAlumnos(usuarios);
+        listaDeTareas = Tarea.obtenerTodasLasTareas();
     }
     
     @Test
-	public void testCrearAlumno() {
+	public void testCrearAlumno() { //MOD_001
 		
-        Alumno usuario = new Alumno("Pepe", "pass1", "12345678Z", 0.0);
+        Alumno usuario = new Alumno("Pepe", "pass1", "12345678A", 0.0);
         usuarios.add(usuario);
         
         assertEquals("Pepe", usuario.getNombre());
         assertEquals("pass1", usuario.getContraseña());
-        assertEquals("12345678Z", usuario.getDni());
+        assertEquals("12345678A", usuario.getDni());
         assertEquals(0.0, usuario.getNota());
     	        
 	}
     
     @Test
-	public void testCrearProfesor() {
+	public void testCrearProfesor() { //MOD_002
 		
-        Profesor usuario = new Profesor("Paquito", "pass1", "12345678Z");
+        Profesor usuario = new Profesor("Paquito", "pass1", "12345678A");
         usuarios.add(usuario);
         
         assertEquals("Paquito", usuario.getNombre());
         assertEquals("pass1", usuario.getContraseña());
-        assertEquals("12345678Z", usuario.getDni());
+        assertEquals("12345678A", usuario.getDni());
         
 	}
 
     @Test
-    public void testLoginUsuarioRegistrado() {
+    public void testLoginUsuarioRegistrado() { //MOD_003
     	
         UsuarioBase usuario = gestion.login("Guillamon", "pass1", usuarios);
         
-        Assertions.assertNotNull(usuario);
-        Assertions.assertEquals("Profesor", usuario.getTipoUsuario());
+        assertNotNull(usuario);
+        assertEquals("Profesor", usuario.getTipoUsuario());
         
     }
 
     @Test
-    public void testLoginUsuarioNoRegistrado() {
+    public void testLoginUsuarioNoRegistrado() { //MOD_004
     	
         UsuarioBase usuario = gestion.login("test-usuario", "test-contraseña", usuarios);
-        Assertions.assertNull(usuario);
+        
+        assertNull(usuario);
         
     }
     
     @Test
-    public void testRegistro() {
+    public void testRegistro() { //MOD_005
     	
         String nombre = "test-usuario";
         String dni = "12345678Z";
@@ -87,22 +89,25 @@ class GestionUsuariosTest {
 
         assertNotNull(usuarioRegistrado);
         assertEquals("Alumno", usuarioRegistrado.getTipoUsuario());
+        
     }
     
     @Test
-    public void testBorrarUsuario() {
+    public void testBorrarUsuario() { //MOD_006
     	
         UsuarioBase usuarioExistente = gestion.login("Guillamon", "pass1", usuarios);
+        
         assertNotNull(usuarioExistente);
         
         gestion.borrarUsuario("Guillamon", usuarios);
         UsuarioBase usuarioBorrado = gestion.login("Guillamon", "pass1", usuarios);
+        
         assertNull(usuarioBorrado);
         
     }
-    
+
     @Test
-    public void testModificarContraseña() {
+    public void testModificarContraseña() { //MOD_007
     	
         UsuarioBase usuario = new Profesor("Guillamon", "pass1", "12345678Z");
         usuarios.add(usuario);
@@ -110,40 +115,122 @@ class GestionUsuariosTest {
         gestion.cambiarContraseña("NuevaContraseña", usuario);
 
         UsuarioBase usuarioModificado = gestion.login("Guillamon", "NuevaContraseña", usuarios);
+        
         assertNotNull(usuarioModificado);
+        
+    }
+    
+    @Test
+    public void testCambiarContraseñaUsuarioNoExistente() { //MOD_008
+    	
+        UsuarioBase usuario = new Profesor("UsuarioConContraseña", "contraseña", "12345678A");
+        gestion.cambiarContraseña("NuevaContraseña", usuario);
+        UsuarioBase usuarioModificado = gestion.login("UsuarioConContraseña", "NuevaContraseña", usuarios);
+        
+        assertNull(usuarioModificado);
         
     }
         
     @Test
-    public void testMostrarUsuarios() {
+    public void testMostrarUsuarios() { //MOD_009
     	
-        gestion.registro("Usuario1", "12345678A", "contraseña1", "alumno", usuarios);
-        gestion.registro("Usuario2", "12345678B", "contraseña2", "alumno", usuarios);
+        gestion.registro("Alumno1", "12345678A", "contraseña1", "alumno", usuarios);
+        gestion.registro("Alumno2", "12345678B", "contraseña2", "alumno", usuarios);
         
+        assertEquals(4, alumnos.size());
         assertDoesNotThrow(() -> gestion.mostrarUsuarios(usuarios));
         
     }
     
     @Test
-    public void testVerEstadisticas() {
+    public void testVerEstadisticas() { //MOD_010
     	
         gestion.registro("Alumno1", "12345678A", "contraseña1", "alumno", usuarios);
         gestion.registro("Alumno2", "12345678B", "contraseña2", "alumno", usuarios);
         
+        assertEquals(4, alumnos.size());
         assertDoesNotThrow(() -> gestion.verEstadisticas(usuarios));
-        
+         
     }
     
     @Test
-    public void testConsultarTareasPendientes() {
+    public void testConsultarTareasPendientes() { //MOD_011
     	
         Alumno alumno = new Alumno("Alumno1", "contraseña", "12345678A", 0.0);
         alumno.agregarTarea(new Tarea("Tarea Avanzada"));
         alumno.agregarTarea(new Tarea("Tarea Basica"));
         alumnos.add(alumno);
         
+        assertEquals(2, alumno.getTareasAsignadas().size());
         assertDoesNotThrow(() -> gestion.consultarTareasPendientes(alumno));
         
+    }
+    
+    @Test
+    void testRecomendarTarea() { //MOD_012
+    	
+        Alumno alumnoNotaAlta = new Alumno("Carlos", "pass1", "12345678A", 9.5);
+        Alumno alumnoNotaMedia = new Alumno("Enrique", "pass2", "12345678B", 7.5);
+        Alumno alumnoNotaBaja = new Alumno("Ismael", "pass3", "12345678C", 5.0);
+
+        Tarea tareaRecomendadaAvanzada = gestion.recomendarTarea(alumnoNotaAlta);
+        Tarea tareaRecomendadaIntermedia = gestion.recomendarTarea(alumnoNotaMedia);
+        Tarea tareaRecomendadaBasica = gestion.recomendarTarea(alumnoNotaBaja);
+        
+        assertEquals("Tarea 3: Demostración del Teorema Central del Límite", tareaRecomendadaAvanzada.getNombre());
+        assertEquals("Tarea 2: Análisis de Convergencia de Series Infinitas", tareaRecomendadaIntermedia.getNombre());
+        assertEquals("Tarea 1: Simulación de Monte Carlo ", tareaRecomendadaBasica.getNombre());
+        
+    }
+    
+    @Test
+	void testAsignarTarea() { //MOD_013
+
+		Alumno alumno = new Alumno("Alumno1", "contraseña", "12345678A", 0.0);
+		Tarea tarea = new Tarea("Tarea Basica");
+		
+        alumno.agregarTarea(tarea);
+        alumnos.add(alumno);
+        listaDeTareas.add(tarea);
+                
+		assertEquals(1, alumno.getTareasAsignadas().size());
+
+	}
+    
+    @Test
+    void testMarcarTareaCompletada() { //MOD_014
+
+		Alumno alumno = new Alumno("Alumno1", "contraseña", "12345678A", 0.0);
+		Tarea tarea = new Tarea("Tarea Basica");
+
+		alumno.agregarTarea(tarea);
+		alumnos.add(alumno);
+		listaDeTareas.add(tarea);
+
+		assertEquals(1, alumno.getTareasAsignadas().size());
+
+		gestion.marcarTareaCompletada(alumno, 0);
+
+		assertEquals(0, alumno.getTareasAsignadas().size());
+		
+    }
+    
+    @Test
+    void testMarcarTareaCompletadaEquivocada() { //MOD_015
+
+        Alumno alumno = new Alumno("Alumno1", "contraseña", "12345678A", 0.0);
+        Tarea tarea = new Tarea("Tarea Basica");
+        
+        alumno.agregarTarea(tarea);
+        alumnos.add(alumno);
+        listaDeTareas.add(tarea);
+        
+        assertEquals(1, alumno.getTareasAsignadas().size());
+        
+        gestion.marcarTareaCompletada(alumno, 1);
+        
+        assertEquals(1, alumno.getTareasAsignadas().size());
+    	        	        
     }
     
 }
