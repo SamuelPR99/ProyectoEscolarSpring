@@ -229,7 +229,7 @@ public class GestionadorUsuarios {
 	}
 	
 	// Validar el DNI
-	private boolean validarDNI(String dni) {
+	public boolean validarDNI(String dni) {
 	    	
 			if (dni.length() == 9) {
 				for (int i = 0; i < 8; i++) {
@@ -248,7 +248,7 @@ public class GestionadorUsuarios {
 	    }
 	
 	// Validar el nombre del usuario
-    private boolean validarNombreUsuario(String usuario) {
+    public boolean validarNombreUsuario(String usuario) {
     	
 		if (usuario.length() >= 3) {
 			return true;
@@ -258,7 +258,7 @@ public class GestionadorUsuarios {
     }
 
     // Debe contener 6 caracteres, no puede tener espacios, y debe contener minimo un caracter especial
-    private boolean validarContraseña(String contraseña) {
+    public boolean validarContraseña(String contraseña) {
     	
         if (contraseña.length() >= 6 && !contraseña.contains(" ") && contraseña.matches(".*[!@#$%^&*].*")) {
 			return true;
