@@ -1,26 +1,30 @@
 package com.daw.proyectoescolar.hugo;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
 import com.daw.proyectoescolar.servicios.incidencias.*;
-
-import java.util.ArrayList;
 
 class IncidenciasTest {
 
 	private ArrayList<Incidencias> listaIncidencias;
 	private GestionDeIncidencias gestionDeIncidencias;
+	private Scanner scannerMock;
+	private Scanner sc;
 	
 	@BeforeEach
 	public void setUp() {
 		
 		gestionDeIncidencias = new GestionDeIncidencias();
 		listaIncidencias = new ArrayList<Incidencias>();
+		scannerMock = mock(Scanner.class);
 		
 		Incidencias inciAlumno1 = new IncidenciaAlumno("Samu me ha pegao");
 		Incidencias inciAlumno2 = new IncidenciaAlumno("Samu me ha pegao otra ve");
@@ -40,7 +44,209 @@ class IncidenciasTest {
 		
 		
 	}
+	
+	@Test
+	public void testMostrarMenuPrincipal() {
+		
+		sc = new Scanner(System.in);
+		
+		gestionDeIncidencias.menuPrincipal(sc);
+		
+	}
+	
+	@Test
+	public void testMensajeError() {
+		
+		when(scannerMock.nextLine())
+			.thenReturn("7") // Opción inválida dentro del menú principal \\
+			.thenReturn("4"); // Salir del menú \\
+		
+		gestionDeIncidencias.menuPrincipal(scannerMock);
+		
+	}
 
+	@Test
+	public void testAñadirIncidenciaAlumno() {
+		
+        when(scannerMock.nextLine())
+            .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
+            .thenReturn("1")  // Elige la opción de añadir una incidencia de alumno \\	
+            .thenReturn("Incidencia Alumno Test.") // Añade la incidencia de alumno \\
+            .thenReturn("4"); // Sale de la aplicación \\
+       
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+      
+        assertEquals(1, gestionDeIncidencias.getListaIncidencias().size());
+        
+    }
+	
+	@Test
+	public void testAñadirIncidenciaProfesor() {
+		
+        when(scannerMock.nextLine())
+            .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
+            .thenReturn("2")  // Elige la opción de añadir una incidencia de profesor \\	
+            .thenReturn("Incidencia Profesor Test.") // Añade la incidencia de profesor \\
+            .thenReturn("4"); // Sale de la aplicación \\
+       
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+      
+        assertEquals(1, gestionDeIncidencias.getListaIncidencias().size());
+        
+    }
+	
+	@Test
+	public void testAñadirIncidenciaAplicacion() {
+		
+        when(scannerMock.nextLine())
+            .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
+            .thenReturn("3")  // Elige la opción de añadir una incidencia de aplicación \\	
+            .thenReturn("Incidencia Aplicación Test.") // Añade la incidencia de aplicación \\
+            .thenReturn("4"); // Sale de la aplicación \\
+       
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+      
+        assertEquals(1, gestionDeIncidencias.getListaIncidencias().size());
+        
+    }
+	
+	@Test
+	public void testListarIncidenciaAlumno() {
+		
+        when(scannerMock.nextLine())
+        	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
+        	.thenReturn("1")  // Elige la opción de añadir una incidencia de alumno \\
+        	.thenReturn("Imprimir Incidencia Alumno Test") // Añade la incidencia de alumno \\
+        	.thenReturn("4")  // Vuelve al menú principal \\
+            .thenReturn("2")  // Entra al submenú de Listar Incidencias \\
+            .thenReturn("1")  // Imprime la incidencia de alumno previamente añadida \\
+            .thenReturn("5") // Vuelve al menú principal \\
+        	.thenReturn("4");  // Sale de la aplicación \\
+        	
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+        
+    }
+	
+	@Test
+	public void testListarIncidenciaProfesor() {
+		
+        when(scannerMock.nextLine())
+        	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
+        	.thenReturn("2")  // Elige la opción de añadir una incidencia de profesor \\
+        	.thenReturn("Imprimir Incidencia Profesor Test") // Añade la incidencia de profesor \\
+        	.thenReturn("4")  // Vuelve al menú principal \\
+            .thenReturn("2")  // Entra al submenú de Listar Incidencias \\
+            .thenReturn("2")  // Imprime la incidencia de profesor previamente añadida \\
+            .thenReturn("5") // Vuelve al menú principal \\
+        	.thenReturn("4");  // Sale de la aplicación \\
+        	
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+        
+    }
+	
+	@Test
+	public void testListarIncidenciaAplicacion() {
+		
+        when(scannerMock.nextLine())
+        	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
+        	.thenReturn("3")  // Elige la opción de añadir una incidencia de aplicación \\
+        	.thenReturn("Imprimir Incidencia Aplicación Test") // Añade la incidencia de aplicación \\
+        	.thenReturn("4")  // Vuelve al menú principal \\
+            .thenReturn("2")  // Entra al submenú de Listar Incidencias \\
+            .thenReturn("3")  // Imprime la incidencia de aplicación previamente añadida \\
+            .thenReturn("5") // Vuelve al menú principal \\
+        	.thenReturn("4");  // Sale de la aplicación \\
+        	
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+        
+    }
+	
+	@Test
+	public void testListarIncidenciasSinFiltrar() {
+		
+        when(scannerMock.nextLine())
+        
+        	// ES NECESARIO AÑADIR UNA INCIDENCIA DE CADA TIPO PARA QUE SE PUEDA VER LA PRUEBA DE QUE IMPRIME TODAS LAS INCIDENCIAS SIN FILTRAR \\
+        
+        	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
+        	
+        	.thenReturn("1")  // Elige la opción de añadir una incidencia de alumno \\	
+        	.thenReturn("Imprimir Incidencia Alumno Test") // Añade la incidencia de alumno \\
+        	
+        	.thenReturn("2") // Elige la opción de añadir una incidencia de profesor \\
+        	.thenReturn("Imprimir Incidencia Profesor Test") // Añade la incidencia de profesor \\
+        	
+        	.thenReturn("3")  // Elige la opción de añadir una incidencia de aplicación \\
+        	.thenReturn("Imprimir Incidencia Aplicación Test") // Añade la incidencia de aplicación \\
+        	
+        	.thenReturn("4")  // Vuelve al menú principal \\
+            .thenReturn("2")  // Entra al submenú de Listar Incidencias \\
+            .thenReturn("4")  // Imprime todas las incidencias añadidas sin filtrarlas por tipo \\
+            .thenReturn("5") // Vuelve al menú principal \\
+        	.thenReturn("4");  // Sale de la aplicación \\
+        	
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+        
+    }
+	
+	@Test
+	public void testEliminarIncidenciaAlumno() {
+		
+        when(scannerMock.nextLine())
+        	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
+        	.thenReturn("1") // Elige la opción de añadir una incidencia de alumno \\
+        	.thenReturn("Esto es un test") // Añade la incidencia de alumno \\
+        	.thenReturn("4") // Vuelve al menú principal \\
+            .thenReturn("3") // Entra al submenú de Eliminar Incidencias \\
+            .thenReturn("1") // Elige la opción de eliminar la incidencia de alumno previamente añadida \\
+        	.thenReturn("4"); // Sale del menú \\
+       
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+        
+    }
+	
+	@Test
+	public void testEliminarIncidenciaProfesor() {
+		
+        when(scannerMock.nextLine())
+        	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
+        	.thenReturn("2") // Elige la opción de añadir una incidencia de profesor \\
+        	.thenReturn("Esto es un test") // Añade la incidencia de profesor \\
+        	.thenReturn("4") // Vuelve al menú principal \\
+            .thenReturn("3") // Entra al submenú de Eliminar Incidencias \\
+            .thenReturn("2") // Elige la opción de eliminar la incidencia de profesor previamente añadida \\
+        	.thenReturn("4"); // Sale del menú \\
+       
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+        
+    }
+	
+	@Test
+	public void testEliminarIncidenciaAplicacion() {
+		
+        when(scannerMock.nextLine())
+        	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
+        	.thenReturn("3") // Elige la opción de añadir una incidencia de aplicación \\
+        	.thenReturn("Esto es un test") // Añade la incidencia de aplicación \\
+        	.thenReturn("4") // Vuelve al menú principal \\
+            .thenReturn("3") // Entra al submenú de Eliminar Incidencias \\
+            .thenReturn("3") // Elige la opción de eliminar la incidencia de aplicación previamente añadida \\
+        	.thenReturn("4"); // Sale del menú \\
+       
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+        
+    }
+	
+	@Test
+	public void testSalirDelMenu() {
+		
+        when(scannerMock.nextLine())
+            .thenReturn("4"); // Sale de la aplicación \\
+       
+            gestionDeIncidencias.menuPrincipal(scannerMock);
+        
+    }
+	
 	@Test
 	void ComprobarTamañoArrayList() {
 		
@@ -57,55 +263,6 @@ class IncidenciasTest {
 		listaIncidencias.add(inciAlumnoPrueba);
 		
 		assertEquals(6, listaIncidencias.size());
-		
-	}
-	
-	@Test
-	void testListarIncidenciaAlumno() {
-		
-		for(Incidencias incidencia : listaIncidencias) {
-			if(incidencia.getTipoIncidencia().equalsIgnoreCase("Alumno")) {
-			
-			
-				
-			}
-			
-		} 
-		
-		
-		
-	}
-	
-	@Test
-	void testComprobarIncidenciaAlumno() {
-		
-		
-		
-	}
-	
-	@Test
-	void testComprobarIncidenciaProfesor() {
-		
-		Incidencias incidenciaProfesor = new IncidenciaProfesor();
-		
-		incidenciaProfesor.setIncidencia();
-		
-		assert(incidenciaProfesor.getIncidencia().equals(incidenciaProfesor));
-		
-		fail("ERROR");
-		
-	}
-	
-	@Test
-	void testComprobarIncidenciaAplicacion() {
-		
-		Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
-		
-		incidenciaAplicacion.setIncidencia();
-		
-		assert(incidenciaAplicacion.getIncidencia().equals(incidenciaAplicacion));
-		
-		fail("ERROR");
 		
 	}
 	
