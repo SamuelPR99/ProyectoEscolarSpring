@@ -1,5 +1,5 @@
 package com.daw.proyectoescolar.paula;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -15,11 +15,21 @@ import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
 
+
+
+// generar una libreria que se pueda utilizar en toda la aplicacion, una especie de clase que yo voy a ir llamando desde cada uno de mis metodos
+//escribir log(""), le pase una cadena de texto y yo le pase el archivo
+//estoy saliendo de mi menu alta usuario
+//un log guarda la informacion de cada usuario que entra en la pagina
+//
+
 class TareasTest {
 
 	protected  ArrayList<UsuarioBase> usuarios;
 	protected ArrayList<Alumno> alumnos;
 	protected String menuInput="8";
+	GestionadorUsuarios gestorUsuarios = new GestionadorUsuarios();
+    GestionTemas gestorTemas = new GestionTemas();
 	//1
 	@Test
 	void testTareaBasica() {
@@ -86,18 +96,31 @@ class TareasTest {
 	        // Simula la entrada del usuario
 	        ByteArrayInputStream inContent = new ByteArrayInputStream(input.getBytes());
 	        System.setIn(inContent);
+	        
 
 	        // Crea instancias de las clases necesarias
-	        GestionadorUsuarios gestorUsuarios = new GestionadorUsuarios();
-	        GestionTemas gestorTemas = new GestionTemas();
+	        
 	 }
 	
 	//8 
-		@Test
-		void test8() {
-			//
-		
-		}
+	 @Test
+	    public void testMostrarRecomendacion() {
+	        // Crear una instancia de la clase que contiene el método mostrarRecomendacion
+	        Tarea tarea = new Tarea("Tarea de prueba", "Realizar pruebas unitarias");
+
+	        // Llamar al método que se va a probar
+	        tarea.mostrarRecomendacion();
+
+	        // Capturar la salida del método
+	        String output = outputContent.toString().trim();
+
+	        // Definir la salida esperada
+	        String expectedOutput = "Recomendación: Tarea Tarea de prueba\nDescripción: Realizar pruebas unitarias";
+
+	        // Afirmar que la salida esperada es igual a la salida del método
+	        Assertions.assertEquals(expectedOutput, output);
+	    }
+	
 	
 	//9
 		
