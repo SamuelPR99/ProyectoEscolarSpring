@@ -285,11 +285,17 @@ class TareasTest {
 
 		// Modificar la nota del alumno 2
 		int numeroAlumno = 2;
-		double nuevaNota = 9.0;
-
+		when(scannerMock.nextInt()).thenReturn(numeroAlumno);
+		when(scannerMock.nextDouble()).thenReturn(9.0);
+		
+		// Modificar la nota del alumno
+		
 		GestionadorUsuarios modificarNotaAlumno = new GestionadorUsuarios();
 		// (numeroAlumno, nuevaNota, alumnos);
+		
 		modificarNotaAlumno.modificarNotaAlumno(scannerMock, alumnos);
+		
 		assertEquals(9.0, alumnos.get(numeroAlumno - 1).getNota(), 0.001);
 	}
+	
 }
