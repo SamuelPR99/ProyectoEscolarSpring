@@ -58,15 +58,13 @@ class TareasTest {
 		Profesor profesor= new Profesor();
 		profesor.verMenu(sc, usuarios, alumnos);
 		Assertions.assertThat(true);
-		
-		//esto no se q hace la vd :(
 		}
 	
 	
 	//3
 		@Test
 		void test3() {
-			//si entras como alumno te tiene que salir su menu
+			
 			Scanner sc= new Scanner(System.in);
 			Alumno alumno= new Alumno();
 			alumno.verMenu(sc, usuarios, alumnos);
@@ -149,9 +147,6 @@ class TareasTest {
 	        ByteArrayInputStream inContent = new ByteArrayInputStream(input.getBytes());
 	        System.setIn(inContent);
 	        
-
-	        // Crea instancias de las clases necesarias
-	        
 	 }
 	 
 		//8
@@ -185,7 +180,6 @@ class TareasTest {
 	        // Verificamos que la tarea seleccionada sea nula
 	        assertEquals(null, tareas);
 	    }
-	
 	
 
 	//10
