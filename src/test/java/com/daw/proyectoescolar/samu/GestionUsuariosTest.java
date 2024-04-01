@@ -26,7 +26,7 @@ class GestionUsuariosTest {
     @BeforeEach
     public void setUp() {
         gestion = new GestionadorUsuarios();
-        usuarios = GestionadorUsuarios.usuarios(new ArrayList<>());
+        usuarios = gestion.usuarios(new ArrayList<>());
         alumnos = gestion.obtenerAlumnos(usuarios);
         listaDeTareas = Tarea.obtenerTodasLasTareas();
     }

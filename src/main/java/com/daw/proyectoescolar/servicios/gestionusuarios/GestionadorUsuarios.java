@@ -353,7 +353,8 @@ public class GestionadorUsuarios {
     
      }
     
-    /*
+    /* post-ficheros
+     * 
     // Crear un ArrayList de usuarios por defecto y los usuarios registrados
     public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
 
