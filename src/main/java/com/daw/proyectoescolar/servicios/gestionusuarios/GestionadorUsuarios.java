@@ -622,6 +622,7 @@ public class GestionadorUsuarios {
 					((Alumno) usuario).setNota(nuevaNota);
 				}
 
+				// Cuando se detecta un alumno, se escribe en el archivo con su nota del array
 				fw.write(usuario.getTipoUsuario() + "," + usuario.getNombre() + "," + usuario.getContraseña() + ","
 						+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? "," + ((Alumno) usuario).getNota() : "")
 						+ "\n");
