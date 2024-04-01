@@ -293,7 +293,7 @@ class TareasTest {
 		GestionadorUsuarios modificarNotaAlumno = new GestionadorUsuarios();
 		// (numeroAlumno, nuevaNota, alumnos);
 		
-		modificarNotaAlumno.modificarNotaAlumno(scannerMock, alumnos);
+		modificarNotaAlumno.modificarNotaAlumno(scannerMock, usuarios);
 		
 		assertEquals(9.0, alumnos.get(numeroAlumno - 1).getNota(), 0.001);
 	}
