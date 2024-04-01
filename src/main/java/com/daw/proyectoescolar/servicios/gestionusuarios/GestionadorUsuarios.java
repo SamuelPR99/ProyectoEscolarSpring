@@ -580,9 +580,11 @@ public class GestionadorUsuarios {
 		
     }
     
-    // Modificar la nota de un alumno, esto tambien sirve para ponerle la nota a un alumno que cree el administrador
-    public void modificarNotaAlumno(Scanner sc,  ArrayList<Alumno> alumnos) {
-    	
+    // Modificar la nota de un alumno y en el archivo
+	public void modificarNotaAlumno(Scanner sc, ArrayList<UsuarioBase> usuarios) {
+
+		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
+
 		System.out.println("Lista de alumnos:");
 		for (int i = 0; i < alumnos.size(); i++) {
 			System.out.println((i + 1) + ". " + alumnos.get(i).getNombre());
@@ -593,20 +595,60 @@ public class GestionadorUsuarios {
 		sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
 
 		if (numeroAlumno >= 1 && numeroAlumno <= alumnos.size()) {
-			
 			System.out.print("Introduzca la nueva nota del alumno: ");
 			double nuevaNota = sc.nextDouble();
 			sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
-			
+
 			alumnos.get(numeroAlumno - 1).setNota(nuevaNota);
-			
 			System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente." + Colores.ANSI_RESET);
-			
+
+			modificarNotaAlumnoArchivo(nuevaNota, alumnos.get(numeroAlumno - 1));
+
 		} else {
 			System.err.println("Numero de alumno no valido.");
 		}
-    	
-    }
+
+	}
+	
+	// Modificar la nota de un alumno en el archivo
+	public void modificarNotaAlumnoArchivo(double nuevaNota, Alumno alumno) {
+		
+		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt")) {
+
+			for (UsuarioBase usuario : usuarios) {
+				if (usuario.getNombre().equals(alumno.getNombre())) {
+					((Alumno) usuario).setNota(nuevaNota);
+				}
+
+				fw.write(usuario.getTipoUsuario() + "," + usuario.getNombre() + "," + usuario.getContraseña() + ","
+						+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? "," + ((Alumno) usuario).getNota() : "")
+						+ "\n");
+			}
+
+			fw.flush();
+			fw.close();
+
+		} catch (IOException e) {
+			System.err.println("Error al escribir en el archivo: " + e.getMessage());
+		}
+
+	}
+
+	// Ver las tareas disponibles
+	public void verTareasDisponibles() {
+
+		if (listaDeTareas.isEmpty()) {
+			System.out.println(Colores.ANSI_GREEN + "No hay tareas disponibles." + Colores.ANSI_RESET);
+		} else {
+			System.out.println("Tareas Disponibles:");
+			for (Tarea tarea : listaDeTareas) {
+				System.out.println("Tipo: " + tarea.getTipo());
+			}
+		}
+	}
+    
     
     // Agregar una nueva tarea del tipo que se quiera
     public void agregarNuevaTarea(Scanner sc) {
