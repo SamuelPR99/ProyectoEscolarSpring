@@ -1,5 +1,9 @@
 package com.daw.proyectoescolar.servicios.gestionusuarios;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -145,8 +149,10 @@ public class GestionadorUsuarios {
 				tipo = sc.nextLine();
 			}
 
-		  
 		    registro(nombre, dni, contraseña, tipo, usuarios);
+		    
+		   
+			
 		}
 	
 	// Registro de un nuevo usuario
@@ -168,18 +174,27 @@ public class GestionadorUsuarios {
 	    usuarios.add(nuevoUsuario);
 
 	    System.out.println(Colores.ANSI_GREEN + "Usuario creado correctamente." + Colores.ANSI_RESET);
+	    
+	    // Guardar el usuario en el archivo
+	    guardarUsuario(nuevoUsuario);
+	    
 	}
 	
-	// Borrar un usuario
-	public void borrarUsuario(String nombre, ArrayList<UsuarioBase> usuarios) {
-		
-		for (UsuarioBase usuario : usuarios) {
-			if (usuario.getNombre().equals(nombre)) {
-                usuarios.remove(usuario);
-                System.out.println(Colores.ANSI_GREEN + "Usuario borrado correctamente." + Colores.ANSI_RESET);
-                return;
-            }
-        }
+	// Guardar un usuario en el archivo
+	public void guardarUsuario(UsuarioBase usuario) {
+
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt", true)) { // Añadir al final del archivo
+			
+			// Escribir el usuario en el archivo con sus atributos separados por comas, si es alumno se añade la nota por defecto (0.0)
+			fw.write(usuario.getTipoUsuario() + "," + usuario.getNombre() + "," + usuario.getContraseña() + "," + usuario.getDni() 
+			+ (usuario.getTipoUsuario().equals("Alumno") ? ",0.0" : "") + "\n");
+			fw.flush();
+			fw.close();
+			
+		} catch (IOException e) {
+			System.err.println("Error al escribir en el archivo: " + e.getMessage());
+		}
+
 	}
 	
 	// Borrar un usuario utilizando Scanner
@@ -188,7 +203,49 @@ public class GestionadorUsuarios {
 	    System.out.println("Introduce el nombre de usuario que quieres borrar:");
 	    String nombre = sc.nextLine();
 	    borrarUsuario(nombre, usuarios);
-	    
+	    		    
+	}
+	
+	// Borrar un usuario
+	public void borrarUsuario(String nombre, ArrayList<UsuarioBase> usuarios) {
+		
+		for (UsuarioBase usuario : usuarios) {
+			if (usuario.getNombre().equals(nombre)) {
+				usuarios.remove(usuario);
+				System.out.println(Colores.ANSI_GREEN + "Usuario borrado correctamente." + Colores.ANSI_RESET);
+				return;
+			}
+		}
+		
+		borrarUsuarioArchivo(nombre);
+
+		// Si el usuario no se encuentra
+		System.err.println("Usuario no encontrado.");
+		
+	}
+	
+	// Borrar un usuario del archivo
+	public void borrarUsuarioArchivo(String nombre) {
+
+		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt")) {
+
+			for (UsuarioBase usuario : usuarios) {
+				if (!usuario.getNombre().equals(nombre)) { // Si el nombre del usuario no coincide, se escribe en el archivo
+					fw.write(usuario.getTipoUsuario() + "," + usuario.getNombre() + "," + usuario.getContraseña() + ","
+							+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? ",0.0" : "") + "\n");
+				}
+				
+			}
+
+			fw.flush();
+			fw.close();
+
+		} catch (IOException e) {
+			System.err.println("Error al escribir en el archivo: " + e.getMessage());
+		}
+
 	}
     
 	// Mostrar los usuarios registrados
@@ -226,6 +283,34 @@ public class GestionadorUsuarios {
 		usuario.setContraseña(nuevaContraseña);
 	    System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
 	    
+	    cambiarContraseñaArchivo(nuevaContraseña, usuario);
+	    
+	}
+	
+	// Cambiar la contraseña en el archivo
+	public void cambiarContraseñaArchivo(String nuevaContraseña, UsuarioBase usuario) {
+
+		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt")) {
+
+			for (UsuarioBase usuarioActual : usuarios) {
+				if (usuarioActual.getNombre().equals(usuario.getNombre())) {
+					usuarioActual.setContraseña(nuevaContraseña);
+				}
+
+				fw.write(usuarioActual.getTipoUsuario() + "," + usuarioActual.getNombre() + ","
+						+ usuarioActual.getContraseña() + "," + usuarioActual.getDni()
+						+ (usuarioActual.getTipoUsuario().equals("Alumno") ? ",0.0" : "") + "\n");
+			}
+
+			fw.flush();
+			fw.close();
+
+		} catch (IOException e) {
+			System.err.println("Error al escribir en el archivo: " + e.getMessage());
+		}
+
 	}
 	
 	// Validar el DNI
@@ -268,6 +353,7 @@ public class GestionadorUsuarios {
     
      }
     
+    /*
     // Crear un ArrayList de usuarios por defecto y los usuarios registrados
     public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
 
@@ -295,7 +381,61 @@ public class GestionadorUsuarios {
         usuariosDefecto.add(new Administrador("Lolo", "pass1", "76429588M"));
 
         return usuariosDefecto;
+        
+        
     }
+    
+     */
+    
+    public ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
+    	
+        ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt"))) {
+        	
+            String linea;
+            
+            while ((linea = br.readLine()) != null) {
+            	
+                String [] datos = linea.split(","); // Separar los datos por comas
+                String tipo = datos[0]; // Tipo de usuario
+                String nombre = datos[1]; // Nombre del usuario
+                String contraseña = datos[2]; // Contraseña del usuario
+                String dni = datos[3]; // DNI del usuario
+                double nota = 0.0; // Nota del alumno
+                
+				if (tipo.equals("Alumno")) { // Si el usuario es un alumno, se le asigna una nota
+					nota = Double.parseDouble(datos[4]);
+				}
+				
+				// Crear el usuario dependiendo del tipo
+                switch (tipo) { 
+                
+                    case "Profesor":
+                        usuariosDefecto.add(new Profesor(nombre, contraseña, dni));
+                        break;
+                        
+                    case "Alumno":
+                        usuariosDefecto.add(new Alumno(nombre, contraseña, dni, nota));
+                        break;
+                        
+                    case "Administrador":
+                        usuariosDefecto.add(new Administrador(nombre, contraseña, dni));
+                        break;
+                        
+                    default:
+                        System.err.println("Tipo de usuario desconocido: " + tipo);
+                        break;
+                }
+            }
+            
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+        
+        return usuariosDefecto;
+    }
+    
     
     /*---------------------------------------------------------------------------------------------------------*/
 	
