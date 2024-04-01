@@ -7,3 +7,4 @@ Alumno,Paula,123,76429585M,0.0
 Alumno,Hugo,123,76429586M,0.0
 Alumno,Zamudio,123,76429587M,0.0
 Administrador,Lolo,pass1,76429588M
+Alumno,Carlos,Jaja@jaja,76429567M,0.0
