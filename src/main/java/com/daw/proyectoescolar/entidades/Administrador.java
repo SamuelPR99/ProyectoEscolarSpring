@@ -54,6 +54,7 @@ public class Administrador extends UsuarioBase {
             opcion = sc.nextLine().toLowerCase();
 
             switch (opcion) {
+            
                 case "1", "mostrar usuarios registrados":
                     GestionLogs.logOpcionMenu("Menu Administrador", "Mostrar usuarios registrados");
                     gestor.mostrarUsuarios(usuarios);
