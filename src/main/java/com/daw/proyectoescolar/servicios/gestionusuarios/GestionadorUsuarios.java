@@ -183,11 +183,11 @@ public class GestionadorUsuarios {
 	// Guardar un usuario en el archivo
 	public void guardarUsuario(UsuarioBase usuario) {
 
-		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt", true)) { // Añadir al final del archivo
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv", true)) { // Añadir al final del archivo
 			
-			// Escribir el usuario en el archivo con sus atributos separados por comas, si es alumno se añade la nota por defecto (0.0)
-			fw.write(usuario.getTipoUsuario() + "," + usuario.getNombre() + "," + usuario.getContraseña() + "," + usuario.getDni() 
-			+ (usuario.getTipoUsuario().equals("Alumno") ? ",0.0" : "") + "\n");
+			// Escribir el usuario en el archivo con sus atributos separados por punto y coma, si es alumno se añade la nota por defecto (0.0)
+			fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña() + ";" + usuario.getDni() 
+			+ (usuario.getTipoUsuario().equals("Alumno") ? ";0.0" : "") + "\n");
 			fw.flush();
 			fw.close();
 			
@@ -229,12 +229,12 @@ public class GestionadorUsuarios {
 
 		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
 
-		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt")) {
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
 
 			for (UsuarioBase usuario : usuarios) {
 				if (!usuario.getNombre().equals(nombre)) { // Si el nombre del usuario no coincide, se escribe en el archivo
-					fw.write(usuario.getTipoUsuario() + "," + usuario.getNombre() + "," + usuario.getContraseña() + ","
-							+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? ",0.0" : "") + "\n");
+					fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña() + ";"
+							+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? ";0.0" : "") + "\n");
 				}
 				
 			}
@@ -292,16 +292,16 @@ public class GestionadorUsuarios {
 
 		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
 
-		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt")) {
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
 
 			for (UsuarioBase usuarioActual : usuarios) {
 				if (usuarioActual.getNombre().equals(usuario.getNombre())) {
 					usuarioActual.setContraseña(nuevaContraseña);
 				}
 
-				fw.write(usuarioActual.getTipoUsuario() + "," + usuarioActual.getNombre() + ","
-						+ usuarioActual.getContraseña() + "," + usuarioActual.getDni()
-						+ (usuarioActual.getTipoUsuario().equals("Alumno") ? ",0.0" : "") + "\n");
+				fw.write(usuarioActual.getTipoUsuario() + ";" + usuarioActual.getNombre() + ";"
+						+ usuarioActual.getContraseña() + ";" + usuarioActual.getDni()
+						+ (usuarioActual.getTipoUsuario().equals("Alumno") ? ";0.0" : "") + "\n");
 			}
 
 			fw.flush();
@@ -392,13 +392,13 @@ public class GestionadorUsuarios {
     	
         ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv"))) {
         	
             String linea;
             
             while ((linea = br.readLine()) != null) {
             	
-                String [] datos = linea.split(","); // Separar los datos por comas
+                String [] datos = linea.split(";"); // Separar los datos por punto y coma
                 String tipo = datos[0]; // Tipo de usuario
                 String nombre = datos[1]; // Nombre del usuario
                 String contraseña = datos[2]; // Contraseña del usuario
@@ -615,7 +615,7 @@ public class GestionadorUsuarios {
 		
 		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
 
-		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt")) {
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
 
 			for (UsuarioBase usuario : usuarios) {
 				if (usuario.getNombre().equals(alumno.getNombre())) {
@@ -623,8 +623,8 @@ public class GestionadorUsuarios {
 				}
 
 				// Cuando se detecta un alumno, se escribe en el archivo con su nota del array
-				fw.write(usuario.getTipoUsuario() + "," + usuario.getNombre() + "," + usuario.getContraseña() + ","
-						+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? "," + ((Alumno) usuario).getNota() : "")
+				fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña() + ";"
+						+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? ";" + ((Alumno) usuario).getNota() : "")
 						+ "\n");
 			}
 
