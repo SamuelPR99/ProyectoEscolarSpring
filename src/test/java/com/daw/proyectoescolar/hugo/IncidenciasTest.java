@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.servicios.incidencias.*;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 import java.util.ArrayList;
 
 class IncidenciasTest {
