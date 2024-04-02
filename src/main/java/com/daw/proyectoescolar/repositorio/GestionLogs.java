@@ -30,7 +30,7 @@ public class GestionLogs {
 	// Metodo para escribir logs de informacion sobre las acciones de los usuarios y fecha y hora de la accion realizada
 	private static void EscribirLog(String tipoLog, String mensajeLog) {
 
-		String fechaActual = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String fechaActual = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		String rutaDirectorioLog = CARPETA_LOGS + fechaActual + "/";
 		String rutaArchivoLog = rutaDirectorioLog + "log_" + tipoLog + ".log";
 
