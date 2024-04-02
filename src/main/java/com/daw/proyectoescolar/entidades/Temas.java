@@ -5,7 +5,7 @@ public abstract class Temas {
 	protected String nombre;
 	protected String descripcion;
 	protected String contenidoTarea;
-	
+	protected String Temas;
 	
 	
 	public Temas() {

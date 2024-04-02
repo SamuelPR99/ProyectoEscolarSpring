@@ -68,7 +68,7 @@ public class Profesor extends UsuarioBase {
 	                break;
 
 	            case "3", "modificar nota de alumno":
-	                gestor.modificarNotaAlumno(sc, alumnos);
+	                gestor.modificarNotaAlumno(sc, usuarios);
 	                break;
 
 	            case "4", "ver estadísticas":
