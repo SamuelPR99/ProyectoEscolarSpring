@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.GestionLogs;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
 public class Administrador extends UsuarioBase {
@@ -54,27 +55,34 @@ public class Administrador extends UsuarioBase {
 
             switch (opcion) {
                 case "1", "mostrar usuarios registrados":
+                    GestionLogs.logOpcionMenu("Menu Administrador", "Mostrar usuarios registrados");
                     gestor.mostrarUsuarios(usuarios);
                     break;
 
                 case "2", "crear un usuario":
+                    GestionLogs.logOpcionMenu("Menu Administrador", "Crear un usuario");
                     gestor.registro(sc, usuarios);
                     break;
 
                 case "3", "borrar un usuario":
+                    GestionLogs.logOpcionMenu("Menu Administrador", "Borrar un usuario");
                     gestor.borrarUsuario(sc, usuarios);
                     break;
 
                 case "4", "cambiar contraseña":
+                    GestionLogs.logOpcionMenu("Menu Administrador", "Cambiar contraseña");
                     gestor.cambiarContraseña(sc, this);
                     break;
 
                 case "5", "salir del menu", "salir", "salir del":
+                    GestionLogs.logOpcionMenu("Menu Administrador", "Salir del menu");
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de administrador..." + Colores.ANSI_RESET);
                     break;
 
                 default:
                     System.err.println("Opcion no valida. Por favor, elige una opción valida.");
+                    GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de administrador.");
+
             }
             
         } while (!opcion.equals("5") && !opcion.contains("salir"));
