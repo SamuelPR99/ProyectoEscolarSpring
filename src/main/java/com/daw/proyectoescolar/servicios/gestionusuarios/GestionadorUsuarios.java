@@ -13,6 +13,7 @@ import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.GestionLogs;
 import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
 
 public class GestionadorUsuarios {
@@ -44,6 +45,9 @@ public class GestionadorUsuarios {
 		        switch (opcion) {
 
 		            case "1", "iniciar sesion":
+		            	
+		            	GestionLogs.logOpcionMenu("Menu Principal", "Iniciar sesion");
+		            
 		                UsuarioBase usuario = login(sc, usuarios);
 
 		                try {
@@ -55,24 +59,29 @@ public class GestionadorUsuarios {
 		                    usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
 		                } catch (NullPointerException excepcion) {
+		                    GestionLogs.errorLogs("Usuario o contraseña incorrectos. Intentalo de nuevo.");
 		                    System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
 						} catch (Exception excepcion) {
+							GestionLogs.errorLogs("Ha ocurrido un error. Intentalo de nuevo.");
 							System.err.println("Ha ocurrido un error. Intentalo de nuevo.");
 						}
 
 		                break;
 		                
 		            case "2", "gestion de incidencias":
+		            	GestionLogs.logOpcionMenu("Menu Principal", "Gestion de incidencias");
 	            	    GestionDeIncidencias gestionadorIncidencias = new GestionDeIncidencias();
                         gestionadorIncidencias.menuPrincipal(sc);    	
 		                break;
 
 		            case "3", "salir":
+		            	GestionLogs.logOpcionMenu("Menu Principal", "Salir");
 		                System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
 		                break;
 
 		            default:
 		                System.err.println("Opcion no valida. Intentalo de nuevo.");
+		                GestionLogs.errorLogs("Opcion no valida seleccionada en el menu principal.");
 
 		        }
 
