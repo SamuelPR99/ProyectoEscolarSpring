@@ -27,8 +27,8 @@ public class GestionLogs {
 
 	// Metodo para escribir logs de informacion sobre las opciones de los menus
 	public static void logOpcionMenu(String nombreMenu, String opcion) {
-		String logMessage = "[" + getFechaActual() + "] MENU '" + nombreMenu + "' OPCION: " + opcion;
-		escribirLog("menu", logMessage);
+		String mensajeLog = "[" + getFechaActual() + "] MENU '" + nombreMenu + "' OPCION: " + opcion;
+		escribirLog("menu", mensajeLog);
 	}
 
 	// Metodo para escribir logs de informacion sobre las acciones de los usuarios y fecha y hora de la accion realizada
