@@ -4,13 +4,7 @@
 [2024-04-03T23:13:24.531605200] ERROR: Opcion no valida seleccionada en el menu principal. Opcion: 
 [2024-04-03T23:13:31.516450500] ERROR: Usuario o contraseña incorrectos.
 [2024-04-03T23:13:36.187754100] ERROR: Usuario o contraseña incorrectos.
-[2024-04-03T23:26:53.840569800] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:26:57.948746100] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:27:03.988863500] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:27:19.292394200] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:27:23.668857300] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:29:43.333445] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:29:50.060335800] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:29:55.076989] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:30:01.037154] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
-[2024-04-03T23:30:08.060200500] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
+[2024-04-03T23:32:26.013215] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
+[2024-04-03T23:32:29.452428800] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
+[2024-04-03T23:32:54.267838200] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
+[2024-04-03T23:33:00.756207500] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null

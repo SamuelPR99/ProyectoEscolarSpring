@@ -50,8 +50,6 @@ public class GestionadorUsuarios {
 
 					UsuarioBase usuario = login(sc, usuarios);
 
-					int intentos = 0;
-
 					try {
 
 						System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD
@@ -60,15 +58,8 @@ public class GestionadorUsuarios {
 						usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
 					} catch (NullPointerException excepcion) {
-						intentos++;
-						
 						GestionLogs.errorLogs("Usuario o contraseña incorrectos." + excepcion.getMessage());
 						System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
-						
-						if (intentos >= 3) {
-							GestionLogs.errorLogs(
-									"Usuario o contraseña incorrectos." + " El usuario ha intentado iniciar sesion " + intentos + " veces sin exito.");
-						}
 					} catch (Exception excepcion) {
 						GestionLogs.errorLogs("Error al iniciar sesion." + " Error: " + excepcion.getMessage());
 						System.err.println("Error al iniciar sesion. Intentalo de nuevo.");
