@@ -82,7 +82,7 @@ public class Administrador extends UsuarioBase {
 
                 default:
                     System.err.println("Opcion no valida. Por favor, elige una opción valida.");
-                    GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de administrador.");
+                    GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de administrador. " + opcion + " no es una opcion valida.");
 
             }
             

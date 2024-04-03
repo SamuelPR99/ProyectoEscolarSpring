@@ -104,7 +104,7 @@ public class Profesor extends UsuarioBase {
 
 	            default:
 	                System.err.println("Opcion no valida. Por favor, elige una opcion valida.");
-	                GestionLogs.errorLogs("Opcion no valida en el menu de profesor");
+	                GestionLogs.errorLogs("Opcion no valida en el menu de profesor. " + opcion + " no es una opcion valida.");
 	                
 	        }
 	        

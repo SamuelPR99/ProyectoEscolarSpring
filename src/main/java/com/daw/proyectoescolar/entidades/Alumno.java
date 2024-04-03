@@ -121,7 +121,7 @@ public class Alumno extends UsuarioBase {
 
                 default:
                     System.err.println("Opcion no valida. Por favor, elige una opcion valida.");
-                    GestionLogs.errorLogs("Opcion no valida en el menu de alumno");
+                    GestionLogs.errorLogs("Opcion no valida en el menu de alumno. " + opcion + " no es una opcion valida.");
             }
             
         } while (!opcion.equals("6") && !opcion.contains("salir"));

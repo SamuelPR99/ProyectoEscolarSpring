@@ -24,15 +24,11 @@ public class ListaDeTemas {
 	public void setListaDeTemas(ArrayList<Temas> listaDeTemas) {
 		ListaDeTemas = listaDeTemas;
 	}
-	
-	
-	
+
 	public void temasIniciados() {
 		
 		ListaDeTemas = new ArrayList<Temas>();
-		
-		
-			
+
 		Temas tema11 = new Tema1();
 		tema11.setNombre("Teoría de la Probabilidad Estocástica");
 		tema11.setDescripcion("Estudio de la probabilidad en un espacio de probabilidad");
@@ -40,7 +36,6 @@ public class ListaDeTemas {
 		+ " Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π.");
 		
 		ListaDeTemas.add(tema11);
-			
 			
 		Temas tema12 = new Tema1();
 		tema12.setNombre("Teoría de la Probabilidad Estocástica");
@@ -58,7 +53,6 @@ public class ListaDeTemas {
 		
 		ListaDeTemas.add(tema13);
 		
-		
 		Temas tema21 = new Tema2();
 		tema21.setNombre("Teoría de Números Avanzada");
 		tema21.setDescripcion("Estudio de los números enteros y sus propiedades");
@@ -66,7 +60,6 @@ public class ListaDeTemas {
 		+ " Implementar un algoritmo para calcular los primeros N números primos utilizando la criba de Eratóstenes.");
 		
 		ListaDeTemas.add(tema21);
-		
 		
 		Temas tema22 = new Tema2();
 		tema22.setNombre("Teoría de Números Avanzada");
@@ -84,7 +77,6 @@ public class ListaDeTemas {
 		
 		ListaDeTemas.add(tema23);
 		
-		
 		Temas tema31 = new Tema3();
 		tema31.setNombre("Análisis Funcional");
 		tema31.setDescripcion("Estudio de espacios vectoriales normados y sus propiedades");
@@ -92,7 +84,6 @@ public class ListaDeTemas {
 		+ " Implementar un algoritmo para encontrar los autovalores y autovectores de una matriz utilizando el método de la potencia.");
 		
 		ListaDeTemas.add(tema31);
-		
 		
 		Temas tema32 = new Tema3();
 		tema32.setNombre("Análisis Funcional");
@@ -118,7 +109,6 @@ public class ListaDeTemas {
 		
 		ListaDeTemas.add(tema41);
 		
-		
 		Temas tema42 = new Tema4();
 		tema42.setNombre("Topología Algebraica");
 		tema42.setDescripcion("Estudio de la topología y sus propiedades");
@@ -143,7 +133,6 @@ public class ListaDeTemas {
 		
 		ListaDeTemas.add(tema51);
 		
-		
 		Temas tema52 = new Tema5();
 		tema52.setNombre("Teoría de Representación de Grupos");
 		tema52.setDescripcion("Estudio de la teoría de grupos y sus propiedades");
@@ -167,7 +156,6 @@ public class ListaDeTemas {
 		+ " Estudiar la teoría de espacios de Sobolev y su relación con problemas de valores en la frontera.");
 		
 		ListaDeTemas.add(tema61);
-		
 		
 		Temas tema62 = new Tema6();
 		tema62.setNombre("Teoría de la Aproximación y Funciones Especiales");

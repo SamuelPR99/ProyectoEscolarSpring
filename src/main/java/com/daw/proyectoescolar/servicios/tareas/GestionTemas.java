@@ -16,7 +16,9 @@ import com.daw.proyectoescolar.repositorio.Tema6;
 public class GestionTemas {
 	
 	protected static ListaDeTemas gestion;
+	
 	public void menuTemas (Scanner sc) {
+		
 		gestion = new ListaDeTemas();
 		gestion.temasIniciados();
 		Temas tema = null;
