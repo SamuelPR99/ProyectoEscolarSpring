@@ -61,11 +61,13 @@ public class GestionadorUsuarios {
 
 					} catch (NullPointerException excepcion) {
 						intentos++;
+						
+						GestionLogs.errorLogs("Usuario o contraseña incorrectos." + excepcion.getMessage());
 						System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
+						
 						if (intentos >= 3) {
 							GestionLogs.errorLogs(
-									"Usuario o contraseña incorrectos." + " El usuario " + usuario.getNombre()
-											+ " ha intentado iniciar sesion " + intentos + " veces sin exito.");
+									"Usuario o contraseña incorrectos." + " El usuario ha intentado iniciar sesion " + intentos + " veces sin exito.");
 						}
 					} catch (Exception excepcion) {
 						GestionLogs.errorLogs("Error al iniciar sesion." + " Error: " + excepcion.getMessage());
