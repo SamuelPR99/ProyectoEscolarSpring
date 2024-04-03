@@ -1,5 +1,9 @@
 package com.daw.proyectoescolar.servicios.gestionusuarios;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,6 +13,7 @@ import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.GestionLogs;
 import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
 
 public class GestionadorUsuarios {
@@ -40,6 +45,9 @@ public class GestionadorUsuarios {
 		        switch (opcion) {
 
 		            case "1", "iniciar sesion":
+		            	
+		            	GestionLogs.logOpcionMenu("Menu Principal", "Iniciar sesion");
+		            
 		                UsuarioBase usuario = login(sc, usuarios);
 
 		                try {
@@ -51,24 +59,29 @@ public class GestionadorUsuarios {
 		                    usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
 		                } catch (NullPointerException excepcion) {
+		                    GestionLogs.errorLogs("Usuario o contraseña incorrectos. Intentalo de nuevo." + " Error: " + excepcion.getMessage());
 		                    System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
 						} catch (Exception excepcion) {
+							GestionLogs.errorLogs("Ha ocurrido un error. Intentalo de nuevo." + " Error: " + excepcion.getMessage());
 							System.err.println("Ha ocurrido un error. Intentalo de nuevo.");
 						}
 
 		                break;
 		                
 		            case "2", "gestion de incidencias":
+		            	GestionLogs.logOpcionMenu("Menu Principal", "Gestion de incidencias");
 	            	    GestionDeIncidencias gestionadorIncidencias = new GestionDeIncidencias();
                         gestionadorIncidencias.menuPrincipal(sc);    	
 		                break;
 
 		            case "3", "salir":
+		            	GestionLogs.logOpcionMenu("Menu Principal", "Salir");
 		                System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
 		                break;
 
 		            default:
 		                System.err.println("Opcion no valida. Intentalo de nuevo.");
+		                GestionLogs.errorLogs("Opcion no valida seleccionada en el menu principal." + " Opcion: " + opcion);
 
 		        }
 
@@ -111,6 +124,7 @@ public class GestionadorUsuarios {
 		    // Validar nombre
 		    while (!validarNombreUsuario(nombre)) {
 		        System.err.println("Nombre de usuario no valido. Intentalo de nuevo: ");
+		        GestionLogs.errorLogs("Nombre de usuario no valido." + " Nombre: " + nombre);
 		        System.out.print("Introduzca su nombre: ");
 		        nombre = sc.nextLine();
 		    }
@@ -121,6 +135,7 @@ public class GestionadorUsuarios {
 		    // Validar el DNI
 		    while (!validarDNI(dni)) {
 		        System.err.println("DNI no valido. Intentalo de nuevo: ");
+		        GestionLogs.errorLogs("DNI no valido." + " DNI: " + dni);
 		        System.out.print("Introduzca su DNI: ");
 		        dni = sc.nextLine();
 		    }
@@ -131,6 +146,7 @@ public class GestionadorUsuarios {
 		    // Validar la contraseña
 		    while (!validarContraseña(contraseña)) {
 		        System.err.println("Contraseña no valida. Intentalo de nuevo: ");
+		        GestionLogs.errorLogs("Contraseña no valida." + " Contraseña: " + contraseña);
 		        System.out.print("Introduzca su contraseña: ");
 		        contraseña = sc.nextLine();
 		    }
@@ -141,12 +157,13 @@ public class GestionadorUsuarios {
 		    // Validar el tipo de usuario
 			while (!tipo.equalsIgnoreCase("profesor") && !tipo.equalsIgnoreCase("alumno")) {
 				System.err.println("Tipo de usuario no valido. Intentalo de nuevo: ");
+				GestionLogs.errorLogs("Tipo de usuario no valido." + " Tipo: " + tipo);
 				System.out.print("¿Es profesor o alumno?: ");
 				tipo = sc.nextLine();
 			}
 
-		  
 		    registro(nombre, dni, contraseña, tipo, usuarios);
+		    
 		}
 	
 	// Registro de un nuevo usuario
@@ -161,6 +178,7 @@ public class GestionadorUsuarios {
 	        nuevoUsuario = new Alumno(nombre, contraseña, dni, 0.0);
 	    } else {
 	        System.out.println("Tipo de usuario no valido.");
+	        GestionLogs.errorLogs("Tipo de usuario no valido." + " Tipo: " + tipo);
 	        return;
 	    }
 
@@ -168,18 +186,28 @@ public class GestionadorUsuarios {
 	    usuarios.add(nuevoUsuario);
 
 	    System.out.println(Colores.ANSI_GREEN + "Usuario creado correctamente." + Colores.ANSI_RESET);
+	    
+	    // Guardar el usuario en el archivo
+	    guardarUsuario(nuevoUsuario);
+	    
 	}
 	
-	// Borrar un usuario
-	public void borrarUsuario(String nombre, ArrayList<UsuarioBase> usuarios) {
-		
-		for (UsuarioBase usuario : usuarios) {
-			if (usuario.getNombre().equals(nombre)) {
-                usuarios.remove(usuario);
-                System.out.println(Colores.ANSI_GREEN + "Usuario borrado correctamente." + Colores.ANSI_RESET);
-                return;
-            }
-        }
+	// Guardar un usuario en el archivo
+	public void guardarUsuario(UsuarioBase usuario) {
+
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv", true)) { // Si es true: Añadir al final del archivo
+			
+			// Escribir el usuario en el archivo con sus atributos separados por punto y coma, si es alumno se añade la nota por defecto (0.0)
+			fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña() + ";" + usuario.getDni() 
+			+ (usuario.getTipoUsuario().equals("Alumno") ? ";0.0" : "") + "\n");
+			fw.flush();
+			fw.close();
+			
+		} catch (IOException e) {
+			System.err.println("Error al escribir en el archivo: " + e.getMessage());
+			GestionLogs.errorLogs("Error al escribir en el archivo: " + e.getMessage() + " No se ha guardado el usuario.");
+		}
+
 	}
 	
 	// Borrar un usuario utilizando Scanner
@@ -188,7 +216,51 @@ public class GestionadorUsuarios {
 	    System.out.println("Introduce el nombre de usuario que quieres borrar:");
 	    String nombre = sc.nextLine();
 	    borrarUsuario(nombre, usuarios);
-	    
+	    		    
+	}
+	
+	// Borrar un usuario
+	public void borrarUsuario(String nombre, ArrayList<UsuarioBase> usuarios) {
+		
+		for (UsuarioBase usuario : usuarios) {
+			if (usuario.getNombre().equals(nombre)) {
+				usuarios.remove(usuario);
+				System.out.println(Colores.ANSI_GREEN + "Usuario borrado correctamente." + Colores.ANSI_RESET);
+				return;
+			}
+		}
+		
+		borrarUsuarioArchivo(nombre);
+
+		// Si el usuario no se encuentra
+		System.err.println("Usuario no encontrado.");
+		GestionLogs.errorLogs("Usuario no encontrado." + " Nombre: " + nombre);
+		
+	}
+	
+	// Borrar un usuario del archivo
+	public void borrarUsuarioArchivo(String nombre) {
+
+		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
+
+			for (UsuarioBase usuario : usuarios) {
+				if (!usuario.getNombre().equals(nombre)) { // Si el nombre del usuario no coincide, se escribe en el archivo
+					fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña() + ";"
+							+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? ";0.0" : "") + "\n");
+				}
+				
+			}
+
+			fw.flush();
+			fw.close();
+
+		} catch (IOException e) {
+			System.err.println("Error al escribir en el archivo: " + e.getMessage());
+			GestionLogs.errorLogs("Error al escribir en el archivo: " + e.getMessage() + " No se ha borrado el usuario.");
+		}
+
 	}
     
 	// Mostrar los usuarios registrados
@@ -213,6 +285,7 @@ public class GestionadorUsuarios {
 	    // Validar la contraseña
 	    while (!validarContraseña(nuevaContraseña)) {
 	        System.err.println("Contraseña no valida. Intentalo de nuevo: ");
+	        GestionLogs.errorLogs("Contraseña no valida.");
 	        System.out.print("Introduce tu nueva contraseña: ");
 	        nuevaContraseña = sc.nextLine();
 	    }
@@ -226,6 +299,35 @@ public class GestionadorUsuarios {
 		usuario.setContraseña(nuevaContraseña);
 	    System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
 	    
+	    cambiarContraseñaArchivo(nuevaContraseña, usuario);
+	    
+	}
+	
+	// Cambiar la contraseña en el archivo
+	public void cambiarContraseñaArchivo(String nuevaContraseña, UsuarioBase usuario) {
+
+		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
+
+			for (UsuarioBase usuarioActual : usuarios) {
+				if (usuarioActual.getNombre().equals(usuario.getNombre())) {
+					usuarioActual.setContraseña(nuevaContraseña);
+				}
+
+				fw.write(usuarioActual.getTipoUsuario() + ";" + usuarioActual.getNombre() + ";"
+						+ usuarioActual.getContraseña() + ";" + usuarioActual.getDni()
+						+ (usuarioActual.getTipoUsuario().equals("Alumno") ? ";0.0" : "") + "\n");
+			}
+
+			fw.flush();
+			fw.close();
+
+		} catch (IOException e) {
+			System.err.println("Error al escribir en el archivo: " + e.getMessage());
+			GestionLogs.errorLogs("Error al escribir en el archivo: " + e.getMessage() + " No se ha cambiado la contraseña.");
+		}
+
 	}
 	
 	// Validar el DNI
@@ -268,6 +370,8 @@ public class GestionadorUsuarios {
     
      }
     
+    /* post-ficheros
+     * 
     // Crear un ArrayList de usuarios por defecto y los usuarios registrados
     public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
 
@@ -295,7 +399,62 @@ public class GestionadorUsuarios {
         usuariosDefecto.add(new Administrador("Lolo", "pass1", "76429588M"));
 
         return usuariosDefecto;
+        
+        
     }
+    
+     */
+    
+    public ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
+    	
+        ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv"))) {
+        	
+            String linea;
+            
+            while ((linea = br.readLine()) != null) {
+            	
+                String [] datos = linea.split(";"); // Separar los datos por punto y coma
+                String tipo = datos[0]; // Tipo de usuario
+                String nombre = datos[1]; // Nombre del usuario
+                String contraseña = datos[2]; // Contraseña del usuario
+                String dni = datos[3]; // DNI del usuario
+                double nota = 0.0; // Nota del alumno
+                
+				if (tipo.equals("Alumno")) { // Si el usuario es un alumno, se le asigna una nota
+					nota = Double.parseDouble(datos[4]);
+				}
+				
+				// Crear el usuario dependiendo del tipo
+                switch (tipo) { 
+                
+                    case "Profesor":
+                        usuariosDefecto.add(new Profesor(nombre, contraseña, dni));
+                        break;
+                        
+                    case "Alumno":
+                        usuariosDefecto.add(new Alumno(nombre, contraseña, dni, nota));
+                        break;
+                        
+                    case "Administrador":
+                        usuariosDefecto.add(new Administrador(nombre, contraseña, dni));
+                        break;
+                        
+                    default:
+                        System.err.println("Tipo de usuario desconocido: " + tipo);
+                        break;
+                }
+            }
+            
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+            GestionLogs.errorLogs("Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+        }
+        
+        return usuariosDefecto;
+    }
+    
     
     /*---------------------------------------------------------------------------------------------------------*/
 	
@@ -425,6 +584,7 @@ public class GestionadorUsuarios {
             System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo() + "\" entregada correctamente." + Colores.ANSI_RESET);
         } else {
             System.err.println("Numero de tarea no valido.");
+            GestionLogs.errorLogs("Numero de tarea no valido." + " Numero seleccionado: " + indiceTarea);
         }
     }
     
@@ -439,9 +599,11 @@ public class GestionadorUsuarios {
 		
     }
     
-    // Modificar la nota de un alumno, esto tambien sirve para ponerle la nota a un alumno que cree el administrador
-    public void modificarNotaAlumno(Scanner sc,  ArrayList<Alumno> alumnos) {
-    	
+    // Modificar la nota de un alumno y en el archivo
+	public void modificarNotaAlumno(Scanner sc, ArrayList<UsuarioBase> usuarios) {
+
+		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
+
 		System.out.println("Lista de alumnos:");
 		for (int i = 0; i < alumnos.size(); i++) {
 			System.out.println((i + 1) + ". " + alumnos.get(i).getNombre());
@@ -452,20 +614,63 @@ public class GestionadorUsuarios {
 		sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
 
 		if (numeroAlumno >= 1 && numeroAlumno <= alumnos.size()) {
-			
 			System.out.print("Introduzca la nueva nota del alumno: ");
 			double nuevaNota = sc.nextDouble();
 			sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
-			
+
 			alumnos.get(numeroAlumno - 1).setNota(nuevaNota);
-			
 			System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente." + Colores.ANSI_RESET);
-			
+
+			modificarNotaAlumnoArchivo(nuevaNota, alumnos.get(numeroAlumno - 1));
+
 		} else {
 			System.err.println("Numero de alumno no valido.");
+			GestionLogs.errorLogs("Numero de alumno no valido." + " Numero seleccionado: " + numeroAlumno);
 		}
-    	
-    }
+
+	}
+	
+	// Modificar la nota de un alumno en el archivo
+	public void modificarNotaAlumnoArchivo(double nuevaNota, Alumno alumno) {
+		
+		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+
+		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
+
+			for (UsuarioBase usuario : usuarios) {
+				if (usuario.getNombre().equals(alumno.getNombre())) {
+					((Alumno) usuario).setNota(nuevaNota);
+				}
+
+				// Cuando se detecta un alumno, se escribe en el archivo con su nota del array
+				fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña() + ";"
+						+ usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? ";" + ((Alumno) usuario).getNota() : "")
+						+ "\n");
+			}
+
+			fw.flush();
+			fw.close();
+
+		} catch (IOException e) {
+			System.err.println("Error al escribir en el archivo: " + e.getMessage());
+			GestionLogs.errorLogs("Error al escribir en el archivo: " + e.getMessage());
+		}
+
+	}
+
+	// Ver las tareas disponibles
+	public void verTareasDisponibles() {
+
+		if (listaDeTareas.isEmpty()) {
+			System.out.println(Colores.ANSI_GREEN + "No hay tareas disponibles." + Colores.ANSI_RESET);
+		} else {
+			System.out.println("Tareas Disponibles:");
+			for (Tarea tarea : listaDeTareas) {
+				System.out.println("Tipo: " + tarea.getTipo());
+			}
+		}
+	}
+    
     
     // Agregar una nueva tarea del tipo que se quiera
     public void agregarNuevaTarea(Scanner sc) {
@@ -499,6 +704,7 @@ public class GestionadorUsuarios {
             System.out.println(Colores.ANSI_GREEN + "Tarea modificada correctamente." + Colores.ANSI_RESET);
         } else {
             System.err.println("Numero de tarea no valido.");
+            GestionLogs.errorLogs("Numero de tarea no valido.");
         }
         
     }

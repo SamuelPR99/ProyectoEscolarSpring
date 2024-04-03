@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.GestionLogs;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
 
@@ -60,39 +61,50 @@ public class Profesor extends UsuarioBase {
 
 	     
 	        switch (opcion) {
+	        
 	        	case "1", "ver listado de temas":
+	        		GestionLogs.logOpcionMenu("Menu Profesor", "Ver listado de temas");
 	        		temitas.menuTemas(sc);
 	        		break;
+	        		
 	            case "2", "ver lista de alumnos":
+	            	GestionLogs.logOpcionMenu("Menu Profesor", "Ver lista de alumnos");
 	            	gestor.verNotasAlumnos(usuarios);
 	                break;
 
 	            case "3", "modificar nota de alumno":
-	                gestor.modificarNotaAlumno(sc, alumnos);
+	            	GestionLogs.logOpcionMenu("Menu Profesor", "Modificar nota de alumno");
+	                gestor.modificarNotaAlumno(sc, usuarios);
 	                break;
 
 	            case "4", "ver estadísticas":
+	            	GestionLogs.logOpcionMenu("Menu Profesor", "Ver estadisticas");
 	                gestor.verEstadisticas(usuarios);
 	                break;
 
 	            case "5", "agregar nueva tarea":
+	            	GestionLogs.logOpcionMenu("Menu Profesor", "Agregar nueva tarea");
 	                gestor.agregarNuevaTarea(sc);
 	                break;
 
 	            case "6", "modificar tarea":
+	            	GestionLogs.logOpcionMenu("Menu Profesor", "Modificar tarea");
 	                gestor.modificarTarea(sc);
 	                break;
 
 	            case "7", "cambiar contraseña":
+	            	GestionLogs.logOpcionMenu("Menu Profesor", "Cambiar contraseña");
 	            	gestor.cambiarContraseña(sc, this);
                 	break;
                    
 	            case "8", "salir del menu", "salir", "salir del":
+	            	GestionLogs.logOpcionMenu("Menu Profesor", "Salir del menu");
 	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de profesor..." + Colores.ANSI_RESET);
 	                break;
 
 	            default:
-	                System.err.println("Opcion no valida. Por favor, elige una opción valida.");
+	                System.err.println("Opcion no valida. Por favor, elige una opcion valida.");
+	                GestionLogs.errorLogs("Opcion no valida en el menu de profesor");
 	                
 	        }
 	        

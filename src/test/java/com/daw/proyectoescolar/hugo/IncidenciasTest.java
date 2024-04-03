@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 
 import com.daw.proyectoescolar.servicios.incidencias.*;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
+import java.util.ArrayList;
+
 class IncidenciasTest {
 
 	private ArrayList<Incidencias> listaIncidencias;
