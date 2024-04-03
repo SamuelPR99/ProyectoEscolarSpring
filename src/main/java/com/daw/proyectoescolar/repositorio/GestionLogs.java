@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class GestionLogs {
+	
+	public GestionLogs() {
+		
+	}
 
 	// Constante de la ruta de la carpeta donde se guardan los logs
 	private static final String CARPETA_LOGS = "logs/";
@@ -18,17 +22,17 @@ public class GestionLogs {
 	// Metodo para escribir logs de informacion sobre errores
 	public static void errorLogs(String mensajeError) {	
 		String mensajeLog = "[" + getFechaActual() + "] ERROR: " + mensajeError;
-		EscribirLog("error", mensajeLog);
+		escribirLog("error", mensajeLog);
 	}
 
 	// Metodo para escribir logs de informacion sobre las opciones de los menus
 	public static void logOpcionMenu(String nombreMenu, String opcion) {
 		String logMessage = "[" + getFechaActual() + "] MENU '" + nombreMenu + "' OPCION: " + opcion;
-		EscribirLog("menu", logMessage);
+		escribirLog("menu", logMessage);
 	}
 
 	// Metodo para escribir logs de informacion sobre las acciones de los usuarios y fecha y hora de la accion realizada
-	private static void EscribirLog(String tipoLog, String mensajeLog) {
+	private static void escribirLog(String tipoLog, String mensajeLog) {
 
 		String fechaActual = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		String rutaDirectorioLog = CARPETA_LOGS + fechaActual + "/";
