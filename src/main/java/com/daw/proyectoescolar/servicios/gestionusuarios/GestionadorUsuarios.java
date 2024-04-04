@@ -252,7 +252,7 @@ public class GestionadorUsuarios {
 															// archivo
 					fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña()
 							+ ";" + usuario.getDni() + (usuario.getTipoUsuario().equals("Alumno") ? ";0.0" : "")
-							+ "\n");
+							+ "\n"); 
 				}
 
 			}
