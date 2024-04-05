@@ -4,6 +4,7 @@ import com.daw.proyectoescolar.entidades.Temas;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListaDeTemas {
@@ -223,6 +224,11 @@ public class ListaDeTemas {
 					
 				}
 			}
-		}
+		} catch (IOException e) {
+			System.err.println("Error al leer el archivo: " + e.getMessage());
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los temas por defecto.");
+		} 
+		
 	}
 }
