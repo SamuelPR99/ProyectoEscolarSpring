@@ -195,18 +195,20 @@ public class ListaDeTemas {
 				
 				switch (nombreTema) {
 
-				case "1":
+				case "Teoría de la Probabilidad Estocástica":
 					ListaDeTemas.add(new Tema1(descripcionTema));
 					break;
-				case "2":
-				
-				case "3": 
 					
-				case "4":
+				case "Teoría de Números Avanzada":
 				
-				case "5": 
+					
+				case "Análisis Funcional": 
+					
+				case "Topología Algebraica":
 				
-				case "6": 
+				case "Teoría de Representación de Grupos": 
+				
+				case "Teoría de la Aproximación y Funciones Especiales": 
 					
 					
 				}
