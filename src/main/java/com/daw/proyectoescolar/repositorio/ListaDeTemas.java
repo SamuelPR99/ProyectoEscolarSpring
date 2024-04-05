@@ -17,7 +17,7 @@ public class ListaDeTemas {
 		super();
 	}
 
-	public ListaDeTemas(ArrayList<Temas> listaDeTemas, String nombreTema, String descripcionTema, String contenidoTema) {
+	public ListaDeTemas(ArrayList<Temas> listaDeTemas) {
 		
 		super();
 		ListaDeTemas = listaDeTemas;
@@ -197,33 +197,28 @@ public class ListaDeTemas {
 				switch (nombreTema) {
 
 				case "Teoría de la Probabilidad Estocástica":
-					ListaDeTemas.add(new Tema1(descripcionTema));
-					ListaDeTemas.add(new Tema1(contenidoTema));
+					ListaDeTemas.add(new Tema3(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				case "Teoría de Números Avanzada":
-					ListaDeTemas.add(new Tema2(descripcionTema));
-					ListaDeTemas.add(new Tema2(contenidoTema));
+					ListaDeTemas.add(new Tema3(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				case "Análisis Funcional": 
-					ListaDeTemas.add(new Tema3(descripcionTema));
-					ListaDeTemas.add(new Tema3(contenidoTema));
+					ListaDeTemas.add(new Tema3(nombreTema, descripcionTema, contenidoTema));
+				
 					break;
 					
 				case "Topología Algebraica":
-					ListaDeTemas.add(new Tema4(descripcionTema));
-					ListaDeTemas.add(new Tema4(contenidoTema));
+					ListaDeTemas.add(new Tema3(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				case "Teoría de Representación de Grupos": 
-					ListaDeTemas.add(new Tema5(descripcionTema));
-					ListaDeTemas.add(new Tema5(contenidoTema));
+					ListaDeTemas.add(new Tema3(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				case "Teoría de la Aproximación y Funciones Especiales": 
-					ListaDeTemas.add(new Tema6(descripcionTema));
-					ListaDeTemas.add(new Tema6(contenidoTema));
+					ListaDeTemas.add(new Tema3(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				}
