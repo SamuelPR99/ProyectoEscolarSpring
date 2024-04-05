@@ -107,6 +107,7 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia de alumno: ");
             incidenciaAlumno.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaAlumno);
+            imprimirIncidenciasFichero(incidenciaAlumno);
             
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
             
@@ -118,6 +119,7 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia de profesor: ");
             incidenciaProfesor.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaProfesor);
+            imprimirIncidenciasFichero(incidenciaProfesor);
             
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
             
@@ -129,6 +131,7 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia aplicación: ");
             incidenciaAplicacion.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaAplicacion);
+            imprimirIncidenciasFichero(incidenciaAplicacion);
             
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de aplicacion añadida con exito!" + Colores.ANSI_RESET);
             
@@ -367,7 +370,7 @@ public class GestionDeIncidencias {
 		
 		File file = new File("src/main/java/com/daw/proyectoescolar/repositorio/incidencias.csv");
 		
-		 FileWriter fw = new FileWriter(file);
+		 FileWriter fw = new FileWriter(file, true);
 		
 		    BufferedWriter bw = new BufferedWriter(fw); 
 		    bw.write(incidencia.getIncidencia());
@@ -375,34 +378,6 @@ public class GestionDeIncidencias {
 		    bw.close(); 
 		    fw.close(); 
 		    
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		} 
-		
-	}
-	
-	public void leerFichero(File file) {
-		
-		try {
-		
-		FileReader fr = new FileReader(file);
-	    BufferedReader br = new BufferedReader(fr);
-	    String linea;
-	    
-	    do {
-	    	
-	        linea = br.readLine(); 
-	        
-	        if (linea != null) {
-	            System.out.println(linea);
-	        }
-	        
-	    } while(linea != null);
-	    
-	    br.close();
-	    fr.close();
-	    
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -425,15 +400,15 @@ public class GestionDeIncidencias {
 				
 				switch (tipoIncidencia) {
 
-				case "Profesor":
+				case "incidenciaAlumno", "IncidenciaAlumno":
 					listaIncidencias.add(new IncidenciaAlumno(descripcionIncidencia));
 					break;
 
-				case "Alumno":
+				case "incidenciaProfesor", "IncidenciaProfesor":
 					listaIncidencias.add(new IncidenciaProfesor(descripcionIncidencia));
 					break;
 
-				case "Aplicacion", "Aplicación":
+				case "incidenciaAplicacion", "IncidenciaAplicacion", "incidenciaAplicación", "IncidenciaAplicación":
 					listaIncidencias.add(new IncidenciaAplicacion(descripcionIncidencia));
 					break;
 
