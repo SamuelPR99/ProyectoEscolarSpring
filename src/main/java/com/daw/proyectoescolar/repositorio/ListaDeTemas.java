@@ -2,11 +2,16 @@ package com.daw.proyectoescolar.repositorio;
 
 import com.daw.proyectoescolar.entidades.Temas;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class ListaDeTemas {
 	
+
+	
 	protected ArrayList<Temas> ListaDeTemas;
+	
 	
 	public ListaDeTemas() {
 		super();
@@ -173,4 +178,39 @@ public class ListaDeTemas {
 		ListaDeTemas.add(tema63);
 	}
 	
+	
+	public void archivoTemas() {
+		
+		ListaDeTemas = new ArrayList<Temas>();
+		try (BufferedReader br = new BufferedReader(
+				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/temas.csv"))) {
+
+			String linea;
+			while ((linea = br.readLine()) != null) {
+
+				String[] datos = linea.split(";"); // Separar los datos por punto y coma
+				String nombreTema = datos[0]; // nombre del tema
+				String descripcionTema = datos[1]; // descripcion del tema 
+				String contenidoTema = datos[2]; // Dificultad y tarea
+				
+				switch (nombreTema) {
+
+				case "1":
+					ListaDeTemas.add(new Tema1(descripcionTema));
+					break;
+				case "2":
+				
+				case "3": 
+					
+				case "4":
+				
+				case "5": 
+				
+				case "6": 
+					
+					
+				}
+			}
+		}
+	}
 }
