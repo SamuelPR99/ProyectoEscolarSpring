@@ -415,11 +415,13 @@ public class GestionadorUsuarios {
 	public ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
 
 		ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<>();
+		
+		String linea = null;
 
 		try (BufferedReader br = new BufferedReader(
 				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv"))) {
 
-			String linea;
+			
 
 			while ((linea = br.readLine()) != null) {
 
@@ -458,7 +460,7 @@ public class GestionadorUsuarios {
 		} catch (IOException e) {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
 			GestionLogs.errorLogs(
-					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto. " + linea);
 		}
 
 		return usuariosDefecto;
