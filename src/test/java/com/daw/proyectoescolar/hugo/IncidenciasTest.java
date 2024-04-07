@@ -1,7 +1,6 @@
 package com.daw.proyectoescolar.hugo;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,11 +10,11 @@ import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.daw.proyectoescolar.servicios.incidencias.*;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
-
-import java.util.ArrayList;
+import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
+import com.daw.proyectoescolar.servicios.incidencias.IncidenciaAlumno;
+import com.daw.proyectoescolar.servicios.incidencias.IncidenciaAplicacion;
+import com.daw.proyectoescolar.servicios.incidencias.IncidenciaProfesor;
+import com.daw.proyectoescolar.servicios.incidencias.Incidencias;
 
 class IncidenciasTest {
 
