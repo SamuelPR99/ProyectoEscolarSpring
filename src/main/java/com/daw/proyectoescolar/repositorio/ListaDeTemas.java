@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class ListaDeTemas {
 	
-
-	
 	protected ArrayList<Temas> ListaDeTemas;
 	
 	
