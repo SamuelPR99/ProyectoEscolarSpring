@@ -402,15 +402,15 @@ public class GestionDeIncidencias {
 				
 				switch (tipoIncidencia) {
 
-				case "incidenciaAlumno", "IncidenciaAlumno":
+				case "Alumno":
 					listaIncidenciasFichero.add(new IncidenciaAlumno(descripcionIncidencia));
 					break;
 
-				case "incidenciaProfesor", "IncidenciaProfesor":
+				case "Profesor":
 					listaIncidenciasFichero.add(new IncidenciaProfesor(descripcionIncidencia));
 					break;
 
-				case "incidenciaAplicacion", "IncidenciaAplicacion", "incidenciaAplicación", "IncidenciaAplicación":
+				case "Aplicacion":
 					listaIncidenciasFichero.add(new IncidenciaAplicacion(descripcionIncidencia));
 					break;
 
