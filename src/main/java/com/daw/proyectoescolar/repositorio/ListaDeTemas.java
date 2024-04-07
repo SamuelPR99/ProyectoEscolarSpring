@@ -9,29 +9,33 @@ import java.util.ArrayList;
 
 public class ListaDeTemas {
 	
-	protected ArrayList<Temas> ListaDeTemas;
+	protected ArrayList<Temas> listaDeTemas;
 	
-	
+	// Constructores
 	public ListaDeTemas() {
 		super();
 	}
 
-	public ListaDeTemas(ArrayList<Temas> listaDeTemas) {
-		
+	public ListaDeTemas(ArrayList<Temas> listaDeTemas) {		
 		super();
-		ListaDeTemas = listaDeTemas;
+		this.listaDeTemas = listaDeTemas;
 	}
 
+	// Getters y Setters
 	public ArrayList<Temas> getListaDeTemas() {
-		return ListaDeTemas;
+		return listaDeTemas;
 	}
 
 	public void setListaDeTemas(ArrayList<Temas> listaDeTemas) {
-		ListaDeTemas = listaDeTemas;
+		this.listaDeTemas = listaDeTemas;
 	}
+	
+	// Metodos
+	
+	// Metodo para leer temas del archivo
 	public void archivoTemas() {
 		
-		ListaDeTemas = new ArrayList<>();
+		listaDeTemas = new ArrayList<>();
 		try (BufferedReader br = new BufferedReader(
 				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/temas.csv"))) {
 
@@ -46,28 +50,28 @@ public class ListaDeTemas {
 				switch(nombreTema) {
 
 				case "Teoría de la Probabilidad Estocástica":
-					ListaDeTemas.add(new Tema1(nombreTema, descripcionTema, contenidoTema));
+					listaDeTemas.add(new Tema1(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				case "Teoría de Números Avanzada":
-					ListaDeTemas.add(new Tema2(nombreTema, descripcionTema, contenidoTema));
+					listaDeTemas.add(new Tema2(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				case "Análisis Funcional": 
-					ListaDeTemas.add(new Tema3(nombreTema, descripcionTema, contenidoTema));
+					listaDeTemas.add(new Tema3(nombreTema, descripcionTema, contenidoTema));
 				
 					break;
 					
 				case "Topología Algebraica":
-					ListaDeTemas.add(new Tema4(nombreTema, descripcionTema, contenidoTema));
+					listaDeTemas.add(new Tema4(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				case "Teoría de Representación de Grupos": 
-					ListaDeTemas.add(new Tema5(nombreTema, descripcionTema, contenidoTema));
+					listaDeTemas.add(new Tema5(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				case "Teoría de la Aproximación y Funciones Especiales": 
-					ListaDeTemas.add(new Tema6(nombreTema, descripcionTema, contenidoTema));
+					listaDeTemas.add(new Tema6(nombreTema, descripcionTema, contenidoTema));
 					break;
 					
 				default:
@@ -77,6 +81,7 @@ public class ListaDeTemas {
 					
 				}
 			}
+			
 		} catch (IOException e) {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
 			GestionLogs.errorLogs(
@@ -84,4 +89,5 @@ public class ListaDeTemas {
 		} 
 		
 	}
+	
 }
