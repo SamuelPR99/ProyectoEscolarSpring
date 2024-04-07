@@ -17,15 +17,15 @@ public abstract class UsuarioBase implements Usuario {
 	    
 	    // Constructores
 	    
-	    public UsuarioBase() {
+	    protected UsuarioBase() {
 		}
 
-	    public UsuarioBase(String nombre, String contraseña) {
+	    protected UsuarioBase(String nombre, String contraseña) {
 	        this.nombre = nombre;
 	        this.contraseña = contraseña;
 	    }
 	    
-		public UsuarioBase(String nombreUsuario, String contrasena, String dni) {
+		protected UsuarioBase(String nombreUsuario, String contrasena, String dni) {
 			this.nombre = nombreUsuario;
 			this.contraseña = contrasena;
 			this.dni = dni;

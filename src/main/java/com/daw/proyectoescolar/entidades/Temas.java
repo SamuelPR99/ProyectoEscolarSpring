@@ -6,14 +6,13 @@ public abstract class Temas {
 	protected String nombre;
 	protected String descripcion;
 	protected String contenidoTarea;
-	protected String Temas;
 	
 	// Constructores
-	public Temas() {
+	protected Temas() {
 		
 	}
 
-	public Temas(String nombre, String descripcion, String contenidoTarea) {
+	protected Temas(String nombre, String descripcion, String contenidoTarea) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
