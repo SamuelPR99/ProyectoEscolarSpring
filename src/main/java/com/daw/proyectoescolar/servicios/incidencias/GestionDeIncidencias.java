@@ -417,7 +417,7 @@ public class GestionDeIncidencias {
 					listaIncidencias.add(new IncidenciaProfesor(descripcionIncidencia));
 					break;
 
-				case "Aplicacion", "Aplicación":
+				case "Aplicacion":
 					listaIncidencias.add(new IncidenciaAplicacion(descripcionIncidencia));
 					break;
 
