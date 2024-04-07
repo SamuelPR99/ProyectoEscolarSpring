@@ -1,12 +1,14 @@
 package com.daw.proyectoescolar.servicios.incidencias;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.entidades.Administrador;
-import com.daw.proyectoescolar.entidades.Alumno;
-import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.GestionLogs;
 
