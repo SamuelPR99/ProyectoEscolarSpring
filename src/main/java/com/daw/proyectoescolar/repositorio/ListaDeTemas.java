@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class ListaDeTemas {
 	
-
-	
 	protected ArrayList<Temas> ListaDeTemas;
 	
 	
@@ -181,6 +179,7 @@ public class ListaDeTemas {
 	}
 	
 	
+/*------------------------------------------------------------------------------------------------------------------*/
 	public void archivoTemas() {
 		
 		ListaDeTemas = new ArrayList<Temas>();
