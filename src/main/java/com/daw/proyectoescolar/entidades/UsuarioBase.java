@@ -12,22 +12,22 @@ public abstract class UsuarioBase implements Usuario {
 		// Atributos
 		
 	    protected String nombre;
-	    protected String contraseña;
+	    protected String contrasena;
 	    protected String dni;
 	    
 	    // Constructores
 	    
-	    public UsuarioBase() {
+	    protected UsuarioBase() {
 		}
 
-	    public UsuarioBase(String nombre, String contraseña) {
+	    protected UsuarioBase(String nombre, String contrasena) {
 	        this.nombre = nombre;
-	        this.contraseña = contraseña;
+	        this.contrasena = contrasena;
 	    }
 	    
-		public UsuarioBase(String nombreUsuario, String contrasena, String dni) {
+		protected UsuarioBase(String nombreUsuario, String contrasena, String dni) {
 			this.nombre = nombreUsuario;
-			this.contraseña = contrasena;
+			this.contrasena = contrasena;
 			this.dni = dni;
 		}
 		
@@ -43,12 +43,12 @@ public abstract class UsuarioBase implements Usuario {
 		}
 
 		@Override
-		public String getContraseña() {
-			return contraseña;
+		public String getContrasena() {
+			return contrasena;
 		}
 
-		public void setContraseña(String contraseña) {
-			this.contraseña = contraseña;
+		public void setContrasena(String contrasena) {
+			this.contrasena = contrasena;
 		}
 		
 		public String getDni() {

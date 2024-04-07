@@ -38,7 +38,7 @@ class GestionUsuariosTest {
         usuarios.add(usuario);
         
         assertEquals("Pepe", usuario.getNombre());
-        assertEquals("pass1", usuario.getContraseña());
+        assertEquals("pass1", usuario.getContrasena());
         assertEquals("12345678A", usuario.getDni());
         assertEquals(0.0, usuario.getNota());
     	        
@@ -51,7 +51,7 @@ class GestionUsuariosTest {
         usuarios.add(usuario);
         
         assertEquals("Paquito", usuario.getNombre());
-        assertEquals("pass1", usuario.getContraseña());
+        assertEquals("pass1", usuario.getContrasena());
         assertEquals("12345678A", usuario.getDni());
         
 	}
@@ -112,7 +112,7 @@ class GestionUsuariosTest {
         UsuarioBase usuario = new Profesor("Guillamon", "pass1", "12345678Z");
         usuarios.add(usuario);
 
-        gestion.cambiarContraseña("NuevaContraseña", usuario);
+        gestion.cambiarContrasena("NuevaContraseña", usuario);
 
         UsuarioBase usuarioModificado = gestion.login("Guillamon", "NuevaContraseña", usuarios);
         
@@ -124,7 +124,7 @@ class GestionUsuariosTest {
     void testCambiarContraseñaUsuarioNoExistente() { //MOD_008
     	
         UsuarioBase usuario = new Profesor("UsuarioConContraseña", "contraseña", "12345678A");
-        gestion.cambiarContraseña("NuevaContraseña", usuario);
+        gestion.cambiarContrasena("NuevaContraseña", usuario);
         UsuarioBase usuarioModificado = gestion.login("UsuarioConContraseña", "NuevaContraseña", usuarios);
         
         assertNull(usuarioModificado);

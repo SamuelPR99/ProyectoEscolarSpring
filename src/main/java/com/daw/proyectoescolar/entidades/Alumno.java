@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.GestionLogs;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
@@ -11,25 +12,25 @@ public class Alumno extends UsuarioBase {
     
     // Atributos
     protected double nota;
-    protected ArrayList<Tarea> tareasAsignadas = new ArrayList<Tarea>();
+    protected ArrayList<Tarea> tareasAsignadas = new ArrayList<>();
     
 
     // Constructores
     public Alumno() {
     }
 
-    public Alumno(String nombre, String contraseña, double nota) {
-        super(nombre, contraseña);
+    public Alumno(String nombre, String contrasena, double nota) {
+        super(nombre, contrasena);
         this.nota = nota;
     }
 
-    public Alumno(String nombre, String contraseña, String dni) {
-        super(nombre, contraseña, dni);
+    public Alumno(String nombre, String contrasena, String dni) {
+        super(nombre, contrasena, dni);
         
     }
     
-    public Alumno(String nombre, String contraseña, String dni, double nota) {
-        super(nombre, contraseña, dni);
+    public Alumno(String nombre, String contrasena, String dni, double nota) {
+        super(nombre, contrasena, dni);
         this.nota = nota;
         
     }
@@ -65,7 +66,7 @@ public class Alumno extends UsuarioBase {
     
     @Override
     public String getTipoUsuario() {
-        return "Alumno";
+        return Constantes.ALUMNO;
     }
        
     @Override
@@ -90,32 +91,32 @@ public class Alumno extends UsuarioBase {
             switch (opcion) {
             
                 case "1", "ver nota":
-                    GestionLogs.logOpcionMenu("Menu Alumno", "Ver nota");
+                    GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Ver nota");
                     System.out.println("Nota actual: " + getNota());
                     break;
 
                 case "2", "recomendar tarea":
-                    GestionLogs.logOpcionMenu("Menu Alumno", "Recomendar tarea");
+                    GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Recomendar tarea");
                     gestor.recomendarTareaYMostrar(this);
                     break;
 
                 case "3", "consultar tareas pendientes":
-                    GestionLogs.logOpcionMenu("Menu Alumno", "Consultar tareas pendientes");
+                    GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Consultar tareas pendientes");
                     gestor.consultarTareasPendientes(this);
                     break;
 
                 case "4", "entregar tarea":
-                	GestionLogs.logOpcionMenu("Menu Alumno", "Entregar tarea");
+                	GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Entregar tarea");
                     gestor.marcarTareaCompletada(this, sc);
                     break;
                     
                 case "5", "Cambiar contraseña":
-					GestionLogs.logOpcionMenu("Menu Alumno", "Cambiar contraseña");
-	            	gestor.cambiarContraseña(sc, this);
+					GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Cambiar contraseña");
+	            	gestor.cambiarContrasena(sc, this);
                 	break;
 
                 case "6", "salir del menu", "salir", "salir del":
-                	GestionLogs.logOpcionMenu("Menu Alumno", "Salir del menu");
+                	GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Salir del menu");
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de alumno..." + Colores.ANSI_RESET);
                     break;
 
