@@ -32,7 +32,7 @@ class GestionUsuariosTest {
     }
     
     @Test
-	public void testCrearAlumno() { //MOD_001
+	void testCrearAlumno() { //MOD_001
 		
         Alumno usuario = new Alumno("Pepe", "pass1", "12345678A", 0.0);
         usuarios.add(usuario);
@@ -45,7 +45,7 @@ class GestionUsuariosTest {
 	}
     
     @Test
-	public void testCrearProfesor() { //MOD_002
+	void testCrearProfesor() { //MOD_002
 		
         Profesor usuario = new Profesor("Paquito", "pass1", "12345678A");
         usuarios.add(usuario);
@@ -57,7 +57,7 @@ class GestionUsuariosTest {
 	}
 
     @Test
-    public void testLoginUsuarioRegistrado() { //MOD_003
+    void testLoginUsuarioRegistrado() { //MOD_003
     	
         UsuarioBase usuario = gestion.login("Guillamon", "pass1", usuarios);
         
@@ -67,7 +67,7 @@ class GestionUsuariosTest {
     }
 
     @Test
-    public void testLoginUsuarioNoRegistrado() { //MOD_004
+    void testLoginUsuarioNoRegistrado() { //MOD_004
     	
         UsuarioBase usuario = gestion.login("test-usuario", "test-contraseña", usuarios);
         
@@ -76,7 +76,7 @@ class GestionUsuariosTest {
     }
     
     @Test
-    public void testRegistro() { //MOD_005
+    void testRegistro() { //MOD_005
     	
         String nombre = "test-usuario";
         String dni = "12345678Z";
@@ -93,7 +93,7 @@ class GestionUsuariosTest {
     }
     
     @Test
-    public void testBorrarUsuario() { //MOD_006
+    void testBorrarUsuario() { //MOD_006
     	
         UsuarioBase usuarioExistente = gestion.login("Guillamon", "pass1", usuarios);
         
@@ -107,7 +107,7 @@ class GestionUsuariosTest {
     }
 
     @Test
-    public void testModificarContraseña() { //MOD_007
+    void testModificarContraseña() { //MOD_007
     	
         UsuarioBase usuario = new Profesor("Guillamon", "pass1", "12345678Z");
         usuarios.add(usuario);
@@ -121,7 +121,7 @@ class GestionUsuariosTest {
     }
     
     @Test
-    public void testCambiarContraseñaUsuarioNoExistente() { //MOD_008
+    void testCambiarContraseñaUsuarioNoExistente() { //MOD_008
     	
         UsuarioBase usuario = new Profesor("UsuarioConContraseña", "contraseña", "12345678A");
         gestion.cambiarContraseña("NuevaContraseña", usuario);
@@ -132,7 +132,7 @@ class GestionUsuariosTest {
     }
         
     @Test
-    public void testMostrarUsuarios() { //MOD_009
+    void testMostrarUsuarios() { //MOD_009
     	
         gestion.registro("Alumno1", "12345678A", "contraseña1", "alumno", usuarios);
         gestion.registro("Alumno2", "12345678B", "contraseña2", "alumno", usuarios);
@@ -143,7 +143,7 @@ class GestionUsuariosTest {
     }
     
     @Test
-    public void testVerEstadisticas() { //MOD_010
+    void testVerEstadisticas() { //MOD_010
     	
         gestion.registro("Alumno1", "12345678A", "contraseña1", "alumno", usuarios);
         gestion.registro("Alumno2", "12345678B", "contraseña2", "alumno", usuarios);
@@ -154,7 +154,7 @@ class GestionUsuariosTest {
     }
     
     @Test
-    public void testConsultarTareasPendientes() { //MOD_011
+    void testConsultarTareasPendientes() { //MOD_011
     	
         Alumno alumno = new Alumno("Alumno1", "contraseña", "12345678A", 0.0);
         alumno.agregarTarea(new Tarea("Tarea Avanzada"));
