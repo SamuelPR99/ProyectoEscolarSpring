@@ -22,4 +22,8 @@ public class Constantes {
 	public static final String MENU_PROFESORES = "Menu Profesores";
 	public static final String MENU_ADMINISTRADORES = "Menu Administradores";
 	
+	
+	public static final String AVANZA = "Avanzada";
+	public static final String BASICA = "Basica";
+	public static final String INTERMEDIA = "Intermedia";
 }
