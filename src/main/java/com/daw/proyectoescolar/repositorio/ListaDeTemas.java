@@ -31,6 +31,10 @@ public class ListaDeTemas {
 	}
 	
 	// Metodos
+	String dificultadAvanzada ="Avanzada";
+	public static String obtenerDificultadAvanzada() {
+		return "Avanzada";
+	}
 	
 	// Metodo para leer temas del archivo
 	public void archivoTemas() {
