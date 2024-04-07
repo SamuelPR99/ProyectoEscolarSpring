@@ -50,7 +50,7 @@ class IncidenciasTest {
 	}
 	
 	@Test
-	public void testMostrarMenuPrincipal() {
+	void testMostrarMenuPrincipal() {
 		
 		sc = new Scanner(System.in);
 		
@@ -59,7 +59,7 @@ class IncidenciasTest {
 	}
 	
 	@Test
-	public void testMensajeError() {
+	void testMensajeError() {
 		
 		when(scannerMock.nextLine())
 			.thenReturn("7") // Opción inválida dentro del menú principal \\
@@ -70,7 +70,7 @@ class IncidenciasTest {
 	}
 
 	@Test
-	public void testAñadirIncidenciaAlumno() {
+	void testAñadirIncidenciaAlumno() {
 		
         when(scannerMock.nextLine())
             .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -85,7 +85,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testAñadirIncidenciaProfesor() {
+	void testAñadirIncidenciaProfesor() {
 		
         when(scannerMock.nextLine())
             .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -100,7 +100,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testAñadirIncidenciaAplicacion() {
+	void testAñadirIncidenciaAplicacion() {
 		
         when(scannerMock.nextLine())
             .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -115,7 +115,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testListarIncidenciaAlumno() {
+	void testListarIncidenciaAlumno() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -132,7 +132,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testListarIncidenciaProfesor() {
+	void testListarIncidenciaProfesor() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -149,7 +149,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testListarIncidenciaAplicacion() {
+	void testListarIncidenciaAplicacion() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -166,7 +166,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testListarIncidenciasSinFiltrar() {
+	void testListarIncidenciasSinFiltrar() {
 		
         when(scannerMock.nextLine())
         
@@ -194,7 +194,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testEliminarIncidenciaAlumno() {
+	void testEliminarIncidenciaAlumno() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
@@ -210,7 +210,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testEliminarIncidenciaProfesor() {
+	void testEliminarIncidenciaProfesor() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
@@ -226,7 +226,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testEliminarIncidenciaAplicacion() {
+	void testEliminarIncidenciaAplicacion() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
@@ -242,7 +242,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testSalirDelMenu() {
+	void testSalirDelMenu() {
 		
         when(scannerMock.nextLine())
             .thenReturn("4"); // Sale de la aplicación \\
