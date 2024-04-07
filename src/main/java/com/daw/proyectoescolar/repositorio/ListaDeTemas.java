@@ -76,7 +76,7 @@ public class ListaDeTemas {
 					
 				default:
 					System.err.println("Tema no encontrado");
-					GestionLogs.errorLogs("Tema no encontrado");
+					GestionLogs.errorLogs("Tema no encontrado" + nombreTema + " No se han cargado los temas por defecto.");
 					break;
 					
 				}
