@@ -2,3 +2,6 @@
 [2024-04-07T11:51:45.679920500] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
 [2024-04-07T11:54:26.607598300] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
 [2024-04-07T13:27:36.819725400] ERROR: Usuario o contraseña incorrectos.Cannot invoke "com.daw.proyectoescolar.repositorio.ListaDeTemas.archivoTemas()" because "com.daw.proyectoescolar.servicios.tareas.GestionTemas.gestion" is null
+[2024-04-07T17:34:42.521760] ERROR: Incidencia no encontrada en el archivo de incidencias.Incidencia de tipo alumno no es una incidencia valida.
+[2024-04-07T17:34:42.528759700] ERROR: Incidencia no encontrada en el archivo de incidencias.Incidencia de tipo profesor no es una incidencia valida.
+[2024-04-07T17:34:42.529760600] ERROR: Incidencia no encontrada en el archivo de incidencias.Incidencia de tipo aplicacion no es una incidencia valida.
