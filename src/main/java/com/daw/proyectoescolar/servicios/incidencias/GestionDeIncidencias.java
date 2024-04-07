@@ -16,7 +16,7 @@ public class GestionDeIncidencias {
 	
 	// ATRIBUTOS DE LA CLASE \\
 
-	 private ArrayList<Incidencias> listaIncidencias = new ArrayList<Incidencias>();
+	 private ArrayList<Incidencias> listaIncidencias = imprimirIncidenciasFichero(new ArrayList<>());
 	
 	// CONSTRUCTORES \\
 	
@@ -109,6 +109,8 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia de alumno: ");
             incidenciaAlumno.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaAlumno);
+            imprimirIncidenciasFichero(listaIncidencias);
+            GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Alumno");
             
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
             
@@ -120,7 +122,9 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia de profesor: ");
             incidenciaProfesor.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaProfesor);
-            
+            imprimirIncidenciasFichero(listaIncidencias);
+            GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Profesor");
+
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
             
             break;
@@ -131,18 +135,21 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia aplicación: ");
             incidenciaAplicacion.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaAplicacion);
+            imprimirIncidenciasFichero(listaIncidencias);
+            GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Aplicacion");
             
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de aplicacion añadida con exito!" + Colores.ANSI_RESET);
             
             break;
             
         case "4", "volver":
-        	
+        	GestionLogs.logOpcionMenu("Menú Incidencias", "Volver al menú principal");	
         	break;
             
         default:
         	
         	System.err.println("Has introducido una opcion invalida.");
+        	GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de incidencias. " + opcion + " no es una opcion valida.");
 
 		}
 		
@@ -150,9 +157,8 @@ public class GestionDeIncidencias {
 		
 	} while (!opcion.equals("4") && !opcion.equals("volver"));
 		
-		
 		return getListaIncidencias();
-		
+	
 	}
 	
 	
@@ -289,28 +295,32 @@ public class GestionDeIncidencias {
 			case "1", "incidencia de alumno", "alumno":
 
 				eliminarIncidenciaAlumno();
+				GestionLogs.logOpcionMenu("Menú Incidencias", "Eliminar Incidencias de Alumno");
 
 				break;
 
 			case "2", "incidencia de profesor", "profesor":
 
 				eliminarIncidenciaProfesor();
+			    GestionLogs.logOpcionMenu("Menú Incidencias", "Eliminar Incidencias de Profesor");
 
 				break;
 
 			case "3", "incidencia de aplicacion", "aplicacion":
 
 				eliminarIncidenciaAplicacion();
+			    GestionLogs.logOpcionMenu("Menú Incidencias", "Eliminar Incidencias de Aplicacion");
 
 				break;
 
 			case "4", "volver":
-
+				GestionLogs.logOpcionMenu("Menú Incidencias", "Volver al menú principal");
 				break;
 
 			default:
 
 				System.err.println("Has introducido una opción invalida.");
+				GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de incidencias. " + opcion + " no es una opcion valida.");
 
 			}
 
@@ -372,7 +382,7 @@ public class GestionDeIncidencias {
 		 FileWriter fw = new FileWriter(file, true);
 		
 		    BufferedWriter bw = new BufferedWriter(fw); 
-		    bw.write("Incidencia de tipo " + incidencia.getTipoIncidencia().toLowerCase() + ";" + incidencia.getIncidencia() + "\n");
+		    bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + "\n");
 		    bw.flush();
 		    bw.close(); 
 		    fw.close(); 
@@ -384,8 +394,8 @@ public class GestionDeIncidencias {
 		
 	}
 	
-	public void imprimirIncidenciasFichero(Incidencias incidencia) {
-			
+	public ArrayList<Incidencias> imprimirIncidenciasFichero(ArrayList<Incidencias> listaIncidencias) {
+
 		try (BufferedReader br = new BufferedReader(
 				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/incidencias.csv"))) {
 
@@ -396,7 +406,7 @@ public class GestionDeIncidencias {
 				String[] datos = linea.split(";"); // Separar los datos por punto y coma
 				String tipoIncidencia = datos[0]; // Tipo de incidencia
 				String descripcionIncidencia = datos[1]; // Detalles de la incidencia
-				
+
 				switch (tipoIncidencia) {
 
 				case "Profesor":
@@ -413,15 +423,19 @@ public class GestionDeIncidencias {
 
 				default:
 					System.err.println("Incidencia no encontrada");
+					GestionLogs.errorLogs("Incidencia no encontrada en el archivo de incidencias." + tipoIncidencia + " no es una incidencia valida.");
 					break;
 				}
-				
-			}} catch (IOException e) {
-				System.err.println("Error al leer el archivo: " + e.getMessage());
-				GestionLogs.errorLogs(
-						"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
-			} 
+			}
+
+		} catch (IOException e) {
+			System.err.println("Error al leer el archivo: " + e.getMessage());
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+		}
 		
+		return listaIncidencias;
+
 	}
 
 	public ArrayList<Incidencias> getListaIncidencias() {
