@@ -38,3 +38,24 @@
 [2024-04-07T11:59:53.105898700] MENU 'Menu Principal' OPCION: Gestion de incidencias
 [2024-04-07T11:59:53.671140600] MENU 'Menú Incidencias' OPCION: Añadir Incidencias
 [2024-04-07T12:00:05.895224900] MENU 'Menú Incidencias' OPCION: Listar Incidencias
+[2024-04-07T12:31:21.409400800] MENU 'Menu Principal' OPCION: Gestion de incidencias
+[2024-04-07T12:31:22.743820700] MENU 'Menú Incidencias' OPCION: Listar Incidencias
+[2024-04-07T12:37:49.643457100] MENU 'Menu Principal' OPCION: Gestion de incidencias
+[2024-04-07T12:37:51.927585] MENU 'Menú Incidencias' OPCION: Añadir Incidencias
+[2024-04-07T12:37:56.489172400] MENU 'Menú Incidencias' OPCION: Listar Incidencias
+[2024-04-07T12:38:44.325158600] MENU 'Menu Principal' OPCION: Gestion de incidencias
+[2024-04-07T12:38:45.649134500] MENU 'Menú Incidencias' OPCION: Listar Incidencias
+[2024-04-07T12:40:10.341711700] MENU 'Menu Principal' OPCION: Gestion de incidencias
+[2024-04-07T12:40:11.664482700] MENU 'Menú Incidencias' OPCION: Listar Incidencias
+[2024-04-07T12:40:36.372508300] MENU 'Menu Principal' OPCION: Iniciar sesion
+[2024-04-07T12:40:40.544252900] MENU 'Menu Alumno' OPCION: Ver nota
+[2024-04-07T12:40:41.598668100] MENU 'Menu Alumno' OPCION: Recomendar tarea
+[2024-04-07T12:40:42.880092200] MENU 'Menu Alumno' OPCION: Consultar tareas pendientes
+[2024-04-07T12:40:43.960754700] MENU 'Menu Alumno' OPCION: Entregar tarea
+[2024-04-07T12:40:51.928316400] MENU 'Menu Alumno' OPCION: Salir del menu
+[2024-04-07T12:40:53.639694700] MENU 'Menu Principal' OPCION: Iniciar sesion
+[2024-04-07T12:40:58.535902300] MENU 'Menu Administrador' OPCION: Mostrar usuarios registrados
+[2024-04-07T12:41:02.297212600] MENU 'Menu Administrador' OPCION: Crear un usuario
+[2024-04-07T12:41:38.976302100] MENU 'Menu Administrador' OPCION: Mostrar usuarios registrados
+[2024-04-07T12:41:40.160683100] MENU 'Menu Administrador' OPCION: Salir del menu
+[2024-04-07T12:41:40.903795900] MENU 'Menu Principal' OPCION: Salir
