@@ -24,6 +24,15 @@ public class GestionDeIncidencias {
 		
 	}
 	
+	// GETTERS Y SETTERS \\
+	public ArrayList<Incidencias> getListaIncidencias() {
+		return listaIncidencias;
+	}
+
+	public void setListaIncidencias(ArrayList<Incidencias> listaIncidencias) {
+		this.listaIncidencias = listaIncidencias;
+	}
+	
 	// METODOS \\
 	
 	// MENU PRINCIPAL DE LA GESTION DE INCIDENCIAS \\
@@ -438,12 +447,6 @@ public class GestionDeIncidencias {
 
 	}
 
-	public ArrayList<Incidencias> getListaIncidencias() {
-		return listaIncidencias;
-	}
 
-	public void setListaIncidencias(ArrayList<Incidencias> listaIncidencias) {
-		this.listaIncidencias = listaIncidencias;
-	}
     
 }
