@@ -29,7 +29,7 @@ public class ListaDeTemas {
 	public void setListaDeTemas(ArrayList<Temas> listaDeTemas) {
 		ListaDeTemas = listaDeTemas;
 	}
-
+/*
 	public void temasIniciados() {
 		
 		ListaDeTemas = new ArrayList<Temas>();
@@ -177,7 +177,7 @@ public class ListaDeTemas {
 		
 		ListaDeTemas.add(tema63);
 	}
-	
+	/*
 	
 /*------------------------------------------------------------------------------------------------------------------*/
 	public void archivoTemas() {
