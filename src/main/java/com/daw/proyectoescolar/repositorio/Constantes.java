@@ -11,15 +11,15 @@ public class Constantes {
 	public static final String ADMINISTRADOR = "Administrador";
 	
 	public static final String VALID = "Tipo de usuario no valido.";
-	public static final String NUMTAREAVALID = "Numero de tarea no valido.";
-	public static final String NUMSELEC = " Numero seleccionado: ";
-	public static final String ERRORARCHIVO = "Error al escribir en el archivo: ";
+	public static final String NUM_TAREA_VALID = "Numero de tarea no valido.";
+	public static final String NUM_SELEC = " Numero seleccionado: ";
+	public static final String ERROR_ARCHIVO = "Error al escribir en el archivo: ";
 	
-	public static final String RUTAUSUARIOS = "src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv";
+	public static final String RUTA_USUARIOS = "src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv";
 	
-	public static final String MENUPRINCIPAL = "Menu Principal";
-	public static final String MENUALUMNOS = "Menu Alumnos";
-	public static final String MENUPROFESORES = "Menu Profesores";
-	public static final String MENUADMINISTRADORES = "Menu Administradores";
+	public static final String MENU_PRINCIPAL = "Menu Principal";
+	public static final String MENU_ALUMNOS = "Menu Alumnos";
+	public static final String MENU_PROFESORES = "Menu Profesores";
+	public static final String MENU_ADMINISTRADORES = "Menu Administradores";
 	
 }

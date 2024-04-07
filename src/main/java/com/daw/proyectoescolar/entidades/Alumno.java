@@ -91,32 +91,32 @@ public class Alumno extends UsuarioBase {
             switch (opcion) {
             
                 case "1", "ver nota":
-                    GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Ver nota");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Ver nota");
                     System.out.println("Nota actual: " + getNota());
                     break;
 
                 case "2", "recomendar tarea":
-                    GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Recomendar tarea");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Recomendar tarea");
                     gestor.recomendarTareaYMostrar(this);
                     break;
 
                 case "3", "consultar tareas pendientes":
-                    GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Consultar tareas pendientes");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Consultar tareas pendientes");
                     gestor.consultarTareasPendientes(this);
                     break;
 
                 case "4", "entregar tarea":
-                	GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Entregar tarea");
+                	GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Entregar tarea");
                     gestor.marcarTareaCompletada(this, sc);
                     break;
                     
                 case "5", "Cambiar contraseña":
-					GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Cambiar contraseña");
+					GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Cambiar contraseña");
 	            	gestor.cambiarContrasena(sc, this);
                 	break;
 
                 case "6", "salir del menu", "salir", "salir del":
-                	GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Salir del menu");
+                	GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Salir del menu");
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de alumno..." + Colores.ANSI_RESET);
                     break;
 

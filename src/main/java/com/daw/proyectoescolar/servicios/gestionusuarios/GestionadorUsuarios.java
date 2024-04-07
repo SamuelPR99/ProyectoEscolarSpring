@@ -22,9 +22,7 @@ public class GestionadorUsuarios {
  private ArrayList<Tarea> listaDeTareas = new Tarea().archivoTareas();
  
      // Constructor vacio
-	 public GestionadorUsuarios() {
-    // TODO document why this constructor is empty
-		 }
+	 public GestionadorUsuarios() {}
 	 
 	 // Iniciar el menu principal
 	 public void iniciar(Scanner sc) {
@@ -50,7 +48,7 @@ public class GestionadorUsuarios {
 
 				case "1", "iniciar sesion":
 
-					GestionLogs.logOpcionMenu(Constantes.MENUPRINCIPAL, "Iniciar sesion");
+					GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Iniciar sesion");
 
 					UsuarioBase usuario = login(sc, usuarios);
 
@@ -72,13 +70,13 @@ public class GestionadorUsuarios {
 					break;
 
 				case "2", "gestion de incidencias":
-					GestionLogs.logOpcionMenu(Constantes.MENUPRINCIPAL, "Gestion de incidencias");
+					GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Gestion de incidencias");
 					GestionDeIncidencias gestionadorIncidencias = new GestionDeIncidencias();
 					gestionadorIncidencias.menuPrincipal(sc);
 					break;
 
 				case "3", "salir":
-					GestionLogs.logOpcionMenu(Constantes.MENUPRINCIPAL, "Salir");
+					GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Salir");
 					System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
 					break;
 
@@ -198,7 +196,7 @@ public class GestionadorUsuarios {
 	// Guardar un usuario en el archivo
 	public void guardarUsuario(UsuarioBase usuario) {
 
-		try (FileWriter fw = new FileWriter(Constantes.RUTAUSUARIOS, true)) { // Si es true: Añadir al final del archivo
+		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS, true)) { // Si es true: Añadir al final del archivo
 
 			// Escribir el usuario en el archivo con sus atributos separados por punto y
 			// coma, si es alumno se añade la nota por defecto (0.0)
@@ -208,8 +206,8 @@ public class GestionadorUsuarios {
 			fw.close();
 
 		} catch (IOException e) {
-			System.err.println(Constantes.ERRORARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERRORARCHIVO + e.getMessage() + " No se ha guardado el usuario.");
+			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha guardado el usuario.");
 		}
 
 	}
@@ -247,7 +245,7 @@ public class GestionadorUsuarios {
 
 		ArrayList<UsuarioBase> usuarios = usuarios();
 
-		try (FileWriter fw = new FileWriter(Constantes.RUTAUSUARIOS)) {
+		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS)) {
 
 			for (UsuarioBase usuario : usuarios) {
 				if (!usuario.getNombre().equals(nombre)) { // Si el nombre del usuario no coincide, se escribe en el
@@ -263,8 +261,8 @@ public class GestionadorUsuarios {
 			fw.close();
 
 		} catch (IOException e) {
-			System.err.println(Constantes.ERRORARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERRORARCHIVO + e.getMessage() + " No se ha borrado el usuario.");
+			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha borrado el usuario.");
 		}
 
 	}
@@ -312,7 +310,7 @@ public class GestionadorUsuarios {
 
 		ArrayList<UsuarioBase> usuarios = usuarios();
 
-		try (FileWriter fw = new FileWriter(Constantes.RUTAUSUARIOS)) {
+		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS)) {
 
 			for (UsuarioBase usuarioActual : usuarios) {
 				if (usuarioActual.getNombre().equals(usuario.getNombre())) {
@@ -328,8 +326,8 @@ public class GestionadorUsuarios {
 			fw.close();
 
 		} catch (IOException e) {
-			System.err.println(Constantes.ERRORARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERRORARCHIVO + e.getMessage() + " No se ha cambiado la contraseña.");
+			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha cambiado la contraseña.");
 		}
 
 	}
@@ -536,8 +534,8 @@ public class GestionadorUsuarios {
 			System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo()
 					+ "\" entregada correctamente." + Colores.ANSI_RESET);
 		} else {
-			System.err.println(Constantes.NUMTAREAVALID);
-			GestionLogs.errorLogs(Constantes.NUMTAREAVALID + Constantes.NUMSELEC + indiceTarea);
+			System.err.println(Constantes.NUM_TAREA_VALID);
+			GestionLogs.errorLogs(Constantes.NUM_TAREA_VALID + Constantes.NUM_SELEC + indiceTarea);
 		}
 	}
 
@@ -578,7 +576,7 @@ public class GestionadorUsuarios {
 
 		} else {
 			System.err.println("Numero de alumno no valido.");
-			GestionLogs.errorLogs("Numero de alumno no valido." + Constantes.NUMSELEC + numeroAlumno);
+			GestionLogs.errorLogs("Numero de alumno no valido." + Constantes.NUM_SELEC + numeroAlumno);
 		}
 
 	}
@@ -606,8 +604,8 @@ public class GestionadorUsuarios {
 			fw.close();
 
 		} catch (IOException e) {
-			System.err.println(Constantes.ERRORARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERRORARCHIVO + e.getMessage());
+			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage());
 		}
 
 	}
@@ -657,8 +655,8 @@ public class GestionadorUsuarios {
 			listaDeTareas.get(numeroTarea - 1).setTipo(nuevoTipo);
 			System.out.println(Colores.ANSI_GREEN + "Tarea modificada correctamente." + Colores.ANSI_RESET);
 		} else {
-			System.err.println(Constantes.NUMTAREAVALID);
-			GestionLogs.errorLogs(Constantes.NUMTAREAVALID + Constantes.NUMSELEC + numeroTarea);
+			System.err.println(Constantes.NUM_TAREA_VALID);
+			GestionLogs.errorLogs(Constantes.NUM_TAREA_VALID + Constantes.NUM_SELEC + numeroTarea);
 		}
 
 	}

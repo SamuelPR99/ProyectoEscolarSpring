@@ -57,27 +57,27 @@ public class Administrador extends UsuarioBase {
             switch (opcion) {
             
                 case "1", "mostrar usuarios registrados":
-                    GestionLogs.logOpcionMenu(Constantes.ADMINISTRADOR, "Mostrar usuarios registrados");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Mostrar usuarios registrados");
                     gestor.mostrarUsuarios(usuarios);
                     break;
 
                 case "2", "crear un usuario":
-                    GestionLogs.logOpcionMenu(Constantes.ADMINISTRADOR, "Crear un usuario");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Crear un usuario");
                     gestor.registro(sc, usuarios);
                     break;
 
                 case "3", "borrar un usuario":
-                    GestionLogs.logOpcionMenu(Constantes.ADMINISTRADOR, "Borrar un usuario");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Borrar un usuario");
                     gestor.borrarUsuario(sc, usuarios);
                     break;
 
                 case "4", "cambiar contraseña":
-                    GestionLogs.logOpcionMenu(Constantes.ADMINISTRADOR, "Cambiar contraseña");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Cambiar contraseña");
                     gestor.cambiarContrasena(sc, this);
                     break;
 
                 case "5", "salir del menu", "salir", "salir del":
-                    GestionLogs.logOpcionMenu(Constantes.ADMINISTRADOR, "Salir del menu");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Salir del menu");
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de administrador..." + Colores.ANSI_RESET);
                     break;
 
