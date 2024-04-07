@@ -107,7 +107,7 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia de alumno: ");
             incidenciaAlumno.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaAlumno);
-            imprimirIncidenciasFichero(incidenciaAlumno);
+            imprimirIncidenciasFichero(listaIncidencias);
             
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
             
@@ -119,7 +119,7 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia de profesor: ");
             incidenciaProfesor.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaProfesor);
-            imprimirIncidenciasFichero(incidenciaProfesor);
+            imprimirIncidenciasFichero(listaIncidencias);
             
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
             
@@ -131,7 +131,7 @@ public class GestionDeIncidencias {
             System.out.println("\nIntroduzca la incidencia aplicación: ");
             incidenciaAplicacion.setIncidencia(sc.nextLine());
             escribirFichero(incidenciaAplicacion);
-            imprimirIncidenciasFichero(incidenciaAplicacion);
+            imprimirIncidenciasFichero(listaIncidencias);
             
             System.out.println(Colores.ANSI_GREEN + "\nIncidencia de aplicacion añadida con exito!" + Colores.ANSI_RESET);
             
@@ -373,7 +373,7 @@ public class GestionDeIncidencias {
 		 FileWriter fw = new FileWriter(file, true);
 		
 		    BufferedWriter bw = new BufferedWriter(fw); 
-		    bw.write(incidencia.getIncidencia());
+		    bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + "\n");
 		    bw.flush();
 		    bw.close(); 
 		    fw.close(); 
@@ -385,12 +385,14 @@ public class GestionDeIncidencias {
 		
 	}
 	
-	public void imprimirIncidenciasFichero(Incidencias incidencia) {
+	public ArrayList<Incidencias> imprimirIncidenciasFichero(ArrayList<Incidencias> listaIncidencias) {
+		
+		ArrayList<Incidencias> listaIncidenciasFichero = new ArrayList<>();
 		
 		try (BufferedReader br = new BufferedReader(
 				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/incidencias.csv"))) {
 
-			String linea;
+			String linea = null;
 
 			while ((linea = br.readLine()) != null) {
 
@@ -401,15 +403,15 @@ public class GestionDeIncidencias {
 				switch (tipoIncidencia) {
 
 				case "incidenciaAlumno", "IncidenciaAlumno":
-					listaIncidencias.add(new IncidenciaAlumno(descripcionIncidencia));
+					listaIncidenciasFichero.add(new IncidenciaAlumno(descripcionIncidencia));
 					break;
 
 				case "incidenciaProfesor", "IncidenciaProfesor":
-					listaIncidencias.add(new IncidenciaProfesor(descripcionIncidencia));
+					listaIncidenciasFichero.add(new IncidenciaProfesor(descripcionIncidencia));
 					break;
 
 				case "incidenciaAplicacion", "IncidenciaAplicacion", "incidenciaAplicación", "IncidenciaAplicación":
-					listaIncidencias.add(new IncidenciaAplicacion(descripcionIncidencia));
+					listaIncidenciasFichero.add(new IncidenciaAplicacion(descripcionIncidencia));
 					break;
 
 				default:
@@ -422,6 +424,8 @@ public class GestionDeIncidencias {
 				GestionLogs.errorLogs(
 						"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
 			} 
+		
+		return listaIncidenciasFichero;
 		
 	}
 
