@@ -25,7 +25,7 @@ public class GestionadorUsuarios {
 	 // Iniciar el menu principal
 	 public void iniciar(Scanner sc) {
 		 
-		    ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+		    ArrayList<UsuarioBase> usuarios = usuarios();
 		    String opcion;
 		    
 		    System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al" 
@@ -243,7 +243,7 @@ public class GestionadorUsuarios {
 	// Borrar un usuario del archivo
 	public void borrarUsuarioArchivo(String nombre) {
 
-		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+		ArrayList<UsuarioBase> usuarios = usuarios();
 
 		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
 
@@ -309,7 +309,7 @@ public class GestionadorUsuarios {
 	// Cambiar la contraseña en el archivo
 	public void cambiarContraseñaArchivo(String nuevaContraseña, UsuarioBase usuario) {
 
-		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+		ArrayList<UsuarioBase> usuarios = usuarios();
 
 		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
 
@@ -412,7 +412,7 @@ public class GestionadorUsuarios {
 	 * 
 	 */
 
-	public ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase> usuariosRegistrados) {
+	public ArrayList<UsuarioBase> usuarios() {
 
 		ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<>();
 		
@@ -646,7 +646,7 @@ public class GestionadorUsuarios {
 	// Modificar la nota de un alumno en el archivo
 	public void modificarNotaAlumnoArchivo(double nuevaNota, Alumno alumno) {
 
-		ArrayList<UsuarioBase> usuarios = usuarios(new ArrayList<UsuarioBase>());
+		ArrayList<UsuarioBase> usuarios = usuarios();
 
 		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
 
