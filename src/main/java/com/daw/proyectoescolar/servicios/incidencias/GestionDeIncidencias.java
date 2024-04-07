@@ -386,9 +386,9 @@ public class GestionDeIncidencias {
 	}
 	
 	public ArrayList<Incidencias> imprimirIncidenciasFichero(ArrayList<Incidencias> listaIncidencias) {
-		
+
 		ArrayList<Incidencias> listaIncidenciasFichero = new ArrayList<>();
-		
+
 		try (BufferedReader br = new BufferedReader(
 				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/incidencias.csv"))) {
 
@@ -399,7 +399,7 @@ public class GestionDeIncidencias {
 				String[] datos = linea.split(";"); // Separar los datos por punto y coma
 				String tipoIncidencia = datos[0]; // Tipo de incidencia
 				String descripcionIncidencia = datos[1]; // Detalles de la incidencia
-				
+
 				switch (tipoIncidencia) {
 
 				case "Alumno":
@@ -418,15 +418,19 @@ public class GestionDeIncidencias {
 					System.err.println("Incidencia no encontrada");
 					break;
 				}
-				
-			}} catch (IOException e) {
-				System.err.println("Error al leer el archivo: " + e.getMessage());
-				GestionLogs.errorLogs(
-						"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
-			} 
-		
+
+			}
+			
+	        setListaIncidencias(listaIncidenciasFichero);
+
+		} catch (IOException e) {
+			System.err.println("Error al leer el archivo: " + e.getMessage());
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+		}
+
 		return listaIncidenciasFichero;
-		
+
 	}
 
 	public ArrayList<Incidencias> getListaIncidencias() {
