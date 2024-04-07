@@ -359,7 +359,7 @@ public class GestionadorUsuarios {
 		String linea = null;
 
 		try (BufferedReader br = new BufferedReader(
-				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv"))) {
+				new FileReader(Constantes.RUTA_USUARIOS))) {
 
 			while ((linea = br.readLine()) != null) {
 
