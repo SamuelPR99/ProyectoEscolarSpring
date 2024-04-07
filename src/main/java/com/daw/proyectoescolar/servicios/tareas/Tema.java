@@ -113,7 +113,7 @@ public class Tema {
 	// Array de temas con sus tareas
 	public static ArrayList<Tema> obtenerTemas() {
 		
-		ArrayList<Tema> temas = new ArrayList<Tema>();
+		ArrayList<Tema> temas = new ArrayList<>();
         ArrayList<Tarea> tareas = Tarea.obtenerTodasLasTareas();
                 
         Tema tema = new Tema();

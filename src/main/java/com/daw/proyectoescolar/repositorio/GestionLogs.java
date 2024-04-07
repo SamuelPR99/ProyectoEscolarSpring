@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class GestionLogs {
 	
 	// Constructores
-	public GestionLogs() {
+	private GestionLogs() {
 		
 	}
 

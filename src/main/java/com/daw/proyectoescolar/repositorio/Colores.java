@@ -1,6 +1,10 @@
 package com.daw.proyectoescolar.repositorio;
 
 public class Colores {
+	
+	private Colores() {
+		
+	}
 
     // Colores de texto
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -31,6 +35,5 @@ public class Colores {
 
     // Reset
     public static final String ANSI_RESET = "\u001B[0m"; // Reiniciar
-    
     
 }

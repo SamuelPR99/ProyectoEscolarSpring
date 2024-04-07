@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.GestionLogs;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
@@ -15,12 +16,12 @@ public class Administrador extends UsuarioBase {
 
     }
     
-    public Administrador(String nombre, String contraseña) {
-        super(nombre, contraseña);
+    public Administrador(String nombre, String contrasena) {
+        super(nombre, contrasena);
     }
     
-    public Administrador(String nombre, String contraseña, String dni) {
-        super(nombre, contraseña, dni);
+    public Administrador(String nombre, String contrasena, String dni) {
+        super(nombre, contrasena, dni);
     }
     
     // Getters y setters
@@ -29,7 +30,7 @@ public class Administrador extends UsuarioBase {
     
     @Override
     public String getTipoUsuario() {
-        return "Administrador";
+        return Constantes.ADMINISTRADOR;
     }
     
     
@@ -56,27 +57,27 @@ public class Administrador extends UsuarioBase {
             switch (opcion) {
             
                 case "1", "mostrar usuarios registrados":
-                    GestionLogs.logOpcionMenu("Menu Administrador", "Mostrar usuarios registrados");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Mostrar usuarios registrados");
                     gestor.mostrarUsuarios(usuarios);
                     break;
 
                 case "2", "crear un usuario":
-                    GestionLogs.logOpcionMenu("Menu Administrador", "Crear un usuario");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Crear un usuario");
                     gestor.registro(sc, usuarios);
                     break;
 
                 case "3", "borrar un usuario":
-                    GestionLogs.logOpcionMenu("Menu Administrador", "Borrar un usuario");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Borrar un usuario");
                     gestor.borrarUsuario(sc, usuarios);
                     break;
 
                 case "4", "cambiar contraseña":
-                    GestionLogs.logOpcionMenu("Menu Administrador", "Cambiar contraseña");
-                    gestor.cambiarContraseña(sc, this);
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Cambiar contraseña");
+                    gestor.cambiarContrasena(sc, this);
                     break;
 
                 case "5", "salir del menu", "salir", "salir del":
-                    GestionLogs.logOpcionMenu("Menu Administrador", "Salir del menu");
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Salir del menu");
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de administrador..." + Colores.ANSI_RESET);
                     break;
 

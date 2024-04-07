@@ -10,7 +10,7 @@ public interface Usuario {
 	 */
 	
 	public abstract String getNombre();
-	public abstract String getContraseña();
+	public abstract String getContrasena();
 	public abstract String getTipoUsuario();
 
 	// Implementa verMenu en los hijos del UsuarioBase

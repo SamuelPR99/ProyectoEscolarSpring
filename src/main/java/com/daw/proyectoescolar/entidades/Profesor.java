@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.GestionLogs;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
@@ -19,12 +20,12 @@ public class Profesor extends UsuarioBase {
 		
 	}
 	
-	public Profesor(String nombre, String contraseña) {
-        super(nombre, contraseña);
+	public Profesor(String nombre, String contrasena) {
+        super(nombre, contrasena);
     }
 	
-	public Profesor(String nombre, String contraseña, String dni) {
-		super(nombre, contraseña, dni);
+	public Profesor(String nombre, String contrasena, String dni) {
+		super(nombre, contrasena, dni);
 	}
 	
     // Getters y setters
@@ -33,7 +34,7 @@ public class Profesor extends UsuarioBase {
 		
     @Override
     public String getTipoUsuario() {
-        return "Profesor";
+        return Constantes.PROFESOR;
     }
     
     // Menu profesor
@@ -63,42 +64,42 @@ public class Profesor extends UsuarioBase {
 	        switch (opcion) {
 	        
 	        	case "1", "ver listado de temas":
-	        		GestionLogs.logOpcionMenu("Menu Profesor", "Ver listado de temas");
+	        		GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Ver listado de temas");
 	        		temitas.menuTemas(sc);
 	        		break;
 	        		
 	            case "2", "ver lista de alumnos":
-	            	GestionLogs.logOpcionMenu("Menu Profesor", "Ver lista de alumnos");
+	            	GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Ver lista de alumnos");
 	            	gestor.verNotasAlumnos(usuarios);
 	                break;
 
 	            case "3", "modificar nota de alumno":
-	            	GestionLogs.logOpcionMenu("Menu Profesor", "Modificar nota de alumno");
+	            	GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Modificar nota de alumno");
 	                gestor.modificarNotaAlumno(sc, usuarios);
 	                break;
 
 	            case "4", "ver estadísticas":
-	            	GestionLogs.logOpcionMenu("Menu Profesor", "Ver estadisticas");
+	            	GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Ver estadisticas");
 	                gestor.verEstadisticas(usuarios);
 	                break;
 
 	            case "5", "agregar nueva tarea":
-	            	GestionLogs.logOpcionMenu("Menu Profesor", "Agregar nueva tarea");
+	            	GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Agregar nueva tarea");
 	                gestor.agregarNuevaTarea(sc);
 	                break;
 
 	            case "6", "modificar tarea":
-	            	GestionLogs.logOpcionMenu("Menu Profesor", "Modificar tarea");
+	            	GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Modificar tarea");
 	                gestor.modificarTarea(sc);
 	                break;
 
 	            case "7", "cambiar contraseña":
-	            	GestionLogs.logOpcionMenu("Menu Profesor", "Cambiar contraseña");
-	            	gestor.cambiarContraseña(sc, this);
+	            	GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Cambiar contraseña");
+	            	gestor.cambiarContrasena(sc, this);
                 	break;
                    
 	            case "8", "salir del menu", "salir", "salir del":
-	            	GestionLogs.logOpcionMenu("Menu Profesor", "Salir del menu");
+	            	GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Salir del menu");
 	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de profesor..." + Colores.ANSI_RESET);
 	                break;
 
