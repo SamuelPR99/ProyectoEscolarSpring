@@ -29,7 +29,6 @@ public class ListaDeTemas {
 	public void setListaDeTemas(ArrayList<Temas> listaDeTemas) {
 		ListaDeTemas = listaDeTemas;
 	}
-
 	public void archivoTemas() {
 		
 		ListaDeTemas = new ArrayList<>();
