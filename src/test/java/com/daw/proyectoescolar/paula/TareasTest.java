@@ -129,7 +129,7 @@ class TareasTest {
 	@Test
 	void testTemasIniciados() {
 		ListaDeTemas listaDeTemas = new ListaDeTemas();
-		listaDeTemas.temasIniciados();
+		listaDeTemas.archivoTemas();
 
 		ArrayList<Temas> temas = listaDeTemas.getListaDeTemas();
 
@@ -202,7 +202,7 @@ class TareasTest {
 
 	@Test
 	void testObtenerTodasLasTareas() {
-		ArrayList<Tarea> tareas = Tarea.obtenerTodasLasTareas();
+		ArrayList<Tarea> tareas = new Tarea().archivoTareas();
 
 		// Verificar que la lista de tareas no sea nula
 		assertNotNull(tareas);

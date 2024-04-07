@@ -28,7 +28,7 @@ class GestionUsuariosTest {
         gestion = new GestionadorUsuarios();
         usuarios = gestion.usuarios();
         alumnos = gestion.obtenerAlumnos(usuarios);
-        listaDeTareas = Tarea.obtenerTodasLasTareas();
+        listaDeTareas = new Tarea().archivoTareas();
     }
     
     @Test
