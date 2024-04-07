@@ -365,54 +365,18 @@ public class GestionadorUsuarios {
 	}
 
 	// Debe contener 6 caracteres, no puede tener espacios, y debe contener minimo
-	// un caracter especial
+	// un caracter especial y una mayuscula
 	public boolean validarContraseña(String contraseña) {
 
-		if (contraseña.length() >= 6 && !contraseña.contains(" ") && contraseña.matches(".*[!@#$%^&*].*")) {
+		if (contraseña.length() >= 6 && !contraseña.contains(" ") && contraseña.matches(".*[!@#$%^&*].*") && contraseña.matches(".*[A-Z].*")) {
 			return true;
-		}
+		} 
 
 		return false;
 
 	}
 
-	/*
-	 * post-ficheros
-	 * 
-	 * // Crear un ArrayList de usuarios por defecto y los usuarios registrados
-	 * public static ArrayList<UsuarioBase> usuarios(ArrayList<UsuarioBase>
-	 * usuariosRegistrados) {
-	 * 
-	 * // Inicialización del ArrayList de usuarios ArrayList<UsuarioBase>
-	 * usuariosDefecto = new ArrayList<UsuarioBase>();
-	 * 
-	 * // Agregar usuarios registrados al ArrayList de usuarios por defecto
-	 * usuariosDefecto.addAll(usuariosRegistrados);
-	 * 
-	 * // Agregar algunos datos de ejemplo en caso de que no se hayan registrado
-	 * usuarios aún
-	 * 
-	 * // Profesores usuariosDefecto.add(new Profesor("Guillamon", "pass1",
-	 * "76429580M")); usuariosDefecto.add(new Profesor("Lidia", "pass2",
-	 * "76429581M")); usuariosDefecto.add(new Profesor("David", "pass3",
-	 * "76429582M")); usuariosDefecto.add(new Profesor("Paco", "pass4",
-	 * "76429583M"));
-	 * 
-	 * // Alumnos usuariosDefecto.add(new Alumno("Samuel", "123", "76429584M",
-	 * 9.0)); usuariosDefecto.add(new Alumno("Paula", "123", "76429585M", 5.0));
-	 * usuariosDefecto.add(new Alumno("Hugo", "123", "76429586M", 7.5));
-	 * usuariosDefecto.add(new Alumno("Zamudio", "123", "76429587M", 3.0));
-	 * 
-	 * // Administradores usuariosDefecto.add(new Administrador("Lolo", "pass1",
-	 * "76429588M"));
-	 * 
-	 * return usuariosDefecto;
-	 * 
-	 * 
-	 * }
-	 * 
-	 */
-
+	// Leer los usuarios del archivo
 	public ArrayList<UsuarioBase> usuarios() {
 
 		ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<>();
@@ -421,8 +385,6 @@ public class GestionadorUsuarios {
 
 		try (BufferedReader br = new BufferedReader(
 				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv"))) {
-
-			
 
 			while ((linea = br.readLine()) != null) {
 
