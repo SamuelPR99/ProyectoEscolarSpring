@@ -418,11 +418,11 @@ public class GestionDeIncidencias {
 
 				switch (tipoIncidencia) {
 
-				case "Profesor":
+				case "Alumno":
 					listaIncidencias.add(new IncidenciaAlumno(descripcionIncidencia));
 					break;
 
-				case "Alumno":
+				case "Profesor":
 					listaIncidencias.add(new IncidenciaProfesor(descripcionIncidencia));
 					break;
 
