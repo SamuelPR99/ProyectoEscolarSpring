@@ -18,8 +18,9 @@ import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
 
 public class GestionadorUsuarios {
 
- private ArrayList<Tarea> listaDeTareas = Tarea.obtenerTodasLasTareas();
+ private ArrayList<Tarea> listaDeTareas = new Tarea().archivoTareas();
  
+     // Constructor vacio
 	 public GestionadorUsuarios() {}
 	 
 	 // Iniciar el menu principal

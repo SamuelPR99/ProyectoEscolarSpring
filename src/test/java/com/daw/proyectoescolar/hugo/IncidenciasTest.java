@@ -1,7 +1,6 @@
 package com.daw.proyectoescolar.hugo;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,11 +10,11 @@ import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.daw.proyectoescolar.servicios.incidencias.*;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
-
-import java.util.ArrayList;
+import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
+import com.daw.proyectoescolar.servicios.incidencias.IncidenciaAlumno;
+import com.daw.proyectoescolar.servicios.incidencias.IncidenciaAplicacion;
+import com.daw.proyectoescolar.servicios.incidencias.IncidenciaProfesor;
+import com.daw.proyectoescolar.servicios.incidencias.Incidencias;
 
 class IncidenciasTest {
 
@@ -51,7 +50,7 @@ class IncidenciasTest {
 	}
 	
 	@Test
-	public void testMostrarMenuPrincipal() {
+	void testMostrarMenuPrincipal() {
 		
 		sc = new Scanner(System.in);
 		
@@ -60,7 +59,7 @@ class IncidenciasTest {
 	}
 	
 	@Test
-	public void testMensajeError() {
+	void testMensajeError() {
 		
 		when(scannerMock.nextLine())
 			.thenReturn("7") // Opción inválida dentro del menú principal \\
@@ -71,7 +70,7 @@ class IncidenciasTest {
 	}
 
 	@Test
-	public void testAñadirIncidenciaAlumno() {
+	void testAñadirIncidenciaAlumno() {
 		
         when(scannerMock.nextLine())
             .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -86,7 +85,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testAñadirIncidenciaProfesor() {
+	void testAñadirIncidenciaProfesor() {
 		
         when(scannerMock.nextLine())
             .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -101,7 +100,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testAñadirIncidenciaAplicacion() {
+	void testAñadirIncidenciaAplicacion() {
 		
         when(scannerMock.nextLine())
             .thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -116,7 +115,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testListarIncidenciaAlumno() {
+	void testListarIncidenciaAlumno() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -133,7 +132,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testListarIncidenciaProfesor() {
+	void testListarIncidenciaProfesor() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -150,7 +149,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testListarIncidenciaAplicacion() {
+	void testListarIncidenciaAplicacion() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1")  // Entra al submenú de Añadir Incidencias \\
@@ -167,7 +166,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testListarIncidenciasSinFiltrar() {
+	void testListarIncidenciasSinFiltrar() {
 		
         when(scannerMock.nextLine())
         
@@ -195,7 +194,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testEliminarIncidenciaAlumno() {
+	void testEliminarIncidenciaAlumno() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
@@ -211,7 +210,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testEliminarIncidenciaProfesor() {
+	void testEliminarIncidenciaProfesor() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
@@ -227,7 +226,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testEliminarIncidenciaAplicacion() {
+	void testEliminarIncidenciaAplicacion() {
 		
         when(scannerMock.nextLine())
         	.thenReturn("1") // Entra al submenú de Añadir Incidencias \\
@@ -243,7 +242,7 @@ class IncidenciasTest {
     }
 	
 	@Test
-	public void testSalirDelMenu() {
+	void testSalirDelMenu() {
 		
         when(scannerMock.nextLine())
             .thenReturn("4"); // Sale de la aplicación \\
