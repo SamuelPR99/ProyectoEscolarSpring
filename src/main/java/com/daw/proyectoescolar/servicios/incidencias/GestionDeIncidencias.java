@@ -369,42 +369,14 @@ public class GestionDeIncidencias {
 		
 		File file = new File("src/main/java/com/daw/proyectoescolar/repositorio/incidencias.csv");
 		
-		 FileWriter fw = new FileWriter(file);
+		 FileWriter fw = new FileWriter(file, true);
 		
 		    BufferedWriter bw = new BufferedWriter(fw); 
-		    bw.write(incidencia.getIncidencia());
+		    bw.write("Incidencia de tipo " + incidencia.getTipoIncidencia().toLowerCase() + ";" + incidencia.getIncidencia() + "\n");
 		    bw.flush();
 		    bw.close(); 
 		    fw.close(); 
 		    
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		} 
-		
-	}
-	
-	public void leerFichero(File file) {
-		
-		try {
-		
-		FileReader fr = new FileReader(file);
-	    BufferedReader br = new BufferedReader(fr);
-	    String linea;
-	    
-	    do {
-	    	
-	        linea = br.readLine(); 
-	        
-	        if (linea != null) {
-	            System.out.println(linea);
-	        }
-	        
-	    } while(linea != null);
-	    
-	    br.close();
-	    fr.close();
-	    
 		} catch (IOException e) {
 			
 			e.printStackTrace();
