@@ -62,7 +62,7 @@ public class GestionadorUsuarios {
 						usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
 					} catch (NullPointerException excepcion) {
-						GestionLogs.errorLogs("Usuario o contraseña incorrectos." + excepcion.getMessage());
+						GestionLogs.errorLogs("Usuario o contraseña incorrectos. " + excepcion.getMessage());
 						System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
 					} catch (Exception excepcion) {
 						GestionLogs.errorLogs("Error al iniciar sesion." + " Error: " + excepcion.getMessage());
@@ -101,15 +101,15 @@ public class GestionadorUsuarios {
 		String nombre = sc.nextLine();
 
 		System.out.println("Introduce tu contraseña:");
-		String contraseña = sc.nextLine();
+		String contrasena = sc.nextLine();
 		
-		return login(nombre, contraseña, usuarios);
+		return login(nombre, contrasena, usuarios);
 	}
 
-	public UsuarioBase login(String nombre, String contrasenia, ArrayList<UsuarioBase> usuarios) {
+	public UsuarioBase login(String nombre, String contrasena, ArrayList<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
-			if (usuario.getNombre().equals(nombre) && usuario.getContraseña().equals(contrasenia)) {
+			if (usuario.getNombre().equals(nombre) && usuario.getContrasena().equals(contrasena)) {
 				return usuario;
 			}
 		}
@@ -143,14 +143,14 @@ public class GestionadorUsuarios {
 		}
 
 		System.out.print("Introduzca su contraseña: ");
-		String contraseña = sc.nextLine();
+		String contrasena = sc.nextLine();
 
 		// Validar la contraseña
-		while (!validarContraseña(contraseña)) {
+		while (!validarContrasena(contrasena)) {
 			System.err.println("Contraseña no valida. Intentalo de nuevo: ");
-			GestionLogs.errorLogs("Contraseña no valida." + " Contraseña: " + contraseña);
+			GestionLogs.errorLogs("Contraseña no valida." + " Contraseña: " + contrasena);
 			System.out.print("Introduzca su contraseña: ");
-			contraseña = sc.nextLine();
+			contrasena = sc.nextLine();
 		}
 
 		System.out.print("¿Es profesor o alumno?: ");
@@ -164,21 +164,21 @@ public class GestionadorUsuarios {
 			tipo = sc.nextLine();
 		}
 
-		registro(nombre, dni, contraseña, tipo, usuarios);
+		registro(nombre, dni, contrasena, tipo, usuarios);
 
 	}
 
 	// Registro de un nuevo usuario
-	public void registro(String nombre, String dni, String contraseña, String tipo,
+	public void registro(String nombre, String dni, String contrasena, String tipo,
 			ArrayList<UsuarioBase> usuarios) {
 
 		UsuarioBase nuevoUsuario = null;
 
 		// Crear el usuario dependiendo del tipo
 		if (tipo.equalsIgnoreCase("profesor")) {
-			nuevoUsuario = new Profesor(nombre, contraseña, dni);
+			nuevoUsuario = new Profesor(nombre, contrasena, dni);
 		} else if (tipo.equalsIgnoreCase("alumno")) {
-			nuevoUsuario = new Alumno(nombre, contraseña, dni, 0.0);
+			nuevoUsuario = new Alumno(nombre, contrasena, dni, 0.0);
 		} else {
 			System.out.println(Constantes.VALID);
 			GestionLogs.errorLogs(Constantes.VALID + " Tipo: " + tipo);
@@ -202,7 +202,7 @@ public class GestionadorUsuarios {
 
 			// Escribir el usuario en el archivo con sus atributos separados por punto y
 			// coma, si es alumno se añade la nota por defecto (0.0)
-			fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña() + ";"
+			fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContrasena() + ";"
 					+ usuario.getDni() + (usuario.getTipoUsuario().equals(Constantes.ALUMNO) ? ";0.0" : "") + "\n");
 			fw.flush();
 			fw.close();
@@ -252,7 +252,7 @@ public class GestionadorUsuarios {
 			for (UsuarioBase usuario : usuarios) {
 				if (!usuario.getNombre().equals(nombre)) { // Si el nombre del usuario no coincide, se escribe en el
 															// archivo
-					fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña()
+					fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContrasena()
 							+ ";" + usuario.getDni() + (usuario.getTipoUsuario().equals(Constantes.ALUMNO) ? ";0.0" : "")
 							+ "\n"); 
 				}
@@ -274,41 +274,41 @@ public class GestionadorUsuarios {
 
 		for (UsuarioBase usuario : usuarios) {
 			System.out.println("\nNombre: " + usuario.getNombre() + "\nTipo: " + usuario.getTipoUsuario()
-					+ "\nDNI: " + usuario.getDni() + "\nContraseña: " + usuario.getContraseña());
+					+ "\nDNI: " + usuario.getDni() + "\nContraseña: " + usuario.getContrasena());
 			System.out.println(Colores.ANSI_BOLD + "_______________________________" + Colores.ANSI_RESET);
 		}
 
 	}
 
 	// Cambiar la contraseña
-	public void cambiarContraseña(Scanner sc, UsuarioBase usuario) {
+	public void cambiarContrasena(Scanner sc, UsuarioBase usuario) {
 
 		System.out.println("Introduce tu nueva contraseña:");
-		String nuevaContraseña = sc.nextLine();
+		String nuevaContrasena = sc.nextLine();
 
 		// Validar la contraseña
-		while (!validarContraseña(nuevaContraseña)) {
+		while (!validarContrasena(nuevaContrasena)) {
 			System.err.println("Contraseña no valida. Intentalo de nuevo: ");
 			GestionLogs.errorLogs("Contraseña no valida.");
 			System.out.print("Introduce tu nueva contraseña: ");
-			nuevaContraseña = sc.nextLine();
+			nuevaContrasena = sc.nextLine();
 		}
 
-		cambiarContraseña(nuevaContraseña, usuario);
+		cambiarContrasena(nuevaContrasena, usuario);
 
 	}
 
-	public void cambiarContraseña(String nuevaContraseña, UsuarioBase usuario) {
+	public void cambiarContrasena(String nuevaContrasena, UsuarioBase usuario) {
 
-		usuario.setContraseña(nuevaContraseña);
+		usuario.setContrasena(nuevaContrasena);
 		System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
 
-		cambiarContraseñaArchivo(nuevaContraseña, usuario);
+		cambiarContrasenaArchivo(nuevaContrasena, usuario);
 
 	}
 
 	// Cambiar la contraseña en el archivo
-	public void cambiarContraseñaArchivo(String nuevaContraseña, UsuarioBase usuario) {
+	public void cambiarContrasenaArchivo(String nuevaContrasena, UsuarioBase usuario) {
 
 		ArrayList<UsuarioBase> usuarios = usuarios();
 
@@ -316,11 +316,11 @@ public class GestionadorUsuarios {
 
 			for (UsuarioBase usuarioActual : usuarios) {
 				if (usuarioActual.getNombre().equals(usuario.getNombre())) {
-					usuarioActual.setContraseña(nuevaContraseña);
+					usuarioActual.setContrasena(nuevaContrasena);
 				}
 
 				fw.write(usuarioActual.getTipoUsuario() + ";" + usuarioActual.getNombre() + ";"
-						+ usuarioActual.getContraseña() + ";" + usuarioActual.getDni()
+						+ usuarioActual.getContrasena() + ";" + usuarioActual.getDni()
 						+ (usuarioActual.getTipoUsuario().equals(Constantes.ALUMNO) ? ";0.0" : "") + "\n");
 			}
 
@@ -337,42 +337,20 @@ public class GestionadorUsuarios {
 	// Validar el DNI
 	public boolean validarDNI(String dni) {
 
-		if (dni.length() == 9) {
-			for (int i = 0; i < 8; i++) {
-				if (!Character.isDigit(dni.charAt(i))) {
-					return false;
-				}
-			}
-
-			if (!Character.isLetter(dni.charAt(8))) {
-				return false;
-			}
-
-			return true;
-		}
-		return false;
+		return dni.length() == 9 && dni.substring(0, 8).matches("[0-9]+") && dni.substring(8).matches("[a-zA-Z]");
 	}
 
 	// Validar el nombre del usuario
 	public boolean validarNombreUsuario(String usuario) {
-
-		if (usuario.length() >= 3) {
-			return true;
-		}
-
-		return false;
+	
+		return usuario.length() >= 3 && !usuario.contains(" ");
 	}
 
 	// Debe contener 6 caracteres, no puede tener espacios, y debe contener minimo
 	// un caracter especial y una mayuscula
-	public boolean validarContraseña(String contraseña) {
+	public boolean validarContrasena(String contrasena) {
 
-		if (contraseña.length() >= 6 && !contraseña.contains(" ") && contraseña.matches(".*[!@#$%^&*].*") && contraseña.matches(".*[A-Z].*")) {
-			return true;
-		} 
-
-		return false;
-
+		return contrasena.length() >= 6 && !contrasena.contains(" ") && contrasena.matches(".*[!@#$%^&*].*") && contrasena.matches(".*[A-Z].*");
 	}
 
 	// Leer los usuarios del archivo
@@ -390,7 +368,7 @@ public class GestionadorUsuarios {
 				String[] datos = linea.split(";"); // Separar los datos por punto y coma
 				String tipo = datos[0]; // Tipo de usuario
 				String nombre = datos[1]; // Nombre del usuario
-				String contraseña = datos[2]; // Contraseña del usuario
+				String contrasena = datos[2]; // Contraseña del usuario
 				String dni = datos[3]; // DNI del usuario
 				double nota = 0.0; // Nota del alumno
 
@@ -402,15 +380,15 @@ public class GestionadorUsuarios {
 				switch (tipo) {
 
 				case Constantes.PROFESOR:
-					usuariosDefecto.add(new Profesor(nombre, contraseña, dni));
+					usuariosDefecto.add(new Profesor(nombre, contrasena, dni));
 					break;
 
 				case Constantes.ALUMNO:
-					usuariosDefecto.add(new Alumno(nombre, contraseña, dni, nota));
+					usuariosDefecto.add(new Alumno(nombre, contrasena, dni, nota));
 					break;
 
 				case Constantes.ADMINISTRADOR:
-					usuariosDefecto.add(new Administrador(nombre, contraseña, dni));
+					usuariosDefecto.add(new Administrador(nombre, contrasena, dni));
 					break;
 
 				default:
@@ -618,7 +596,7 @@ public class GestionadorUsuarios {
 				}
 
 				// Cuando se detecta un alumno, se escribe en el archivo con su nota del array
-				fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContraseña() + ";"
+				fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContrasena() + ";"
 						+ usuario.getDni()
 						+ (usuario.getTipoUsuario().equals("Alumno") ? ";" + ((Alumno) usuario).getNota() : "")
 						+ "\n");

@@ -20,12 +20,12 @@ public class Profesor extends UsuarioBase {
 		
 	}
 	
-	public Profesor(String nombre, String contraseña) {
-        super(nombre, contraseña);
+	public Profesor(String nombre, String contrasena) {
+        super(nombre, contrasena);
     }
 	
-	public Profesor(String nombre, String contraseña, String dni) {
-		super(nombre, contraseña, dni);
+	public Profesor(String nombre, String contrasena, String dni) {
+		super(nombre, contrasena, dni);
 	}
 	
     // Getters y setters
@@ -95,7 +95,7 @@ public class Profesor extends UsuarioBase {
 
 	            case "7", "cambiar contraseña":
 	            	GestionLogs.logOpcionMenu(Constantes.MENUPROFESORES, "Cambiar contraseña");
-	            	gestor.cambiarContraseña(sc, this);
+	            	gestor.cambiarContrasena(sc, this);
                 	break;
                    
 	            case "8", "salir del menu", "salir", "salir del":

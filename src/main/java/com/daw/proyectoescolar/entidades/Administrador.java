@@ -16,12 +16,12 @@ public class Administrador extends UsuarioBase {
 
     }
     
-    public Administrador(String nombre, String contraseña) {
-        super(nombre, contraseña);
+    public Administrador(String nombre, String contrasena) {
+        super(nombre, contrasena);
     }
     
-    public Administrador(String nombre, String contraseña, String dni) {
-        super(nombre, contraseña, dni);
+    public Administrador(String nombre, String contrasena, String dni) {
+        super(nombre, contrasena, dni);
     }
     
     // Getters y setters
@@ -73,7 +73,7 @@ public class Administrador extends UsuarioBase {
 
                 case "4", "cambiar contraseña":
                     GestionLogs.logOpcionMenu(Constantes.ADMINISTRADOR, "Cambiar contraseña");
-                    gestor.cambiarContraseña(sc, this);
+                    gestor.cambiarContrasena(sc, this);
                     break;
 
                 case "5", "salir del menu", "salir", "salir del":

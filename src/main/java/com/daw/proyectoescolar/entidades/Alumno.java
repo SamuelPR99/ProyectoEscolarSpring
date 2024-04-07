@@ -19,18 +19,18 @@ public class Alumno extends UsuarioBase {
     public Alumno() {
     }
 
-    public Alumno(String nombre, String contraseña, double nota) {
-        super(nombre, contraseña);
+    public Alumno(String nombre, String contrasena, double nota) {
+        super(nombre, contrasena);
         this.nota = nota;
     }
 
-    public Alumno(String nombre, String contraseña, String dni) {
-        super(nombre, contraseña, dni);
+    public Alumno(String nombre, String contrasena, String dni) {
+        super(nombre, contrasena, dni);
         
     }
     
-    public Alumno(String nombre, String contraseña, String dni, double nota) {
-        super(nombre, contraseña, dni);
+    public Alumno(String nombre, String contrasena, String dni, double nota) {
+        super(nombre, contrasena, dni);
         this.nota = nota;
         
     }
@@ -112,7 +112,7 @@ public class Alumno extends UsuarioBase {
                     
                 case "5", "Cambiar contraseña":
 					GestionLogs.logOpcionMenu(Constantes.MENUALUMNOS, "Cambiar contraseña");
-	            	gestor.cambiarContraseña(sc, this);
+	            	gestor.cambiarContrasena(sc, this);
                 	break;
 
                 case "6", "salir del menu", "salir", "salir del":
