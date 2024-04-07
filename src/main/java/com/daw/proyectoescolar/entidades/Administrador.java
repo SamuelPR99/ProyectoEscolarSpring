@@ -30,7 +30,7 @@ public class Administrador extends UsuarioBase {
     
     @Override
     public String getTipoUsuario() {
-        return "Administrador";
+        return Constantes.ADMINISTRADOR;
     }
     
     

@@ -34,7 +34,7 @@ public class Profesor extends UsuarioBase {
 		
     @Override
     public String getTipoUsuario() {
-        return "Profesor";
+        return Constantes.PROFESOR;
     }
     
     // Menu profesor
