@@ -26,4 +26,8 @@ public class Constantes {
 	public static final String AVANZA = "Avanzada";
 	public static final String BASICA = "Basica";
 	public static final String INTERMEDIA = "Intermedia";
+	
+	public static final String CONEXION_URL = "jdbc:mariadb://localhost:3306/iesmurcia";
+	public static final String USER = "root";
+	public static final String PASSWORD = "root";
 }

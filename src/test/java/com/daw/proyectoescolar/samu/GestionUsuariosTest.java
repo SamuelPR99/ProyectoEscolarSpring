@@ -14,10 +14,12 @@ import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
+import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
 class GestionUsuariosTest {
 	
+	private UsuariosRepo uRepo;
 	private GestionadorUsuarios gestion;
     private ArrayList<UsuarioBase> usuarios;
     private ArrayList<Alumno> alumnos;
@@ -25,8 +27,9 @@ class GestionUsuariosTest {
 
     @BeforeEach
     public void setUp() {
+    	uRepo = new UsuariosRepo();
         gestion = new GestionadorUsuarios();
-        usuarios = gestion.usuarios();
+        usuarios = uRepo.usuarios();
         alumnos = gestion.obtenerAlumnos(usuarios);
         listaDeTareas = new Tarea().archivoTareas();
     }

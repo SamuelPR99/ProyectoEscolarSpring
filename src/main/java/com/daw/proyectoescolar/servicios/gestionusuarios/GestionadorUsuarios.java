@@ -1,13 +1,8 @@
 package com.daw.proyectoescolar.servicios.gestionusuarios;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
@@ -15,11 +10,13 @@ import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.GestionLogs;
+import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
 
 public class GestionadorUsuarios {
 
  private ArrayList<Tarea> listaDeTareas = new Tarea().archivoTareas();
+ private UsuariosRepo uRepo = new UsuariosRepo();
  
      // Constructor vacio
 	 public GestionadorUsuarios() {}
@@ -27,7 +24,7 @@ public class GestionadorUsuarios {
 	 // Iniciar el menu principal
 	 public void iniciar(Scanner sc) {
 		 
-		    ArrayList<UsuarioBase> usuarios = usuarios();
+		    ArrayList<UsuarioBase> usuarios = uRepo.usuarios();
 		    String opcion;
 		    
 		    System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al" 
@@ -189,26 +186,7 @@ public class GestionadorUsuarios {
 		System.out.println(Colores.ANSI_GREEN + "Usuario creado correctamente." + Colores.ANSI_RESET);
 
 		// Guardar el usuario en el archivo
-		guardarUsuario(nuevoUsuario);
-
-	}
-
-	// Guardar un usuario en el archivo
-	public void guardarUsuario(UsuarioBase usuario) {
-
-		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS, true)) { // Si es true: Añadir al final del archivo
-
-			// Escribir el usuario en el archivo con sus atributos separados por punto y
-			// coma, si es alumno se añade la nota por defecto (0.0)
-			fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContrasena() + ";"
-					+ usuario.getDni() + (usuario.getTipoUsuario().equals(Constantes.ALUMNO) ? ";0.0" : "") + "\n");
-			fw.flush();
-			fw.close();
-
-		} catch (IOException e) {
-			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha guardado el usuario.");
-		}
+		uRepo.registro(nuevoUsuario);
 
 	}
 
@@ -232,38 +210,11 @@ public class GestionadorUsuarios {
 			}
 		}
 
-		borrarUsuarioArchivo(nombre);
+		uRepo.borrarUsuario(nombre);
 
 		// Si el usuario no se encuentra
 		System.err.println("Usuario no encontrado.");
 		GestionLogs.errorLogs("Usuario no encontrado." + " Nombre: " + nombre);
-
-	}
-
-	// Borrar un usuario del archivo
-	public void borrarUsuarioArchivo(String nombre) {
-
-		ArrayList<UsuarioBase> usuarios = usuarios();
-
-		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS)) {
-
-			for (UsuarioBase usuario : usuarios) {
-				if (!usuario.getNombre().equals(nombre)) { // Si el nombre del usuario no coincide, se escribe en el
-															// archivo
-					fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContrasena()
-							+ ";" + usuario.getDni() + (usuario.getTipoUsuario().equals(Constantes.ALUMNO) ? ";0.0" : "")
-							+ "\n"); 
-				}
-
-			}
-
-			fw.flush();
-			fw.close();
-
-		} catch (IOException e) {
-			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha borrado el usuario.");
-		}
 
 	}
 
@@ -297,38 +248,11 @@ public class GestionadorUsuarios {
 	}
 
 	public void cambiarContrasena(String nuevaContrasena, UsuarioBase usuario) {
-
+		
 		usuario.setContrasena(nuevaContrasena);
 		System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
 
-		cambiarContrasenaArchivo(nuevaContrasena, usuario);
-
-	}
-
-	// Cambiar la contraseña en el archivo
-	public void cambiarContrasenaArchivo(String nuevaContrasena, UsuarioBase usuario) {
-
-		ArrayList<UsuarioBase> usuarios = usuarios();
-
-		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS)) {
-
-			for (UsuarioBase usuarioActual : usuarios) {
-				if (usuarioActual.getNombre().equals(usuario.getNombre())) {
-					usuarioActual.setContrasena(nuevaContrasena);
-				}
-
-				fw.write(usuarioActual.getTipoUsuario() + ";" + usuarioActual.getNombre() + ";"
-						+ usuarioActual.getContrasena() + ";" + usuarioActual.getDni()
-						+ (usuarioActual.getTipoUsuario().equals(Constantes.ALUMNO) ? ";0.0" : "") + "\n");
-			}
-
-			fw.flush();
-			fw.close();
-
-		} catch (IOException e) {
-			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha cambiado la contraseña.");
-		}
+		uRepo.cambiarContrasena(nuevaContrasena, usuario);
 
 	}
 
@@ -349,59 +273,6 @@ public class GestionadorUsuarios {
 	public boolean validarContrasena(String contrasena) {
 
 		return contrasena.length() >= 6 && !contrasena.contains(" ") && contrasena.matches(".*[!@#$%^&*].*") && contrasena.matches(".*[A-Z].*");
-	}
-
-	// Leer los usuarios del archivo
-	public ArrayList<UsuarioBase> usuarios() {
-
-		ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<>();
-		
-		String linea = null;
-
-		try (BufferedReader br = new BufferedReader(
-				new FileReader(Constantes.RUTA_USUARIOS))) {
-
-			while ((linea = br.readLine()) != null) {
-
-				String[] datos = linea.split(";"); // Separar los datos por punto y coma
-				String tipo = datos[0]; // Tipo de usuario
-				String nombre = datos[1]; // Nombre del usuario
-				String contrasena = datos[2]; // Contraseña del usuario
-				String dni = datos[3]; // DNI del usuario
-				double nota = 0.0; // Nota del alumno
-
-				if (tipo.equals(Constantes.ALUMNO)) { // Si el usuario es un alumno, se le asigna una nota
-					nota = Double.parseDouble(datos[4]);
-				}
-
-				// Crear el usuario dependiendo del tipo
-				switch (tipo) {
-
-				case Constantes.PROFESOR:
-					usuariosDefecto.add(new Profesor(nombre, contrasena, dni));
-					break;
-
-				case Constantes.ALUMNO:
-					usuariosDefecto.add(new Alumno(nombre, contrasena, dni, nota));
-					break;
-
-				case Constantes.ADMINISTRADOR:
-					usuariosDefecto.add(new Administrador(nombre, contrasena, dni));
-					break;
-
-				default:
-					System.err.println("Tipo de usuario desconocido: " + tipo);
-					break;
-				}
-			}
-
-		} catch (IOException e) {
-			System.err.println("Error al leer el archivo: " + e.getMessage());
-			GestionLogs.errorLogs(
-					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto. " + linea);
-		}
-
-		return usuariosDefecto;
 	}
 
 	/*---------------------------------------------------------------------------------------------------------*/
@@ -527,6 +398,7 @@ public class GestionadorUsuarios {
 	}
 
 	public void marcarTareaCompletada(Alumno alumno, int indiceTarea) {
+		
 		ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
 
 		if (indiceTarea >= 0 && indiceTarea < tareasAsignadas.size()) {
@@ -572,40 +444,11 @@ public class GestionadorUsuarios {
 			alumnos.get(numeroAlumno - 1).setNota(nuevaNota);
 			System.out.println(Colores.ANSI_GREEN + "Nota modificada correctamente." + Colores.ANSI_RESET);
 
-			modificarNotaAlumnoArchivo(nuevaNota, alumnos.get(numeroAlumno - 1));
+			uRepo.modificarNotaAlumno(nuevaNota, alumnos.get(numeroAlumno - 1));
 
 		} else {
 			System.err.println("Numero de alumno no valido.");
 			GestionLogs.errorLogs("Numero de alumno no valido." + Constantes.NUM_SELEC + numeroAlumno);
-		}
-
-	}
-
-	// Modificar la nota de un alumno en el archivo
-	public void modificarNotaAlumnoArchivo(double nuevaNota, Alumno alumno) {
-
-		ArrayList<UsuarioBase> usuarios = usuarios();
-
-		try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
-
-			for (UsuarioBase usuario : usuarios) {
-				if (usuario.getNombre().equals(alumno.getNombre())) {
-					((Alumno) usuario).setNota(nuevaNota);
-				}
-
-				// Cuando se detecta un alumno, se escribe en el archivo con su nota del array
-				fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContrasena() + ";"
-						+ usuario.getDni()
-						+ (usuario.getTipoUsuario().equals("Alumno") ? ";" + ((Alumno) usuario).getNota() : "")
-						+ "\n");
-			}
-
-			fw.flush();
-			fw.close();
-
-		} catch (IOException e) {
-			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage());
 		}
 
 	}
@@ -666,7 +509,6 @@ public class GestionadorUsuarios {
 
 		Tarea tareaRecomendada = recomendarTarea(alumno);
 		tareaRecomendada.mostrarRecomendacion();
-
 	}
 
 }
