@@ -15,89 +15,86 @@ import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
 
 public class GestionadorUsuarios {
 
- private ArrayList<Tarea> listaDeTareas = new Tarea().archivoTareas();
- private UsuariosRepo uRepo = new UsuariosRepo();
- 
-     // Constructor vacio
-	 public GestionadorUsuarios() {}
-	 
-	 // Iniciar el menu principal
-	 public void iniciar(Scanner sc) {
-		 
-		    ArrayList<UsuarioBase> usuarios = uRepo.usuarios();
-		    String opcion;
-		    
-		    System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al" 
-		    + Colores.ANSI_YELLOW_BACKGROUND + " Campus Virtual " 
-		    + Colores.ANSI_BLUE_BACKGROUND + " del IES Murcia." + Colores.ANSI_RESET);
+	private ArrayList<Tarea> listaDeTareas = new Tarea().archivoTareas();
+	private UsuariosRepo uRepo = new UsuariosRepo();
 
-		    do {
+	// Constructor vacio
+	public GestionadorUsuarios() {
+	}
 
-		        System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE +"\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW 
-		        		+ "1. Iniciar sesion\n"
-		                + "2. Gestion de incidencias\n"
-		                + "3. Salir"
-		                + Colores.ANSI_RESET);
+	// Iniciar el menu principal
+	public void iniciar(Scanner sc) {
 
-				opcion = sc.nextLine().toLowerCase();
+		ArrayList<UsuarioBase> usuarios = uRepo.usuarios();
+		String opcion;
 
-				switch (opcion) {
+		System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al"
+				+ Colores.ANSI_YELLOW_BACKGROUND + " Campus Virtual " + Colores.ANSI_BLUE_BACKGROUND
+				+ " del IES Murcia." + Colores.ANSI_RESET);
 
-				case "1", "iniciar sesion":
+		do {
 
-					GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Iniciar sesion");
+			System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE + "\nSeleccione una opcion:\n"
+					+ Colores.ANSI_RESET + Colores.ANSI_YELLOW + "1. Iniciar sesion\n" + "2. Gestion de incidencias\n"
+					+ "3. Salir" + Colores.ANSI_RESET);
 
-					UsuarioBase usuario = login(sc, usuarios);
+			opcion = sc.nextLine().toLowerCase();
 
-					try {
+			switch (opcion) {
 
-						System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD
-								+ usuario.getTipoUsuario() + Colores.ANSI_RESET + ", " + usuario.getNombre());
+			case "1", "iniciar sesion":
 
-						usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
+				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Iniciar sesion");
 
-					} catch (NullPointerException excepcion) {
-						GestionLogs.errorLogs("Usuario o contraseña incorrectos. " + excepcion.getMessage());
-						System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
-					} catch (Exception excepcion) {
-						GestionLogs.errorLogs("Error al iniciar sesion." + " Error: " + excepcion.getMessage());
-						System.err.println("Error al iniciar sesion. Intentalo de nuevo.");
-					}
+				UsuarioBase usuario = login(sc, usuarios);
 
-					break;
+				try {
 
-				case "2", "gestion de incidencias":
-					GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Gestion de incidencias");
-					GestionDeIncidencias gestionadorIncidencias = new GestionDeIncidencias();
-					gestionadorIncidencias.menuPrincipal(sc);
-					break;
+					System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD
+							+ usuario.getTipoUsuario() + Colores.ANSI_RESET + ", " + usuario.getNombre());
 
-				case "3", "salir":
-					GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Salir");
-					System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
-					break;
+					usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
 
-				default:
-					System.err.println("Opcion no valida. Intentalo de nuevo.");
-					GestionLogs.errorLogs("Opcion no valida seleccionada en el menu principal." + " Opcion: " + opcion);
-
+				} catch (NullPointerException excepcion) {
+					GestionLogs.errorLogs("Usuario o contraseña incorrectos. " + excepcion.getMessage());
+					System.err.println("Usuario o contraseña incorrectos. Intentalo de nuevo.");
+				} catch (Exception excepcion) {
+					GestionLogs.errorLogs("Error al iniciar sesion." + " Error: " + excepcion.getMessage());
+					System.err.println("Error al iniciar sesion. Intentalo de nuevo.");
 				}
 
-			} while (!opcion.equals("3") && !opcion.equals("salir"));
+				break;
 
-		}
+			case "2", "gestion de incidencias":
+				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Gestion de incidencias");
+				GestionDeIncidencias gestionadorIncidencias = new GestionDeIncidencias();
+				gestionadorIncidencias.menuPrincipal(sc);
+				break;
+
+			case "3", "salir":
+				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Salir");
+				System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
+				break;
+
+			default:
+				System.err.println("Opcion no valida. Intentalo de nuevo.");
+				GestionLogs.errorLogs("Opcion no valida seleccionada en el menu principal." + " Opcion: " + opcion);
+
+			}
+
+		} while (!opcion.equals("3") && !opcion.equals("salir"));
+
+	}
 
 	// Iniciar sesion
 	public UsuarioBase login(Scanner sc, ArrayList<UsuarioBase> usuarios) {
 
-
-		
 		System.out.println("Introduce tu nombre de usuario:");
 		String nombre = sc.nextLine();
 
 		System.out.println("Introduce tu contraseña:");
 		String contrasena = sc.nextLine();
-		
+
 		return login(nombre, contrasena, usuarios);
 	}
 
@@ -164,8 +161,7 @@ public class GestionadorUsuarios {
 	}
 
 	// Registro de un nuevo usuario
-	public void registro(String nombre, String dni, String contrasena, String tipo,
-			ArrayList<UsuarioBase> usuarios) {
+	public void registro(String nombre, String dni, String contrasena, String tipo, ArrayList<UsuarioBase> usuarios) {
 
 		UsuarioBase nuevoUsuario = null;
 
@@ -222,8 +218,8 @@ public class GestionadorUsuarios {
 	public void mostrarUsuarios(ArrayList<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
-			System.out.println("\nNombre: " + usuario.getNombre() + "\nTipo: " + usuario.getTipoUsuario()
-					+ "\nDNI: " + usuario.getDni() + "\nContraseña: " + usuario.getContrasena());
+			System.out.println("\nNombre: " + usuario.getNombre() + "\nTipo: " + usuario.getTipoUsuario() + "\nDNI: "
+					+ usuario.getDni() + "\nContraseña: " + usuario.getContrasena());
 			System.out.println(Colores.ANSI_BOLD + "_______________________________" + Colores.ANSI_RESET);
 		}
 
@@ -248,7 +244,7 @@ public class GestionadorUsuarios {
 	}
 
 	public void cambiarContrasena(String nuevaContrasena, UsuarioBase usuario) {
-		
+
 		usuario.setContrasena(nuevaContrasena);
 		System.out.println(Colores.ANSI_GREEN + "Contraseña cambiada correctamente." + Colores.ANSI_RESET);
 
@@ -264,7 +260,7 @@ public class GestionadorUsuarios {
 
 	// Validar el nombre del usuario
 	public boolean validarNombreUsuario(String usuario) {
-	
+
 		return usuario.length() >= 3 && !usuario.contains(" ");
 	}
 
@@ -272,7 +268,8 @@ public class GestionadorUsuarios {
 	// un caracter especial y una mayuscula
 	public boolean validarContrasena(String contrasena) {
 
-		return contrasena.length() >= 6 && !contrasena.contains(" ") && contrasena.matches(".*[!@#$%^&*].*") && contrasena.matches(".*[A-Z].*");
+		return contrasena.length() >= 6 && !contrasena.contains(" ") && contrasena.matches(".*[!@#$%^&*].*")
+				&& contrasena.matches(".*[A-Z].*");
 	}
 
 	/*---------------------------------------------------------------------------------------------------------*/
@@ -381,8 +378,7 @@ public class GestionadorUsuarios {
 		ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
 
 		if (tareasAsignadas.isEmpty()) {
-			System.out.println(
-					Colores.ANSI_GREEN + "No tienes tareas pendientes para entregar." + Colores.ANSI_RESET);
+			System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes para entregar." + Colores.ANSI_RESET);
 		} else {
 			System.out.println("Tareas Pendientes:");
 			for (int i = 0; i < tareasAsignadas.size(); i++) {
@@ -398,7 +394,7 @@ public class GestionadorUsuarios {
 	}
 
 	public void marcarTareaCompletada(Alumno alumno, int indiceTarea) {
-		
+
 		ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
 
 		if (indiceTarea >= 0 && indiceTarea < tareasAsignadas.size()) {
@@ -475,8 +471,8 @@ public class GestionadorUsuarios {
 		Tarea nuevaTarea = new Tarea(tipoTarea);
 		listaDeTareas.add(nuevaTarea);
 
-		System.out.println(Colores.ANSI_GREEN + "Nueva tarea \"" + tipoTarea + "\" agregada correctamente."
-				+ Colores.ANSI_RESET);
+		System.out.println(
+				Colores.ANSI_GREEN + "Nueva tarea \"" + tipoTarea + "\" agregada correctamente." + Colores.ANSI_RESET);
 
 	}
 

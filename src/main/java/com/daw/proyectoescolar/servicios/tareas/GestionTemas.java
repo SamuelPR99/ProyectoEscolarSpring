@@ -25,8 +25,11 @@ public class GestionTemas {
 		System.out.println(Colores.ANSI_PURPLE + Colores.ANSI_UNDERLINE + "\n¿Que tema quieres?:\n" + Colores.ANSI_RESET
 				+ Colores.ANSI_PURPLE + "Tema 1\n" + "Tema 2\n" + "Tema 3\n" + "Tema 4\n" + "Tema 5\n" + "Tema 6\n"
 				+ Colores.ANSI_RESET);
+		
 		String eleccion = sc.nextLine().toLowerCase();
+		
 		switch (eleccion) {
+		
 		case "1", "tema 1":
 			tema = new Tema1();
 			recorroArray(tema);
@@ -50,6 +53,10 @@ public class GestionTemas {
 		case "6", "tema 6":
 			tema = new Tema6();
 			recorroArray(tema);
+			break;
+			
+		default:
+			System.err.println("No has seleccionado un tema valido.");
 			break;
 		}
 	}

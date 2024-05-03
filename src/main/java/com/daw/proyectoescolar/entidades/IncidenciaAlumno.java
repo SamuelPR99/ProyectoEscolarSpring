@@ -1,4 +1,4 @@
-package com.daw.proyectoescolar.servicios.incidencias;
+package com.daw.proyectoescolar.entidades;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 

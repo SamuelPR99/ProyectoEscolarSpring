@@ -10,11 +10,11 @@ import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
+import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
+import com.daw.proyectoescolar.entidades.IncidenciaProfesor;
+import com.daw.proyectoescolar.entidades.Incidencias;
 import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
-import com.daw.proyectoescolar.servicios.incidencias.IncidenciaAlumno;
-import com.daw.proyectoescolar.servicios.incidencias.IncidenciaAplicacion;
-import com.daw.proyectoescolar.servicios.incidencias.IncidenciaProfesor;
-import com.daw.proyectoescolar.servicios.incidencias.Incidencias;
 
 class IncidenciasTest {
 
@@ -22,6 +22,7 @@ class IncidenciasTest {
 	private GestionDeIncidencias gestionDeIncidencias;
 	private Scanner scannerMock;
 	private Scanner sc;
+	
 	
 	@BeforeEach
 	public void setUp() {

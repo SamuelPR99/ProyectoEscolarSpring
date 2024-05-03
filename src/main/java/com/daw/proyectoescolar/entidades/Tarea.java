@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.GestionLogs;
 
 public class Tarea {
@@ -85,7 +86,7 @@ public class Tarea {
 		ArrayList<Tarea> tareas = new ArrayList<>();
 
 		try (BufferedReader br = new BufferedReader(
-				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/tareas.csv"))) {
+				new FileReader(Constantes.RUTA_TAREAS))) {
 
 			String linea;
 

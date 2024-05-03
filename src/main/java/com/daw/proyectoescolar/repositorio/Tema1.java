@@ -12,6 +12,4 @@ public class Tema1 extends Temas {
 		super(nombre, descripcion, contenidoTarea);
 	}
 
-	
-	
 }

@@ -38,7 +38,7 @@ public class ListaDeTemas {
 		
 		listaDeTemas = new ArrayList<>();
 		try (BufferedReader br = new BufferedReader(
-				new FileReader("src/main/java/com/daw/proyectoescolar/repositorio/temas.csv"))) {
+				new FileReader(Constantes.RUTA_TEMAS))) {
 
 			String linea;
 			while ((linea = br.readLine()) != null) {

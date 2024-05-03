@@ -143,34 +143,33 @@ public class UsuariosRepo {
 		}
 
 	}
-	
+
 	// Modificar la nota de un alumno en el archivo
-		public void modificarNotaAlumno(double nuevaNota, Alumno alumno) {
+	public void modificarNotaAlumno(double nuevaNota, Alumno alumno) {
 
-			ArrayList<UsuarioBase> usuarios = usuarios();
+		ArrayList<UsuarioBase> usuarios = usuarios();
 
-			try (FileWriter fw = new FileWriter("src/main/java/com/daw/proyectoescolar/repositorio/usuarios.csv")) {
+		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS)) {
 
-				for (UsuarioBase usuario : usuarios) {
-					if (usuario.getNombre().equals(alumno.getNombre())) {
-						((Alumno) usuario).setNota(nuevaNota);
-					}
-
-					// Cuando se detecta un alumno, se escribe en el archivo con su nota del array
-					fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContrasena() + ";"
-							+ usuario.getDni()
-							+ (usuario.getTipoUsuario().equals("Alumno") ? ";" + ((Alumno) usuario).getNota() : "")
-							+ "\n");
+			for (UsuarioBase usuario : usuarios) {
+				if (usuario.getNombre().equals(alumno.getNombre())) {
+					((Alumno) usuario).setNota(nuevaNota);
 				}
 
-				fw.flush();
-				fw.close();
-
-			} catch (IOException e) {
-				System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-				GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage());
+				// Cuando se detecta un alumno, se escribe en el archivo con su nota del array
+				fw.write(usuario.getTipoUsuario() + ";" + usuario.getNombre() + ";" + usuario.getContrasena() + ";"
+						+ usuario.getDni()
+						+ (usuario.getTipoUsuario().equals("Alumno") ? ";" + ((Alumno) usuario).getNota() : "") + "\n");
 			}
 
+			fw.flush();
+			fw.close();
+
+		} catch (IOException e) {
+			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage());
 		}
+
+	}
 
 }
