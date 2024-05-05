@@ -10,15 +10,15 @@ import org.junit.jupiter.api.BeforeEach;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
-import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
-import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
+import com.daw.proyectoescolar.servicios.temas.GestionTemas;
+import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 class TareasTest {
 
 	protected ArrayList<UsuarioBase> usuarios;
 	protected ArrayList<Alumno> alumnos;
 	protected String menuInput = "8";
-	GestionadorUsuarios gestorUsuarios = new GestionadorUsuarios();
+	GestionUsuarios gestorUsuarios = new GestionUsuarios();
 	GestionTemas gestorTemas = new GestionTemas();
 	protected ArrayList<Tarea> tareas;
 	Scanner scannerMock;
@@ -82,7 +82,7 @@ class TareasTest {
 	void testValidarDNI() {
 
 	  // Casos de prueba válidos
-	  GestionadorUsuarios validarD = new GestionadorUsuarios();
+		GestionUsuarios validarD = new GestionUsuarios();
 	  assertTrue(validarD.validarDNI("12345678Z"));
 	  assertTrue(validarD.validarDNI("98765432X"));
 
@@ -278,7 +278,7 @@ class TareasTest {
 		
 		// Modificar la nota del alumno
 		
-		GestionadorUsuarios modificarNotaAlumno = new GestionadorUsuarios();
+		GestionUsuarios modificarNotaAlumno = new GestionUsuarios();
 		// (numeroAlumno, nuevaNota, alumnos);
 		
 		modificarNotaAlumno.modificarNotaAlumno(scannerMock, usuarios);

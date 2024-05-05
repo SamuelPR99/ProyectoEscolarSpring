@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Temas;
-import com.daw.proyectoescolar.logs.GestionLogs;
+import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 
 public class TemasRepo {

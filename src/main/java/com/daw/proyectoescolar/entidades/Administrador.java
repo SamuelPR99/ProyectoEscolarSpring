@@ -3,9 +3,9 @@ package com.daw.proyectoescolar.entidades;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.logs.GestionLogs;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
+import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 public class Administrador extends UsuarioBase {

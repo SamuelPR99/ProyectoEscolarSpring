@@ -12,7 +12,7 @@ import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
 import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
 import com.daw.proyectoescolar.entidades.IncidenciaProfesor;
 import com.daw.proyectoescolar.entidades.Incidencias;
-import com.daw.proyectoescolar.logs.GestionLogs;
+import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class IncidenciasRepo {
 

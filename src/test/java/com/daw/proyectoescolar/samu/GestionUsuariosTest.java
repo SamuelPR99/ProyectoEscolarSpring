@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.samu;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -16,12 +17,12 @@ import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.TemasRepo;
 import com.daw.proyectoescolar.repositorio.UsuariosRepo;
-import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
+import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 class GestionUsuariosTest {
 	
 	private UsuariosRepo uRepo;
-	private GestionadorUsuarios gestion;
+	private GestionUsuarios gestion;
     private ArrayList<UsuarioBase> usuarios;
     private ArrayList<Alumno> alumnos;
     private ArrayList<Tarea> listaDeTareas;
@@ -29,7 +30,7 @@ class GestionUsuariosTest {
     @BeforeEach
     public void setUp() {
     	uRepo = new UsuariosRepo();
-        gestion = new GestionadorUsuarios();
+        gestion = new GestionUsuarios();
         usuarios = uRepo.usuarios();
         alumnos = gestion.obtenerAlumnos(usuarios);
         listaDeTareas = new TemasRepo().archivoTareas();

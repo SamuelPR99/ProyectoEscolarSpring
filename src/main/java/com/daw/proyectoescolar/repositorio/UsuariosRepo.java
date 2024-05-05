@@ -10,7 +10,7 @@ import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
-import com.daw.proyectoescolar.logs.GestionLogs;
+import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class UsuariosRepo {
 

@@ -20,6 +20,7 @@ public class Constantes {
 	public static final String RUTA_INCIDENCIAS = "src/main/java/com/daw/proyectoescolar/repositorio/incidencias.txt";
 	public static final String RUTA_TAREAS = "src/main/java/com/daw/proyectoescolar/repositorio/tareas.txt";
 	public static final String RUTA_TEMAS = "src/main/java/com/daw/proyectoescolar/repositorio/temas.txt";
+	public static final String CARPETA_LOGS = "logs/";
 	
 	public static final String MENU_PRINCIPAL = "Menu Principal";
 	public static final String MENU_ALUMNOS = "Menu Alumnos";

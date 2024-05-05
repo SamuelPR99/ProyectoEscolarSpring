@@ -7,12 +7,12 @@ import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
-import com.daw.proyectoescolar.logs.GestionLogs;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.TemasRepo;
 import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
+import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class GestionUsuarios {
 
