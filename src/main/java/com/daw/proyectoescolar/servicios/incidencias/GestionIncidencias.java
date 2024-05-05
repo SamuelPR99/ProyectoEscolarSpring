@@ -16,7 +16,7 @@ public class GestionIncidencias {
 	// ATRIBUTOS DE LA CLASE
 
 	private IncidenciasRepo iRepo = new IncidenciasRepo();
-	private ArrayList<Incidencias> listaIncidencias = iRepo.leerIncidencias(new ArrayList<Incidencias>());
+	private ArrayList<Incidencias> listaIncidencias = iRepo.leerIncidencias(new ArrayList<>());
 
 	// CONSTRUCTORES
 
@@ -54,7 +54,7 @@ public class GestionIncidencias {
 
 			case "1", "añadir incidencia", "añadir una incidencia":
 				GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias");
-				añadirIncidencia(sc);
+				anadirIncidencia(sc);
 				break;
 
 			case "2", "listar incidencias", "listar":
@@ -86,7 +86,7 @@ public class GestionIncidencias {
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-	public ArrayList<Incidencias> añadirIncidencia(Scanner sc) {
+	public ArrayList<Incidencias> anadirIncidencia(Scanner sc) {
 
 		/*
 		 * Este metodo hace que el usuario pueda añadir todas las incidencias del tipo
