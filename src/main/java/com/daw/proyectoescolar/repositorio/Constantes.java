@@ -13,7 +13,8 @@ public class Constantes {
 	public static final String VALID = "Tipo de usuario no valido.";
 	public static final String NUM_TAREA_VALID = "Numero de tarea no valido.";
 	public static final String NUM_SELEC = " Numero seleccionado: ";
-	public static final String ERROR_ARCHIVO = "Error al escribir en el archivo: ";
+	public static final String ERROR_ESCRIBIR_ARCHIVO = "Error al escribir en el archivo: ";
+	public static final String ERROR_LEER_ARCHIVO = "Error al leer el archivo: ";
 	
 	public static final String RUTA_USUARIOS = "src/main/java/com/daw/proyectoescolar/repositorio/usuarios.txt";
 	public static final String RUTA_INCIDENCIAS = "src/main/java/com/daw/proyectoescolar/repositorio/incidencias.txt";

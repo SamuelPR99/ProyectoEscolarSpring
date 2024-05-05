@@ -1,25 +1,26 @@
 package com.daw.proyectoescolar.entidades;
 
-public abstract class Temas {
+import java.util.ArrayList;
+
+public class Temas {
 
 	// Atributos
 	protected String nombre;
 	protected String descripcion;
-	protected String contenidoTarea;
-	
+	protected ArrayList<Tarea> listaTareas;
+
 	// Constructores
-	protected Temas() {
-		
+
+	public Temas() {
 	}
 
-	protected Temas(String nombre, String descripcion, String contenidoTarea) {
-		super();
+	public Temas(String nombre, String descripcion, ArrayList<Tarea> listaTareas) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.contenidoTarea = contenidoTarea;
+		this.listaTareas = listaTareas;
 	}
 
-	// Getters y setters
+	// Getters y Setters
 	public String getNombre() {
 		return nombre;
 	}
@@ -36,12 +37,18 @@ public abstract class Temas {
 		this.descripcion = descripcion;
 	}
 
-	public String getContenidoTarea() {
-		return contenidoTarea;
+	public ArrayList<Tarea> getListaTareas() {
+		return listaTareas;
 	}
 
-	public void setContenidoTarea(String contenidoTarea) {
-		this.contenidoTarea = contenidoTarea;
+	public void setListaTareas(ArrayList<Tarea> listaTareas) {
+		this.listaTareas = listaTareas;
 	}
-			
+
+	// Metodos
+	@Override
+	public String toString() {
+		return "Temas [nombre=" + nombre + ", descripcion=" + descripcion + ", listaTareas=" + listaTareas + "]";
+	}
+
 }

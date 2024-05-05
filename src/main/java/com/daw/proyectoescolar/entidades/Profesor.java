@@ -3,17 +3,16 @@ package com.daw.proyectoescolar.entidades;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.logs.GestionLogs;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
-import com.daw.proyectoescolar.repositorio.GestionLogs;
-import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
-import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
+import com.daw.proyectoescolar.servicios.temas.GestionTemas;
+import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 public class Profesor extends UsuarioBase {
 	
 	// Atributos
 
-	
     // Constructores
 
 	public Profesor() {
@@ -41,7 +40,7 @@ public class Profesor extends UsuarioBase {
 	@Override
 	public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
 		
-	    GestionadorUsuarios gestor = new GestionadorUsuarios();
+		GestionUsuarios gestor = new GestionUsuarios();
 	    GestionTemas temitas = new GestionTemas();
 	    
 	    String opcion;
@@ -65,7 +64,7 @@ public class Profesor extends UsuarioBase {
 	        
 	        	case "1", "ver listado de temas":
 	        		GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Ver listado de temas");
-	        		temitas.menuTemas(sc);
+	        	    temitas.menuTemas(sc);
 	        		break;
 	        		
 	            case "2", "ver lista de alumnos":
@@ -98,7 +97,7 @@ public class Profesor extends UsuarioBase {
 	            	gestor.cambiarContrasena(sc, this);
                 	break;
                    
-	            case "8", "salir del menu", "salir", "salir del":
+	            case "8", "salir del menu":
 	            	GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Salir del menu");
 	                System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de profesor..." + Colores.ANSI_RESET);
 	                break;

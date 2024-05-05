@@ -3,10 +3,10 @@ package com.daw.proyectoescolar.entidades;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.daw.proyectoescolar.logs.GestionLogs;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
-import com.daw.proyectoescolar.repositorio.GestionLogs;
-import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
+import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 public class Administrador extends UsuarioBase {
     
@@ -39,7 +39,7 @@ public class Administrador extends UsuarioBase {
     @Override
     public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
     	
-    	GestionadorUsuarios gestor = new GestionadorUsuarios();
+    	GestionUsuarios gestor = new GestionUsuarios();
    
         String opcion;
 

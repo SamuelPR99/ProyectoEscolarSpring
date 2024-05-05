@@ -10,6 +10,7 @@ import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
+import com.daw.proyectoescolar.logs.GestionLogs;
 
 public class UsuariosRepo {
 
@@ -84,8 +85,8 @@ public class UsuariosRepo {
 			fw.close();
 
 		} catch (IOException e) {
-			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha guardado el usuario.");
+			System.err.println(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage() + " No se ha guardado el usuario.");
 		}
 
 	}
@@ -111,8 +112,8 @@ public class UsuariosRepo {
 			fw.close();
 
 		} catch (IOException e) {
-			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha borrado el usuario.");
+			System.err.println(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage() + " No se ha borrado el usuario.");
 		}
 
 	}
@@ -138,8 +139,8 @@ public class UsuariosRepo {
 			fw.close();
 
 		} catch (IOException e) {
-			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage() + " No se ha cambiado la contraseña.");
+			System.err.println(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage() + " No se ha cambiado la contraseña.");
 		}
 
 	}
@@ -166,8 +167,8 @@ public class UsuariosRepo {
 			fw.close();
 
 		} catch (IOException e) {
-			System.err.println(Constantes.ERROR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ARCHIVO + e.getMessage());
+			System.err.println(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage());
+			GestionLogs.errorLogs(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage());
 		}
 
 	}

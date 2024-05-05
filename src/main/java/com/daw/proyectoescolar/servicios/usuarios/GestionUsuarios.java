@@ -1,4 +1,4 @@
-package com.daw.proyectoescolar.servicios.gestionusuarios;
+package com.daw.proyectoescolar.servicios.usuarios;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,19 +7,20 @@ import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
+import com.daw.proyectoescolar.logs.GestionLogs;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
-import com.daw.proyectoescolar.repositorio.GestionLogs;
+import com.daw.proyectoescolar.repositorio.TemasRepo;
 import com.daw.proyectoescolar.repositorio.UsuariosRepo;
-import com.daw.proyectoescolar.servicios.incidencias.GestionDeIncidencias;
+import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
 
-public class GestionadorUsuarios {
+public class GestionUsuarios {
 
-	private ArrayList<Tarea> listaDeTareas = new Tarea().archivoTareas();
+	private ArrayList<Tarea> listaDeTareas = new TemasRepo().archivoTareas();
 	private UsuariosRepo uRepo = new UsuariosRepo();
 
 	// Constructor vacio
-	public GestionadorUsuarios() {
+	public GestionUsuarios() {
 	}
 
 	// Iniciar el menu principal
@@ -67,7 +68,7 @@ public class GestionadorUsuarios {
 
 			case "2", "gestion de incidencias":
 				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Gestion de incidencias");
-				GestionDeIncidencias gestionadorIncidencias = new GestionDeIncidencias();
+				GestionIncidencias gestionadorIncidencias = new GestionIncidencias();
 				gestionadorIncidencias.menuPrincipal(sc);
 				break;
 

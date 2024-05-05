@@ -14,6 +14,7 @@ import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
+import com.daw.proyectoescolar.repositorio.TemasRepo;
 import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 
@@ -31,7 +32,7 @@ class GestionUsuariosTest {
         gestion = new GestionadorUsuarios();
         usuarios = uRepo.usuarios();
         alumnos = gestion.obtenerAlumnos(usuarios);
-        listaDeTareas = new Tarea().archivoTareas();
+        listaDeTareas = new TemasRepo().archivoTareas();
     }
     
     @Test

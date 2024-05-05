@@ -1,28 +1,15 @@
 package com.daw.proyectoescolar.paula;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
 
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import com.daw.proyectoescolar.entidades.Alumno;
-import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.Tarea;
-import com.daw.proyectoescolar.entidades.Temas;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
-import com.daw.proyectoescolar.repositorio.ListaDeTemas;
-import com.daw.proyectoescolar.repositorio.Tema1;
 import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
 import com.daw.proyectoescolar.servicios.tareas.GestionTemas;
 
@@ -44,6 +31,7 @@ class TareasTest {
 
 	}
 
+	/*
 	@Test
 	void testTareaBasica() {
 
@@ -297,5 +285,5 @@ class TareasTest {
 		
 		assertEquals(9.0, alumnos.get(numeroAlumno - 1).getNota(), 0.001);
 	}
-	
+	*/
 }

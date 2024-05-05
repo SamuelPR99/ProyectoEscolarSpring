@@ -1,4 +1,4 @@
-package com.daw.proyectoescolar.repositorio;
+package com.daw.proyectoescolar.logs;
 
 import java.io.BufferedWriter;
 import java.io.File;

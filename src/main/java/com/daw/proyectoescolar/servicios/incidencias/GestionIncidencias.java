@@ -1,11 +1,5 @@
 package com.daw.proyectoescolar.servicios.incidencias;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,23 +7,24 @@ import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
 import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
 import com.daw.proyectoescolar.entidades.IncidenciaProfesor;
 import com.daw.proyectoescolar.entidades.Incidencias;
+import com.daw.proyectoescolar.logs.GestionLogs;
 import com.daw.proyectoescolar.repositorio.Colores;
-import com.daw.proyectoescolar.repositorio.Constantes;
-import com.daw.proyectoescolar.repositorio.GestionLogs;
+import com.daw.proyectoescolar.repositorio.IncidenciasRepo;
 
-public class GestionDeIncidencias {
+public class GestionIncidencias {
 
-	// ATRIBUTOS DE LA CLASE \\
+	// ATRIBUTOS DE LA CLASE
 
-	private ArrayList<Incidencias> listaIncidencias = imprimirIncidenciasFichero(new ArrayList<>());
+	private IncidenciasRepo iRepo = new IncidenciasRepo();
+	private ArrayList<Incidencias> listaIncidencias = iRepo.leerIncidencias(new ArrayList<Incidencias>());
 
-	// CONSTRUCTORES \\
+	// CONSTRUCTORES
 
-	public GestionDeIncidencias() {
+	public GestionIncidencias() {
 
 	}
 
-	// GETTERS Y SETTERS \\
+	// GETTERS Y SETTERS
 	public ArrayList<Incidencias> getListaIncidencias() {
 		return listaIncidencias;
 	}
@@ -38,9 +33,9 @@ public class GestionDeIncidencias {
 		this.listaIncidencias = listaIncidencias;
 	}
 
-	// METODOS \\
+	// METODOS
 
-	// MENU PRINCIPAL DE LA GESTION DE INCIDENCIAS \\
+	// MENU PRINCIPAL DE LA GESTION DE INCIDENCIAS
 	public void menuPrincipal(Scanner sc) {
 
 		String opcion;
@@ -101,7 +96,7 @@ public class GestionDeIncidencias {
 
 		String opcion;
 
-		// Submenu para añadir las incidencias que el usuario desee \\
+		// Submenu para añadir las incidencias que el usuario desee
 
 		do {
 
@@ -117,8 +112,8 @@ public class GestionDeIncidencias {
 				Incidencias incidenciaAlumno = new IncidenciaAlumno();
 				System.out.println("\nIntroduzca la incidencia de alumno: ");
 				incidenciaAlumno.setIncidencia(sc.nextLine());
-				escribirFichero(incidenciaAlumno);
-				imprimirIncidenciasFichero(listaIncidencias);
+				iRepo.escribirIncidencia(incidenciaAlumno);
+				iRepo.leerIncidencias(listaIncidencias);
 				GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Alumno");
 
 				System.out
@@ -131,8 +126,8 @@ public class GestionDeIncidencias {
 				Incidencias incidenciaProfesor = new IncidenciaProfesor();
 				System.out.println("\nIntroduzca la incidencia de profesor: ");
 				incidenciaProfesor.setIncidencia(sc.nextLine());
-				escribirFichero(incidenciaProfesor);
-				imprimirIncidenciasFichero(listaIncidencias);
+				iRepo.escribirIncidencia(incidenciaProfesor);
+				iRepo.leerIncidencias(listaIncidencias);
 				GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Profesor");
 
 				System.out.println(
@@ -145,8 +140,8 @@ public class GestionDeIncidencias {
 				Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
 				System.out.println("\nIntroduzca la incidencia aplicación: ");
 				incidenciaAplicacion.setIncidencia(sc.nextLine());
-				escribirFichero(incidenciaAplicacion);
-				imprimirIncidenciasFichero(listaIncidencias);
+				iRepo.escribirIncidencia(incidenciaAplicacion);
+				iRepo.leerIncidencias(listaIncidencias);
 				GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Aplicacion");
 
 				System.out.println(
@@ -230,7 +225,7 @@ public class GestionDeIncidencias {
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-	// Metodo encargado de imprimir las incidencias de tipo Alumno \\
+	// Metodo encargado de imprimir las incidencias de tipo Alumno
 	public void verIncidenciaAlumno() {
 
 		if (getListaIncidencias().isEmpty()) {
@@ -244,7 +239,7 @@ public class GestionDeIncidencias {
 		}
 	}
 
-	// Metodo encargado de imprimir las incidencias de tipo Profesor \\
+	// Metodo encargado de imprimir las incidencias de tipo Profesor
 	public void verIncidenciaProfesor() {
 
 		if (getListaIncidencias().isEmpty()) {
@@ -258,7 +253,7 @@ public class GestionDeIncidencias {
 		}
 	}
 
-	// Metodo encargado de imprimir las incidencias de tipo Aplicacion \\
+	// Metodo encargado de imprimir las incidencias de tipo Aplicacion
 	public void verIncidenciaAplicacion() {
 
 		if (getListaIncidencias().isEmpty()) {
@@ -272,8 +267,9 @@ public class GestionDeIncidencias {
 		}
 	}
 
-	// Metodo encargado de imprimir todas las incidencias, sin filtrarlas por su
-	// tipo. \\
+	/* Metodo encargado de imprimir todas las incidencias, 
+	 * sin filtrarlas por su tipo.
+	 */
 	public void verIncidenciasGenerales() {
 
 		if (getListaIncidencias().isEmpty()) {
@@ -286,8 +282,10 @@ public class GestionDeIncidencias {
 		}
 	}
 
-	// Metodo encargado de eliminar las incidencias registradas. \\
-	// Se eliminan por tipo de incidencia. \\
+	/*
+	 * Metodo encargado de eliminar las incidencias registradas. Se eliminan por
+	 * tipo de incidencia.
+	 */
 	public void eliminarIncidencias(Scanner sc) {
 
 		String opcion;
@@ -337,7 +335,7 @@ public class GestionDeIncidencias {
 
 	}
 
-	// Metodo encargado de eliminar las incidencias de tipo Alumno \\
+	// Metodo encargado de eliminar las incidencias de tipo Alumno
 	public void eliminarIncidenciaAlumno() {
 
 		if (getListaIncidencias().isEmpty()) {
@@ -353,7 +351,7 @@ public class GestionDeIncidencias {
 		}
 	}
 
-	// Metodo encargado de eliminar las incidencias de tipo Profesor \\
+	// Metodo encargado de eliminar las incidencias de tipo Profesor
 	public void eliminarIncidenciaProfesor() {
 
 		if (getListaIncidencias().isEmpty()) {
@@ -369,7 +367,7 @@ public class GestionDeIncidencias {
 		}
 	}
 
-	// Metodo encargado de eliminar las incidencias de tipo Aplicacion \\
+	// Metodo encargado de eliminar las incidencias de tipo Aplicacion
 	public void eliminarIncidenciaAplicacion() {
 
 		if (getListaIncidencias().isEmpty()) {
@@ -383,82 +381,6 @@ public class GestionDeIncidencias {
 				}
 			}
 		}
-	}
-
-	public void escribirFichero(Incidencias incidencia) {
-
-		BufferedWriter bw = null;
-		FileWriter fw = null;
-
-		try {
-
-			File file = new File(Constantes.RUTA_INCIDENCIAS);
-
-			fw = new FileWriter(file, true);
-
-			bw = new BufferedWriter(fw);
-			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + "\n");
-			bw.flush();
-			fw.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		finally {
-			if (bw != null) {
-				try {
-					bw.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-	}
-
-	public ArrayList<Incidencias> imprimirIncidenciasFichero(ArrayList<Incidencias> listaIncidencias) {
-
-		try (BufferedReader br = new BufferedReader(new FileReader(Constantes.RUTA_INCIDENCIAS))) {
-
-			String linea;
-
-			while ((linea = br.readLine()) != null) {
-
-				String[] datos = linea.split(";"); // Separar los datos por punto y coma
-				String tipoIncidencia = datos[0]; // Tipo de incidencia
-				String descripcionIncidencia = datos[1]; // Detalles de la incidencia
-
-				switch (tipoIncidencia) {
-
-				case "Alumno":
-					listaIncidencias.add(new IncidenciaAlumno(descripcionIncidencia));
-					break;
-
-				case "Profesor":
-					listaIncidencias.add(new IncidenciaProfesor(descripcionIncidencia));
-					break;
-
-				case "Aplicacion":
-					listaIncidencias.add(new IncidenciaAplicacion(descripcionIncidencia));
-					break;
-
-				default:
-					System.err.println("Incidencia no encontrada");
-					GestionLogs.errorLogs("Incidencia no encontrada en el archivo de incidencias." + tipoIncidencia
-							+ " no es una incidencia valida.");
-					break;
-				}
-			}
-
-		} catch (IOException e) {
-			System.err.println("Error al leer el archivo: " + e.getMessage());
-			GestionLogs.errorLogs(
-					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
-		}
-
-		return listaIncidencias;
-
 	}
 
 }

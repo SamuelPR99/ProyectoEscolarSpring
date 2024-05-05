@@ -2,7 +2,7 @@ package com.daw.proyectoescolar.controladores;
 
 import java.util.Scanner;
 
-import com.daw.proyectoescolar.servicios.gestionusuarios.GestionadorUsuarios;
+import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 public class Controlador {
 
@@ -12,7 +12,7 @@ public class Controlador {
 
         Scanner sc = new Scanner(System.in);
         
-        new GestionadorUsuarios().iniciar(sc);
+        new GestionUsuarios().iniciar(sc);
         
         /*
          * Por cuestiones de seguridad no puedes registrarte como un usario administrador
