@@ -20,7 +20,7 @@ public class Controlador {
          * Usuario: Lolo
          * Contraseña: pass1
          */
-        
+
         sc.close();
        
     }
