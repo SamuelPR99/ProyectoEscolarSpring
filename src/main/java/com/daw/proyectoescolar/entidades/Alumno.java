@@ -17,6 +17,7 @@ public class Alumno extends UsuarioBase {
 
     // Constructores
     public Alumno() {
+    	
     }
 
     public Alumno(String nombre, String contrasena, double nota) {
@@ -26,14 +27,17 @@ public class Alumno extends UsuarioBase {
 
     public Alumno(String nombre, String contrasena, String dni) {
         super(nombre, contrasena, dni);
-        
     }
     
     public Alumno(String nombre, String contrasena, String dni, double nota) {
         super(nombre, contrasena, dni);
         this.nota = nota;
-        
     }
+    
+	public Alumno(int usuarioId, String nombre, String contrasena, String dni, double nota) {
+		super(usuarioId, nombre, contrasena, dni);
+		this.nota = nota;
+	}
     
     // Getters y setters
     public double getNota() {

@@ -11,6 +11,7 @@ public abstract class UsuarioBase implements Usuario {
 
 		// Atributos
 		
+		protected int usuarioId;
 	    protected String nombre;
 	    protected String contrasena;
 	    protected String dni;
@@ -31,8 +32,19 @@ public abstract class UsuarioBase implements Usuario {
 			this.dni = dni;
 		}
 		
+		protected UsuarioBase(int id, String nombreUsuario, String contrasena, String dni) {
+		    this.usuarioId = id;
+			this.nombre = nombreUsuario;
+			this.contrasena = contrasena;
+			this.dni = dni;
+		}
+		
 		// Getters y setters
 
+		public int getUsuarioId() {
+			return usuarioId;
+		}
+		
 	    @Override
 	    public String getNombre() {
 			return nombre;

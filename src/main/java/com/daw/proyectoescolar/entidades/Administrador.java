@@ -24,6 +24,10 @@ public class Administrador extends UsuarioBase {
         super(nombre, contrasena, dni);
     }
     
+    public Administrador(int usuarioId, String nombre, String contrasena, String dni) {
+		super(usuarioId, nombre, contrasena, dni);
+	}
+    
     // Getters y setters
     
     // Metodos
