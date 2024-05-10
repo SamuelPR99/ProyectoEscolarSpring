@@ -4,8 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class logsRepo {
 	
@@ -18,9 +16,10 @@ public class logsRepo {
 	 * Metodo para escribir logs de informacion sobre las acciones de los usuarios 
 	 * y fecha y hora de la accion realizada
 	 */
+	
 	public static void escribirLog(String tipoLog, String mensajeLog) {
 
-		String fechaActual = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		String fechaActual = FechaYHora.fechaActualSinHora();
 		String rutaDirectorioLog = Constantes.CARPETA_LOGS + fechaActual + "/";
 		String rutaArchivoLog = rutaDirectorioLog + "log_" + tipoLog + ".log";
 

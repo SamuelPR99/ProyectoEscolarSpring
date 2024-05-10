@@ -9,7 +9,6 @@ import java.util.HashMap;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Temas;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
-import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 
 public class TemasRepo {
 
@@ -20,6 +19,7 @@ public class TemasRepo {
 
     // Metodos
 
+    // Lee el archivo de temas y crea un array de temas
     public ArrayList<Temas> archivoTemas() {
 
         ArrayList<Temas> temas = new ArrayList<>();
@@ -29,7 +29,7 @@ public class TemasRepo {
             BufferedReader br = new BufferedReader(fr);
             String linea = br.readLine();
 
-            HashMap<Integer, ArrayList<Tarea>> hashTareas = new GestionTemas().hashTareas();
+            HashMap<Integer, ArrayList<Tarea>> hashTareas = hashTareas(); // HashMap que obtiene las tareas de archivoTareas()
             int temaActual = 1;
 
             while (linea != null) {
@@ -39,7 +39,8 @@ public class TemasRepo {
                 String descripcion = partes[1];
 
                 ArrayList<Tarea> tareasArray = new ArrayList<>();
-                for (int i = 0; i < 3; i++) {
+                
+                for (int i = 0; i < 3; i++) { // Cada tema tiene 3 tareas
                     tareasArray.addAll(hashTareas.get(temaActual));
                     temaActual++;
                 }
@@ -91,5 +92,22 @@ public class TemasRepo {
 
         return tareas;
     }
+    
+    // Crea un HashMap de tareas a partir de archivoTareas()
+    public HashMap<Integer, ArrayList<Tarea>> hashTareas() {
+
+		HashMap<Integer, ArrayList<Tarea>> tareas = new HashMap<>();
+		ArrayList<Tarea> tareasArray = new TemasRepo().archivoTareas();
+
+		int i = 1;
+		for (Tarea tarea : tareasArray) {
+			ArrayList<Tarea> tareasList = new ArrayList<>();
+			tareasList.add(tarea);
+			tareas.put(i, tareasList);
+			i++;
+		}
+
+		return tareas;
+	}
 
 }

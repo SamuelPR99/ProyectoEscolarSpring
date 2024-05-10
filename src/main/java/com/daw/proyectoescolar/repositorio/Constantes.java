@@ -10,17 +10,20 @@ public class Constantes {
 
 	}
 
+	// Tipos de usuario
 	public static final String ALUMNO = "Alumno";
 	public static final String PROFESOR = "Profesor";
 	public static final String ADMINISTRADOR = "Administrador";
 
+	// Mensajes
 	public static final String VALID = "Tipo de usuario no valido.";
 	public static final String NUM_TAREA_VALID = "Numero de tarea no valido.";
 	public static final String NUM_SELEC = " Numero seleccionado: ";
 	public static final String ERROR_ESCRIBIR_ARCHIVO = "Error al escribir en el archivo: ";
 	public static final String ERROR_LEER_ARCHIVO = "Error al leer el archivo: ";
 
-	public static final String RUTA_RUTAS_PROPERTIES = "rutas.properties";
+	// Rutas
+	public static final String RUTA_RUTAS_PROPERTIES = "src/main/java/com/daw/proyectoescolar/repositorio/rutas.properties";
 	public static final String RUTA_USUARIOS;
 	public static final String RUTA_INCIDENCIAS;
 	public static final String RUTA_TAREAS;
@@ -28,22 +31,27 @@ public class Constantes {
 	public static final String CARPETA_LOGS;
 	public static final String RUTA_BBDD_PROPERTIES;
 
+	// Menus
 	public static final String MENU_PRINCIPAL = "Menu Principal";
 	public static final String MENU_ALUMNOS = "Menu Alumnos";
 	public static final String MENU_PROFESORES = "Menu Profesores";
 	public static final String MENU_ADMINISTRADORES = "Menu Administradores";
 
+	// Dificultad temas
 	public static final String AVANZA = "Avanzada";
 	public static final String BASICA = "Basica";
 	public static final String INTERMEDIA = "Intermedia";
 
+	// Datos de la base de datos
 	public static final String CONEXION_URL;
 	public static final String USER;
 	public static final String PASSWORD;
 
 	// Sacar rutas de un archivo .properties
 	static {
+		
 		Properties rutas = new Properties();
+		
 		try {
 			rutas.load(new FileInputStream(RUTA_RUTAS_PROPERTIES));
 
@@ -53,6 +61,7 @@ public class Constantes {
 			RUTA_TEMAS = rutas.getProperty("ruta.temas");
 			CARPETA_LOGS = rutas.getProperty("carpeta.logs");
 			RUTA_BBDD_PROPERTIES = rutas.getProperty("ruta.bbdd");
+			
 		} catch (IOException e) {
 			throw new ExceptionInInitializerError(e);
 		}
@@ -74,5 +83,5 @@ public class Constantes {
 			throw new ExceptionInInitializerError(e);
 		}
 	}
-
+	
 }
