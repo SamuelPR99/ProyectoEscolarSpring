@@ -13,6 +13,10 @@ public class IncidenciaAplicacion extends Incidencias {
 		super(incidencia);
 	}
 	
+	public IncidenciaAplicacion(String incidencia, String fechaIncidencia) { 
+		super(incidencia, fechaIncidencia);
+	}
+	
 	public IncidenciaAplicacion(int incidenciaId, String incidencia, String fechaIncidencia) {																					// "Incidencias"
 		super(incidenciaId, incidencia, fechaIncidencia);
 	}

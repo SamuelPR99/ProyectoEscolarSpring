@@ -15,6 +15,11 @@ public abstract class Incidencias {
 	public Incidencias(String incidencia) {
 		this.incidencia = incidencia;
 	}
+	
+	public Incidencias(String incidencia, String fechaIncidencia) {
+		this.incidencia = incidencia;
+		this.fechaIncidencia = fechaIncidencia;
+	}
 		
 	public Incidencias(int incidenciaId, String incidencia, String fechaIncidencia) {
 		this.incidenciaId = incidenciaId;

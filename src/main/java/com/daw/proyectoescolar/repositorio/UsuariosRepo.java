@@ -1,9 +1,14 @@
 package com.daw.proyectoescolar.repositorio;
 
 import java.io.BufferedReader;
+import java.sql.Connection;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.daw.proyectoescolar.entidades.Administrador;
@@ -86,7 +91,8 @@ public class UsuariosRepo {
 
 		} catch (IOException e) {
 			System.err.println(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage() + " No se ha guardado el usuario.");
+			GestionLogs
+					.errorLogs(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage() + " No se ha guardado el usuario.");
 		}
 
 	}
@@ -140,7 +146,8 @@ public class UsuariosRepo {
 
 		} catch (IOException e) {
 			System.err.println(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage());
-			GestionLogs.errorLogs(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage() + " No se ha cambiado la contraseña.");
+			GestionLogs.errorLogs(
+					Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage() + " No se ha cambiado la contraseña.");
 		}
 
 	}
@@ -171,6 +178,121 @@ public class UsuariosRepo {
 			GestionLogs.errorLogs(Constantes.ERROR_ESCRIBIR_ARCHIVO + e.getMessage());
 		}
 
+	}
+
+	/*---------------------------------*/
+
+	// Base de datos
+
+	/*
+	 * Script de la base de datos
+	 * 
+	 * CREATE TABLE `asignartarea` ( `tareaAsignada_id` int(11) NOT NULL
+	 * AUTO_INCREMENT, `tarea_id` int(11) NOT NULL, `fecha_inicio` datetime NOT
+	 * NULL, `fecha_entrega` datetime NOT NULL, `fecha_expiracion` datetime NOT
+	 * NULL, `puntuacion` decimal(10,0) NOT NULL, `usuario_id` int(11) NOT NULL,
+	 * PRIMARY KEY (`tareaAsignada_id`), KEY `asignartarea_tarea_FK` (`tarea_id`),
+	 * KEY `asignartarea_usuario_FK` (`usuario_id`), CONSTRAINT
+	 * `asignartarea_tarea_FK` FOREIGN KEY (`tarea_id`) REFERENCES `tarea`
+	 * (`tarea_id`), CONSTRAINT `asignartarea_usuario_FK` FOREIGN KEY (`usuario_id`)
+	 * REFERENCES `usuario` (`usuario_id`) )
+	 * 
+	 * CREATE TABLE `incidencia` ( `incidencia_id` int(11) NOT NULL AUTO_INCREMENT,
+	 * `tipo` enum('Aplicacion','Profesor','Alumno') NOT NULL, `incidencia`
+	 * varchar(255) NOT NULL, `usuario_id` int(11) NOT NULL, `fecha` datetime
+	 * DEFAULT NULL, PRIMARY KEY (`incidencia_id`), KEY `incidencia_usuario_FK`
+	 * (`usuario_id`), CONSTRAINT `incidencia_usuario_FK` FOREIGN KEY (`usuario_id`)
+	 * REFERENCES `usuario` (`usuario_id`) )
+	 * 
+	 * CREATE TABLE `nota` ( `usuario_id` int(11) NOT NULL, `nota` decimal(10,0) NOT
+	 * NULL, PRIMARY KEY (`usuario_id`), CONSTRAINT `nota_usuario_FK` FOREIGN KEY
+	 * (`usuario_id`) REFERENCES `usuario` (`usuario_id`) )
+	 * 
+	 * CREATE TABLE `tarea` ( `tarea_id` int(11) NOT NULL AUTO_INCREMENT, `titulo`
+	 * varchar(255) NOT NULL, `dificultad` varchar(255) NOT NULL, `descripcion`
+	 * varchar(255) NOT NULL, `tema_id` int(11) NOT NULL, PRIMARY KEY (`tarea_id`),
+	 * KEY `tareas_temas_FK` (`tema_id`), CONSTRAINT `tarea_tema_FK` FOREIGN KEY
+	 * (`tema_id`) REFERENCES `tema` (`tema_id`) )
+	 * 
+	 * CREATE TABLE `tema` ( `tema_id` int(11) NOT NULL, `titulo` varchar(255) NOT
+	 * NULL, `descripcion` varchar(255) NOT NULL, PRIMARY KEY (`tema_id`) )
+	 * 
+	 * CREATE TABLE `usuario` ( `usuario_id` int(11) NOT NULL AUTO_INCREMENT,
+	 * `nombre` varchar(150) NOT NULL, `contrasena` varchar(250) NOT NULL, `tipo`
+	 * enum('Administrador','Profesor','Alumno') NOT NULL, `dni` varchar(9) NOT
+	 * NULL, PRIMARY KEY (`usuario_id`) )
+	 * 
+	 */
+
+	// Comprobar si existen usuarios en la base de datos
+	public boolean comprobarUsuarios() {
+
+		boolean existe = false;
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "SELECT COUNT(*) FROM usuario";
+
+		try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+			existe = ps.executeQuery().next();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return existe;
+
+	}
+
+	// Insertar los usuarios en la base de datos
+	public void insertarUsuarios() {
+
+		ArrayList<UsuarioBase> usuarios = usuarios();
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sqlInsert = "INSERT INTO usuario (nombre, contrasena, tipo, dni) VALUES (?, ?, ?, ?)";
+		String sqlSelect = "SELECT usuario_id FROM usuario WHERE nombre = ? AND tipo = 'Alumno'";
+		String sqlInsertNota = "INSERT INTO nota (usuario_id, nota) VALUES (?, ?)";
+
+		try {
+			
+			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
+
+			for (UsuarioBase usuario : usuarios) {
+				psInsert.setString(1, usuario.getNombre());
+				psInsert.setString(2, usuario.getContrasena());
+				psInsert.setString(3, usuario.getTipoUsuario());
+				psInsert.setString(4, usuario.getDni());
+
+				psInsert.executeUpdate();
+
+				if (usuario.getTipoUsuario().equals(Constantes.ALUMNO)) {
+					PreparedStatement psSelect = conexion.prepareStatement(sqlSelect);
+					psSelect.setString(1, usuario.getNombre());
+
+					ResultSet rs = psSelect.executeQuery();
+
+					if (rs.next()) {
+						int usuarioId = rs.getInt("usuario_id");
+
+						PreparedStatement psInsertNota = conexion.prepareStatement(sqlInsertNota);
+						psInsertNota.setInt(1, usuarioId);
+						psInsertNota.setDouble(2, ((Alumno) usuario).getNota());
+
+						psInsertNota.executeUpdate();
+					}
+				}
+			}
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
 	}
 
 }

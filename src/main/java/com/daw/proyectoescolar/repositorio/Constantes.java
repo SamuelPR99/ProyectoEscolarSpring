@@ -36,6 +36,7 @@ public class Constantes {
 	public static final String MENU_ALUMNOS = "Menu Alumnos";
 	public static final String MENU_PROFESORES = "Menu Profesores";
 	public static final String MENU_ADMINISTRADORES = "Menu Administradores";
+	public static final String MENU_INCIDENCIAS = "Menu Incidencias";
 
 	// Dificultad temas
 	public static final String AVANZA = "Avanzada";

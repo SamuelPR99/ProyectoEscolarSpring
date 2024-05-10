@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.repositorio;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -13,7 +14,7 @@ public class ConexionBBDD {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conexion = DriverManager.getConnection(Constantes.CONEXION_URL, Constantes.USER, Constantes.PASSWORD);
-			System.out.println("Conexión establecida a la base de datos.");
+			System.out.println("Conexion establecida a la base de datos.");
 
 		} catch (SQLException | ClassNotFoundException ce) {
 			ce.printStackTrace();

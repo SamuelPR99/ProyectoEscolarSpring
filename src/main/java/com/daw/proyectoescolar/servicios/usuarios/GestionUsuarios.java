@@ -75,6 +75,14 @@ public class GestionUsuarios {
 			case "3", "salir":
 				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Salir");
 				System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
+				System.exit(0);
+				break;
+				
+			case "4", "insertar usuario":
+				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Insertar usuario");
+			    UsuariosRepo uRepo = new UsuariosRepo();
+			    uRepo.insertarUsuarios();
+				
 				break;
 
 			default:
