@@ -25,6 +25,13 @@ public class Tarea {
 		this.descripcion = descripcion;
 	}
 	
+	public Tarea(String tipo, String nombre, String descripcion, int temaId) {
+		this.tipo = tipo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.temaId = temaId;
+	}
+	
 	public Tarea(int tareaId, String tipo, String nombre, String descripcion, int temaId) {
 		this.tareaId = tareaId;
 		this.tipo = tipo;
