@@ -26,6 +26,10 @@ public class GestionUsuarios {
 	// Iniciar el menu principal
 	public void iniciar(Scanner sc) {
 
+		if (!uRepo.comprobarDatos()) { // si la bbdd esta vacia
+			uRepo.insertarUsuariosArchivoBBDD(); // cargar los datos de los usuarios
+		} 
+		
 		ArrayList<UsuarioBase> usuarios = uRepo.usuarios();
 		String opcion;
 
@@ -78,13 +82,6 @@ public class GestionUsuarios {
 				System.exit(0);
 				break;
 				
-			case "4", "insertar usuario":
-				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Insertar usuario");
-			    UsuariosRepo uRepo = new UsuariosRepo();
-			    uRepo.insertarUsuarios();
-				
-				break;
-
 			default:
 				System.err.println("Opcion no valida. Intentalo de nuevo.");
 				GestionLogs.errorLogs("Opcion no valida seleccionada en el menu principal." + " Opcion: " + opcion);
@@ -192,6 +189,8 @@ public class GestionUsuarios {
 
 		// Guardar el usuario en el archivo
 		uRepo.registro(nuevoUsuario);
+		// Insertar el usuario en la base de datos
+		uRepo.insertarUsuario(nuevoUsuario); 
 
 	}
 

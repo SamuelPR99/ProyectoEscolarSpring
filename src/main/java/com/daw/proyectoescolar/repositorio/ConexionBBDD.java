@@ -14,7 +14,7 @@ public class ConexionBBDD {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conexion = DriverManager.getConnection(Constantes.CONEXION_URL, Constantes.USER, Constantes.PASSWORD);
-			System.out.println("Conexion establecida a la base de datos.");
+			System.out.println("..." + Colores.ANSI_GREEN + "↪" + Colores.ANSI_RESET);
 
 		} catch (SQLException | ClassNotFoundException ce) {
 			ce.printStackTrace();
@@ -26,7 +26,7 @@ public class ConexionBBDD {
 	public void cerrarConexion(Connection conexion) {
 		try {
 			conexion.close();
-			System.out.println("Conexion cerrada con exito");
+			System.out.println("..." + Colores.ANSI_RED + "↩" + Colores.ANSI_RESET);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

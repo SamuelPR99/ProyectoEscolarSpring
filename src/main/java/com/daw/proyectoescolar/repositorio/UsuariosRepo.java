@@ -222,30 +222,8 @@ public class UsuariosRepo {
 	 * 
 	 */
 
-	// Comprobar si existen usuarios en la base de datos
-	public boolean comprobarUsuarios() {
-
-		boolean existe = false;
-
-		ConexionBBDD conexionBBDD = new ConexionBBDD();
-		Connection conexion = conexionBBDD.conectar();
-
-		String sql = "SELECT COUNT(*) FROM usuario";
-
-		try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-
-			existe = ps.executeQuery().next();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return existe;
-
-	}
-
 	// Insertar los usuarios en la base de datos
-	public void insertarUsuarios() {
+	public void insertarUsuariosArchivoBBDD() {
 
 		ArrayList<UsuarioBase> usuarios = usuarios();
 
@@ -289,6 +267,102 @@ public class UsuariosRepo {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+	}
+
+	// Borrar la nota y los usuarios de la base de datos
+	public void borrarUsuarios() {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sqlDeleteNota = "DELETE FROM nota";
+		String sqlDeleteUsuario = "DELETE FROM usuario";
+
+		try {
+
+			PreparedStatement psDeleteNota = conexion.prepareStatement(sqlDeleteNota);
+			psDeleteNota.executeUpdate();
+
+			PreparedStatement psDeleteUsuario = conexion.prepareStatement(sqlDeleteUsuario);
+			psDeleteUsuario.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+	}
+
+	// Comprobar si hay datos en usuario con count
+	public boolean comprobarDatos() {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "SELECT COUNT(*) FROM usuario";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int count = rs.getInt(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+
+		return false;
+	}
+
+	// Insertar un usuario en la base de datos
+	public void insertarUsuario(UsuarioBase usuario) {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sqlInsert = "INSERT INTO usuario (nombre, contrasena, tipo, dni) VALUES (?, ?, ?, ?)";
+		String sqlSelect = "SELECT usuario_id FROM usuario WHERE nombre = ? AND tipo = 'Alumno'";
+		String sqlInsertNota = "INSERT INTO nota (usuario_id, nota) VALUES (?, ?)";
+
+		try {
+
+			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
+			psInsert.setString(1, usuario.getNombre());
+			psInsert.setString(2, usuario.getContrasena());
+			psInsert.setString(3, usuario.getTipoUsuario());
+			psInsert.setString(4, usuario.getDni());
+			psInsert.executeUpdate();
+
+			if (usuario.getTipoUsuario().equals(Constantes.ALUMNO)) {
+				PreparedStatement psSelect = conexion.prepareStatement(sqlSelect);
+				psSelect.setString(1, usuario.getNombre());
+				ResultSet rs = psSelect.executeQuery();
+
+				if (rs.next()) {
+					int usuarioId = rs.getInt("usuario_id");
+					PreparedStatement psInsertNota = conexion.prepareStatement(sqlInsertNota);
+					psInsertNota.setInt(1, usuarioId);
+					psInsertNota.setDouble(2, ((Alumno) usuario).getNota());
+					psInsertNota.executeUpdate();
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 	}
