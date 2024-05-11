@@ -1,14 +1,12 @@
 package com.daw.proyectoescolar.repositorio;
 
 import java.io.BufferedReader;
-import java.sql.Connection;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.daw.proyectoescolar.entidades.Administrador;
@@ -259,7 +257,7 @@ public class UsuariosRepo {
 		String sqlInsertNota = "INSERT INTO nota (usuario_id, nota) VALUES (?, ?)";
 
 		try {
-			
+
 			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
 
 			for (UsuarioBase usuario : usuarios) {
@@ -287,7 +285,7 @@ public class UsuariosRepo {
 					}
 				}
 			}
-	
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
