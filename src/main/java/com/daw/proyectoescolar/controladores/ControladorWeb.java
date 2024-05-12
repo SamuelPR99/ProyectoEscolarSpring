@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
-import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 
 @Controller
 
@@ -36,8 +35,7 @@ public class ControladorWeb {
     @PostMapping("registro")
     public ModelAndView registrarUsuario(@RequestParam String nombre, @RequestParam String dni, @RequestParam String contrasena, @RequestParam String tipo) {
         ModelAndView mav = new ModelAndView();
-        UsuariosRepo uRepo = new UsuariosRepo();
-        ArrayList<UsuarioBase> usuarios = uRepo.usuarios();
+        ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
         gestionUsuarios.registro(nombre, dni, contrasena, tipo, usuarios);    
         // redirige a la vista de registro exitoso
         mav.setViewName("registroExitoso");
@@ -47,8 +45,7 @@ public class ControladorWeb {
     @PostMapping("login")
     public ModelAndView loguearUsuario(@RequestParam String nombre, @RequestParam String contrasena) {
         ModelAndView mav = new ModelAndView();
-        UsuariosRepo uRepo = new UsuariosRepo();
-        ArrayList<UsuarioBase> usuarios = uRepo.usuarios();
+        ArrayList <UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
         UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
         if (usuario != null) {
             mav.addObject("usuario", usuario);

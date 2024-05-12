@@ -22,6 +22,13 @@ public class GestionUsuarios {
 	// Constructor vacio
 	public GestionUsuarios() {
 	}
+	
+	// Metodos
+	
+	// Obtener el ArrayList de usuarios
+	public ArrayList<UsuarioBase> obtenerUsuarios() {
+		return uRepo.usuariosBBDD();
+	}
 
 	// Iniciar el menu principal
 	public void iniciar(Scanner sc) {
@@ -30,7 +37,7 @@ public class GestionUsuarios {
 			uRepo.insertarUsuariosArchivoBBDD(); // cargar los datos de los usuarios
 		} 
 		
-		ArrayList<UsuarioBase> usuarios = uRepo.usuarios();
+		ArrayList<UsuarioBase> usuarios = obtenerUsuarios();
 		String opcion;
 
 		System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al"
@@ -103,7 +110,7 @@ public class GestionUsuarios {
 
 		return login(nombre, contrasena, usuarios);
 	}
-
+	
 	public UsuarioBase login(String nombre, String contrasena, ArrayList<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {

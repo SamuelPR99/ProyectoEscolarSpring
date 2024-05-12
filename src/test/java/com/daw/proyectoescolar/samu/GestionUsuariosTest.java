@@ -64,7 +64,7 @@ class GestionUsuariosTest {
     @Test
     void testLoginUsuarioRegistrado() { //MOD_003
     	
-        UsuarioBase usuario = gestion.login("Guillamon", "pass1", usuarios);
+        UsuarioBase usuario = gestion.login("Guillamon", "pass1");
         
         assertNotNull(usuario);
         assertEquals("Profesor", usuario.getTipoUsuario());
@@ -74,7 +74,7 @@ class GestionUsuariosTest {
     @Test
     void testLoginUsuarioNoRegistrado() { //MOD_004
     	
-        UsuarioBase usuario = gestion.login("test-usuario", "test-contraseña", usuarios);
+        UsuarioBase usuario = gestion.login("test-usuario", "test-contraseña");
         
         assertNull(usuario);
         
@@ -90,7 +90,7 @@ class GestionUsuariosTest {
 
         gestion.registro(nombre, dni, contraseña, tipo, usuarios);
 
-        UsuarioBase usuarioRegistrado = gestion.login(nombre, contraseña, usuarios);
+        UsuarioBase usuarioRegistrado = gestion.login(nombre, contraseña);
 
         assertNotNull(usuarioRegistrado);
         assertEquals("Alumno", usuarioRegistrado.getTipoUsuario());
@@ -100,12 +100,12 @@ class GestionUsuariosTest {
     @Test
     void testBorrarUsuario() { //MOD_006
     	
-        UsuarioBase usuarioExistente = gestion.login("Guillamon", "pass1", usuarios);
+        UsuarioBase usuarioExistente = gestion.login("Guillamon", "pass1");
         
         assertNotNull(usuarioExistente);
         
         gestion.borrarUsuario("Guillamon", usuarios);
-        UsuarioBase usuarioBorrado = gestion.login("Guillamon", "pass1", usuarios);
+        UsuarioBase usuarioBorrado = gestion.login("Guillamon", "pass1");
         
         assertNull(usuarioBorrado);
         
@@ -119,7 +119,7 @@ class GestionUsuariosTest {
 
         gestion.cambiarContrasena("NuevaContraseña", usuario);
 
-        UsuarioBase usuarioModificado = gestion.login("Guillamon", "NuevaContraseña", usuarios);
+        UsuarioBase usuarioModificado = gestion.login("Guillamon", "NuevaContraseña");
         
         assertNotNull(usuarioModificado);
         
@@ -130,7 +130,7 @@ class GestionUsuariosTest {
     	
         UsuarioBase usuario = new Profesor("UsuarioConContraseña", "contraseña", "12345678A");
         gestion.cambiarContrasena("NuevaContraseña", usuario);
-        UsuarioBase usuarioModificado = gestion.login("UsuarioConContraseña", "NuevaContraseña", usuarios);
+        UsuarioBase usuarioModificado = gestion.login("UsuarioConContraseña", "NuevaContraseña");
         
         assertNull(usuarioModificado);
         
