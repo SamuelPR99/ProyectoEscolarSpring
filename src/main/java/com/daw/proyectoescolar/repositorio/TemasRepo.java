@@ -127,7 +127,7 @@ public class TemasRepo {
 		Connection conexion = conexionBBDD.conectar();
 		
 		
-		String sqlInsert = "INSERT INTO tema (titulo, descripcion) VALUES (?, ?)";
+		String sqlInsert = "INSERT INTO tema (numero_tema, titulo, descripcion) VALUES (?, ?, ?)";
 
 
 		try {
@@ -135,9 +135,11 @@ public class TemasRepo {
 			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
 
 			for (Temas archivoTemas : temas) {
-				psInsert.setString(1, archivoTemas.getNombre());
-				psInsert.setString(1, archivoTemas.getDescripcion());
+				psInsert.setInt(1, archivoTemas.getNumeroTema());
+				psInsert.setString(2, archivoTemas.getNombre());
+				psInsert.setString(3, archivoTemas.getDescripcion());
 
+				psInsert.executeUpdate();
 			}
 
 		} catch (Exception e) {

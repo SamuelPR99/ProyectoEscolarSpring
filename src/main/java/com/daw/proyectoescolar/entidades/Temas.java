@@ -46,6 +46,14 @@ public class Temas {
 		this.temaId = temaId;
 	}
 
+	public int getNumeroTema() {
+		return numeroTema;
+	}
+
+	public void setNumeroTema(int numeroTema) {
+		this.numeroTema = numeroTema;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -75,5 +83,7 @@ public class Temas {
 	public String toString() {
 		return "Temas [nombre=" + nombre + ", descripcion=" + descripcion + ", listaTareas=" + listaTareas + "]";
 	}
+
+	
 
 }
