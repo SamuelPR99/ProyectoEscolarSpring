@@ -6,6 +6,7 @@ public class Temas {
 
 	// Atributos
 	protected int temaId;
+	protected int numeroTema;
 	protected String nombre;
 	protected String descripcion;
 	protected ArrayList<Tarea> listaTareas;
