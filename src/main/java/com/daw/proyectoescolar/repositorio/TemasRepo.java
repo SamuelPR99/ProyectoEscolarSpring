@@ -5,14 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Temas;
-import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class TemasRepo {
@@ -40,7 +37,7 @@ public class TemasRepo {
             while (linea != null) {
 
                 String[] partes = linea.split(";");
-                int numeroTema = Integer.parseInt(partes[1]);
+                int numeroTema = Integer.parseInt(partes[0]);
                 String titulo = partes[1];
                 String descripcion = partes[2];
 
