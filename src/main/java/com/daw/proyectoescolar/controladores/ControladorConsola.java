@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
-public class Controlador {
-
+public class ControladorConsola {
+	
     public static void main(String[] args) {
     	
-        // Clase para unir el proyecto
+        // Clase para unir el proyecto a traves de la consola
 
         Scanner sc = new Scanner(System.in);
         
@@ -24,5 +24,5 @@ public class Controlador {
         sc.close();
        
     }
-      
+
 }

@@ -22,11 +22,25 @@ public class GestionUsuarios {
 	// Constructor vacio
 	public GestionUsuarios() {
 	}
+	
+	// Metodos
+	
+	// Obtener el ArrayList de usuarios
+	public ArrayList<UsuarioBase> obtenerUsuarios() {
+		return uRepo.usuariosBBDD();
+	}
 
 	// Iniciar el menu principal
 	public void iniciar(Scanner sc) {
 
-		ArrayList<UsuarioBase> usuarios = uRepo.usuarios();
+		if (!uRepo.comprobarDatos()) { // si la bbdd esta vacia
+			uRepo.insertarUsuariosArchivoBBDD(); // cargar los datos de los usuarios
+		}
+		
+		TemasRepo tr = new TemasRepo();
+		tr.insertarTemasArchivoBBDD();
+		
+		ArrayList<UsuarioBase> usuarios = obtenerUsuarios();
 		String opcion;
 
 		System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al"
@@ -75,8 +89,9 @@ public class GestionUsuarios {
 			case "3", "salir":
 				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Salir");
 				System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
+				System.exit(0);
 				break;
-
+				
 			default:
 				System.err.println("Opcion no valida. Intentalo de nuevo.");
 				GestionLogs.errorLogs("Opcion no valida seleccionada en el menu principal." + " Opcion: " + opcion);
@@ -98,7 +113,7 @@ public class GestionUsuarios {
 
 		return login(nombre, contrasena, usuarios);
 	}
-
+	
 	public UsuarioBase login(String nombre, String contrasena, ArrayList<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
@@ -184,6 +199,8 @@ public class GestionUsuarios {
 
 		// Guardar el usuario en el archivo
 		uRepo.registro(nuevoUsuario);
+		// Insertar el usuario en la base de datos
+		uRepo.insertarUsuario(nuevoUsuario); 
 
 	}
 

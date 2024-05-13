@@ -10,3 +10,8 @@ Administrador;Lolo;pass1;76429588M
 Alumno;Carlos;Jaja@jaja;76429567M;4.0
 Alumno;Gabriel;Jeje@jeje;76429597M;7.0
 Alumno;Nico;Jiji@jiji;76429517M;0.0
+Alumno;Rafa;Jaja@jaja;76429512M;0.0
+Profesor;Pedro;Jaja@jaja;76429519M
+Alumno;Marcos;Jaja@jaja;76429280M;0.0
+Profesor;Antonio;aasfasfasf;afsasfasf
+Profesor;Antonio;asfasf;asgfasf

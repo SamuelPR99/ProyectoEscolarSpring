@@ -1,5 +1,3 @@
-Alumno;asfasf
-Alumno;aafsafasf
-Alumno;alumnOOOOOOOOO
-Profesor;profEEEEEEEEEEEE
-Aplicacion;APPPPPPPPPPPPPPPPPP
+Alumno;hola, grasias;2024-05-10 20:54:55
+Profesor;hola jejejeje;2024-05-10 20:56:38
+Aplicacion;adios;2024-05-10 20:56:43

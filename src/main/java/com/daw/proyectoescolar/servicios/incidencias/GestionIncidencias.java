@@ -8,23 +8,22 @@ import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
 import com.daw.proyectoescolar.entidades.IncidenciaProfesor;
 import com.daw.proyectoescolar.entidades.Incidencias;
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.IncidenciasRepo;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class GestionIncidencias {
-
-	// ATRIBUTOS DE LA CLASE
-
+	
+	// Atributos
 	private IncidenciasRepo iRepo = new IncidenciasRepo();
 	private ArrayList<Incidencias> listaIncidencias = iRepo.leerIncidencias(new ArrayList<>());
 
-	// CONSTRUCTORES
-
+	// Constructores
 	public GestionIncidencias() {
 
 	}
 
-	// GETTERS Y SETTERS
+	// Getters y Setters
 	public ArrayList<Incidencias> getListaIncidencias() {
 		return listaIncidencias;
 	}
@@ -33,9 +32,9 @@ public class GestionIncidencias {
 		this.listaIncidencias = listaIncidencias;
 	}
 
-	// METODOS
+	// Metodos
 
-	// MENU PRINCIPAL DE LA GESTION DE INCIDENCIAS
+	// Metodo que muestra el menu principal de la gestion de incidencias
 	public void menuPrincipal(Scanner sc) {
 
 		String opcion;
@@ -53,22 +52,22 @@ public class GestionIncidencias {
 			switch (opcion) {
 
 			case "1", "añadir incidencia", "añadir una incidencia":
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias");
 				anadirIncidencia(sc);
 				break;
 
 			case "2", "listar incidencias", "listar":
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Listar Incidencias");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Listar Incidencias");
 				listado(sc);
 				break;
 
 			case "3", "eliminar", "eliminar incidencias":
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Eliminar Incidencias");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Eliminar Incidencias");
 				eliminarIncidencias(sc);
 				break;
 
 			case "4", "salir":
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Salió de la aplicación");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Salió de la aplicación");
 				System.out.println(Colores.ANSI_PURPLE + "Saliendo de la aplicacion..." + Colores.ANSI_RESET);
 				break;
 
@@ -86,13 +85,8 @@ public class GestionIncidencias {
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+	// Metodo encargado de añadir incidencias al ArrayList
 	public ArrayList<Incidencias> anadirIncidencia(Scanner sc) {
-
-		/*
-		 * Este metodo hace que el usuario pueda añadir todas las incidencias del tipo
-		 * que desee hasta que introduzca la opción de "Volver" que lo retornará hasta
-		 * el menu principal
-		 */
 
 		String opcion;
 
@@ -114,7 +108,7 @@ public class GestionIncidencias {
 				incidenciaAlumno.setIncidencia(sc.nextLine());
 				iRepo.escribirIncidencia(incidenciaAlumno);
 				iRepo.leerIncidencias(listaIncidencias);
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Alumno");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias de Alumno");
 
 				System.out
 						.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
@@ -128,7 +122,7 @@ public class GestionIncidencias {
 				incidenciaProfesor.setIncidencia(sc.nextLine());
 				iRepo.escribirIncidencia(incidenciaProfesor);
 				iRepo.leerIncidencias(listaIncidencias);
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Profesor");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias de Profesor");
 
 				System.out.println(
 						Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
@@ -142,7 +136,7 @@ public class GestionIncidencias {
 				incidenciaAplicacion.setIncidencia(sc.nextLine());
 				iRepo.escribirIncidencia(incidenciaAplicacion);
 				iRepo.leerIncidencias(listaIncidencias);
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Añadir Incidencias de Aplicacion");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias de Aplicacion");
 
 				System.out.println(
 						Colores.ANSI_GREEN + "\nIncidencia de aplicacion añadida con exito!" + Colores.ANSI_RESET);
@@ -150,7 +144,7 @@ public class GestionIncidencias {
 				break;
 
 			case "4", "volver":
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Volver al menú principal");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Volver al menú principal");
 				break;
 
 			default:
@@ -171,6 +165,7 @@ public class GestionIncidencias {
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+	// Metodo encargado de listar las incidencias
 	public void listado(Scanner sc) {
 
 		/*
@@ -301,26 +296,26 @@ public class GestionIncidencias {
 			case "1", "incidencia de alumno", "alumno":
 
 				eliminarIncidenciaAlumno();
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Eliminar Incidencias de Alumno");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Eliminar Incidencias de Alumno");
 
 				break;
 
 			case "2", "incidencia de profesor", "profesor":
 
 				eliminarIncidenciaProfesor();
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Eliminar Incidencias de Profesor");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Eliminar Incidencias de Profesor");
 
 				break;
 
 			case "3", "incidencia de aplicacion", "aplicacion":
 
 				eliminarIncidenciaAplicacion();
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Eliminar Incidencias de Aplicacion");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Eliminar Incidencias de Aplicacion");
 
 				break;
 
 			case "4", "volver":
-				GestionLogs.logOpcionMenu("Menú Incidencias", "Volver al menú principal");
+				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Volver al menú principal");
 				break;
 
 			default:

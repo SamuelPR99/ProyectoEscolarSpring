@@ -27,19 +27,20 @@ public class IncidenciasRepo {
 				String[] datos = linea.split(";"); // Separar los datos por punto y coma
 				String tipoIncidencia = datos[0]; // Tipo de incidencia
 				String descripcionIncidencia = datos[1]; // Detalles de la incidencia
+				String fechaIncidencia = datos[2]; // Fecha de la incidencia
 
 				switch (tipoIncidencia) {
 
 				case "Alumno":
-					listaIncidencias.add(new IncidenciaAlumno(descripcionIncidencia));
+					listaIncidencias.add(new IncidenciaAlumno(descripcionIncidencia, fechaIncidencia));
 					break;
 
 				case "Profesor":
-					listaIncidencias.add(new IncidenciaProfesor(descripcionIncidencia));
+					listaIncidencias.add(new IncidenciaProfesor(descripcionIncidencia, fechaIncidencia));
 					break;
 
 				case "Aplicacion":
-					listaIncidencias.add(new IncidenciaAplicacion(descripcionIncidencia));
+					listaIncidencias.add(new IncidenciaAplicacion(descripcionIncidencia, fechaIncidencia));
 					break;
 
 				default:
@@ -72,7 +73,7 @@ public class IncidenciasRepo {
 			fw = new FileWriter(file, true);
 
 			bw = new BufferedWriter(fw);
-			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + "\n");
+			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + ";" + FechaYHora.fechaActual() + "\n");
 			bw.flush();
 			fw.close();
 

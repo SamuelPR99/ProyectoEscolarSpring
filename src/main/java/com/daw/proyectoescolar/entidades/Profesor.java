@@ -27,6 +27,10 @@ public class Profesor extends UsuarioBase {
 		super(nombre, contrasena, dni);
 	}
 	
+	public Profesor(int usuarioId, String nombre, String contrasena, String dni) {
+		super(usuarioId, nombre, contrasena, dni);
+	}
+	
     // Getters y setters
 	
 	// Metodos
