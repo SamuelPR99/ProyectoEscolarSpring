@@ -5,9 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Temas;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
@@ -146,4 +148,47 @@ public class TemasRepo {
 		}
 		
     }
+    
+    public void insertarTareasArchivoBBDD() {
+
+   	 ArrayList<Tarea> tareas = archivoTareas();
+		
+   	ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+		
+		
+		String sqlInsert = "INSERT INTO tarea (nombre, descripcion, dificultad) VALUES (?, ?, ?)";
+		String sqlSelect = "SELECT tema_id FROM temas WHERE numero_tema = ? ";
+
+		try {
+
+			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
+
+			for (Tarea archivoTareas : tareas) {
+				psInsert.setString(1, archivoTareas.getNombre());
+				psInsert.setString(2, archivoTareas.getDescripcion());
+				psInsert.setString(3, archivoTareas.getTipo());
+
+				psInsert.executeUpdate();
+				
+				
+				PreparedStatement psSelect = conexion.prepareStatement(sqlInsert);
+				ResultSet rs = psSelect.executeQuery();
+				
+				if (rs.next()) {
+					int temaId = rs.getInt("tema_id");
+
+					
+
+					psInsert.executeUpdate();
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+		
+   }
 }
