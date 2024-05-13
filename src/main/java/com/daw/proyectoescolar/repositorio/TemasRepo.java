@@ -3,11 +3,16 @@ package com.daw.proyectoescolar.repositorio;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Temas;
+import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class TemasRepo {
@@ -109,5 +114,36 @@ public class TemasRepo {
 
 		return tareas;
 	}
+    
+    //Insertar los temas en la bbdd
+    
+    
+    public void insertarTemasArchivoBBDD() {
 
+    	 ArrayList<Temas> temas = archivoTemas();
+		
+    	ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+		
+		
+		String sqlInsert = "INSERT INTO tema (titulo, descripcion) VALUES (?, ?)";
+
+
+		try {
+
+			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
+
+			for (Temas archivoTemas : temas) {
+				psInsert.setString(1, archivoTemas.getNombre());
+				psInsert.setString(1, archivoTemas.getDescripcion());
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+		
+    }
 }
