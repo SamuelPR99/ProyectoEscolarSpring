@@ -1,6 +1,6 @@
-Teoría de la Probabilidad Estocástica;Estudio de la probabilidad en un espacio de probabilidad
-Teoría de Números Avanzada;Estudio de los números enteros y sus propiedades
-Análisis Funcional;Estudio de espacios vectoriales normados y sus propiedades
-Topología Algebraica;Estudio de la topología y sus propiedades
-Teoría de Representación de Grupos;Estudio de la teoría de grupos y sus propiedades
-Teoría de la Aproximación y Funciones Especiales;Estudio de la aproximación de funciones y sus propiedades
+1;Teoría de la Probabilidad Estocástica;Estudio de la probabilidad en un espacio de probabilidad
+2;Teoría de Números Avanzada;Estudio de los números enteros y sus propiedades
+3;Análisis Funcional;Estudio de espacios vectoriales normados y sus propiedades
+4;Topología Algebraica;Estudio de la topología y sus propiedades
+5;Teoría de Representación de Grupos;Estudio de la teoría de grupos y sus propiedades
+6;Teoría de la Aproximación y Funciones Especiales;Estudio de la aproximación de funciones y sus propiedades

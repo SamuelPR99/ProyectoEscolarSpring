@@ -15,75 +15,82 @@ import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 public class ControladorWeb {
 
-    private GestionUsuarios gestionUsuarios = new GestionUsuarios();
-    
-    @GetMapping("login")
-    public ModelAndView login() {
-        return new ModelAndView("login");
-    }
+	private GestionUsuarios gestionUsuarios = new GestionUsuarios();
 
-    @GetMapping("registro")
-    public ModelAndView registro() {
-        return new ModelAndView("registro");
-    }
-    
-    @GetMapping("registroExitoso")
+	@GetMapping("login")
+	public ModelAndView login() {
+		return new ModelAndView("login");
+	}
+
+	@GetMapping("registro")
+	public ModelAndView registro() {
+		return new ModelAndView("registro");
+	}
+
+	@GetMapping("registroExitoso")
 	public ModelAndView registroExitoso() {
 		return new ModelAndView("registroExitoso");
 	}
 
-    @PostMapping("registro")
-    public ModelAndView registrarUsuario(@RequestParam String nombre, @RequestParam String dni, @RequestParam String contrasena, @RequestParam String tipo) {
-        ModelAndView mav = new ModelAndView();
-        ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
-        gestionUsuarios.registro(nombre, dni, contrasena, tipo, usuarios);    
-        // redirige a la vista de registro exitoso
-        mav.setViewName("registroExitoso");
-        return mav;
-    }
-    
-    @PostMapping("login")
-    public ModelAndView loguearUsuario(@RequestParam String nombre, @RequestParam String contrasena) {
-        ModelAndView mav = new ModelAndView();
-        ArrayList <UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
-        UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
-        if (usuario != null) {
-            mav.addObject("usuario", usuario);
-            mav.setViewName("loginExitoso");
-        } else {
-            mav.setViewName("loginFallido");
-        }
-        return mav;
-    }
+	@PostMapping("registro")
+	public ModelAndView registrarUsuario(@RequestParam String nombre, @RequestParam String dni,
+			@RequestParam String contrasena, @RequestParam String tipo) {
+		ModelAndView mav = new ModelAndView();
+		ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
+		
 
-    @GetMapping("loginExitoso")
-    public ModelAndView loginExitoso() {
-        return new ModelAndView("loginExitoso");
-    }
+		if (gestionUsuarios.validarNombreUsuario(nombre) && gestionUsuarios.validarContrasena(contrasena)
+				&& gestionUsuarios.validarDNI(dni)) {
+			gestionUsuarios.registro(nombre, dni, contrasena, tipo, usuarios);
+			mav.setViewName("registroExitoso");
+		} else {
+			mav.addObject("mensaje", "Error en algun campo, vuelve a registrarte");
+		}
+		return mav;
+	}
 
-    @GetMapping("admin")
-    public ModelAndView admin() {
-        return new ModelAndView("admin");
-    }
+	@PostMapping("login")
+	public ModelAndView loguearUsuario(@RequestParam String nombre, @RequestParam String contrasena) {
+		ModelAndView mav = new ModelAndView();
+		ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
+		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
+		if (usuario != null) {
+			mav.addObject("usuario", usuario);
+			mav.setViewName("loginExitoso");
+		} else {
+			mav.setViewName("loginFallido");
+		}
+		return mav;
+	}
 
-    @GetMapping("alumno")
-    public ModelAndView usuario() {
-        return new ModelAndView("usuario");
-    }
-    
-    @GetMapping("profesor")
+	@GetMapping("loginExitoso")
+	public ModelAndView loginExitoso() {
+		return new ModelAndView("loginExitoso");
+	}
+
+	@GetMapping("admin")
+	public ModelAndView admin() {
+		return new ModelAndView("admin");
+	}
+
+	@GetMapping("alumno")
+	public ModelAndView usuario() {
+		return new ModelAndView("usuario");
+	}
+
+	@GetMapping("profesor")
 	public ModelAndView profesor() {
 		return new ModelAndView("profesor");
 	}
 
-    @GetMapping("logout")
-    public ModelAndView logout() {
-        return new ModelAndView("logout");
-    }
+	@GetMapping("logout")
+	public ModelAndView logout() {
+		return new ModelAndView("logout");
+	}
 
-    @GetMapping("error")
-    public ModelAndView error() {
-        return new ModelAndView("error");
-    }
+	@GetMapping("error")
+	public ModelAndView error() {
+		return new ModelAndView("error");
+	}
 
 }

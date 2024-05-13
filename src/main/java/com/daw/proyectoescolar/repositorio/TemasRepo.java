@@ -40,8 +40,9 @@ public class TemasRepo {
             while (linea != null) {
 
                 String[] partes = linea.split(";");
-                String nombre = partes[0];
-                String descripcion = partes[1];
+                int numeroTema = Integer.parseInt(partes[1]);
+                String titulo = partes[1];
+                String descripcion = partes[2];
 
                 ArrayList<Tarea> tareasArray = new ArrayList<>();
                 
@@ -50,7 +51,7 @@ public class TemasRepo {
                     temaActual++;
                 }
 
-                Temas tema = new Temas(nombre, descripcion, tareasArray);
+                Temas tema = new Temas(numeroTema, titulo, descripcion, tareasArray);
                 temas.add(tema);
 
                 linea = br.readLine();

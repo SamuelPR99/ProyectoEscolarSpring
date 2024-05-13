@@ -12,15 +12,15 @@
 		<label>Nombre:</label> <input type="text" name="nombre" required><br>
 		<label>DNI:</label> <input type="text" name="dni" required><br>
 		<label>Tipo de usuario</label> <select name="tipo">
-			<option value="Profesor">profesor</option>
-			<option value="Alumno">alumno</option>
+			<option value="Profesor">Profesor</option>
+			<option value="Alumno">Plumno</option>
 			
 		</select><br>
 		
 		<label>Contraseña:</label> <input type="password" name="contrasena" required>
 		<!-- boton sumbit -->
 		<input type="submit" value="Registrarse">
-
+		${mensaje}
 		<br>
 		
 	</form>
