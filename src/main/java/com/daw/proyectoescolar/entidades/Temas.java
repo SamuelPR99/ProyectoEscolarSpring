@@ -6,6 +6,7 @@ public class Temas {
 
 	// Atributos
 	protected int temaId;
+	protected int numeroTema;
 	protected String nombre;
 	protected String descripcion;
 	protected ArrayList<Tarea> listaTareas;
@@ -21,8 +22,16 @@ public class Temas {
 		this.listaTareas = listaTareas;
 	}
 	
-	public Temas(int temaId, String nombre, String descripcion, ArrayList<Tarea> listaTareas) {
+	public Temas(int numeroTema, String nombre, String descripcion, ArrayList<Tarea> listaTareas) {
+		this.numeroTema = numeroTema;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.listaTareas = listaTareas;
+	}
+	
+	public Temas(int temaId, int numeroTema, String nombre, String descripcion, ArrayList<Tarea> listaTareas) {
 		this.temaId = temaId;
+		this.numeroTema = numeroTema;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.listaTareas = listaTareas;
@@ -35,6 +44,14 @@ public class Temas {
 
 	public void setTemaId(int temaId) {
 		this.temaId = temaId;
+	}
+
+	public int getNumeroTema() {
+		return numeroTema;
+	}
+
+	public void setNumeroTema(int numeroTema) {
+		this.numeroTema = numeroTema;
 	}
 
 	public String getNombre() {
@@ -66,5 +83,7 @@ public class Temas {
 	public String toString() {
 		return "Temas [nombre=" + nombre + ", descripcion=" + descripcion + ", listaTareas=" + listaTareas + "]";
 	}
+
+	
 
 }

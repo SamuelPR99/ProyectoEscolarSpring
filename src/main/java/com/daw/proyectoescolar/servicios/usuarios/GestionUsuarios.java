@@ -35,7 +35,10 @@ public class GestionUsuarios {
 
 		if (!uRepo.comprobarDatos()) { // si la bbdd esta vacia
 			uRepo.insertarUsuariosArchivoBBDD(); // cargar los datos de los usuarios
-		} 
+		}
+		
+		TemasRepo tr = new TemasRepo();
+		tr.insertarTemasArchivoBBDD();
 		
 		ArrayList<UsuarioBase> usuarios = obtenerUsuarios();
 		String opcion;
