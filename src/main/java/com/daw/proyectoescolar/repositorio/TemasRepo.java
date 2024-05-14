@@ -177,9 +177,7 @@ public class TemasRepo {
 				
 				if (rs.next()) {
 					int temaId = rs.getInt("tema_id");
-
-					
-
+					psInsert.setInt(1, temaId);
 					psInsert.executeUpdate();
 				}
 			}
