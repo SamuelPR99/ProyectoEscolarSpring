@@ -142,11 +142,11 @@ public class TemasRepo {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
-		
+
 		String sqlInsertTemas = "INSERT INTO tema (numero_tema, titulo, descripcion) VALUES (?, ?, ?)";
 		String sqlInsertTareas = "INSERT INTO tarea (titulo, descripcion, dificultad, tema_id) VALUES (?, ?, ?, ?)";
 		String sqlSelect = "SELECT tema_id FROM tema WHERE numero_tema = ?";
-		
+
 		try {
 
 			PreparedStatement psInsertTemas = conexion.prepareStatement(sqlInsertTemas);
@@ -182,36 +182,24 @@ public class TemasRepo {
 		}
 	}
 
-	/*
-	 * 
-	public void insertarTareasArchivoBBDD() {
-
-		ArrayList<Tarea> tareas = archivoTareas();
+	// Comprobar si hay datos en temas con count
+	public boolean comprobarDatos() {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
 
-		String sqlInsert = "INSERT INTO tarea (nombre, descripcion, dificultad) VALUES (?, ?, ?)";
-		String sqlSelect = "SELECT tema_id FROM temas WHERE tema_id = ?";
+		String sql = "SELECT COUNT(*) FROM tema";
 
 		try {
 
-			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 
-			for (Tarea archivoTareas : tareas) {
-				psInsert.setString(1, archivoTareas.getNombre());
-				psInsert.setString(2, archivoTareas.getDescripcion());
-				psInsert.setString(3, archivoTareas.getTipo());
+			if (rs.next()) {
+				int contador = rs.getInt(1);
 
-				psInsert.executeUpdate();
-
-				PreparedStatement psSelect = conexion.prepareStatement(sqlInsert);
-				ResultSet rs = psSelect.executeQuery();
-
-				if (rs.next()) {
-					int temaId = rs.getInt("tema_id");
-					psInsert.setInt(1, temaId);
-					psInsert.executeUpdate();
+				if (contador > 0) {
+					return true;
 				}
 			}
 
@@ -221,7 +209,6 @@ public class TemasRepo {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 
+		return false;
 	}
-	
-	*/
 }

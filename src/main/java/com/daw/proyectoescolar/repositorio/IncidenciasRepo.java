@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
@@ -73,7 +76,8 @@ public class IncidenciasRepo {
 			fw = new FileWriter(file, true);
 
 			bw = new BufferedWriter(fw);
-			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + ";" + FechaYHora.fechaActual() + "\n");
+			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + ";" + FechaYHora.fechaActual()
+					+ "\n");
 			bw.flush();
 			fw.close();
 
@@ -91,6 +95,36 @@ public class IncidenciasRepo {
 			}
 		}
 
+	}
+
+	// Comprobar si hay datos en incidencias con count
+	public boolean comprobarDatos() {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "SELECT COUNT(*) FROM incidencia";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int contador = rs.getInt(1);
+
+				if (contador > 0) {
+					return true;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+
+		return false;
 	}
 
 }
