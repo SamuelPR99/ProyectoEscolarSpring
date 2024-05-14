@@ -158,7 +158,7 @@ public class TemasRepo {
 		
 		
 		String sqlInsert = "INSERT INTO tarea (nombre, descripcion, dificultad) VALUES (?, ?, ?)";
-		String sqlSelect = "SELECT tema_id FROM temas WHERE numero_tema = ? ";
+		String sqlSelect = "SELECT tema_id FROM temas WHERE tema_id = ? ";
 
 		try {
 
