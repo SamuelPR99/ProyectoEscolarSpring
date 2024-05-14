@@ -1,13 +1,19 @@
 package com.daw.proyectoescolar.servicios.incidencias;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.daw.bbdd.entidades.Usuario;
 import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
 import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
 import com.daw.proyectoescolar.entidades.IncidenciaProfesor;
 import com.daw.proyectoescolar.entidades.Incidencias;
 import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.ConexionBBDD;
 import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.IncidenciasRepo;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
@@ -17,7 +23,8 @@ public class GestionIncidencias {
 	// Atributos
 	private IncidenciasRepo iRepo = new IncidenciasRepo();
 	private ArrayList<Incidencias> listaIncidencias = iRepo.leerIncidencias(new ArrayList<>());
-
+	private ConexionBBDD conexionBBDD = new ConexionBBDD();
+	
 	// Constructores
 	public GestionIncidencias() {
 
@@ -82,6 +89,13 @@ public class GestionIncidencias {
 		} while (!opcion.equals("4") && !opcion.contains("salir"));
 
 	}
+	
+	// VARIABLES DE SQL
+	
+	
+	String sqlSelect = "SELECT * FROM incidencia";
+	
+	// VARIABLES DE SQL
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -89,6 +103,7 @@ public class GestionIncidencias {
 	public ArrayList<Incidencias> anadirIncidencia(Scanner sc) {
 
 		String opcion;
+		String sqlInsert = "INSERT INTO incidencia (tipo, incidencia) VALUES (?, ?)";
 
 		// Submenu para añadir las incidencias que el usuario desee
 
@@ -102,12 +117,30 @@ public class GestionIncidencias {
 			switch (opcion) {
 
 			case "1", "incidencia de alumno", "alumno":
-
-				Incidencias incidenciaAlumno = new IncidenciaAlumno();
-				System.out.println("\nIntroduzca la incidencia de alumno: ");
-				incidenciaAlumno.setIncidencia(sc.nextLine());
-				iRepo.escribirIncidencia(incidenciaAlumno);
-				iRepo.leerIncidencias(listaIncidencias);
+				
+				Connection conexion = conexionBBDD.conectar();
+			try {
+		        PreparedStatement ps = conexion.prepareStatement(sqlInsert);
+		        
+		        ResultSet rs = ps.executeQuery(sqlInsert);
+		        
+		        while (rs.next()) {
+		      
+		        	for(Incidencias incidencias : listaIncidencias) {
+		        		
+		        	
+		        } 
+		        
+		        rs.close();
+		        ps.close();
+	        }
+		        } catch (SQLException sqle) {
+	        	sqle.printStackTrace();
+	        } finally {
+			conexionBBDD.cerrarConexion(conexion);
+				}
+			}
+				
 				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias de Alumno");
 
 				System.out
