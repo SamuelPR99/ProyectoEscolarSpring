@@ -38,7 +38,7 @@ public class GestionUsuarios {
 		}
 		
 		TemasRepo tr = new TemasRepo();
-		tr.insertarTemasArchivoBBDD();
+		tr.insertarTemasYTareasDeArchivoTemas();
 		
 		ArrayList<UsuarioBase> usuarios = obtenerUsuarios();
 		String opcion;

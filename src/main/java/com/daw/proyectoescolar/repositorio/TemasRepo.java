@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Temas;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
@@ -137,25 +136,43 @@ public class TemasRepo {
 
 	// Insertar los temas en la bbdd
 
-	public void insertarTemasArchivoBBDD() {
+	public void insertarTemasYTareasDeArchivoTemas() {
 
 		ArrayList<Temas> temas = archivoTemas();
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
-
-		String sqlInsert = "INSERT INTO tema (numero_tema, titulo, descripcion) VALUES (?, ?, ?)";
-
+		
+		String sqlInsertTemas = "INSERT INTO tema (numero_tema, titulo, descripcion) VALUES (?, ?, ?)";
+		String sqlInsertTareas = "INSERT INTO tarea (titulo, descripcion, dificultad, tema_id) VALUES (?, ?, ?, ?)";
+		String sqlSelect = "SELECT tema_id FROM tema WHERE numero_tema = ?";
+		
 		try {
 
-			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
+			PreparedStatement psInsertTemas = conexion.prepareStatement(sqlInsertTemas);
+			PreparedStatement psInsertTareas = conexion.prepareStatement(sqlInsertTareas);
 
 			for (Temas archivoTemas : temas) {
-				psInsert.setInt(1, archivoTemas.getNumeroTema());
-				psInsert.setString(2, archivoTemas.getNombre());
-				psInsert.setString(3, archivoTemas.getDescripcion());
+				psInsertTemas.setInt(1, archivoTemas.getNumeroTema());
+				psInsertTemas.setString(2, archivoTemas.getNombre());
+				psInsertTemas.setString(3, archivoTemas.getDescripcion());
 
-				psInsert.executeUpdate();
+				psInsertTemas.executeUpdate();
+
+				PreparedStatement psSelect = conexion.prepareStatement(sqlSelect);
+				psSelect.setInt(1, archivoTemas.getNumeroTema());
+				ResultSet rs = psSelect.executeQuery();
+
+				if (rs.next()) {
+					int temaId = rs.getInt("tema_id");
+					for (Tarea tarea : archivoTemas.getListaTareas()) {
+						psInsertTareas.setString(1, tarea.getNombre());
+						psInsertTareas.setString(2, tarea.getDescripcion());
+						psInsertTareas.setString(3, tarea.getTipo());
+						psInsertTareas.setInt(4, temaId);
+						psInsertTareas.executeUpdate();
+					}
+				}
 			}
 
 		} catch (Exception e) {
@@ -163,9 +180,10 @@ public class TemasRepo {
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
-
 	}
 
+	/*
+	 * 
 	public void insertarTareasArchivoBBDD() {
 
 		ArrayList<Tarea> tareas = archivoTareas();
@@ -204,4 +222,6 @@ public class TemasRepo {
 		}
 
 	}
+	
+	*/
 }
