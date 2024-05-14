@@ -115,12 +115,32 @@ public class TemasRepo {
 		return tareas;
 	}
     
+ // Crea un HashMap con los temas
+ 	public HashMap<Integer, ArrayList<Temas>> hashTemas() {
+
+ 		HashMap<Integer, ArrayList<Temas>> temas = new HashMap<>(); 
+ 		TemasRepo repo = new TemasRepo();
+ 		ArrayList<Temas> temasArray = repo.archivoTemas(); // Array de temas
+ 		
+ 		// Crea un HashMap con los temas
+ 		int i = 1;
+ 		for (Temas tema : temasArray) {
+ 			ArrayList<Temas> tareas = new ArrayList<>();
+ 			tareas.add(tema); // Cada tema tiene una lista de tareas
+ 			temas.put(i, tareas); // Se añade al HashMap de temas 
+ 			i++;
+ 		}
+
+ 		return temas;
+ 	}
+    
     //Insertar los temas en la bbdd
     
     
     public void insertarTemasArchivoBBDD() {
 
     	 ArrayList<Temas> temas = archivoTemas();
+    	 
 		
     	ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
