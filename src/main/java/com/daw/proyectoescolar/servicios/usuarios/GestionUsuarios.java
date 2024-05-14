@@ -258,6 +258,7 @@ public class GestionUsuarios {
 		}
 
 		cambiarContrasena(nuevaContrasena, usuario);
+		uRepo.cambiarContrasena(usuario);
 
 	}
 
