@@ -5,11 +5,9 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
-import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
-import com.daw.proyectoescolar.repositorio.IncidenciasRepo;
 import com.daw.proyectoescolar.repositorio.TemasRepo;
 import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
@@ -17,7 +15,6 @@ import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class GestionUsuarios {
 
-	private ArrayList<Tarea> listaDeTareas = new TemasRepo().archivoTareas();
 	private UsuariosRepo uRepo = new UsuariosRepo();
 
 	// Constructor vacio
@@ -296,50 +293,16 @@ public class GestionUsuarios {
 		TemasRepo tRepo = new TemasRepo();
 		
 		if (!tRepo.comprobarDatos()) {
-			tRepo.insertarTemasYTareasDeArchivoTemas();
+			tRepo.insertarTemasYTareasBBDD();
 		}
 		
-		IncidenciasRepo iRepo = new IncidenciasRepo();
-		
-		if (!iRepo.comprobarDatos()) {
+		/*
+		 * IncidenciasRepo iRepo = new IncidenciasRepo();
+		 * if (!iRepo.comprobarDatos()) {
+		 * }
+		 */
 			
-		}
-	}
-
-	/*---------------------------------------------------------------------------------------------------------*/
-
-	// Recomendar una tarea al alumno
-	public Tarea recomendarTarea(Alumno alumno) {
-
-		double nota = alumno.getNota();
-		String tipoTarea;
-
-		if (nota >= 9.0) {
-			tipoTarea = "Avanzada";
-		} else if (nota >= 7.0) {
-			tipoTarea = "Intermedia";
-		} else {
-			tipoTarea = "Basica";
-		}
-
-		// Buscar la primera tarea del tipo recomendado
-		for (Tarea tarea : listaDeTareas) {
-			if (tarea.getTipo().equals(tipoTarea)) {
-				alumno.agregarTarea(tarea);
-				return tarea;
-
-			}
-		}
-
-		// Si no hay tareas del tipo que se recomienda, busca la primera tarea de
-		// cualquier tipo
-		if (!listaDeTareas.isEmpty()) {
-			Tarea tareaRecomendada = listaDeTareas.get(0);
-			alumno.agregarTarea(tareaRecomendada);
-			return listaDeTareas.get(0);
-		}
-
-		return null;
+		
 	}
 
 	// Ver estadisticas de los alumnos
@@ -391,56 +354,7 @@ public class GestionUsuarios {
 
 	}
 
-	// Consultar la tarea pendiente del alumno
-	public void consultarTareasPendientes(Alumno alumno) {
-
-		ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
-
-		if (tareasAsignadas.isEmpty()) {
-			System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes." + Colores.ANSI_RESET);
-		} else {
-			System.out.println("Tareas Pendientes:");
-			for (Tarea tarea : tareasAsignadas) {
-				System.out.println("Tipo: " + tarea.getTipo());
-
-			}
-		}
-	}
-
-	// Marcar la tarea actual del alumno como completada
-	public void marcarTareaCompletada(Alumno alumno, Scanner sc) {
-		ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
-
-		if (tareasAsignadas.isEmpty()) {
-			System.out.println(Colores.ANSI_GREEN + "No tienes tareas pendientes para entregar." + Colores.ANSI_RESET);
-		} else {
-			System.out.println("Tareas Pendientes:");
-			for (int i = 0; i < tareasAsignadas.size(); i++) {
-				System.out.println((i + 1) + ". Tipo: " + tareasAsignadas.get(i).getTipo());
-			}
-
-			System.out.print("Seleccione el numero de la tarea que va a entregar: ");
-			int numeroTarea = sc.nextInt();
-			sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
-
-			marcarTareaCompletada(alumno, numeroTarea - 1);
-		}
-	}
-
-	public void marcarTareaCompletada(Alumno alumno, int indiceTarea) {
-
-		ArrayList<Tarea> tareasAsignadas = alumno.getTareasAsignadas();
-
-		if (indiceTarea >= 0 && indiceTarea < tareasAsignadas.size()) {
-			Tarea tareaEntregada = tareasAsignadas.remove(indiceTarea);
-			System.out.println(Colores.ANSI_GREEN + "Tarea \"" + tareaEntregada.getTipo()
-					+ "\" entregada correctamente." + Colores.ANSI_RESET);
-		} else {
-			System.err.println(Constantes.NUM_TAREA_VALID);
-			GestionLogs.errorLogs(Constantes.NUM_TAREA_VALID + Constantes.NUM_SELEC + indiceTarea);
-		}
-	}
-
+	
 	// Ver las notas de los alumnos
 	public void verNotasAlumnos(ArrayList<UsuarioBase> usuarios) {
 
@@ -481,64 +395,6 @@ public class GestionUsuarios {
 			GestionLogs.errorLogs("Numero de alumno no valido." + Constantes.NUM_SELEC + numeroAlumno);
 		}
 
-	}
-
-	// Ver las tareas disponibles
-	public void verTareasDisponibles() {
-
-		if (listaDeTareas.isEmpty()) {
-			System.out.println(Colores.ANSI_GREEN + "No hay tareas disponibles." + Colores.ANSI_RESET);
-		} else {
-			System.out.println("Tareas Disponibles:");
-			for (Tarea tarea : listaDeTareas) {
-				System.out.println("Tipo: " + tarea.getTipo());
-			}
-		}
-	}
-
-	// Agregar una nueva tarea del tipo que se quiera
-	public void agregarNuevaTarea(Scanner sc) {
-
-		System.out.print("Introduzca el tipo de la nueva tarea: ");
-		String tipoTarea = sc.nextLine();
-
-		Tarea nuevaTarea = new Tarea(tipoTarea);
-		listaDeTareas.add(nuevaTarea);
-
-		System.out.println(
-				Colores.ANSI_GREEN + "Nueva tarea \"" + tipoTarea + "\" agregada correctamente." + Colores.ANSI_RESET);
-
-	}
-
-	// Modificar el tipo de una tarea
-	public void modificarTarea(Scanner sc) {
-
-		System.out.println("Lista de tareas:");
-		for (int i = 0; i < listaDeTareas.size(); i++) {
-			System.out.println((i + 1) + ". " + listaDeTareas.get(i).getTipo());
-		}
-
-		System.out.print("Introduzca el numero de la tarea a modificar: ");
-		int numeroTarea = sc.nextInt();
-		sc.nextLine(); // Si no pongo esto, el scanner no lee bien el siguiente string
-
-		if (numeroTarea >= 1 && numeroTarea <= listaDeTareas.size()) {
-			System.out.print("Introduzca el nuevo tipo de la tarea: ");
-			String nuevoTipo = sc.nextLine();
-			listaDeTareas.get(numeroTarea - 1).setTipo(nuevoTipo);
-			System.out.println(Colores.ANSI_GREEN + "Tarea modificada correctamente." + Colores.ANSI_RESET);
-		} else {
-			System.err.println(Constantes.NUM_TAREA_VALID);
-			GestionLogs.errorLogs(Constantes.NUM_TAREA_VALID + Constantes.NUM_SELEC + numeroTarea);
-		}
-
-	}
-
-	// Recomendar una tarea al alumno y mostrarla
-	public void recomendarTareaYMostrar(Alumno alumno) {
-
-		Tarea tareaRecomendada = recomendarTarea(alumno);
-		tareaRecomendada.mostrarRecomendacion();
 	}
 
 }

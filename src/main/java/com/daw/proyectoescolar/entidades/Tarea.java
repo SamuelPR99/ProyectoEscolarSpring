@@ -1,6 +1,8 @@
 
 package com.daw.proyectoescolar.entidades;
 
+import java.sql.Date;
+
 public class Tarea {
 
 	// Atributos
@@ -9,6 +11,10 @@ public class Tarea {
 	protected String nombre;
 	protected String descripcion;
 	protected int temaId;
+	protected Date fechaInicio; 
+	protected Date fechaExpiracion; 
+	protected Date fechaEntrega; 
+	protected double puntuacion;
 
 	// Constructores
 	public Tarea() {
@@ -38,6 +44,18 @@ public class Tarea {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.temaId = temaId;
+	}
+	
+	public Tarea(int idTarea, String nombre, String descripcion, String tipo, Date fechaInicio, Date fechaExpiracion,
+			Date fechaEntrega, double puntuacion) {
+		this.tareaId = idTarea;
+		this.tipo = tipo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.fechaInicio = fechaInicio;
+		this.fechaExpiracion = fechaExpiracion;
+		this.fechaEntrega = fechaEntrega;
+		this.puntuacion = puntuacion;
 	}
 	
 	// Getters y setters

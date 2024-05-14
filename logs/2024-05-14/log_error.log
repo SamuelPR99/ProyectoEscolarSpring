@@ -1,1 +1,2 @@
 [2024-05-14 09:00:00] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
+[2024-05-14 22:54:38] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null

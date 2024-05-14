@@ -137,7 +137,7 @@ public class TemasRepo {
 
 	// Insertar los temas en la bbdd
 
-	public void insertarTemasYTareasDeArchivoTemas() {
+	public void insertarTemasYTareasBBDD() {
 
 		ArrayList<Temas> temas = archivoTemas();
 
@@ -213,24 +213,35 @@ public class TemasRepo {
 		return false;
 	}
 
-	// Metodo para asignar una tarea a un alumno
-	public void asignarTarea(int idTarea, int idAlumno, int idProfesor, Date fechaEntrega, Date fechaExpiracion) {
+	public void asignarTarea(int idTarea, int idAlumno, int idProfesor, Date fechaExpiracion) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
 
-		String sql = "INSERT INTO asignartarea (tarea_id, fecha_inicio, fecha_entrega, fecha_expiracion, alumno_id, profesor_id) VALUES (?, NOW(), ?, ?, ?, ?)";
+		String sql = "SELECT * FROM usuario WHERE usuario_id = ?";
 
 		try {
 
 			PreparedStatement ps = conexion.prepareStatement(sql);
 
-			ps.setInt(1, idTarea);
-			ps.setDate(2, fechaEntrega);
-			ps.setDate(3, fechaExpiracion);
-			ps.setInt(4, idAlumno);
-			ps.setInt(5, idProfesor);
-			ps.executeUpdate();
+			ps.setInt(1, idAlumno);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) { // El alumno existe en la tabla usuario
+
+				sql = "INSERT INTO asignartarea (tarea_id, fecha_inicio, fecha_expiracion, alumno_id, profesor_id) VALUES (?, NOW(), ?, ?, ?)";
+
+				ps = conexion.prepareStatement(sql);
+
+				ps.setInt(1, idTarea);
+				ps.setDate(2, fechaExpiracion);
+				ps.setInt(3, idAlumno);
+				ps.setInt(4, idProfesor);
+				ps.executeUpdate();
+
+			} else { // El alumno no existe en la tabla usuario
+				System.out.println("El alumno con id " + idAlumno + " no existe en la base de datos.");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -239,7 +250,46 @@ public class TemasRepo {
 		}
 	}
 
-	// Metodo para que un alumno entregue una tarea
+	public ArrayList<Tarea> obtenerTareasAlumno(int idAlumno) {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		ArrayList<Tarea> tareas = new ArrayList<>();
+
+		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio, asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id WHERE asignartarea.alumno_id = ? AND asignartarea.estado != 1";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+
+			ps.setInt(1, idAlumno);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int idTarea = rs.getInt("tarea_id");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+				String dificultad = rs.getString("dificultad");
+				Date fechaInicio = rs.getDate("fecha_inicio");
+				Date fechaExpiracion = rs.getDate("fecha_expiracion");
+				Date fechaEntrega = rs.getDate("fecha_entrega");
+				double puntuacion = rs.getDouble("puntuacion");
+
+				Tarea tarea = new Tarea(idTarea, titulo, descripcion, dificultad, fechaInicio, fechaExpiracion,
+						fechaEntrega, puntuacion);
+				tareas.add(tarea);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+
+		return tareas;
+	}
+
 	public void entregarTarea(int idTarea, int idAlumno) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
@@ -258,23 +308,21 @@ public class TemasRepo {
 			if (rs.next()) {
 				Date fechaExpiracion = rs.getDate("fecha_expiracion");
 
+				double puntuacion;
 				if (new Date(System.currentTimeMillis()).before(fechaExpiracion)) { // La tarea se entrega a tiempo
-
-					String sqlUpdate = "UPDATE asignartarea SET puntuacion = ? WHERE tarea_id = ? AND alumno_id = ?";
-
-					PreparedStatement psUpdate = conexion.prepareStatement(sqlUpdate);
-
-					psUpdate.setDouble(1, calcularPuntuacion(idTarea));
-					psUpdate.setInt(2, idTarea);
-					psUpdate.setInt(3, idAlumno);
-					psUpdate.executeUpdate();
+					puntuacion = calcularPuntuacion(idTarea);
+				} else { // La tarea se entrega tarde, la puntuacion es 0
+					puntuacion = 0;
 				}
-			} else { // La tarea se entrega tarde, la puntuacion es 0
 
-				String sqlUpdate = "UPDATE asignartarea SET puntuacion = 0 WHERE tarea_id = ? AND alumno_id = ?";
+				String sqlUpdate = "UPDATE asignartarea SET fecha_entrega = NOW(), puntuacion = ?, estado = ? WHERE tarea_id = ? AND alumno_id = ?";
+
 				PreparedStatement psUpdate = conexion.prepareStatement(sqlUpdate);
-				psUpdate.setInt(1, idTarea);
-				psUpdate.setInt(2, idAlumno);
+
+				psUpdate.setDouble(1, puntuacion);
+				psUpdate.setInt(2, 1); // La tarea se marca como entregada
+				psUpdate.setInt(3, idTarea);
+				psUpdate.setInt(4, idAlumno);
 				psUpdate.executeUpdate();
 			}
 
@@ -285,7 +333,7 @@ public class TemasRepo {
 		}
 	}
 
-	public double calcularPuntuacion(int idTarea) {
+	private double calcularPuntuacion(int idTarea) {
 
 		String dificultad = obtenerDificultadTarea(idTarea);
 		double puntuacion;
@@ -321,7 +369,7 @@ public class TemasRepo {
 		String sql = "SELECT dificultad FROM tarea WHERE tarea_id = ?";
 
 		try {
-			
+
 			PreparedStatement ps = conexion.prepareStatement(sql);
 
 			ps.setInt(1, idTarea);

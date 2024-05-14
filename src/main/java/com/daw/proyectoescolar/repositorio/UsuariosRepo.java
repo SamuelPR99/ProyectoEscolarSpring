@@ -287,40 +287,39 @@ public class UsuariosRepo {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String tipo = rs.getString("tipo");
-				String nombre = rs.getString("nombre");
-				String contrasena = rs.getString("contrasena");
-				String dni = rs.getString("dni");
+			    int usuarioId = rs.getInt("usuario_id");
+			    String tipo = rs.getString("tipo");
+			    String nombre = rs.getString("nombre");
+			    String contrasena = rs.getString("contrasena");
+			    String dni = rs.getString("dni");
 
-				switch (tipo) {
+			    switch (tipo) {
+			        case Constantes.PROFESOR:
+			            usuarios.add(new Profesor(usuarioId, nombre, contrasena, dni));
+			            break;
 
-				case Constantes.PROFESOR:
-					usuarios.add(new Profesor(nombre, contrasena, dni));
-					break;
+			        case Constantes.ALUMNO:
+			            String sqlNota = "SELECT nota FROM nota WHERE usuario_id = ?";
+			            PreparedStatement psNota = conexion.prepareStatement(sqlNota);
+			            psNota.setInt(1, usuarioId);
+			            ResultSet rsNota = psNota.executeQuery();
 
-				case Constantes.ALUMNO:
-					String sqlNota = "SELECT nota FROM nota WHERE usuario_id = ?";
-					PreparedStatement psNota = conexion.prepareStatement(sqlNota);
-					psNota.setInt(1, rs.getInt("usuario_id"));
-					ResultSet rsNota = psNota.executeQuery();
+			            if (rsNota.next()) {
+			                double nota = rsNota.getDouble("nota");
+			                usuarios.add(new Alumno(usuarioId, nombre, contrasena, dni, nota));
+			            } else {
+			                System.err.println("No se ha encontrado la nota del alumno: " + nombre);
+			            }
+			            break;
 
-					if (rsNota.next()) {
-						double nota = rsNota.getDouble("nota");
-						usuarios.add(new Alumno(nombre, contrasena, dni, nota));
-					} else {
-						System.err.println("No se ha encontrado la nota del alumno: " + nombre);
-					}
+			        case Constantes.ADMINISTRADOR:
+			            usuarios.add(new Administrador(usuarioId, nombre, contrasena, dni));
+			            break;
 
-					break;
-
-				case Constantes.ADMINISTRADOR:
-					usuarios.add(new Administrador(nombre, contrasena, dni));
-					break;
-
-				default:
-					System.err.println("Tipo de usuario desconocido: " + tipo);
-					break;
-				}
+			        default:
+			            System.err.println("Tipo de usuario desconocido: " + tipo);
+			            break;
+			    }
 			}
 
 		} catch (Exception e) {
@@ -506,6 +505,37 @@ public class UsuariosRepo {
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
+	}
+	
+	public ArrayList<Alumno> obtenerAlumnos() {
+	    ArrayList<Alumno> alumnos = new ArrayList<>();
+
+	    ConexionBBDD conexionBBDD = new ConexionBBDD();
+	    Connection conexion = conexionBBDD.conectar();
+
+	    String sql = "SELECT * FROM usuario WHERE tipo = 'alumno'";
+
+	    try {
+	        PreparedStatement ps = conexion.prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            int id = rs.getInt("usuario_id");
+	            String nombre = rs.getString("nombre");
+	            String contrasena = rs.getString("contrasena");
+	            String dni = rs.getString("dni");
+	           
+	            Alumno alumno = new Alumno(id, nombre, contrasena, dni);
+	            alumnos.add(alumno);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        conexionBBDD.cerrarConexion(conexion);
+	    }
+
+	    return alumnos;
 	}
 	
 }
