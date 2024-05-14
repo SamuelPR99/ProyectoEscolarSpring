@@ -443,7 +443,7 @@ border-radius
 				<div class="Submit">
 					<button type="submit">Login</button>
 				</div>
-				<a href="http://127.0.0.1:5500/registroApp.html" target="_blank">
+				<a href="registro" target="_blank">
 					<h5>¿No estás registrado? pulsa aquí</h5>
 				</a>
 			</form>

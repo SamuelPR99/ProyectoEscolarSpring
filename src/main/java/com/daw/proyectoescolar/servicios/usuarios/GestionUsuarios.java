@@ -9,6 +9,7 @@ import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
+import com.daw.proyectoescolar.repositorio.IncidenciasRepo;
 import com.daw.proyectoescolar.repositorio.TemasRepo;
 import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
@@ -33,13 +34,8 @@ public class GestionUsuarios {
 	// Iniciar el menu principal
 	public void iniciar(Scanner sc) {
 
-		if (!uRepo.comprobarDatos()) { // si la bbdd esta vacia
-			uRepo.insertarUsuariosArchivoBBDD(); // cargar los datos de los usuarios
-		}
-		
-		TemasRepo tr = new TemasRepo();
-		tr.insertarTemasArchivoBBDD();
-		
+		inicializarBBDD();
+
 		ArrayList<UsuarioBase> usuarios = obtenerUsuarios();
 		String opcion;
 
@@ -258,6 +254,7 @@ public class GestionUsuarios {
 		}
 
 		cambiarContrasena(nuevaContrasena, usuario);
+		uRepo.cambiarContrasena(usuario);
 
 	}
 
@@ -288,6 +285,25 @@ public class GestionUsuarios {
 
 		return contrasena.length() >= 6 && !contrasena.contains(" ") && contrasena.matches(".*[!@#$%^&*].*")
 				&& contrasena.matches(".*[A-Z].*");
+	}
+	
+	public void inicializarBBDD() {
+		
+		if (!uRepo.comprobarDatos()) { // si la bbdd esta vacia
+			uRepo.insertarUsuariosArchivoBBDD(); // cargar los datos de los usuarios
+		}
+		
+		TemasRepo tRepo = new TemasRepo();
+		
+		if (!tRepo.comprobarDatos()) {
+			tRepo.insertarTemasYTareasDeArchivoTemas();
+		}
+		
+		IncidenciasRepo iRepo = new IncidenciasRepo();
+		
+		if (!iRepo.comprobarDatos()) {
+			
+		}
 	}
 
 	/*---------------------------------------------------------------------------------------------------------*/

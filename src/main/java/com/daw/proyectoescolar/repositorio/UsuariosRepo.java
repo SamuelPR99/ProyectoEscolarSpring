@@ -487,4 +487,25 @@ public class UsuariosRepo {
 		return null;
 	}
 	
+	public void cambiarContrasena(UsuarioBase usuario) {
+		
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+		
+		String sql = "UPDATE usuario SET contrasena = ? WHERE nombre = ?";
+		
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setString(1, usuario.getContrasena());
+			ps.setString(2, usuario.getNombre());
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+	}
+	
 }

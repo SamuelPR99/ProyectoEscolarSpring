@@ -1,4 +1,4 @@
-Basica;Tarea 1: Simulación de Monte Carlo ;Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de π.
+Basica;Tarea 1: Simulación de Monte Carlo ;Implementar un algoritmo de simulación de Monte Carlo para estimar el valor de pi.
 Intermedia;Tarea 2: Análisis de Convergencia de Series Infinitas;Analizar la convergencia de una serie infinita utilizando técnicas avanzadas de cálculo de límites y criterios de convergencia.
 Avanzada;Tarea 3: Demostración del Teorema Central del Límite;Investigar y demostrar el teorema central del límite utilizando herramientas avanzadas de probabilidad y análisis matemático.
 Basica;Tarea 1: Cálculo de Números Primos con la Criba de Eratóstenes; Implementar un algoritmo para calcular los primeros N números primos utilizando la criba de Eratóstenes.

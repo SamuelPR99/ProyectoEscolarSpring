@@ -9,6 +9,8 @@ import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.TemasRepo;
 
 public class GestionTemas {
+	
+	TemasRepo tRepo = new TemasRepo();
 
 	// Constructores
 	public GestionTemas() {
@@ -17,29 +19,12 @@ public class GestionTemas {
 
 	// Metodos
 
-	// Crea un HashMap con los temas
-	public HashMap<Integer, ArrayList<Temas>> hashTemas() {
-
-		HashMap<Integer, ArrayList<Temas>> temas = new HashMap<>(); 
-		TemasRepo repo = new TemasRepo();
-		ArrayList<Temas> temasArray = repo.archivoTemas(); // Array de temas
-		
-		// Crea un HashMap con los temas
-		int i = 1;
-		for (Temas tema : temasArray) {
-			ArrayList<Temas> tareas = new ArrayList<>();
-			tareas.add(tema); // Cada tema tiene una lista de tareas
-			temas.put(i, tareas); // Se añade al HashMap de temas 
-			i++;
-		}
-
-		return temas;
-	}
+	
 
 	// Muestra los temas
 	public void mostrarTemas() {
 
-		HashMap<Integer, ArrayList<Temas>> temas = hashTemas();
+		HashMap<Integer, ArrayList<Temas>> temas = tRepo.hashTemas();
 
 		for (Integer tema : temas.keySet()) { // Se recorren los temas
 			System.out.println(tema + " - " + temas.get(tema).get(0).getNombre()); // Se muestra el nombre de cada tema
@@ -55,7 +40,7 @@ public class GestionTemas {
 		int numTema = sc.nextInt();
 		sc.nextLine(); // Limpiar buffer
 		
-		HashMap<Integer, ArrayList<Temas>> temas = hashTemas();
+		HashMap<Integer, ArrayList<Temas>> temas = tRepo.hashTemas();
 		ArrayList<Temas> tema = temas.get(numTema);
 		System.out.println(tema.get(0).getListaTareas() + "\n");
 		
