@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -211,4 +212,132 @@ public class TemasRepo {
 
 		return false;
 	}
+
+	// Metodo para asignar una tarea a un alumno
+	public void asignarTarea(int idTarea, int idAlumno, int idProfesor, Date fechaEntrega, Date fechaExpiracion) {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "INSERT INTO asignartarea (tarea_id, fecha_inicio, fecha_entrega, fecha_expiracion, alumno_id, profesor_id) VALUES (?, NOW(), ?, ?, ?, ?)";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+
+			ps.setInt(1, idTarea);
+			ps.setDate(2, fechaEntrega);
+			ps.setDate(3, fechaExpiracion);
+			ps.setInt(4, idAlumno);
+			ps.setInt(5, idProfesor);
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+	}
+
+	// Metodo para que un alumno entregue una tarea
+	public void entregarTarea(int idTarea, int idAlumno) {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "SELECT * FROM asignartarea WHERE tarea_id = ? AND alumno_id = ?";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+
+			ps.setInt(1, idTarea);
+			ps.setInt(2, idAlumno);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				Date fechaExpiracion = rs.getDate("fecha_expiracion");
+
+				if (new Date(System.currentTimeMillis()).before(fechaExpiracion)) { // La tarea se entrega a tiempo
+
+					String sqlUpdate = "UPDATE asignartarea SET puntuacion = ? WHERE tarea_id = ? AND alumno_id = ?";
+
+					PreparedStatement psUpdate = conexion.prepareStatement(sqlUpdate);
+
+					psUpdate.setDouble(1, calcularPuntuacion(idTarea));
+					psUpdate.setInt(2, idTarea);
+					psUpdate.setInt(3, idAlumno);
+					psUpdate.executeUpdate();
+				}
+			} else { // La tarea se entrega tarde, la puntuacion es 0
+
+				String sqlUpdate = "UPDATE asignartarea SET puntuacion = 0 WHERE tarea_id = ? AND alumno_id = ?";
+				PreparedStatement psUpdate = conexion.prepareStatement(sqlUpdate);
+				psUpdate.setInt(1, idTarea);
+				psUpdate.setInt(2, idAlumno);
+				psUpdate.executeUpdate();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+	}
+
+	public double calcularPuntuacion(int idTarea) {
+
+		String dificultad = obtenerDificultadTarea(idTarea);
+		double puntuacion;
+
+		switch (dificultad) {
+
+		case "Basica":
+			puntuacion = 1.0;
+			break;
+
+		case "Intermedia":
+			puntuacion = 2.0;
+			break;
+
+		case "Avanzada":
+			puntuacion = 3.0;
+			break;
+
+		default:
+			puntuacion = 0.0;
+			break;
+		}
+
+		return puntuacion;
+	}
+
+	private String obtenerDificultadTarea(int idTarea) {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String dificultad = "";
+		String sql = "SELECT dificultad FROM tarea WHERE tarea_id = ?";
+
+		try {
+			
+			PreparedStatement ps = conexion.prepareStatement(sql);
+
+			ps.setInt(1, idTarea);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				dificultad = rs.getString("dificultad");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+
+		return dificultad;
+	}
+
 }
