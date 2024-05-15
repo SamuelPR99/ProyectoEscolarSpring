@@ -106,7 +106,7 @@ public class Alumno extends UsuarioBase {
 
 			case "3", "entregar tarea":
 				GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Entregar tarea bbdd");
-				gestorTemas.marcarTareaCompletadaBBDD(sc, this.usuarioId);
+				gestorTemas.marcarTareaCompletada(sc, this.usuarioId);
 				break;
 
 			case "4", "Cambiar contraseña":

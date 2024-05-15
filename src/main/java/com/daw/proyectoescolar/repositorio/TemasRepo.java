@@ -309,7 +309,7 @@ public class TemasRepo {
 				Date fechaExpiracion = rs.getDate("fecha_expiracion");
 
 				double puntuacion;
-				if (new Date(System.currentTimeMillis()).before(fechaExpiracion)) { // La tarea se entrega a tiempo
+				if (FechaYHora.fechaActualCompleta().before(fechaExpiracion)) { // La tarea se entrega a tiempo
 					puntuacion = calcularPuntuacion(idTarea);
 				} else { // La tarea se entrega tarde, la puntuacion es 0
 					puntuacion = 0;

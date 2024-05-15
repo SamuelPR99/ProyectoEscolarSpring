@@ -1,5 +1,7 @@
 package com.daw.proyectoescolar.repositorio;
 
+import java.sql.Date;
+
 public class FechaYHora {
 	
 	private FechaYHora() {
@@ -11,7 +13,14 @@ public class FechaYHora {
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(fecha);
 	}
-
+	
+	// fecha completa con milisegundos
+	public static Date fechaActualCompleta() {
+		java.util.Date fecha = new java.util.Date();
+		java.sql.Date fechaSql = new java.sql.Date(fecha.getTime());
+		return fechaSql;
+	}
+		
 	public static String fechaActualSinHora() {
 		java.util.Date fecha = new java.util.Date();
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -53,5 +62,8 @@ public class FechaYHora {
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyyMMddHH");
 		return sdf.format(fecha);
 	}
+	
+	
+	
 
 }

@@ -93,46 +93,53 @@ public class GestionTemas {
 
 	// Asignar una tarea a los alumnos desde profesor
 	public void asignarTarea(Scanner sc, int idProfesor) {
-		 UsuariosRepo uRepo = new UsuariosRepo();
-		 ArrayList<Alumno> alumnos = uRepo.obtenerAlumnos();
-	    // Mostrar los temas
-	    mostrarTemas();
 
-	    System.out.println("Por favor, elija un tema:");
-	    int idTema = sc.nextInt();
-	    sc.nextLine(); // Limpiar buffer
+		UsuariosRepo uRepo = new UsuariosRepo();
+		ArrayList<Alumno> alumnos = uRepo.obtenerAlumnos();
 
-	    // Obtener las tareas del tema elegido
-	    ArrayList<Tarea> tareasTema = tRepo.archivoTemas().get(idTema - 1).getListaTareas();
+		mostrarTemas();
 
-	    // Mostrar las tareas del tema elegido
-	    for (int i = 0; i < tareasTema.size(); i++) {
-	        System.out.println((i + 1) + ". " + tareasTema.get(i).getNombre());
-	    }
+		System.out.println("Por favor, elija un tema:");
+		int idTema = sc.nextInt();
+		sc.nextLine(); // Limpiar buffer
 
-	    // Pedir al profesor que elija una tarea
-	    System.out.println("Por favor, elija una tarea:");
-	    int idTarea = sc.nextInt();
-	    sc.nextLine(); // Limpiar buffer
+		// Obtener las tareas del tema elegido
+		ArrayList<Tarea> tareasTema = tRepo.archivoTemas().get(idTema - 1).getListaTareas();
 
-	    // Pedir al profesor que introduzca una fecha de expiración
-	    System.out.println("Por favor, introduzca la fecha de expiración (en formato yyyy-mm-dd):");
-	    String fechaExpiracionStr = sc.nextLine();
-	    Date fechaExpiracion = Date.valueOf(fechaExpiracionStr); // Convertir la fecha de String a Date
+		// Mostrar las tareas del tema elegido
+		for (int i = 0; i < tareasTema.size(); i++) {
+			System.out.println((i + 1) + ". " + tareasTema.get(i).getNombre());
+		}
 
-	    // Asignar la tarea a todos los alumnos
-	    for (Alumno alumno : alumnos) {
-	        tRepo.asignarTarea(idTarea, alumno.getUsuarioId(), idProfesor, fechaExpiracion);
-	    }
+		// Pedir al profesor que elija una tarea
+		System.out.println("Por favor, elija una tarea:");
+		int idTarea = sc.nextInt();
+		sc.nextLine(); // Limpiar buffer
 
-	    System.out.println("Tarea asignada a todos los alumnos con éxito.");
+		// Pedir al profesor que introduzca una fecha de expiración
+		System.out.println("Por favor, introduzca la fecha de expiración (en formato yyyy-mm-dd):");
+		String fechaExpiracionStr = sc.nextLine();
+		Date fechaExpiracion = Date.valueOf(fechaExpiracionStr); // Convertir la fecha de String a Date
+
+		// Asignar la tarea a todos los alumnos
+		for (Alumno alumno : alumnos) {
+			tRepo.asignarTarea(idTarea, alumno.getUsuarioId(), idProfesor, fechaExpiracion);
+		}
+
+		System.out.println("Tarea asignada a todos los alumnos con éxito.");
 	}
-	
+
 	// Marcar una tarea como completada
-	public void marcarTareaCompletadaBBDD(Scanner sc, int idAlumno) {
-		
+	public void marcarTareaCompletada(Scanner sc, int idAlumno) {
+
 		// Obtener las tareas del alumno
 		ArrayList<Tarea> tareas = tRepo.obtenerTareasAlumno(idAlumno);
+
+		// Comprobar si el ArrayList de tareas esta vacio
+		if (tareas.isEmpty()) {
+			System.out.println(Colores.ANSI_BOLD + "No tienes ninguna tarea. 🤷‍♀️" + Colores.ANSI_RESET);
+			return;
+		}
 
 		// Mostrar las tareas del alumno
 		for (int i = 0; i < tareas.size(); i++) {
@@ -145,8 +152,7 @@ public class GestionTemas {
 
 		// Marcar la tarea como completada
 		tRepo.entregarTarea(idTarea, idAlumno);
-
-		System.out.println("Tarea marcada como completada con éxito.");
+		System.out.println(Colores.ANSI_GREEN + "Tarea entregada con exito. 😎" + Colores.ANSI_RESET);
 	}
 
 }
