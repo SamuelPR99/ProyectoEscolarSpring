@@ -16,3 +16,4 @@ Alumno;Marcos;Jaja@jaja;76429280M;0.0
 Profesor;Antonio;aasfasfasf;afsasfasf
 Profesor;Antonio;asfasf;asgfasf
 Profesor;Paquito;Jaja@jaja;76429567Z
+Alumno;Pablo;Jeje@jeje;76429588L;0.0

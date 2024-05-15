@@ -14,7 +14,7 @@ public class ConexionBBDD {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conexion = DriverManager.getConnection(Constantes.CONEXION_URL, Constantes.USER, Constantes.PASSWORD);
-			System.out.println("..." + Colores.ANSI_GREEN + "↪" + Colores.ANSI_RESET);
+			System.out.println(Colores.ANSI_GREEN + "↪" + Colores.ANSI_RESET + "...");
 
 		} catch (SQLException | ClassNotFoundException ce) {
 			ce.printStackTrace();

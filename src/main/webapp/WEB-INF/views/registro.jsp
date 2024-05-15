@@ -13,7 +13,7 @@
 		<label>DNI:</label> <input type="text" name="dni" required><br>
 		<label>Tipo de usuario</label> <select name="tipo">
 			<option value="Profesor">Profesor</option>
-			<option value="Alumno">Plumno</option>
+			<option value="Alumno">Alumno</option>
 			
 		</select><br>
 		
