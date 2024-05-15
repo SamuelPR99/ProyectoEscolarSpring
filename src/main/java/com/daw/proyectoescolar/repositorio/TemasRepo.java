@@ -229,7 +229,7 @@ public class TemasRepo {
 
 			if (rs.next()) { // El alumno existe en la tabla usuario
 
-				sql = "INSERT INTO asignartarea (tarea_id, fecha_inicio, fecha_expiracion, alumno_id, profesor_id) VALUES (?, NOW(), ?, ?, ?)";
+				sql = "INSERT INTO asignartarea (tarea_id, fecha_inicio, fecha_expiracion, alumno_id, profesor_id, estado) VALUES (?, NOW(), ?, ?, ?, 0)";
 
 				ps = conexion.prepareStatement(sql);
 
