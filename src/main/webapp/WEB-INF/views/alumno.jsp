@@ -18,11 +18,12 @@
     <h1>Bienvenido, ${usuario.nombre}</h1>
     <p>Nota actual: ${usuario.nota}</p>
     <h2>Tareas Asignadas</h2>
-    <c:forEach var="tarea" items="${usuario.tareas}">
+    <c:forEach var="tarea" items="${tareasAsignadas}">
         <div class="tarea">
-            <h3>${tarea.nombre}</h3>
-            <p>${tarea.descripcion}</p>
-            <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
+               <h3>${tarea.nombre}</h3>
+                <p>${tarea.descripcion}</p>
+                <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
+                <p>Nota: ${tarea.nota}</p>
         </div>
     </c:forEach>
     <h2>Calificaciones</h2>

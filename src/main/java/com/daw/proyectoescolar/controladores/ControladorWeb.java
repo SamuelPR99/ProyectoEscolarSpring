@@ -63,6 +63,8 @@ public class ControladorWeb {
 				mav.addObject("tareasAsignadas", ((Alumno) usuario).getTareasAsignadas()); // Añadimos las tareas asignadas al alumno
 			} else if (usuario.getTipoUsuario().equals("Profesor")) {
 				mav.setViewName("profesor");
+			} else {
+				mav.setViewName("error");
 			}
 
 		} else {
@@ -83,7 +85,7 @@ public class ControladorWeb {
 
 	@GetMapping("alumno")
 	public ModelAndView usuario() {
-		return new ModelAndView("usuario");
+		return new ModelAndView("alumno");
 	}
 
 	@GetMapping("profesor")

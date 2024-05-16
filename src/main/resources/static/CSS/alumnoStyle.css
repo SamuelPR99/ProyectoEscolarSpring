@@ -6,15 +6,15 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: #3c3c3c;
+    color: #f0f0f0;
     padding: 10px;
     text-align: center;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #3c3c3c;
+    color: #f0f0f0;
     text-align: center;
     padding: 10px;
     position: fixed;
@@ -27,7 +27,7 @@ h1, h2, h3 {
 }
 
 a {
-    color: #333;
+    color: #007BFF;
     text-decoration: none;
 }
 
@@ -36,4 +36,8 @@ div {
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
+}
+
+header h1 {
+    color: #FFFFFF; /* Cambiado a blanco para mejorar la visibilidad */
 }
