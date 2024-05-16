@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +15,7 @@
 	<div class="todo">
 		<div class="logo" style="overflow: hidden;"></div>
 		<div>
-			<h1 class="mensaje">¡Bienvenido!</h1>
+			<h1 class="mensaje">Â¡Bienvenido!</h1>
 		</div>
 
 		<form id="loginForm">
@@ -21,14 +23,14 @@
 				<label class="usuario" for="username"></label>
 				<input placeholder="Usuario..." type="text" id="username" name="username" required>
 			</div>
-			<div class="BotonContraseña">
+			<div class="BotonContraseÃ±a">
 				<label for="password"></label>
-				<input placeholder="Contraseña..." type="password" id="password" name="password" required>
+				<input placeholder="ContraseÃ±a..." type="password" id="password" name="password" required>
 			</div>
 			<div class="Submit">
 				<button type="submit">Login</button>
 			</div>
-			<a href="registro" target="_blank"><h5>¿No estas registrado?</h5></a>
+			<a href="registro" target="_blank"><h5>Â¿No estas registrado?</h5></a>
 		</form>
 	</div>
 </div>
