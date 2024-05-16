@@ -37,7 +37,6 @@ public class ControladorWeb {
 			@RequestParam String contrasena, @RequestParam String tipo) {
 		ModelAndView mav = new ModelAndView();
 		ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
-		
 
 		if (gestionUsuarios.validarNombreUsuario(nombre) && gestionUsuarios.validarContrasena(contrasena)
 				&& gestionUsuarios.validarDNI(dni)) {

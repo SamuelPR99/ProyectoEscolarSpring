@@ -17,3 +17,15 @@ Profesor;Antonio;aasfasfasf;afsasfasf
 Profesor;Antonio;asfasf;asgfasf
 Profesor;Paquito;Jaja@jaja;76429567Z
 Alumno;Pablo;Jeje@jeje;76429588L;0.0
+Profesor;Paquillo;Jaja@jaja;47531515V
+Profesor;Paquillo;Jaja@jaja;47531515V
+Profesor;Agapito;Jeje@jaja;47565853F
+Profesor;Agapito;Jeje@jaja;47565853F
+Profesor;Agapito;Jeje@jaja;47565853F
+Profesor;Agapito;Jeje@jaja;47565853F
+Profesor;Agapito;Jeje@jaja;47565853F
+Profesor;Agapito;Jeje@jaja;47565853F
+Profesor;Agapito;Jeje@jaja;47565853F
+Profesor;Agapito;Jeje@jaja;47565853F
+Profesor;Paquillo;Jaja@jaja;47531515V
+Profesor;Enrique;Jaja@jeje;47531515V
