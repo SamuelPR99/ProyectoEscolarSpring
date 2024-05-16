@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +23,8 @@
     <h2>Tareas Asignadas</h2>
     <c:forEach var="tarea" items="${tareasAsignadas}">
         <div class="tarea">
-               <h3>${tarea.nombre}</h3>
-                <p>${tarea.descripcion}</p>
+               <h3>Nombre de la tarea: ${tarea.nombre}</h3>
+                <p>Descripcion: ${tarea.descripcion}</p>
                 <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
                 <p>Nota: ${tarea.nota}</p>
         </div>
