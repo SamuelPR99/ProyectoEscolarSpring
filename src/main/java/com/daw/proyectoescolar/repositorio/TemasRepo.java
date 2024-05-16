@@ -257,7 +257,7 @@ public class TemasRepo {
 
 		ArrayList<Tarea> tareas = new ArrayList<>();
 
-		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio, asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id WHERE asignartarea.alumno_id = ? AND asignartarea.estado != 1";
+		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio, asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion, asignartarea.estado, asignartarea.puntuacion FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id WHERE asignartarea.alumno_id = ? AND asignartarea.estado != 1";
 
 		try {
 
@@ -275,9 +275,10 @@ public class TemasRepo {
 				Date fechaExpiracion = rs.getDate("fecha_expiracion");
 				Date fechaEntrega = rs.getDate("fecha_entrega");
 				double puntuacion = rs.getDouble("puntuacion");
+				boolean estado = rs.getBoolean("estado");
 
 				Tarea tarea = new Tarea(idTarea, titulo, descripcion, dificultad, fechaInicio, fechaExpiracion,
-						fechaEntrega, puntuacion);
+						fechaEntrega, puntuacion, estado);
 				tareas.add(tarea);
 			}
 

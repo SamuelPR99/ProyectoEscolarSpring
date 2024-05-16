@@ -15,6 +15,8 @@ public class Tarea {
 	protected Date fechaExpiracion; 
 	protected Date fechaEntrega; 
 	protected double puntuacion;
+	protected boolean estado;
+	protected double nota;
 
 	// Constructores
 	public Tarea() {
@@ -57,7 +59,20 @@ public class Tarea {
 		this.fechaEntrega = fechaEntrega;
 		this.puntuacion = puntuacion;
 	}
-	
+
+	public Tarea(int idTarea, String nombre, String descripcion, String tipo, Date fechaInicio, Date fechaExpiracion,
+				  Date fechaEntrega, double puntuacion, boolean estado) {
+		this.tareaId = idTarea;
+		this.tipo = tipo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.fechaInicio = fechaInicio;
+		this.fechaExpiracion = fechaExpiracion;
+		this.fechaEntrega = fechaEntrega;
+		this.puntuacion = puntuacion;
+		this.estado = estado;
+	}
+
 	// Getters y setters
 	public int getTareaId() {
 		return tareaId;
@@ -97,6 +112,46 @@ public class Tarea {
 
 	public void setTemaId(int temaId) {
 		this.temaId = temaId;
+	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaExpiracion() {
+		return fechaExpiracion;
+	}
+
+	public void setFechaExpiracion(Date fechaExpiracion) {
+		this.fechaExpiracion = fechaExpiracion;
+	}
+
+	public Date getFechaEntrega() {
+		return fechaEntrega;
+	}
+
+	public void setFechaEntrega(Date fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
+	}
+
+	public double getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(double puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	// Metodos

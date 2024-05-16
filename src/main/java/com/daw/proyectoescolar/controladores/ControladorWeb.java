@@ -3,6 +3,7 @@ package com.daw.proyectoescolar.controladores;
 import java.util.ArrayList;
 
 import com.daw.proyectoescolar.entidades.Alumno;
+import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,13 +55,15 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 		ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
 		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
+		int id = usuario.getUsuarioId();
+		GestionTemas gt = new GestionTemas();
 		if (usuario != null) {
 			mav.addObject("usuario", usuario); // Añadimos el usuario a la vista para poder mostrar su nombre
 			if (usuario.getTipoUsuario().equals("Administrador")) {
 				mav.setViewName("administrador");
 			} else if (usuario.getTipoUsuario().equals("Alumno")) {
 				mav.setViewName("alumno");
-				mav.addObject("tareasAsignadas", ((Alumno) usuario).getTareasAsignadas()); // Añadimos las tareas asignadas al alumno
+				mav.addObject("tareasAsignadas", gt.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
 			} else if (usuario.getTipoUsuario().equals("Profesor")) {
 				mav.setViewName("profesor");
 			} else {

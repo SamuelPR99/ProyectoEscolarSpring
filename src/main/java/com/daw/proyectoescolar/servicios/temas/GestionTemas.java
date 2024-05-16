@@ -155,4 +155,9 @@ public class GestionTemas {
 		System.out.println(Colores.ANSI_GREEN + "Tarea entregada con exito. 😎" + Colores.ANSI_RESET);
 	}
 
+	// ArrayList de tareas asignadas a un alumno para mostrarlas en la vista
+	public ArrayList<Tarea> tareasAsignadas(int idAlumno) {
+		return tRepo.obtenerTareasAlumno(idAlumno);
+	}
+
 }
