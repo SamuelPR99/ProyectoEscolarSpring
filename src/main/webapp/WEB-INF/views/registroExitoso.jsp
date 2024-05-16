@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Bienvenido</title>
+	<link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
 	<h1>Registro exitoso</h1>

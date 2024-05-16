@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Registro</title>
+	<link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
 	<h1>Registro</h1>
@@ -18,11 +19,10 @@
 		</select><br>
 		
 		<label>Contraseña:</label> <input type="password" name="contrasena" required>
-		<!-- boton sumbit -->
 		<input type="submit" value="Registrarse">
 		${mensaje}
 		<br>
-		
+
 	</form>
 	<a href="login">Iniciar sesión</a>
 
