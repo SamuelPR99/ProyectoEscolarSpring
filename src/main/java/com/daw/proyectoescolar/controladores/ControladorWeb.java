@@ -2,6 +2,7 @@ package com.daw.proyectoescolar.controladores;
 
 import java.util.ArrayList;
 
+import com.daw.proyectoescolar.entidades.Alumno;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,8 +55,16 @@ public class ControladorWeb {
 		ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
 		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
 		if (usuario != null) {
-			mav.addObject("usuario", usuario);
-			mav.setViewName("loginExitoso");
+			mav.addObject("usuario", usuario); // Añadimos el usuario a la vista para poder mostrar su nombre
+			if (usuario.getTipoUsuario().equals("Administrador")) {
+				mav.setViewName("administrador");
+			} else if (usuario.getTipoUsuario().equals("Alumno")) {
+				mav.setViewName("alumno");
+				mav.addObject("tareasAsignadas", ((Alumno) usuario).getTareasAsignadas()); // Añadimos las tareas asignadas al alumno
+			} else if (usuario.getTipoUsuario().equals("Profesor")) {
+				mav.setViewName("profesor");
+			}
+
 		} else {
 			mav.setViewName("loginFallido");
 		}
@@ -67,7 +76,7 @@ public class ControladorWeb {
 		return new ModelAndView("loginExitoso");
 	}
 
-	@GetMapping("admin")
+	@GetMapping("administrador")
 	public ModelAndView admin() {
 		return new ModelAndView("admin");
 	}

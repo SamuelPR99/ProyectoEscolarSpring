@@ -18,14 +18,14 @@
 			<h1 class="mensaje">¡Bienvenido!</h1>
 		</div>
 
-		<form id="loginForm">
+		<form id="loginForm" action="login" method="post">
 			<div class="BotonUsuario">
-				<label class="usuario" for="username"></label>
-				<input placeholder="Usuario..." type="text" id="username" name="username" required>
+				<label class="usuario" for="nombre"></label>
+				<input placeholder="Usuario..." type="text" id="nombre" name="nombre" required>
 			</div>
 			<div class="BotonContraseña">
-				<label for="password"></label>
-				<input placeholder="Contraseña..." type="password" id="password" name="password" required>
+				<label for="contrasena"></label>
+				<input placeholder="Contraseña..." type="password" id="contrasena" name="contrasena" required>
 			</div>
 			<div class="Submit">
 				<button type="submit">Login</button>
