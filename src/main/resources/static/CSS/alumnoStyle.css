@@ -1,44 +1,9 @@
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
-    margin-bottom: 100px;
-}
-
-nav {
-
-    color: #f0f0f0;
-    padding: 10px;
-    text-align: center;
-    margin-left: 30%;
-}
-
-header {
-    background-color: #3c3c3c;
-    color: #f0f0f0;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-}
-
-.tituloheader {
-    margin-left: 47%;
-}
-
-footer {
-    background-color: #3c3c3c;
-    color: #f0f0f0;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000; /* Asegura que el footer esté sobre otros elementos */
-}
-
-h1, h2, h3 {
     color: #333;
 }
 
@@ -47,16 +12,78 @@ a {
     text-decoration: none;
 }
 
-div {
-    cursor: pointer;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+h1, h2, h3 {
+    color: #333;
 }
 
-/* Estilo para el div de detalles oculto */
-div[style*="max-height: 0px;"], div[style*="max-height: 0;"] {
+/* Navigation Bar */
+nav {
+    background-color: #333;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* Header */
+header {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.tituloheader {
+    margin: 0;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+}
+
+.tarea {
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.tarea:hover {
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+/* Toggle Details Animation */
+.tarea div[style*="max-height: 0px;"],
+.tarea div[style*="max-height: 0;"] {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
@@ -64,14 +91,11 @@ div[style*="max-height: 0px;"], div[style*="max-height: 0;"] {
     transition: opacity 0.5s, max-height 0.5s ease-out, visibility 0.5s ease-out;
 }
 
-/* Estilo para el div de detalles visible */
-div[style*="max-height: 500px;"] {
+.tarea div[style*="max-height: 500px;"] {
     opacity: 1;
     max-height: 500px;
     visibility: visible;
     transition: opacity 0.5s, max-height 0.5s ease-in, visibility 0s ease-in 0s;
 }
 
-header h1 {
-    color: #FFFFFF; /* Cambiado a blanco para mejorar la visibilidad */
-}
+

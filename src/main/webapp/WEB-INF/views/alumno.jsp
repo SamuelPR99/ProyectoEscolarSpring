@@ -35,7 +35,16 @@
                         <p>Descripcion: ${tarea.descripcion}</p>
                         <p>Dificultad: ${tarea.tipo}</p>
                         <p>Fecha de inicio: ${tarea.fechaInicio}</p>
-                        <p>Fecha de expiracion: ${tarea.fechaExpiracion}</p>
+                        <p>Fecha de expiracion:
+                            <c:choose>
+                                <c:when test="${tarea.fechaExpiracion lt fechaActual}">
+                                    <span style="color: red;">${tarea.fechaExpiracion} (Expirada)</span>
+                                </c:when>
+                                <c:otherwise>
+                                    ${tarea.fechaExpiracion}
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
                         <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
                         <p>Estado:
                             <c:choose>
@@ -86,7 +95,15 @@
                         <p>Descripcion: ${tarea.descripcion}</p>
                         <p>Dificultad: ${tarea.tipo}</p>
                         <p>Fecha de inicio: ${tarea.fechaInicio}</p>
-                        <p>Fecha de expiracion: ${tarea.fechaExpiracion}</p>
+                        <p>Fecha de expiracion:
+                            <c:choose>
+                                <c:when test="${tarea.fechaExpiracion lt fechaActual}">
+                                    <span style="color: red;">${tarea.fechaExpiracion} (Expirada)</span>
+                                </c:when>
+                                <c:otherwise>
+                                    ${tarea.fechaExpiracion}
+                                </c:otherwise>
+                            </c:choose>
                         <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
                         <p>Estado:
                             <c:choose>
@@ -150,9 +167,6 @@
             });
         });
     </script>
-</main>
-<footer>
-    <p>&copy; 2024 IES Murcia. Samuel, Paula y Hugo.</p>
-</footer>
+
 </body>
 </html>

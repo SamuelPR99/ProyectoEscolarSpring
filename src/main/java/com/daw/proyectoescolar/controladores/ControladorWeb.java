@@ -2,6 +2,7 @@ package com.daw.proyectoescolar.controladores;
 
 import java.util.List;
 
+import com.daw.proyectoescolar.repositorio.FechaYHora;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,12 +53,16 @@ public class ControladorWeb {
 
 	@PostMapping("login")
 	public ModelAndView loguearUsuario(@RequestParam String nombre, @RequestParam String contrasena, HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
 		List<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
+
 		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
-		int id = usuario.getUsuarioId();
-		GestionTemas gt = new GestionTemas();
+
 		if (usuario != null) {
+			int id = usuario.getUsuarioId();
+			GestionTemas gt = new GestionTemas();
+
 			session.setAttribute("usuario", usuario); // Guardar el usuario en la sesión
 			mav.addObject("usuario", usuario); // Añadimos el usuario a la vista para poder mostrar su nombre
 			if (usuario.getTipoUsuario().equals("Administrador")) {
@@ -66,14 +71,16 @@ public class ControladorWeb {
 				mav.setViewName("alumno");
 				mav.addObject("tareasAsignadas", gt.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
 				mav.addObject("tareasEntregadas", gt.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
+				mav.addObject("fechaActual", FechaYHora.fechaActual()); // Añadir la fecha actual a la vista
 			} else if (usuario.getTipoUsuario().equals("Profesor")) {
 				mav.setViewName("profesor");
 			} else {
-				mav.setViewName("error");
+				mav.addObject("mensaje", "Usuario o contraseña incorrectos");
+				mav.setViewName("login");
 			}
-
 		} else {
-			mav.setViewName("loginFallido");
+			mav.addObject("mensaje", "Usuario o contraseña incorrectos");
+			mav.setViewName("login");
 		}
 		return mav;
 	}
@@ -108,6 +115,7 @@ public class ControladorWeb {
 			mav.setViewName("alumno");
 			mav.addObject("tareasAsignadas", gt.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
 			mav.addObject("tareasEntregadas", gt.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
+			mav.addObject("fechaActual", FechaYHora.fechaActual()); // Añadir la fecha actual a la vista
 		} else {
 			mav.setViewName("error");
 		}

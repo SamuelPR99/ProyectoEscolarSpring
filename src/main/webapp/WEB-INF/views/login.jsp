@@ -30,6 +30,7 @@
 			<div class="Submit">
 				<button type="submit">Login</button>
 			</div>
+			<h5>${mensaje}</h5>
 			<a href="registro" target="_blank"><h5>¿No estas registrado?</h5></a>
 		</form>
 	</div>
