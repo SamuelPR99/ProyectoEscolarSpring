@@ -1,87 +1,101 @@
-/* Global Styles */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Trebuchet MS";
+    color: #333;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
-    color: #333;
 }
 
-a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-h1, h2, h3 {
-    color: #333;
-}
-
-/* Navigation Bar */
-nav {
-    background-color: #333;
+header {
+    background-color: #004a99;
+    color: white;
+    padding: 1rem 2rem;
     display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
 }
 
 nav a {
-    color: #f0f0f0;
-    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 nav a:hover {
-    background-color: #007BFF;
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 
-/* Header */
-header {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #f0f0f0;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.tituloheader {
-    margin: 0;
-}
-
-/* Footer */
-footer {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #f0f0f0;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-/* Main Content */
 main {
-    padding: 20px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    color: #004a99;
+}
+
+h2 {
+    color: #0066cc;
+    margin-top: 2rem;
+}
+
+p {
+    line-height: 1.6;
 }
 
 .tarea {
-    margin: 10px 0;
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: box-shadow 0.3s ease;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #f1f1f1;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.tarea:hover {
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+.tarea h3 {
+    margin: 0;
+    cursor: pointer;
 }
 
-/* Toggle Details Animation */
+.tarea div {
+    margin-top: 1rem;
+}
+
+.tarea form {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    background-color: #004a99;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #003366;
+}
+
+/* Specific Style for Task Details */
 .tarea div[style*="max-height: 0px;"],
 .tarea div[style*="max-height: 0;"] {
     opacity: 0;
@@ -98,4 +112,56 @@ main {
     transition: opacity 0.5s, max-height 0.5s ease-in, visibility 0s ease-in 0s;
 }
 
+/* Footer Styles */
+footer {
+    background-color: #004a99;
+    color: white;
+    text-align: center;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid #003366;
+}
 
+footer p {
+    margin: 0.5rem 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+footer a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        margin-top: 1rem;
+    }
+
+    nav a {
+        margin: 0.5rem 0;
+    }
+
+    main {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .tarea {
+        margin: 1rem 0;
+    }
+}

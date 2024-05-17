@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <h1 class="tituloheader">IES Murcia</h1>
+    <h1>IES Murcia</h1>
     <nav>
         <a href="#">Inicio</a> |
         <a href="#">Perfil</a> |
@@ -167,6 +167,15 @@
             });
         });
     </script>
-
+</main>
 </body>
+<footer>
+    <p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>
+    <p>
+        <a href="#">Política de Privacidad</a> |
+        <a href="#">Términos de Servicio</a> |
+        <a href="#">Contacto</a>
+    </p>
+</footer>
+
 </html>
