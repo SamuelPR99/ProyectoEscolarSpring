@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
+    margin-bottom: 100px;
 }
 
 nav {
@@ -10,6 +11,7 @@ nav {
     color: #f0f0f0;
     padding: 10px;
     text-align: center;
+    margin-left: 30%;
 }
 
 header {
@@ -17,6 +19,12 @@ header {
     color: #f0f0f0;
     padding: 10px;
     text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.tituloheader {
+    margin-left: 47%;
 }
 
 footer {
@@ -24,8 +32,10 @@ footer {
     color: #f0f0f0;
     text-align: center;
     padding: 10px;
-    position: relative;
+    position: fixed;
+    bottom: 0;
     width: 100%;
+    z-index: 1000; /* Asegura que el footer esté sobre otros elementos */
 }
 
 h1, h2, h3 {
@@ -43,6 +53,23 @@ div {
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
+}
+
+/* Estilo para el div de detalles oculto */
+div[style*="max-height: 0px;"], div[style*="max-height: 0;"] {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: opacity 0.5s, max-height 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+/* Estilo para el div de detalles visible */
+div[style*="max-height: 500px;"] {
+    opacity: 1;
+    max-height: 500px;
+    visibility: visible;
+    transition: opacity 0.5s, max-height 0.5s ease-in, visibility 0s ease-in 0s;
 }
 
 header h1 {

@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <h1>IES Murcia</h1>
+    <h1 class="tituloheader">IES Murcia</h1>
     <nav>
         <a href="#">Inicio</a> |
         <a href="#">Perfil</a> |
@@ -24,7 +24,7 @@
     <c:forEach var="tarea" items="${tareasAsignadas}">
         <div class="tarea">
             <div onclick="toggleDetails(this)">
-                <h3>Nombre de la tarea: ${tarea.nombre}</h3>
+                <h3>${tarea.nombre}</h3>
             </div>
             <div style="display: none;">
                 <p>Descripcion: ${tarea.descripcion}</p>
@@ -61,19 +61,42 @@
     
     <a href="login">Cerrar sesión</a>
 
+    <!-- JavaScript para mostrar y ocultar los detalles de las tareas -->
     <script>
-        function toggleDetails(element) { // Funcion para mostrar/ocultar detalles de una tarea
-            var details = element.nextElementSibling; // Elemento siguiente al que se ha hecho click
-            if (details.style.display === "none") { // Si esta oculto, se muestra
-                details.style.display = "block"; // Se muestra
+        function toggleDetails(element) {
+            var details = element.nextElementSibling;
+            if (details.style.maxHeight === "0px" || details.style.maxHeight === "") {
+                details.style.display = "block"; // Asegura que el elemento se muestre antes de iniciar la transición
+                setTimeout(function() { // Introduce un breve retraso para asegurar que la transición se aplique
+                    details.style.opacity = "1";
+                    details.style.maxHeight = "500px"; // Ajusta este valor según tu contenido
+                    details.style.visibility = "visible"; // Asegura que el elemento sea visible durante la transición
+                }, 10); // Un retraso mínimo es suficiente para permitir que el navegador aplique el display: block
             } else {
-                details.style.display = "none"; // Se oculta
+                details.style.opacity = "0";
+                details.style.maxHeight = "0";
+                details.style.visibility = "hidden"; // Inicia el proceso de hacer el elemento no visible
+                setTimeout(function() {
+                    if (details.style.opacity === "0") { // Verifica nuevamente para evitar ocultarlo si el usuario hizo clic nuevamente durante la transición
+                        details.style.display = "none";
+                    }
+                }, 500); // La duración de este temporizador debe coincidir con la duración de la transición CSS
             }
         }
     </script>
+
+    <!-- Otra forma de hacerlo, sin necesidad de temporizadores -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() { // Espera a que el DOM esté completamente cargado
+            var detalles = document.querySelectorAll('.tarea > div:nth-child(2)'); // Selecciona todos los elementos que se desplegarán
+            detalles.forEach(function(detalle) { // Itera sobre cada elemento
+                detalle.style.maxHeight = "0px"; // Inicializa max-height a 0
+            });
+        });
+    </script>
 </main>
 <footer>
-    <p>&copy; 2024 IES Murcia. Samuel, Paula, Hugo.</p>
+    <p>&copy; 2024 IES Murcia. Samuel, Paula y Hugo.</p>
 </footer>
 </body>
 </html>
