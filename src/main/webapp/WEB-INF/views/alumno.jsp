@@ -14,52 +14,108 @@
     <nav>
         <a href="#">Inicio</a> |
         <a href="#">Perfil</a> |
-        <a href="#">Contacto</a>
+        <a href="login">Cerrar sesión</a>
     </nav>
 </header>
 <main>
     <h1>Bienvenid@, ${usuario.nombre}</h1>
     <p>Nota actual: ${usuario.nota}</p>
     <h2>Tareas Asignadas</h2>
-    <c:forEach var="tarea" items="${tareasAsignadas}">
-        <div class="tarea">
-            <div onclick="toggleDetails(this)">
-                <h3>${tarea.nombre}</h3>
-            </div>
-            <div style="display: none;">
-                <p>Descripcion: ${tarea.descripcion}</p>
-                <p>Dificultad: ${tarea.tipo}</p>
-                <p>Fecha de inicio: ${tarea.fechaInicio}</p>
-                <p>Fecha de expiracion: ${tarea.fechaExpiracion}</p>
-                <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
-                <p>Estado:
-                    <c:choose>
-                        <c:when test="${tarea.estado}">
-                            Entregada
-                        </c:when>
-                        <c:otherwise>
-                            No entregada
-                        </c:otherwise>
-                    </c:choose>
-                </p>
-                <p>Puntuación: ${tarea.puntuacion} /
-                    <c:choose>
-                        <c:when test="${tarea.tipo == 'Avanzada'}">
-                            3 puntos
-                        </c:when>
-                        <c:when test="${tarea.tipo == 'Intermedia'}">
-                            2 puntos
-                        </c:when>
-                        <c:when test="${tarea.tipo == 'Basica'}">
-                            1 punto
-                        </c:when>
-                    </c:choose>
-                </p>
-            </div>
-        </div>
-    </c:forEach>
-    
-    <a href="login">Cerrar sesión</a>
+    <c:choose>
+        <c:when test="${tareasAsignadas.size() == 0}">
+            <p>No hay tareas disponibles</p>
+        </c:when>
+        <c:otherwise>
+            <c:forEach var="tarea" items="${tareasAsignadas}">
+                <div class="tarea">
+                    <div onclick="toggleDetails(this)">
+                        <h3>${tarea.nombre}</h3>
+                    </div>
+                    <div style="display: none;">
+                        <p>Descripcion: ${tarea.descripcion}</p>
+                        <p>Dificultad: ${tarea.tipo}</p>
+                        <p>Fecha de inicio: ${tarea.fechaInicio}</p>
+                        <p>Fecha de expiracion: ${tarea.fechaExpiracion}</p>
+                        <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
+                        <p>Estado:
+                            <c:choose>
+                                <c:when test="${tarea.estado}">
+                                    Entregada
+                                </c:when>
+                                <c:otherwise>
+                                    No entregada
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
+                        <p>Puntuación: ${tarea.puntuacion} /
+                            <c:choose>
+                                <c:when test="${tarea.tipo == 'Avanzada'}">
+                                    3 puntos
+                                </c:when>
+                                <c:when test="${tarea.tipo == 'Intermedia'}">
+                                    2 puntos
+                                </c:when>
+                                <c:when test="${tarea.tipo == 'Basica'}">
+                                    1 punto
+                                </c:when>
+                            </c:choose>
+                        </p>
+                        <form action="entregarTarea" method="post">
+                            <input type="hidden" name="idTarea" value="${tarea.tareaId}">
+                            <input type="hidden" name="idAlumno" value="${usuario.usuarioId}">
+                            <button type="submit">Entregar Tarea</button>
+                        </form>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:otherwise>
+    </c:choose>
+
+    <h2>Tareas Entregadas</h2>
+    <c:choose>
+        <c:when test="${tareasEntregadas.size() == 0}">
+            <p>No hay tareas entregadas</p>
+        </c:when>
+        <c:otherwise>
+            <c:forEach var="tarea" items="${tareasEntregadas}">
+                <div class="tarea">
+                    <div onclick="toggleDetails(this)">
+                        <h3>${tarea.nombre}</h3>
+                    </div>
+                    <div style="display: none;">
+                        <p>Descripcion: ${tarea.descripcion}</p>
+                        <p>Dificultad: ${tarea.tipo}</p>
+                        <p>Fecha de inicio: ${tarea.fechaInicio}</p>
+                        <p>Fecha de expiracion: ${tarea.fechaExpiracion}</p>
+                        <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
+                        <p>Estado:
+                            <c:choose>
+                                <c:when test="${tarea.estado}">
+                                    Entregada
+                                </c:when>
+                                <c:otherwise>
+                                    No entregada
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
+                        <p>Puntuación: ${tarea.puntuacion} /
+                            <c:choose>
+                                <c:when test="${tarea.tipo == 'Avanzada'}">
+                                    3 puntos
+                                </c:when>
+                                <c:when test="${tarea.tipo == 'Intermedia'}">
+                                    2 puntos
+                                </c:when>
+                                <c:when test="${tarea.tipo == 'Basica'}">
+                                    1 punto
+                                </c:when>
+                            </c:choose>
+                        </p>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:otherwise>
+    </c:choose>
 
     <!-- JavaScript para mostrar y ocultar los detalles de las tareas -->
     <script>

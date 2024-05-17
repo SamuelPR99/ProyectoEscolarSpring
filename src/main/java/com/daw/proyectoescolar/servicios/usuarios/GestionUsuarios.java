@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.servicios.usuarios;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.Alumno;
@@ -15,7 +16,7 @@ import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class GestionUsuarios {
 
-	private UsuariosRepo uRepo = new UsuariosRepo();
+	private final  UsuariosRepo uRepo = new UsuariosRepo();
 
 	// Constructor vacio
 	public GestionUsuarios() {
@@ -24,7 +25,7 @@ public class GestionUsuarios {
 	// Metodos
 	
 	// Obtener el ArrayList de usuarios
-	public ArrayList<UsuarioBase> obtenerUsuarios() {
+	public List<UsuarioBase> obtenerUsuarios() {
 		return uRepo.usuariosBBDD();
 	}
 
@@ -33,7 +34,7 @@ public class GestionUsuarios {
 
 		inicializarBBDD();
 
-		ArrayList<UsuarioBase> usuarios = obtenerUsuarios();
+		List<UsuarioBase> usuarios = obtenerUsuarios();
 		String opcion;
 
 		System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD + Colores.ANSI_BLUE_BACKGROUND + "Bienvenido al"
@@ -96,7 +97,7 @@ public class GestionUsuarios {
 	}
 
 	// Iniciar sesion
-	public UsuarioBase login(Scanner sc, ArrayList<UsuarioBase> usuarios) {
+	public UsuarioBase login(Scanner sc, List<UsuarioBase> usuarios) {
 
 		System.out.println("Introduce tu nombre de usuario:");
 		String nombre = sc.nextLine();
@@ -107,7 +108,7 @@ public class GestionUsuarios {
 		return login(nombre, contrasena, usuarios);
 	}
 	
-	public UsuarioBase login(String nombre, String contrasena, ArrayList<UsuarioBase> usuarios) {
+	public UsuarioBase login(String nombre, String contrasena, List<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
 			if (usuario.getNombre().equals(nombre) && usuario.getContrasena().equals(contrasena)) {
@@ -119,7 +120,7 @@ public class GestionUsuarios {
 	}
 
 	// Registro de un nuevo usuario
-	public void registro(Scanner sc, ArrayList<UsuarioBase> usuarios) {
+	public void registro(Scanner sc, List<UsuarioBase> usuarios) {
 
 		System.out.print("Introduzca su nombre: ");
 		String nombre = sc.nextLine();
@@ -170,7 +171,7 @@ public class GestionUsuarios {
 	}
 
 	// Registro de un nuevo usuario
-	public void registro(String nombre, String dni, String contrasena, String tipo, ArrayList<UsuarioBase> usuarios) {
+	public void registro(String nombre, String dni, String contrasena, String tipo, List<UsuarioBase> usuarios) {
 
 		UsuarioBase nuevoUsuario = null;
 
@@ -198,7 +199,7 @@ public class GestionUsuarios {
 	}
 
 	// Borrar un usuario utilizando Scanner
-	public void borrarUsuario(Scanner sc, ArrayList<UsuarioBase> usuarios) {
+	public void borrarUsuario(Scanner sc, List<UsuarioBase> usuarios) {
 
 		System.out.println("Introduce el nombre de usuario que quieres borrar:");
 		String nombre = sc.nextLine();
@@ -207,7 +208,7 @@ public class GestionUsuarios {
 	}
 
 	// Borrar un usuario
-	public void borrarUsuario(String nombre, ArrayList<UsuarioBase> usuarios) {
+	public void borrarUsuario(String nombre, List<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
 			if (usuario.getNombre().equals(nombre)) {
@@ -226,7 +227,7 @@ public class GestionUsuarios {
 	}
 
 	// Mostrar los usuarios registrados
-	public void mostrarUsuarios(ArrayList<UsuarioBase> usuarios) {
+	public void mostrarUsuarios(List<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
 			System.out.println("\nNombre: " + usuario.getNombre() + "\nTipo: " + usuario.getTipoUsuario() + "\nDNI: "
@@ -306,9 +307,9 @@ public class GestionUsuarios {
 	}
 
 	// Ver estadisticas de los alumnos
-	public void verEstadisticas(ArrayList<UsuarioBase> usuarios) {
+	public void verEstadisticas(List<UsuarioBase> usuarios) {
 
-		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
+		List<Alumno> alumnos = obtenerAlumnos(usuarios);
 
 		if (alumnos.isEmpty()) {
 			System.err.println("No hay alumnos para mostrar estadisticas.");
@@ -340,9 +341,9 @@ public class GestionUsuarios {
 	}
 
 	// Obtener los alumnos del ArrayList de usuarios
-	public ArrayList<Alumno> obtenerAlumnos(ArrayList<UsuarioBase> usuarios) {
+	public List<Alumno> obtenerAlumnos(List<UsuarioBase> usuarios) {
 
-		ArrayList<Alumno> alumnos = new ArrayList<>();
+		List<Alumno> alumnos = new ArrayList<>();
 
 		for (UsuarioBase usuario : usuarios) {
 			if (usuario.getTipoUsuario().equals(Constantes.ALUMNO)) {
@@ -356,9 +357,9 @@ public class GestionUsuarios {
 
 	
 	// Ver las notas de los alumnos
-	public void verNotasAlumnos(ArrayList<UsuarioBase> usuarios) {
+	public void verNotasAlumnos(List<UsuarioBase> usuarios) {
 
-		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
+		List<Alumno> alumnos = obtenerAlumnos(usuarios);
 
 		for (Alumno alumno : alumnos) {
 			System.out.println("Nombre: " + alumno.getNombre() + " / Nota: " + alumno.getNota());
@@ -367,9 +368,9 @@ public class GestionUsuarios {
 	}
 
 	// Modificar la nota de un alumno y en el archivo
-	public void modificarNotaAlumno(Scanner sc, ArrayList<UsuarioBase> usuarios) {
+	public void modificarNotaAlumno(Scanner sc, List<UsuarioBase> usuarios) {
 
-		ArrayList<Alumno> alumnos = obtenerAlumnos(usuarios);
+		List<Alumno> alumnos = obtenerAlumnos(usuarios);
 
 		System.out.println("Lista de alumnos:");
 		for (int i = 0; i < alumnos.size(); i++) {

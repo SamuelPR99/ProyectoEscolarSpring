@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
@@ -13,7 +14,7 @@ public class Alumno extends UsuarioBase {
 
 	// Atributos
 	protected double nota;
-	protected ArrayList<Tarea> tareasAsignadas = new ArrayList<>();
+	protected List<Tarea> tareasAsignadas = new ArrayList<>();
 
 	// Constructores
 	public Alumno() {
@@ -52,11 +53,11 @@ public class Alumno extends UsuarioBase {
 		this.nota = nota;
 	}
 
-	public ArrayList<Tarea> getTareasAsignadas() {
+	public List<Tarea> getTareasAsignadas() {
 		return tareasAsignadas;
 	}
 
-	public void setTareasAsignadas(ArrayList<Tarea> tareasAsignadas) {
+	public void setTareasAsignadas(List<Tarea> tareasAsignadas) {
 		this.tareasAsignadas = tareasAsignadas;
 
 		// Metodos
@@ -77,7 +78,7 @@ public class Alumno extends UsuarioBase {
 	}
 
 	@Override
-	public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
+	public void verMenu(Scanner sc, List<UsuarioBase> usuarios, List<Alumno> alumnos) {
 
 		GestionUsuarios gestor = new GestionUsuarios();
 		GestionTemas gestorTemas = new GestionTemas();

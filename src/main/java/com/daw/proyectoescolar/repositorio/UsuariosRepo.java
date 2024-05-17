@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.daw.proyectoescolar.entidades.Administrador;
 import com.daw.proyectoescolar.entidades.Alumno;
@@ -23,9 +24,9 @@ public class UsuariosRepo {
 	}
 
 	// Leer los usuarios del archivo
-	public ArrayList<UsuarioBase> usuarios() {
+	public List<UsuarioBase> usuarios() {
 
-		ArrayList<UsuarioBase> usuariosDefecto = new ArrayList<>();
+		List<UsuarioBase> usuariosDefecto = new ArrayList<>();
 
 		String linea = null;
 
@@ -98,7 +99,7 @@ public class UsuariosRepo {
 	// Borrar un usuario del archivo
 	public void borrarUsuario(String nombre) {
 
-		ArrayList<UsuarioBase> usuarios = usuarios();
+		List<UsuarioBase> usuarios = usuarios();
 
 		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS)) {
 
@@ -125,7 +126,7 @@ public class UsuariosRepo {
 	// Cambiar la contraseña en el archivo
 	public void cambiarContrasena(String nuevaContrasena, UsuarioBase usuario) {
 
-		ArrayList<UsuarioBase> usuarios = usuarios();
+		List<UsuarioBase> usuarios = usuarios();
 
 		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS)) {
 
@@ -153,7 +154,7 @@ public class UsuariosRepo {
 	// Modificar la nota de un alumno en el archivo
 	public void modificarNotaAlumno(double nuevaNota, Alumno alumno) {
 
-		ArrayList<UsuarioBase> usuarios = usuarios();
+		List<UsuarioBase> usuarios = usuarios();
 
 		try (FileWriter fw = new FileWriter(Constantes.RUTA_USUARIOS)) {
 
@@ -180,52 +181,10 @@ public class UsuariosRepo {
 
 	/*---------------------------------*/
 
-	// Base de datos
-
-	/*
-	 * Script de la base de datos
-	 * 
-	 * CREATE TABLE `asignartarea` ( `tareaAsignada_id` int(11) NOT NULL
-	 * AUTO_INCREMENT, `tarea_id` int(11) NOT NULL, `fecha_inicio` datetime NOT
-	 * NULL, `fecha_entrega` datetime NOT NULL, `fecha_expiracion` datetime NOT
-	 * NULL, `puntuacion` decimal(10,0) NOT NULL, `usuario_id` int(11) NOT NULL,
-	 * PRIMARY KEY (`tareaAsignada_id`), KEY `asignartarea_tarea_FK` (`tarea_id`),
-	 * KEY `asignartarea_usuario_FK` (`usuario_id`), CONSTRAINT
-	 * `asignartarea_tarea_FK` FOREIGN KEY (`tarea_id`) REFERENCES `tarea`
-	 * (`tarea_id`), CONSTRAINT `asignartarea_usuario_FK` FOREIGN KEY (`usuario_id`)
-	 * REFERENCES `usuario` (`usuario_id`) )
-	 * 
-	 * CREATE TABLE `incidencia` ( `incidencia_id` int(11) NOT NULL AUTO_INCREMENT,
-	 * `tipo` enum('Aplicacion','Profesor','Alumno') NOT NULL, `incidencia`
-	 * varchar(255) NOT NULL, `usuario_id` int(11) NOT NULL, `fecha` datetime
-	 * DEFAULT NULL, PRIMARY KEY (`incidencia_id`), KEY `incidencia_usuario_FK`
-	 * (`usuario_id`), CONSTRAINT `incidencia_usuario_FK` FOREIGN KEY (`usuario_id`)
-	 * REFERENCES `usuario` (`usuario_id`) )
-	 * 
-	 * CREATE TABLE `nota` ( `usuario_id` int(11) NOT NULL, `nota` decimal(10,0) NOT
-	 * NULL, PRIMARY KEY (`usuario_id`), CONSTRAINT `nota_usuario_FK` FOREIGN KEY
-	 * (`usuario_id`) REFERENCES `usuario` (`usuario_id`) )
-	 * 
-	 * CREATE TABLE `tarea` ( `tarea_id` int(11) NOT NULL AUTO_INCREMENT, `titulo`
-	 * varchar(255) NOT NULL, `dificultad` varchar(255) NOT NULL, `descripcion`
-	 * varchar(255) NOT NULL, `tema_id` int(11) NOT NULL, PRIMARY KEY (`tarea_id`),
-	 * KEY `tareas_temas_FK` (`tema_id`), CONSTRAINT `tarea_tema_FK` FOREIGN KEY
-	 * (`tema_id`) REFERENCES `tema` (`tema_id`) )
-	 * 
-	 * CREATE TABLE `tema` ( `tema_id` int(11) NOT NULL, `titulo` varchar(255) NOT
-	 * NULL, `descripcion` varchar(255) NOT NULL, PRIMARY KEY (`tema_id`) )
-	 * 
-	 * CREATE TABLE `usuario` ( `usuario_id` int(11) NOT NULL AUTO_INCREMENT,
-	 * `nombre` varchar(150) NOT NULL, `contrasena` varchar(250) NOT NULL, `tipo`
-	 * enum('Administrador','Profesor','Alumno') NOT NULL, `dni` varchar(9) NOT
-	 * NULL, PRIMARY KEY (`usuario_id`) )
-	 * 
-	 */
-
 	// Insertar los usuarios en la base de datos
 	public void insertarUsuariosArchivoBBDD() {
 
-		ArrayList<UsuarioBase> usuarios = usuarios();
+		List<UsuarioBase> usuarios = usuarios();
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
@@ -272,9 +231,9 @@ public class UsuariosRepo {
 	}
 	
 	// ArrayList de usuarios de la BBDD
-	public ArrayList<UsuarioBase> usuariosBBDD() {
+	public List<UsuarioBase> usuariosBBDD() {
 
-		ArrayList<UsuarioBase> usuarios = new ArrayList<>();
+		List<UsuarioBase> usuarios = new ArrayList<>();
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();

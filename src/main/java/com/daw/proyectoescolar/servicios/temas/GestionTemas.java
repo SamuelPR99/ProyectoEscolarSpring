@@ -1,8 +1,8 @@
 package com.daw.proyectoescolar.servicios.temas;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.Alumno;
@@ -15,7 +15,7 @@ import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 public class GestionTemas {
 
 	TemasRepo tRepo = new TemasRepo();
-	private ArrayList<Tarea> listaDeTareas = new TemasRepo().archivoTareas();
+	private List<Tarea> listaDeTareas = new TemasRepo().archivoTareas();
 
 	// Constructores
 	public GestionTemas() {
@@ -27,7 +27,7 @@ public class GestionTemas {
 	// Muestra los temas
 	public void mostrarTemas() {
 
-		HashMap<Integer, ArrayList<Temas>> temas = tRepo.hashTemas();
+		HashMap<Integer, List<Temas>> temas = tRepo.hashTemas();
 
 		for (Integer tema : temas.keySet()) { // Se recorren los temas
 			System.out.println(tema + " - " + temas.get(tema).get(0).getNombre()); // Se muestra el nombre de cada tema
@@ -44,8 +44,8 @@ public class GestionTemas {
 		int numTema = sc.nextInt();
 		sc.nextLine(); // Limpiar buffer
 
-		HashMap<Integer, ArrayList<Temas>> temas = tRepo.hashTemas();
-		ArrayList<Temas> tema = temas.get(numTema);
+		HashMap<Integer, List<Temas>> temas = tRepo.hashTemas();
+		List<Temas> tema = temas.get(numTema);
 		System.out.println(tema.get(0).getListaTareas() + "\n");
 
 	}
@@ -95,7 +95,7 @@ public class GestionTemas {
 	public void asignarTarea(Scanner sc, int idProfesor) {
 
 		UsuariosRepo uRepo = new UsuariosRepo();
-		ArrayList<Alumno> alumnos = uRepo.obtenerAlumnos();
+		List<Alumno> alumnos = uRepo.obtenerAlumnos();
 
 		mostrarTemas();
 
@@ -104,7 +104,7 @@ public class GestionTemas {
 		sc.nextLine(); // Limpiar buffer
 
 		// Obtener las tareas del tema elegido
-		ArrayList<Tarea> tareasTema = tRepo.archivoTemas().get(idTema - 1).getListaTareas();
+		List<Tarea> tareasTema = tRepo.archivoTemas().get(idTema - 1).getListaTareas();
 
 		// Mostrar las tareas del tema elegido
 		for (int i = 0; i < tareasTema.size(); i++) {
@@ -133,7 +133,7 @@ public class GestionTemas {
 	public void marcarTareaCompletada(Scanner sc, int idAlumno) {
 
 		// Obtener las tareas del alumno
-		ArrayList<Tarea> tareas = tRepo.obtenerTareasAlumno(idAlumno);
+		List<Tarea> tareas = tRepo.obtenerTareasAlumno(idAlumno);
 
 		// Comprobar si el ArrayList de tareas esta vacio
 		if (tareas.isEmpty()) {
@@ -156,8 +156,17 @@ public class GestionTemas {
 	}
 
 	// ArrayList de tareas asignadas a un alumno para mostrarlas en la vista
-	public ArrayList<Tarea> tareasAsignadas(int idAlumno) {
+	public List<Tarea> tareasAsignadas(int idAlumno) {
 		return tRepo.obtenerTareasAlumno(idAlumno);
 	}
 
+	// Lista de tareas Entregadas para mostrarlas en la vista
+	public List<Tarea> tareasEntregadas(int idAlumno) {
+		return tRepo.tareasEntregadas(idAlumno);
+	}
+
+	// entregartarea boton para entregar tarea en la vista
+	public void entregarTarea(int idTarea, int idAlumno) {
+		tRepo.entregarTarea(idTarea, idAlumno);
+	}
 }

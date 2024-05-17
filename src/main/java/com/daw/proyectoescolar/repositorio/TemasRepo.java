@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.entidades.Temas;
@@ -24,9 +25,9 @@ public class TemasRepo {
 	// Metodos
 
 	// Lee el archivo de temas y crea un array de temas
-	public ArrayList<Temas> archivoTemas() {
+	public List<Temas> archivoTemas() {
 
-		ArrayList<Temas> temas = new ArrayList<>();
+		List<Temas> temas = new ArrayList<>();
 
 		try {
 			FileReader fr = new FileReader(Constantes.RUTA_TEMAS);
@@ -67,9 +68,9 @@ public class TemasRepo {
 		return temas;
 	}
 
-	public ArrayList<Tarea> archivoTareas() {
+	public List<Tarea> archivoTareas() {
 
-		ArrayList<Tarea> tareas = new ArrayList<>();
+		List<Tarea> tareas = new ArrayList<>();
 
 		try {
 
@@ -103,7 +104,7 @@ public class TemasRepo {
 	public HashMap<Integer, ArrayList<Tarea>> hashTareas() {
 
 		HashMap<Integer, ArrayList<Tarea>> tareas = new HashMap<>();
-		ArrayList<Tarea> tareasArray = new TemasRepo().archivoTareas();
+		List<Tarea> tareasArray = new TemasRepo().archivoTareas();
 
 		int i = 1;
 		for (Tarea tarea : tareasArray) {
@@ -117,16 +118,16 @@ public class TemasRepo {
 	}
 
 	// Crea un HashMap con los temas
-	public HashMap<Integer, ArrayList<Temas>> hashTemas() {
+	public HashMap<Integer, List<Temas>> hashTemas() {
 
-		HashMap<Integer, ArrayList<Temas>> temas = new HashMap<>();
+		HashMap<Integer, List<Temas>> temas = new HashMap<>();
 		TemasRepo repo = new TemasRepo();
-		ArrayList<Temas> temasArray = repo.archivoTemas(); // Array de temas
+		List<Temas> temasArray = repo.archivoTemas(); // Array de temas
 
 		// Crea un HashMap con los temas
 		int i = 1;
 		for (Temas tema : temasArray) {
-			ArrayList<Temas> tareas = new ArrayList<>();
+			List<Temas> tareas = new ArrayList<>();
 			tareas.add(tema); // Cada tema tiene una lista de tareas
 			temas.put(i, tareas); // Se añade al HashMap de temas
 			i++;
@@ -139,7 +140,7 @@ public class TemasRepo {
 
 	public void insertarTemasYTareasBBDD() {
 
-		ArrayList<Temas> temas = archivoTemas();
+		List<Temas> temas = archivoTemas();
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
@@ -250,12 +251,12 @@ public class TemasRepo {
 		}
 	}
 
-	public ArrayList<Tarea> obtenerTareasAlumno(int idAlumno) {
+	public List<Tarea> obtenerTareasAlumno(int idAlumno) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
 
-		ArrayList<Tarea> tareas = new ArrayList<>();
+		List<Tarea> tareas = new ArrayList<>();
 
 		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio, asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion, asignartarea.estado, asignartarea.puntuacion FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id WHERE asignartarea.alumno_id = ? AND asignartarea.estado != 1";
 
@@ -337,28 +338,14 @@ public class TemasRepo {
 	private double calcularPuntuacion(int idTarea) {
 
 		String dificultad = obtenerDificultadTarea(idTarea);
-		double puntuacion;
+		double puntuacion = switch (dificultad) {
+            case "Basica" -> 1.0;
+            case "Intermedia" -> 2.0;
+            case "Avanzada" -> 3.0;
+            default -> 0.0;
+        };
 
-		switch (dificultad) {
-
-		case "Basica":
-			puntuacion = 1.0;
-			break;
-
-		case "Intermedia":
-			puntuacion = 2.0;
-			break;
-
-		case "Avanzada":
-			puntuacion = 3.0;
-			break;
-
-		default:
-			puntuacion = 0.0;
-			break;
-		}
-
-		return puntuacion;
+        return puntuacion;
 	}
 
 	private String obtenerDificultadTarea(int idTarea) {
@@ -388,5 +375,48 @@ public class TemasRepo {
 
 		return dificultad;
 	}
+
+	public List<Tarea> tareasEntregadas(int idAlumno) {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		List<Tarea> tareas = new ArrayList<>();
+
+		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio, asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion, asignartarea.estado, asignartarea.puntuacion FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id WHERE asignartarea.alumno_id = ? AND asignartarea.estado = 1";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+
+			ps.setInt(1, idAlumno);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int idTarea = rs.getInt("tarea_id");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+				String dificultad = rs.getString("dificultad");
+				Date fechaInicio = rs.getDate("fecha_inicio");
+				Date fechaExpiracion = rs.getDate("fecha_expiracion");
+				Date fechaEntrega = rs.getDate("fecha_entrega");
+				double puntuacion = rs.getDouble("puntuacion");
+				boolean estado = rs.getBoolean("estado");
+
+				Tarea tarea = new Tarea(idTarea, titulo, descripcion, dificultad, fechaInicio, fechaExpiracion,
+						fechaEntrega, puntuacion, estado);
+				tareas.add(tarea);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+
+		return tareas;
+	}
+
+
 
 }

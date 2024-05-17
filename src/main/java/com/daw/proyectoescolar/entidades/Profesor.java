@@ -1,6 +1,6 @@
 package com.daw.proyectoescolar.entidades;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
@@ -42,7 +42,7 @@ public class Profesor extends UsuarioBase {
 
 	// Menu profesor
 	@Override
-	public void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos) {
+	public void verMenu(Scanner sc, List<UsuarioBase> usuarios, List<Alumno> alumnos) {
 
 		GestionUsuarios gestor = new GestionUsuarios();
 		GestionTemas temitas = new GestionTemas();

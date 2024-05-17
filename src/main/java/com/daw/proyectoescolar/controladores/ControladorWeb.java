@@ -1,14 +1,14 @@
 package com.daw.proyectoescolar.controladores;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.HttpSession;
 
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
@@ -38,7 +38,7 @@ public class ControladorWeb {
 	public ModelAndView registrarUsuario(@RequestParam String nombre, @RequestParam String dni,
 			@RequestParam String contrasena, @RequestParam String tipo) {
 		ModelAndView mav = new ModelAndView();
-		ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
+		List<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
 
 		if (gestionUsuarios.validarNombreUsuario(nombre) && gestionUsuarios.validarContrasena(contrasena)
 				&& gestionUsuarios.validarDNI(dni)) {
@@ -51,19 +51,21 @@ public class ControladorWeb {
 	}
 
 	@PostMapping("login")
-	public ModelAndView loguearUsuario(@RequestParam String nombre, @RequestParam String contrasena) {
+	public ModelAndView loguearUsuario(@RequestParam String nombre, @RequestParam String contrasena, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		ArrayList<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
+		List<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
 		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
 		int id = usuario.getUsuarioId();
 		GestionTemas gt = new GestionTemas();
 		if (usuario != null) {
+			session.setAttribute("usuario", usuario); // Guardar el usuario en la sesión
 			mav.addObject("usuario", usuario); // Añadimos el usuario a la vista para poder mostrar su nombre
 			if (usuario.getTipoUsuario().equals("Administrador")) {
 				mav.setViewName("administrador");
 			} else if (usuario.getTipoUsuario().equals("Alumno")) {
 				mav.setViewName("alumno");
 				mav.addObject("tareasAsignadas", gt.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
+				mav.addObject("tareasEntregadas", gt.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
 			} else if (usuario.getTipoUsuario().equals("Profesor")) {
 				mav.setViewName("profesor");
 			} else {
@@ -76,23 +78,44 @@ public class ControladorWeb {
 		return mav;
 	}
 
+	@PostMapping("entregarTarea")
+	public ModelAndView entregarTarea(@RequestParam int idTarea, @RequestParam int idAlumno) {
+		ModelAndView mav = new ModelAndView();
+		GestionTemas gt = new GestionTemas();
+		gt.entregarTarea(idTarea, idAlumno);
+		mav.setViewName("redirect:/alumno"); // Redirige de nuevo a la página del alumno
+		return mav;
+	}
+
 	@GetMapping("loginExitoso")
 	public ModelAndView loginExitoso() {
 		return new ModelAndView("loginExitoso");
 	}
 
 	@GetMapping("administrador")
-	public ModelAndView admin() {
+	public ModelAndView admin(HttpSession session) {
 		return new ModelAndView("admin");
 	}
 
 	@GetMapping("alumno")
-	public ModelAndView usuario() {
-		return new ModelAndView("alumno");
+	public ModelAndView alumno(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
+		int id = usuario.getUsuarioId();
+		GestionTemas gt = new GestionTemas();
+		if (usuario != null) {
+			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
+			mav.setViewName("alumno");
+			mav.addObject("tareasAsignadas", gt.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
+			mav.addObject("tareasEntregadas", gt.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
+		} else {
+			mav.setViewName("error");
+		}
+		return mav;
 	}
 
 	@GetMapping("profesor")
-	public ModelAndView profesor() {
+	public ModelAndView profesor(HttpSession session) {
 		return new ModelAndView("profesor");
 	}
 

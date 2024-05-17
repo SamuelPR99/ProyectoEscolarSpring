@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.entidades;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public interface Usuario {
@@ -14,6 +15,6 @@ public interface Usuario {
 	public abstract String getTipoUsuario();
 
 	// Implementa verMenu en los hijos del UsuarioBase
-	public abstract void verMenu(Scanner sc, ArrayList<UsuarioBase> usuarios, ArrayList<Alumno> alumnos);
+	public abstract void verMenu(Scanner sc, List<UsuarioBase> usuarios, List<Alumno> alumnos);
 	
 }
