@@ -398,4 +398,10 @@ public class GestionUsuarios {
 
 	}
 
+	// modificar la nota de un alumno para vista de profesor en la base de datos
+	public void modificarNotaAlumno(int idAlumno, double nota) {
+		uRepo.modificarNotaAlumno(idAlumno, nota);
+	}
+
+
 }

@@ -496,5 +496,26 @@ public class UsuariosRepo {
 
 	    return alumnos;
 	}
-	
+
+	// Modificar la nota de un alumno en la base de datos a traves de id
+	public void modificarNotaAlumno(int usuarioId, double nota) {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "UPDATE nota SET nota = ? WHERE usuario_id = ?";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setDouble(1, nota);
+			ps.setInt(2, usuarioId);
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+	}
 }

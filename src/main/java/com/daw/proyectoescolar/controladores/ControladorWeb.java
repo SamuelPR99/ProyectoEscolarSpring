@@ -74,6 +74,8 @@ public class ControladorWeb {
 				mav.addObject("fechaActual", FechaYHora.fechaActual()); // Añadir la fecha actual a la vista
 			} else if (usuario.getTipoUsuario().equals("Profesor")) {
 				mav.setViewName("profesor");
+				mav.addObject("alumnos", gestionUsuarios.obtenerAlumnos(usuarios));
+				mav.addObject("temas", gt.obtenerTemas());
 			} else {
 				mav.addObject("mensaje", "Usuario o contraseña incorrectos");
 				mav.setViewName("login");
@@ -91,6 +93,15 @@ public class ControladorWeb {
 		GestionTemas gt = new GestionTemas();
 		gt.entregarTarea(idTarea, idAlumno);
 		mav.setViewName("redirect:/alumno"); // Redirige de nuevo a la página del alumno
+		return mav;
+	}
+
+	@PostMapping("cambiarNota")
+	public ModelAndView cambiarNota(@RequestParam int idAlumno, @RequestParam double nota) {
+		ModelAndView mav = new ModelAndView();
+		GestionUsuarios gu = new GestionUsuarios();
+		gu.modificarNotaAlumno(idAlumno, nota);
+		mav.setViewName("redirect:profesor"); // Redirige de nuevo a la página del profesor
 		return mav;
 	}
 
@@ -124,7 +135,18 @@ public class ControladorWeb {
 
 	@GetMapping("profesor")
 	public ModelAndView profesor(HttpSession session) {
-		return new ModelAndView("profesor");
+		ModelAndView mav = new ModelAndView();
+		GestionTemas gt = new GestionTemas();
+		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
+		if (usuario != null) {
+			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
+			mav.setViewName("profesor");
+			mav.addObject("alumnos", gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios()));
+			mav.addObject("temas", gt.obtenerTemas());
+		} else {
+			mav.setViewName("error");
+		}
+		return mav;
 	}
 
 	@GetMapping("logout")

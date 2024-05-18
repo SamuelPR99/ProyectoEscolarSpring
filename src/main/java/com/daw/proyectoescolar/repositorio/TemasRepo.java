@@ -417,6 +417,77 @@ public class TemasRepo {
 		return tareas;
 	}
 
+	// Obtener temas con tareas de la base de datos
+	public List<Temas> obtenerTemasBBDD() {
+
+		List<Temas> temas = new ArrayList<>();
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "SELECT * FROM tema";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int temaId = rs.getInt("tema_id");
+				int numeroTema = rs.getInt("numero_tema");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+
+				List<Tarea> tareas = obtenerTareasBBDD(temaId);
+
+				Temas tema = new Temas(temaId, numeroTema, titulo, descripcion, (ArrayList<Tarea>) tareas);
+				temas.add(tema);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+
+		return temas;
+	}
+
+	// Obtener tareas de la base de datos
+	public List<Tarea> obtenerTareasBBDD(int temaId) {
+
+		List<Tarea> tareas = new ArrayList<>();
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "SELECT * FROM tarea WHERE tema_id = ?";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setInt(1, temaId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int tareaId = rs.getInt("tarea_id");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+				String dificultad = rs.getString("dificultad");
+
+				Tarea tarea = new Tarea(tareaId, titulo, descripcion, dificultad);
+				tareas.add(tarea);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+
+		return tareas;
+	}
+
 
 
 }

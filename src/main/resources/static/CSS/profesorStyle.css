@@ -1,0 +1,23 @@
+body {
+    background-image: url(../IMG/fondoProf.jpg);
+}
+
+/* Estilos para el contenido colapsable */
+.collapsible-content{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+/* Estilos para los encabezados colapsables */
+.collapsible-header{
+    cursor: pointer;
+}
+
+/* Estilos para el contenido abierto */
+.collapsible-section.open .collapsible-content{
+    max-height: 1000px; /* Ajusta este valor según el contenido */
+}
+
+
+

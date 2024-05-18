@@ -73,6 +73,14 @@ public class Tarea {
 		this.estado = estado;
 	}
 
+	// Constructor para obternerTareasBBDD() de la base de datos: Tarea tarea = new Tarea(tareaId, titulo, descripcion, dificultad);
+	public Tarea(int tareaId, String nombre, String descripcion, String tipo) {
+		this.tareaId = tareaId;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.tipo = tipo;
+	}
+
 	// Getters y setters
 	public int getTareaId() {
 		return tareaId;

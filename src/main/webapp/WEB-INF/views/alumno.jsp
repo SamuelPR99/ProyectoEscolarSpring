@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>IES Murcia - Alumno</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/alumnoStyle.css">
 </head>
 <body>

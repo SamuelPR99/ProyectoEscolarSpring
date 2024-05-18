@@ -1,83 +1,19 @@
-/* General Styles */
 body {
-    font-family: "Trebuchet MS";
-    color: #333;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
     background-image: url(../IMG/board-597238_1920.jpg);
-    background-attachment: fixed; /* Añade esta línea */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-header {
-    background-color: rgba(0, 18, 101, 0.2);
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-header, footer {
-    /* ... tus estilos actuales ... */
-    opacity: 0; /* Inicialmente oculto */
-    transition: opacity 1s ease-in-out; /* Transición de 1 segundo */
-}
-
-body:hover header, body:hover footer {
-    opacity: 1; /* Visible cuando se pasa el mouse sobre el cuerpo de la página */
-}
-
-header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 1rem;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
-}
-
-main {
-    padding: 2rem;
-    width: 800px; /* Ajusta este valor según tus necesidades */
-    margin: 2rem auto;
-    background-color: white;
-    box-shadow: 0px 3px 10px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    flex: 1 0 auto;
 }
 
 .nota-alta {
     padding: 0.5rem;
     border-radius: 5px;
-    background-color: #4CAF50; /* verde */
+    background-color: #4CAF50;
     color: white;
 }
 
 .nota-baja {
     padding: 0.5rem;
     border-radius: 5px;
-    background-color: #f44336; /* rojo */
+    background-color: #f44336;
     color: white;
-}
-
-p strong {
-    display: inline-block;
 }
 
 .nota-container {
@@ -104,22 +40,6 @@ p strong {
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-header h1 {
-    color: white;
-}
-
-h1 {
-    color: #004a99;
-}
-
-h2 {
-    color: #0066cc;
-    margin-top: 2rem;
-}
-
-p {
-    line-height: 1.6;
-}
 
 .tarea {
     background-color: #f1f1f1;
@@ -145,20 +65,6 @@ p {
     justify-content: flex-end;
 }
 
-button {
-    background-color: #004a99;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #003366;
-}
-
 /* Specific Style for Task Details */
 .tarea div[style*="max-height: 0px;"],
 .tarea div[style*="max-height: 0;"] {
@@ -176,37 +82,8 @@ button:hover {
     transition: opacity 0.5s, max-height 0.5s ease-in, visibility 0s ease-in 0s;
 }
 
-/* Footer Styles */
-footer {
-    background-color: rgba(0, 18, 101, 0.2);
-    color: white;
-    text-align: center;
-    padding: 1rem 2rem;
-    margin-top: 2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
-}
 
-footer p {
-    margin: 0.5rem 0;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-    margin: 0 1rem;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-footer a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
-}
-
-/* Responsive Design */
+/* Responsive*/
 @media (max-width: 768px) {
     header {
         flex-direction: column;
