@@ -19,7 +19,12 @@
 </header>
 <main>
     <h1>Bienvenid@, ${usuario.nombre}</h1>
-    <p>Nota actual: ${usuario.nota}</p>
+    <div style="display: flex; align-items: center;">
+        <strong>Nota actual:</strong>
+        <div class="nota-container">
+            <span class="${usuario.nota >= 5 ? 'nota-alta' : 'nota-baja'}">${usuario.nota}</span>
+        </div>
+    </div>
     <h2>Tareas Asignadas</h2>
     <c:choose>
         <c:when test="${tareasAsignadas.size() == 0}">
@@ -32,10 +37,10 @@
                         <h3>${tarea.nombre}</h3>
                     </div>
                     <div style="display: none;">
-                        <p>Descripcion: ${tarea.descripcion}</p>
-                        <p>Dificultad: ${tarea.tipo}</p>
-                        <p>Fecha de inicio: ${tarea.fechaInicio}</p>
-                        <p>Fecha de expiracion:
+                        <p><strong>Descripcion:</strong> ${tarea.descripcion}</p>
+                        <p><strong>Dificultad:</strong> ${tarea.tipo}</p>
+                        <p><strong>Fecha de inicio:</strong> ${tarea.fechaInicio}</p>
+                        <p><strong>Fecha de expiracion:</strong>
                             <c:choose>
                                 <c:when test="${tarea.fechaExpiracion lt fechaActual}">
                                     <span style="color: red;">${tarea.fechaExpiracion} (Expirada)</span>
@@ -45,8 +50,8 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
-                        <p>Estado:
+                        <p><strong>Fecha de entrega:</strong> ${tarea.fechaEntrega}</p>
+                        <p><strong>Estado:</strong>
                             <c:choose>
                                 <c:when test="${tarea.estado}">
                                     Entregada
@@ -56,7 +61,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <p>Puntuación: ${tarea.puntuacion} /
+                        <p><strong>Puntuación:</strong> ${tarea.puntuacion} /
                             <c:choose>
                                 <c:when test="${tarea.tipo == 'Avanzada'}">
                                     3 puntos
@@ -92,10 +97,10 @@
                         <h3>${tarea.nombre}</h3>
                     </div>
                     <div style="display: none;">
-                        <p>Descripcion: ${tarea.descripcion}</p>
-                        <p>Dificultad: ${tarea.tipo}</p>
-                        <p>Fecha de inicio: ${tarea.fechaInicio}</p>
-                        <p>Fecha de expiracion:
+                        <p><strong>Descripcion:</strong> ${tarea.descripcion}</p>
+                        <p><strong>Dificultad:</strong> ${tarea.tipo}</p>
+                        <p><strong>Fecha de inicio:</strong> ${tarea.fechaInicio}</p>
+                        <p><strong>Fecha de expiracion:</strong>
                             <c:choose>
                                 <c:when test="${tarea.fechaExpiracion lt fechaActual}">
                                     <span style="color: red;">${tarea.fechaExpiracion} (Expirada)</span>
@@ -104,8 +109,8 @@
                                     ${tarea.fechaExpiracion}
                                 </c:otherwise>
                             </c:choose>
-                        <p>Fecha de entrega: ${tarea.fechaEntrega}</p>
-                        <p>Estado:
+                        <p><strong>Fecha de entrega:</strong> ${tarea.fechaEntrega}</p>
+                        <p><strong>Estado:</strong>
                             <c:choose>
                                 <c:when test="${tarea.estado}">
                                     Entregada
@@ -115,7 +120,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-                        <p>Puntuación: ${tarea.puntuacion} /
+                        <p><strong>Puntuación:</strong> ${tarea.puntuacion} /
                             <c:choose>
                                 <c:when test="${tarea.tipo == 'Avanzada'}">
                                     3 puntos
