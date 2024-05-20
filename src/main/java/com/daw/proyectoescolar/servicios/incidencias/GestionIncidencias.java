@@ -42,8 +42,7 @@ public class GestionIncidencias {
 		incidenciaAlumno.setIncidencia(sc.nextLine());
 		incidenciaAlumno.setUsuarioId(usuarioId);
 		iRepo.escribirIncidencia(incidenciaAlumno, usuarioId);
-		iRepo.leerIncidencias();
-		iRepo.insertarIncidenciasBBDD();
+		iRepo.insertarIncidenciasBBDD(); // Reemplazarlo por el metodo de insertar una incidencia en la base de datos
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Alumno");
 
 		System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
@@ -56,14 +55,14 @@ public class GestionIncidencias {
 		incidenciaProfesor.setIncidencia(sc.nextLine());
 		incidenciaProfesor.setUsuarioId(usuarioId);
 		iRepo.escribirIncidencia(incidenciaProfesor, usuarioId);
-		iRepo.leerIncidencias();
-		iRepo.insertarIncidenciasBBDD();
+		iRepo.insertarIncidenciasBBDD(); // Reemplazarlo por el metodo de insertar una incidencia en la base de datos
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Profesor");
 
 		System.out.println(
 				Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
 	}
 
+	// esto metelo en los menus de incidencias de los usuarios que ya me ha dao un poco de pereza
 	public void crearIncidenciaAplicacion(Scanner sc, int usuarioId) {
 
 		Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
@@ -71,8 +70,7 @@ public class GestionIncidencias {
 		incidenciaAplicacion.setIncidencia(sc.nextLine());
 		incidenciaAplicacion.setUsuarioId(usuarioId);
 		iRepo.escribirIncidencia(incidenciaAplicacion, usuarioId);
-		iRepo.leerIncidencias();
-		iRepo.insertarIncidenciasBBDD();
+		iRepo.insertarIncidenciasBBDD(); // Reemplazarlo por el metodo de insertar una incidencia en la base de datos
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Aplicacion");
 
 		System.out.println(
