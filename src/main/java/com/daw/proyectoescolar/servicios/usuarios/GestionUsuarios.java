@@ -7,11 +7,7 @@ import java.util.Scanner;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
-import com.daw.proyectoescolar.repositorio.Colores;
-import com.daw.proyectoescolar.repositorio.Constantes;
-import com.daw.proyectoescolar.repositorio.TemasRepo;
-import com.daw.proyectoescolar.repositorio.UsuariosRepo;
-import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
+import com.daw.proyectoescolar.repositorio.*;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class GestionUsuarios {
@@ -44,8 +40,8 @@ public class GestionUsuarios {
 		do {
 
 			System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE + "\nSeleccione una opcion:\n"
-					+ Colores.ANSI_RESET + Colores.ANSI_YELLOW + "1. Iniciar sesion\n" + "2. Gestion de incidencias\n"
-					+ "3. Salir" + Colores.ANSI_RESET);
+					+ Colores.ANSI_RESET + Colores.ANSI_YELLOW + "1. Iniciar sesion\n"
+					+ "2. Salir" + Colores.ANSI_RESET);
 
 			opcion = sc.nextLine().toLowerCase();
 
@@ -62,7 +58,7 @@ public class GestionUsuarios {
 					System.out.println("Bienvenido " + Colores.ANSI_UNDERLINE + Colores.ANSI_BOLD
 							+ usuario.getTipoUsuario() + Colores.ANSI_RESET + ", " + usuario.getNombre());
 
-					usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios));
+					usuario.verMenu(sc, usuarios, obtenerAlumnos(usuarios), usuario);
 
 				} catch (NullPointerException excepcion) {
 					GestionLogs.errorLogs("Usuario o contraseña incorrectos. " + excepcion.getMessage());
@@ -74,13 +70,7 @@ public class GestionUsuarios {
 
 				break;
 
-			case "2", "gestion de incidencias":
-				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Gestion de incidencias");
-				GestionIncidencias gestionadorIncidencias = new GestionIncidencias();
-				gestionadorIncidencias.menuPrincipal(sc);
-				break;
-
-			case "3", "salir":
+			case "2", "salir":
 				GestionLogs.logOpcionMenu(Constantes.MENU_PRINCIPAL, "Salir");
 				System.out.println("Hasta luego. " + Colores.ANSI_GREEN + "(⌐■_■)" + Colores.ANSI_RESET);
 				System.exit(0);
@@ -92,7 +82,7 @@ public class GestionUsuarios {
 
 			}
 
-		} while (!opcion.equals("3") && !opcion.equals("salir"));
+		} while (!opcion.equals("2") && !opcion.equals("salir"));
 
 	}
 
@@ -292,18 +282,14 @@ public class GestionUsuarios {
 		}
 		
 		TemasRepo tRepo = new TemasRepo();
-		
 		if (!tRepo.comprobarDatos()) {
 			tRepo.insertarTemasYTareasBBDD();
 		}
-		
-		/*
-		 * IncidenciasRepo iRepo = new IncidenciasRepo();
-		 * if (!iRepo.comprobarDatos()) {
-		 * }
-		 */
-			
-		
+
+		IncidenciasRepo iRepo = new IncidenciasRepo();
+		if (!iRepo.comprobarDatos()) {
+			iRepo.insertarIncidenciasBBDD();
+		}
 	}
 
 	// Ver estadisticas de los alumnos

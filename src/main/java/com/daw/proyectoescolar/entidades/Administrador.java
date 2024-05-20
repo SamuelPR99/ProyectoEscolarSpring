@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
+import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
@@ -36,12 +37,50 @@ public class Administrador extends UsuarioBase {
     public String getTipoUsuario() {
         return Constantes.ADMINISTRADOR;
     }
-    
-    
+
+    @Override
+    public void incidenciasMenu(Scanner sc, UsuarioBase usuario) {
+
+        GestionIncidencias gestor = new GestionIncidencias();
+        String opcion;
+
+        do {
+
+            System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE + "\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
+                    + "1. Mostrar incidencias\n"
+                    + "2. Crear incidencia\n"
+                    + "3. Salir del menu" + Colores.ANSI_RESET);
+
+            opcion = sc.nextLine().toLowerCase();
+
+            switch (opcion) {
+
+                case "1", "mostrar incidencias":
+                    GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Mostrar incidencias");
+                    gestor.listado(sc);
+                    break;
+
+                case "2", "borrar incidencia":
+                    GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Borrar incidencia");
+                    gestor.eliminarIncidencias(sc);
+                    break;
+
+                case "3", "salir del menu", "salir", "salir del":
+                    GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Salir del menu");
+                    System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de incidencias..." + Colores.ANSI_RESET);
+                    break;
+
+                default:
+                    System.err.println("Opcion no valida. Por favor, elige una opción valida.");
+                    GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de incidencias. " + opcion + " no es una opcion valida.");
+            }
+
+        } while (!opcion.equals("3") && !opcion.contains("salir"));
+    }
     
     // Menu administrador
     @Override
-    public void verMenu(Scanner sc, List<UsuarioBase> usuarios, List<Alumno> alumnos) {
+    public void verMenu(Scanner sc, List<UsuarioBase> usuarios, List<Alumno> alumnos, UsuarioBase usuario) {
     	
     	GestionUsuarios gestor = new GestionUsuarios();
    
@@ -54,7 +93,8 @@ public class Administrador extends UsuarioBase {
                     + "2. Crear un usuario\n"
                     + "3. Borrar un usuario\n"
                     + "4. Cambiar contraseña\n"
-                    + "5. Salir del menu" + Colores.ANSI_RESET);
+                    + "5. Menu incidencias\n"
+                    + "6. Salir del menu" + Colores.ANSI_RESET);
             
             opcion = sc.nextLine().toLowerCase();
 
@@ -80,7 +120,12 @@ public class Administrador extends UsuarioBase {
                     gestor.cambiarContrasena(sc, this);
                     break;
 
-                case "5", "salir del menu", "salir", "salir del":
+                case "5", "menu incidencias":
+                    GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Menu incidencias");
+                    incidenciasMenu(sc, this);
+                    break;
+
+                case "6", "salir del menu", "salir", "salir del":
                     GestionLogs.logOpcionMenu(Constantes.MENU_ADMINISTRADORES, "Salir del menu");
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de administrador..." + Colores.ANSI_RESET);
                     break;
@@ -91,7 +136,7 @@ public class Administrador extends UsuarioBase {
 
             }
             
-        } while (!opcion.equals("5") && !opcion.contains("salir"));
+        } while (!opcion.equals("6") && !opcion.contains("salir"));
     }
 
 }

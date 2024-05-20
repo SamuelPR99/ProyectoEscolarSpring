@@ -21,73 +21,63 @@ import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class IncidenciasRepo {
 
-	public ArrayList<Incidencias> leerIncidencias(ArrayList<Incidencias> listaIncidencias) {
+	public List<Incidencias> leerIncidencias() {
 
-		try (BufferedReader br = new BufferedReader(new FileReader(Constantes.RUTA_INCIDENCIAS))) {
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+
+		List<Incidencias> listaIncidencias = new ArrayList<>();
+
+		try {
+			archivo = new File(Constantes.RUTA_INCIDENCIAS);
+			fr = new FileReader(archivo);
+			br = new BufferedReader(fr);
 
 			String linea;
-
 			while ((linea = br.readLine()) != null) {
-
-				String[] datos = linea.split(";"); // Separar los datos por punto y coma
-				String tipoIncidencia = datos[0]; // Tipo de incidencia
-				String descripcionIncidencia = datos[1]; // Detalles de la incidencia
-				String fechaIncidencia = datos[2]; // Fecha de la incidencia
-
-				switch (tipoIncidencia) {
-
-				case "Alumno":
-					listaIncidencias.add(new IncidenciaAlumno(descripcionIncidencia, fechaIncidencia));
-					break;
-
-				case "Profesor":
-					listaIncidencias.add(new IncidenciaProfesor(descripcionIncidencia, fechaIncidencia));
-					break;
-
-				case "Aplicacion":
-					listaIncidencias.add(new IncidenciaAplicacion(descripcionIncidencia, fechaIncidencia));
-					break;
-
-				default:
-					System.err.println("Incidencia no encontrada");
-					GestionLogs.errorLogs("Incidencia no encontrada en el archivo de incidencias." + tipoIncidencia
-							+ " no es una incidencia valida.");
-					break;
+				String[] datos = linea.split(";");
+				if (datos[0].equals("Alumno")) {
+					IncidenciaAlumno incidencia = new IncidenciaAlumno(datos[1], datos[2], Integer.parseInt(datos[3]));
+					listaIncidencias.add(incidencia);
+				} else if (datos[0].equals("Profesor")) {
+					IncidenciaProfesor incidencia = new IncidenciaProfesor(datos[1], datos[2], Integer.parseInt(datos[3]));
+					listaIncidencias.add(incidencia);
+				} else if (datos[0].equals("Aplicacion")) {
+					IncidenciaAplicacion incidencia = new IncidenciaAplicacion(datos[1], datos[2], Integer.parseInt(datos[3]));
+					listaIncidencias.add(incidencia);
 				}
 			}
-
 		} catch (IOException e) {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
-			GestionLogs.errorLogs(
-					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+			GestionLogs.errorLogs("Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+		} finally {
+			try {
+				if (null != fr) {
+					fr.close();
+				}
+			} catch (IOException e2) {
+				System.err.println("Error al cerrar el archivo: " + e2.getMessage());
+				GestionLogs.errorLogs("Error al cerrar el archivo: " + e2.getMessage() + " No se han cargado los usuarios por defecto.");
+			}
 		}
-
 		return listaIncidencias;
-
 	}
 
-	public void escribirIncidencia(Incidencias incidencia) {
-
+	public void escribirIncidencia(Incidencias incidencia, int usuarioId) {
 		BufferedWriter bw = null;
 		FileWriter fw = null;
 
 		try {
-
 			File file = new File(Constantes.RUTA_INCIDENCIAS);
-
 			fw = new FileWriter(file, true);
-
 			bw = new BufferedWriter(fw);
-			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + ";" + FechaYHora.fechaActual()
-					+ "\n");
+			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + ";" + FechaYHora.fechaActual() + ";" + usuarioId + "\n");
 			bw.flush();
 			fw.close();
-
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-
-		finally {
+		} finally {
 			if (bw != null) {
 				try {
 					bw.close();
@@ -96,7 +86,6 @@ public class IncidenciasRepo {
 				}
 			}
 		}
-
 	}
 
 	// Comprobar si hay datos en incidencias con count
@@ -129,40 +118,28 @@ public class IncidenciasRepo {
 		return false;
 	}
 
-	public List<Incidencias> insertarIncidenciasBBDD(ArrayList<Incidencias> listaIncidencias) {
-		
-		List<Incidencias> incidencias = leerIncidencias(listaIncidencias);
-		
+	public void insertarIncidenciasBBDD() {
+
+		List<Incidencias> incidencias = leerIncidencias();
+
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
-		
-		String sql = "INSERT INTO incidencia (tipo, incidencia, fecha) VALUES (?, ?, ?)";
-		
-		try  {
-		
-		PreparedStatement ps = conexion.prepareStatement(sql);
-        
-		for(Incidencias incidencia : incidencias) {
-		
+		String sql = "INSERT INTO incidencia (tipo, incidencia, fecha, usuario_id) VALUES (?, ?, ?, ?)";
+
+		try {
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			for(Incidencias incidencia : incidencias) {
 				ps.setString(1, incidencia.getTipoIncidencia());
 				ps.setString(2, incidencia.getIncidencia());
 				ps.setString(3, incidencia.getFechaIncidencia());
+				ps.setInt(4, incidencia.getUsuarioId());
 				ps.executeUpdate();
-				
-		}
-				
-		 
-		 
+			}
 		} catch (SQLException e) {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
-			GestionLogs.errorLogs(
-					"Error al leer el archivo: " + e.getMessage() + " No se han insertado las incidencias en la base de datos.");
+			GestionLogs.errorLogs("Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
-		
-		return incidencias;
-		
 	}
-	
 }

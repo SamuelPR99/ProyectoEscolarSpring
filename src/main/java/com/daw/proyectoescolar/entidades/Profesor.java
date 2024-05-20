@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
+import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
@@ -40,9 +41,50 @@ public class Profesor extends UsuarioBase {
 		return Constantes.PROFESOR;
 	}
 
+	@Override
+	public void incidenciasMenu(Scanner sc, UsuarioBase usuario) {
+
+		GestionIncidencias gestor = new GestionIncidencias();
+		String opcion;
+
+		do {
+
+			System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE + "\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
+					+ "1. Mostrar incidencias\n"
+					+ "2. Crear incidencia\n"
+					+ "3. Salir del menu" + Colores.ANSI_RESET);
+
+			opcion = sc.nextLine().toLowerCase();
+
+			switch (opcion) {
+
+				case "1", "mostrar incidencias":
+					GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Mostrar incidencias");
+					gestor.verIncidenciasProfesor(usuario.getUsuarioId());
+					break;
+
+				case "2", "crear incidencia":
+					GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear incidencia");
+					gestor.crearIncidenciaProfesor(sc, usuario.getUsuarioId());
+					break;
+
+				case "3", "salir del menu":
+					GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Salir del menu");
+					System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de incidencias..." + Colores.ANSI_RESET);
+					break;
+
+				default:
+					System.err.println("Opcion no valida. Por favor, elige una opcion valida.");
+					GestionLogs.errorLogs("Opcion no valida en el menu de incidencias. " + opcion + " no es una opcion valida.");
+
+			}
+
+		} while (!opcion.equals("3") && !opcion.contains("salir"));
+	}
+
 	// Menu profesor
 	@Override
-	public void verMenu(Scanner sc, List<UsuarioBase> usuarios, List<Alumno> alumnos) {
+	public void verMenu(Scanner sc, List<UsuarioBase> usuarios, List<Alumno> alumnos, UsuarioBase usuario) {
 
 		GestionUsuarios gestor = new GestionUsuarios();
 		GestionTemas temitas = new GestionTemas();
@@ -54,7 +96,7 @@ public class Profesor extends UsuarioBase {
 			System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE + "\nSeleccione una opcion:\n"
 					+ Colores.ANSI_RESET + Colores.ANSI_YELLOW + "1. Ver lista de temas\n" + "2. Ver lista de alumnos\n"
 					+ "3. Modificar nota de alumno\n" + "4. Ver estadisticas\n" + "5. Agregar nueva tarea\n"
-					+ "6. Cambiar contraseña\n" + "7. Salir del menu" + Colores.ANSI_RESET);
+					+ "6. Cambiar contraseña\n" + "7. Menu incidencias\n" +"8. Salir del menu" + Colores.ANSI_RESET);
 
 			opcion = sc.nextLine().toLowerCase();
 
@@ -89,8 +131,13 @@ public class Profesor extends UsuarioBase {
 				GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Cambiar contraseña");
 				gestor.cambiarContrasena(sc, this);
 				break;
+
+			case "7", "menu incidencias":
+				GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Menu incidencias");
+				incidenciasMenu(sc, usuario);
+				break;
 	
-			case "7", "salir del menu":
+			case "8", "salir del menu":
 				GestionLogs.logOpcionMenu(Constantes.MENU_PROFESORES, "Salir del menu");
 				System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de profesor..." + Colores.ANSI_RESET);
 		        break;
@@ -101,7 +148,7 @@ public class Profesor extends UsuarioBase {
 
 			}
 
-		} while (!opcion.equals("7") && !opcion.contains("salir"));
+		} while (!opcion.equals("8") && !opcion.contains("salir"));
 
 	}
 

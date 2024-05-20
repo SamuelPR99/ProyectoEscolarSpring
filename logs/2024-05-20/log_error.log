@@ -16,3 +16,10 @@ Query - conn:25(M)  - "INSERT INTO incidencia (tipo, incidencia, fecha) VALUES (
 [2024-05-20 20:02:57] ERROR: (conn=43) Unknown column 'numero_tema' in 'field list'
 [2024-05-20 20:03:17] ERROR: (conn=47) Unknown column 'numero_tema' in 'field list'
 [2024-05-20 20:03:32] ERROR: (conn=51) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 20:18:00] ERROR: Error al leer el archivo: (conn=165) Field 'usuario_id' doesn't have a default value No se han insertado las incidencias en la base de datos.
+[2024-05-20 21:20:37] ERROR: Error al iniciar sesion. Error: Index 3 out of bounds for length 3
+[2024-05-20 21:23:21] ERROR: Error al iniciar sesion. Error: Index 3 out of bounds for length 3
+[2024-05-20 21:33:00] ERROR: Error al iniciar sesion. Error: Index 3 out of bounds for length 3
+[2024-05-20 21:44:20] ERROR: Error al iniciar sesion. Error: Index 3 out of bounds for length 3
+[2024-05-20 21:46:12] ERROR: Error al iniciar sesion. Error: Index 1 out of bounds for length 1
+[2024-05-20 21:57:08] ERROR: Opcion no valida en el menu de alumno.  no es una opcion valida.

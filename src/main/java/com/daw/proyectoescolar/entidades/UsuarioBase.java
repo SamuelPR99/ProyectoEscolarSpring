@@ -1,5 +1,7 @@
 package com.daw.proyectoescolar.entidades;
 
+import java.util.Scanner;
+
 public abstract class UsuarioBase implements Usuario {
 	
 	/**
@@ -71,6 +73,6 @@ public abstract class UsuarioBase implements Usuario {
 			this.dni = dni;
 		}
 
-		// Metodos
+	// Metodos
 }
 

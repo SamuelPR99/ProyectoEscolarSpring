@@ -20,6 +20,14 @@ public class IncidenciaAlumno extends Incidencias {
 	public IncidenciaAlumno(int incidenciaId, String incidencia, String fechaIncidencia) {
 		super(incidenciaId, incidencia, fechaIncidencia);
 	}
+
+	public IncidenciaAlumno(int incidenciaId, String incidencia, String fechaIncidencia, int usuarioId) {
+		super(incidenciaId, incidencia, fechaIncidencia, usuarioId);
+	}
+
+	public IncidenciaAlumno(String incidencia, String fechaIncidencia, int usuarioId) {
+		super(incidencia, fechaIncidencia, usuarioId);
+	}
 	
 	// Metodos
 	@Override

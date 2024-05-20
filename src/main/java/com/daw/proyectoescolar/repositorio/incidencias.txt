@@ -1,12 +1,3 @@
-Alumno;hola, grasias;2024-05-10 20:54:55
-Profesor;hola jejejeje;2024-05-10 20:56:38
-Aplicacion;adios;2024-05-10 20:56:43
-Alumno;jiji 13 de mayo;2024-05-13 12:52:40
-Alumno;prueba alumno jeje;2024-05-20 19:23:45
-Alumno;segunda prueba de alumno;2024-05-20 19:27:55
-Alumno;tercera prueba alumno;2024-05-20 19:34:00
-Alumno;otra prueba mas de alumno;2024-05-20 19:38:59
-Alumno;alumnoPRUEBA;2024-05-20 19:51:04
-Alumno;dadadasdafgsgdsdg;2024-05-20 19:55:07
-Alumno;prueba DE NUEVO ALUMNO AAAAAAAAAAAAAA;2024-05-20 19:59:25
-Aplicacion;jejejejejjejejejejejejejeje;2024-05-20 20:03:44
+Alumno;hola, grasias;2024-05-10 20:54:55;5
+
+Alumno;los muertos;2024-05-20 21:56:46;5

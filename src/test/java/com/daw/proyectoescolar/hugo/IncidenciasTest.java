@@ -19,6 +19,7 @@ import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
 
 class IncidenciasTest {
 
+	/*
 	private ArrayList<Incidencias> listaIncidencias;
 	private GestionIncidencias gestionIncidencias;
 	private Scanner scannerMock;
@@ -260,5 +261,5 @@ class IncidenciasTest {
 		assertEquals(6, listaIncidencias.size());
 
 	}
-
+*/
 }

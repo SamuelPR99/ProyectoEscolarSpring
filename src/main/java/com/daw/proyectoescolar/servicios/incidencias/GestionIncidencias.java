@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.servicios.incidencias;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
@@ -16,7 +17,7 @@ public class GestionIncidencias {
 	
 	// Atributos
 	private IncidenciasRepo iRepo = new IncidenciasRepo();
-	private ArrayList<Incidencias> listaIncidencias = iRepo.leerIncidencias(new ArrayList<>());
+	private List<Incidencias> listaIncidencias = iRepo.leerIncidencias();
 
 	// Constructores
 	public GestionIncidencias() {
@@ -24,144 +25,58 @@ public class GestionIncidencias {
 	}
 
 	// Getters y Setters
-	public ArrayList<Incidencias> getListaIncidencias() {
+	public List<Incidencias> getListaIncidencias() {
 		return listaIncidencias;
 	}
 
-	public void setListaIncidencias(ArrayList<Incidencias> listaIncidencias) {
+	public void setListaIncidencias(List<Incidencias> listaIncidencias) {
 		this.listaIncidencias = listaIncidencias;
 	}
 
 	// Metodos
 
-	// Metodo que muestra el menu principal de la gestion de incidencias
-	public void menuPrincipal(Scanner sc) {
+	public void crearIncidenciaAlumno(Scanner sc, int usuarioId) {
 
-		String opcion;
+		Incidencias incidenciaAlumno = new IncidenciaAlumno();
+		System.out.println("\nIntroduzca la incidencia de alumno: ");
+		incidenciaAlumno.setIncidencia(sc.nextLine());
+		incidenciaAlumno.setUsuarioId(usuarioId);
+		iRepo.escribirIncidencia(incidenciaAlumno, usuarioId);
+		iRepo.leerIncidencias();
+		iRepo.insertarIncidenciasBBDD();
+		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Alumno");
 
-		System.out.println(Colores.ANSI_PURPLE + "\nBienvenido a la gestion de incidencias de nuestra aplicacion!\n"
-				+ Colores.ANSI_RESET);
-
-		do {
-
-			System.out.println("1 - Añadir una incidencia\n" + "2 - Listar incidencias\n" + "3 - Eliminar incidencias\n"
-					+ "4 - Salir del menú de incidencias\n" + "Introduce una opción:");
-
-			opcion = sc.nextLine();
-
-			switch (opcion) {
-
-			case "1", "añadir incidencia", "añadir una incidencia":
-				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias");
-				anadirIncidencia(sc);
-				break;
-
-			case "2", "listar incidencias", "listar":
-				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Listar Incidencias");
-				listado(sc);
-				break;
-
-			case "3", "eliminar", "eliminar incidencias":
-				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Eliminar Incidencias");
-				eliminarIncidencias(sc);
-				break;
-
-			case "4", "salir":
-				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Salió de la aplicación");
-				System.out.println(Colores.ANSI_PURPLE + "Saliendo de la aplicacion..." + Colores.ANSI_RESET);
-				break;
-
-			default:
-
-				System.err.println("Has introducido una opción inválida. Vuelve a intentarlo");
-				GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de incidencias. " + opcion
-						+ " no es una opcion valida.");
-
-			}
-
-		} while (!opcion.equals("4") && !opcion.contains("salir"));
-
+		System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
 	}
 
-	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	public void crearIncidenciaProfesor(Scanner sc, int usuarioId) {
 
-	// Metodo encargado de añadir incidencias al ArrayList
-	public ArrayList<Incidencias> anadirIncidencia(Scanner sc) {
+		Incidencias incidenciaProfesor = new IncidenciaProfesor();
+		System.out.println("\nIntroduzca la incidencia de profesor: ");
+		incidenciaProfesor.setIncidencia(sc.nextLine());
+		incidenciaProfesor.setUsuarioId(usuarioId);
+		iRepo.escribirIncidencia(incidenciaProfesor, usuarioId);
+		iRepo.leerIncidencias();
+		iRepo.insertarIncidenciasBBDD();
+		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Profesor");
 
-		String opcion;
+		System.out.println(
+				Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
+	}
 
-		// Submenu para añadir las incidencias que el usuario desee
+	public void crearIncidenciaAplicacion(Scanner sc, int usuarioId) {
 
-		do {
+		Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
+		System.out.println("\nIntroduzca la incidencia de aplicacion: ");
+		incidenciaAplicacion.setIncidencia(sc.nextLine());
+		incidenciaAplicacion.setUsuarioId(usuarioId);
+		iRepo.escribirIncidencia(incidenciaAplicacion, usuarioId);
+		iRepo.leerIncidencias();
+		iRepo.insertarIncidenciasBBDD();
+		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Aplicacion");
 
-			System.out.println("¿Que tipo de incidencia quieres añadir?\n" + "1 - Incidencia de alumno\n"
-					+ "2 - Incidencia de profesor\n" + "3 - Incidencia de aplicacion\n" + "4 - Volver");
-
-			opcion = sc.nextLine().toLowerCase();
-
-			switch (opcion) {
-
-			case "1", "incidencia de alumno", "alumno":
-
-				Incidencias incidenciaAlumno = new IncidenciaAlumno();
-				System.out.println("\nIntroduzca la incidencia de alumno: ");
-				incidenciaAlumno.setIncidencia(sc.nextLine());
-				iRepo.escribirIncidencia(incidenciaAlumno);
-				iRepo.leerIncidencias(listaIncidencias);
-				iRepo.insertarIncidenciasBBDD(listaIncidencias);
-				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias de Alumno");
-
-				System.out
-						.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
-
-				break;
-
-			case "2", "incidencia de profesor", "profesor":
-
-				Incidencias incidenciaProfesor = new IncidenciaProfesor();
-				System.out.println("\nIntroduzca la incidencia de profesor: ");
-				incidenciaProfesor.setIncidencia(sc.nextLine());
-				iRepo.escribirIncidencia(incidenciaProfesor);
-				iRepo.leerIncidencias(listaIncidencias);
-				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias de Profesor");
-
-				System.out.println(
-						Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
-
-				break;
-
-			case "3", "incidencia de aplicacion", "aplicacion":
-
-				Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
-				System.out.println("\nIntroduzca la incidencia aplicación: ");
-				incidenciaAplicacion.setIncidencia(sc.nextLine());
-				iRepo.escribirIncidencia(incidenciaAplicacion);
-				iRepo.leerIncidencias(listaIncidencias);
-				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias de Aplicacion");
-
-				System.out.println(
-						Colores.ANSI_GREEN + "\nIncidencia de aplicacion añadida con exito!" + Colores.ANSI_RESET);
-
-				break;
-
-			case "4", "volver":
-				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Volver al menú principal");
-				break;
-
-			default:
-
-				System.err.println("Has introducido una opcion invalida.");
-				GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de incidencias. " + opcion
-						+ " no es una opcion valida.");
-
-			}
-
-			System.out.println("\n");
-
-		} while (!opcion.equals("4") && !opcion.equals("volver"));
-
-		return getListaIncidencias();
-
+		System.out.println(
+				Colores.ANSI_GREEN + "\nIncidencia de aplicacion añadida con exito!" + Colores.ANSI_RESET);
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -216,6 +131,34 @@ public class GestionIncidencias {
 			}
 
 		} while (!volver);
+
+	}
+
+	public void verIncidenciasAlumno(int usuarioId) {
+
+		if (getListaIncidencias().isEmpty()) {
+			System.err.println("\nLo siento. No hay incidencias de alumnos registradas.\n");
+		} else {
+			for (Incidencias incidencia : getListaIncidencias()) {
+				if (incidencia.getTipoIncidencia().equals("Alumno") && incidencia.getUsuarioId() == usuarioId) {
+					System.out.println(incidencia);
+				}
+			}
+		}
+
+	}
+
+	public void verIncidenciasProfesor(int usuarioId) {
+
+		if (getListaIncidencias().isEmpty()) {
+			System.err.println("\nLo siento. No hay incidencias de profesores registradas.\n");
+		} else {
+			for (Incidencias incidencia : getListaIncidencias()) {
+				if (incidencia.getTipoIncidencia().equals("Profesor") && incidencia.getUsuarioId() == usuarioId) {
+					System.out.println(incidencia);
+				}
+			}
+		}
 
 	}
 

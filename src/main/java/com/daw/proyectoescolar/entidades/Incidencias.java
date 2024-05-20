@@ -6,6 +6,7 @@ public abstract class Incidencias {
 	protected int incidenciaId;
 	protected String incidencia;
 	protected String fechaIncidencia;
+	protected int usuarioId;
 	
 	// Constructores
 	public Incidencias() {
@@ -25,6 +26,19 @@ public abstract class Incidencias {
 		this.incidenciaId = incidenciaId;
 		this.incidencia = incidencia;
 		this.fechaIncidencia = fechaIncidencia;
+	}
+
+	public Incidencias(int incidenciaId, String incidencia, String fechaIncidencia, int usuarioId) {
+		this.incidenciaId = incidenciaId;
+		this.incidencia = incidencia;
+		this.fechaIncidencia = fechaIncidencia;
+		this.usuarioId = usuarioId;
+	}
+
+	public Incidencias(String incidencia, String fechaIncidencia, int usuarioId) {
+		this.incidencia = incidencia;
+		this.fechaIncidencia = fechaIncidencia;
+		this.usuarioId = usuarioId;
 	}
 
 	// Getters y Setters
@@ -51,6 +65,14 @@ public abstract class Incidencias {
 
 	public void setFechaIncidencia(String fechaIncidencia) {
 		this.fechaIncidencia = fechaIncidencia;
+	}
+
+	public int getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(int usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 
 	// Metodos
