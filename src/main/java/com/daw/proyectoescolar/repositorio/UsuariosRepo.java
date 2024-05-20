@@ -388,66 +388,6 @@ public class UsuariosRepo {
 		}
 	}
 
-	// Login con BBDD
-	public UsuarioBase login(String nombre, String contrasena) {
-
-		ConexionBBDD conexionBBDD = new ConexionBBDD();
-		Connection conexion = conexionBBDD.conectar();
-
-		String sql = "SELECT * FROM usuario WHERE nombre = ? AND contrasena = ?";
-
-		try {
-
-			PreparedStatement ps = conexion.prepareStatement(sql);
-			ps.setString(1, nombre);
-			ps.setString(2, contrasena);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				String tipo = rs.getString("tipo");
-				String dni = rs.getString("dni");
-
-				switch (tipo) {
-
-				case Constantes.PROFESOR:
-					return new Profesor(nombre, contrasena, dni);
-					
-
-				case Constantes.ALUMNO:
-					String sqlNota = "SELECT nota FROM nota WHERE usuario_id = ?";
-					PreparedStatement psNota = conexion.prepareStatement(sqlNota);
-					psNota.setInt(1, rs.getInt("usuario_id"));
-					ResultSet rsNota = psNota.executeQuery();
-
-					if (rsNota.next()) {
-						double nota = rsNota.getDouble("nota");
-						return new Alumno(nombre, contrasena, dni, nota);
-					} else {
-						System.err.println("No se ha encontrado la nota del alumno: " + nombre);
-					}
-					
-					break;
-
-				case Constantes.ADMINISTRADOR:
-					return new Administrador(nombre, contrasena, dni);
-
-				default:
-					System.err.println("Tipo de usuario desconocido: " + tipo);
-					break;
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs("Error al hacer login en la base de datos: " + e.getMessage());
-		} finally {
-			conexionBBDD.cerrarConexion(conexion);
-		}
-
-		return null;
-	}
-	
 	public void cambiarContrasena(UsuarioBase usuario) {
 		
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
@@ -470,8 +410,9 @@ public class UsuariosRepo {
 		}
 	}
 	
-	public ArrayList<Alumno> obtenerAlumnos() {
-	    ArrayList<Alumno> alumnos = new ArrayList<>();
+	public List<Alumno> obtenerAlumnos() {
+
+	    List<Alumno> alumnos = new ArrayList<>();
 
 	    ConexionBBDD conexionBBDD = new ConexionBBDD();
 	    Connection conexion = conexionBBDD.conectar();

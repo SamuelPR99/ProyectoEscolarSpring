@@ -65,13 +65,13 @@
                         <p><strong>Puntuación:</strong> ${tarea.puntuacion} /
                             <c:choose>
                                 <c:when test="${tarea.tipo == 'Avanzada'}">
-                                    3 puntos
+                                    3.0 puntos
                                 </c:when>
                                 <c:when test="${tarea.tipo == 'Intermedia'}">
-                                    2 puntos
+                                    2.0 puntos
                                 </c:when>
                                 <c:when test="${tarea.tipo == 'Basica'}">
-                                    1 punto
+                                    1.0 punto
                                 </c:when>
                             </c:choose>
                         </p>
@@ -124,13 +124,13 @@
                         <p><strong>Puntuación:</strong> ${tarea.puntuacion} /
                             <c:choose>
                                 <c:when test="${tarea.tipo == 'Avanzada'}">
-                                    3 puntos
+                                    3.0 puntos
                                 </c:when>
                                 <c:when test="${tarea.tipo == 'Intermedia'}">
-                                    2 puntos
+                                    2.0 puntos
                                 </c:when>
                                 <c:when test="${tarea.tipo == 'Basica'}">
-                                    1 punto
+                                    1.0 punto
                                 </c:when>
                             </c:choose>
                         </p>
