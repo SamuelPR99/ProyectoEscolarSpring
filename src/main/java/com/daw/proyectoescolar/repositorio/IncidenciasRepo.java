@@ -38,13 +38,13 @@ public class IncidenciasRepo {
 			while ((linea = br.readLine()) != null) {
 				String[] datos = linea.split(";");
 				if (datos[0].equals("Alumno")) {
-					IncidenciaAlumno incidencia = new IncidenciaAlumno(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaAlumno(datos[1], datos[2], Integer.parseInt(datos[3]));
 					listaIncidencias.add(incidencia);
 				} else if (datos[0].equals("Profesor")) {
-					IncidenciaProfesor incidencia = new IncidenciaProfesor(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaProfesor(datos[1], datos[2], Integer.parseInt(datos[3]));
 					listaIncidencias.add(incidencia);
 				} else if (datos[0].equals("Aplicacion")) {
-					IncidenciaAplicacion incidencia = new IncidenciaAplicacion(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaAplicacion(datos[1], datos[2], Integer.parseInt(datos[3]));
 					listaIncidencias.add(incidencia);
 				}
 			}
