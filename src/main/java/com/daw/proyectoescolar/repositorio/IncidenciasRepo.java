@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
 import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
@@ -127,4 +129,40 @@ public class IncidenciasRepo {
 		return false;
 	}
 
+	public List<Incidencias> insertarIncidenciasBBDD(ArrayList<Incidencias> listaIncidencias) {
+		
+		List<Incidencias> incidencias = leerIncidencias(listaIncidencias);
+		
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+		
+		String sql = "INSERT INTO incidencia (tipo, incidencia, fecha) VALUES (?, ?, ?)";
+		
+		try  {
+		
+		PreparedStatement ps = conexion.prepareStatement(sql);
+        
+		for(Incidencias incidencia : incidencias) {
+		
+				ps.setString(1, incidencia.getTipoIncidencia());
+				ps.setString(2, incidencia.getIncidencia());
+				ps.setString(3, incidencia.getFechaIncidencia());
+				ps.executeUpdate();
+				
+		}
+				
+		 
+		 
+		} catch (SQLException e) {
+			System.err.println("Error al leer el archivo: " + e.getMessage());
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han insertado las incidencias en la base de datos.");
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+		
+		return incidencias;
+		
+	}
+	
 }

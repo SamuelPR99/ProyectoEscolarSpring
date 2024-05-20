@@ -108,6 +108,7 @@ public class GestionIncidencias {
 				incidenciaAlumno.setIncidencia(sc.nextLine());
 				iRepo.escribirIncidencia(incidenciaAlumno);
 				iRepo.leerIncidencias(listaIncidencias);
+				iRepo.insertarIncidenciasBBDD(listaIncidencias);
 				GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Añadir Incidencias de Alumno");
 
 				System.out

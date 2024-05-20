@@ -1,0 +1,18 @@
+[2024-05-20 19:23:27] ERROR: (conn=8) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 19:23:45] ERROR: Error al leer el archivo: (conn=10) Parameter at position 1 is not set No se han insertado las incidencias en la base de datos.
+[2024-05-20 19:27:46] ERROR: (conn=13) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 19:27:55] ERROR: Error al leer el archivo: (conn=15) Parameter at position 1 is not set No se han insertado las incidencias en la base de datos.
+[2024-05-20 19:33:51] ERROR: (conn=18) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 19:34:00] ERROR: Error al leer el archivo: (conn=20) Parameter at position 1 is not set No se han insertado las incidencias en la base de datos.
+[2024-05-20 19:38:49] ERROR: (conn=23) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 19:38:59] ERROR: Error al leer el archivo: (conn=25) Could not set parameter at position 0 (values was 'Alumno')
+Query - conn:25(M)  - "INSERT INTO incidencia (tipo, incidencia, fecha) VALUES (?, ?, ?)" No se han insertado las incidencias en la base de datos.
+[2024-05-20 19:50:45] ERROR: (conn=28) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 19:51:04] ERROR: Error al leer el archivo: (conn=30) Field 'usuario_id' doesn't have a default value No se han insertado las incidencias en la base de datos.
+[2024-05-20 19:55:00] ERROR: (conn=33) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 19:55:07] ERROR: Error al leer el archivo: (conn=35) Field 'usuario_id' doesn't have a default value No se han insertado las incidencias en la base de datos.
+[2024-05-20 19:59:11] ERROR: (conn=38) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 19:59:25] ERROR: Error al leer el archivo: (conn=40) Field 'usuario_id' doesn't have a default value No se han insertado las incidencias en la base de datos.
+[2024-05-20 20:02:57] ERROR: (conn=43) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 20:03:17] ERROR: (conn=47) Unknown column 'numero_tema' in 'field list'
+[2024-05-20 20:03:32] ERROR: (conn=51) Unknown column 'numero_tema' in 'field list'
