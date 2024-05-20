@@ -157,7 +157,7 @@ public class GestionTemas {
 
 	// obtenerTemas para mostrarlos en la vista
 	public List<Temas> obtenerTemas() {
-		return tRepo.archivoTemas();
+		return tRepo.obtenerTemasBBDD();
 	}
 
 	// ArrayList de tareas asignadas a un alumno para mostrarlas en la vista
