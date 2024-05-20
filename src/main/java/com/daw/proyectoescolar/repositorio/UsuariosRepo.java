@@ -179,8 +179,6 @@ public class UsuariosRepo {
 
 	}
 
-	/*---------------------------------*/
-
 	// Insertar los usuarios en la base de datos
 	public void insertarUsuariosArchivoBBDD() {
 
@@ -225,6 +223,7 @@ public class UsuariosRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs("Error al insertar los usuarios en la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -283,6 +282,7 @@ public class UsuariosRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs("Error al obtener los usuarios de la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -309,6 +309,7 @@ public class UsuariosRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs("Error al borrar los usuarios de la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -337,6 +338,7 @@ public class UsuariosRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs("Error al comprobar los datos de la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -379,8 +381,8 @@ public class UsuariosRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs("Error al insertar el usuario en la base de datos: " + e.getMessage());
 		}
-
 		finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -438,6 +440,7 @@ public class UsuariosRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs("Error al hacer login en la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -461,6 +464,7 @@ public class UsuariosRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs("Error al cambiar la contraseña en la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -514,6 +518,7 @@ public class UsuariosRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs("Error al modificar la nota del alumno en la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}

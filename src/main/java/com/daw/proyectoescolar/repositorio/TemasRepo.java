@@ -68,6 +68,7 @@ public class TemasRepo {
 		return temas;
 	}
 
+	// Lee el archivo de tareas y crea un array de tareas
 	public List<Tarea> archivoTareas() {
 
 		List<Tarea> tareas = new ArrayList<>();
@@ -137,7 +138,6 @@ public class TemasRepo {
 	}
 
 	// Insertar los temas en la bbdd
-
 	public void insertarTemasYTareasBBDD() {
 
 		List<Temas> temas = archivoTemas();
@@ -179,6 +179,7 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -207,6 +208,7 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -214,6 +216,7 @@ public class TemasRepo {
 		return false;
 	}
 
+	// Asignar una tarea a los alumnos desde profesor
 	public void asignarTarea(int idTarea, int idAlumno, int idProfesor, Date fechaExpiracion) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
@@ -246,11 +249,13 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 	}
 
+	// Obtener tareas asignadas a un alumno
 	public List<Tarea> obtenerTareasAlumno(int idAlumno) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
@@ -285,6 +290,7 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -292,6 +298,7 @@ public class TemasRepo {
 		return tareas;
 	}
 
+	// Entregar una tarea
 	public void entregarTarea(int idTarea, int idAlumno) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
@@ -330,11 +337,13 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 	}
 
+	// Calcular la puntuacion de una tarea
 	private double calcularPuntuacion(int idTarea) {
 
 		String dificultad = obtenerDificultadTarea(idTarea);
@@ -348,6 +357,7 @@ public class TemasRepo {
         return puntuacion;
 	}
 
+	// Obtener la dificultad de una tarea
 	private String obtenerDificultadTarea(int idTarea) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
@@ -369,13 +379,16 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
+
 		}
 
 		return dificultad;
 	}
 
+	// Modificar la puntuacion de una tarea entregada
 	public List<Tarea> tareasEntregadas(int idAlumno) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
@@ -410,6 +423,7 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -446,6 +460,7 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -481,13 +496,12 @@ public class TemasRepo {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			GestionLogs.errorLogs(e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 
 		return tareas;
 	}
-
-
 
 }
