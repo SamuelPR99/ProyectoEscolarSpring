@@ -48,7 +48,7 @@
     <section class="collapsible-section">
         <h2 class="collapsible-header">Asignar Tarea</h2>
         <div class="collapsible-content">
-            <form id="asignarTareaForm" action="asignarTarea" method="post">
+            <form class="asignarTarea" id="asignarTareaForm" action="asignarTarea" method="post">
                 <label for="idTarea"><strong>Tarea:</strong></label>
                 <select id="idTarea" name="idTarea">
                     <c:forEach var="tema" items="${temas}">
@@ -144,11 +144,23 @@
 </script>
 
 <script>
-    $(document).ready(function() {
+    // Convertir los datos de JSTL a JavaScript
+    var datosTareasEntregadasATiempoPorAlumno = {
+        <c:forEach var="entry" items="${tareasEntregadasATiempoPorAlumno}" varStatus="status">
+        "${entry.key.nombre}": ${entry.value}<c:if test="${!status.last}">,</c:if>
+        </c:forEach>
+    };
+</script>
+
+<script>
+    $(document).ready(function () {
         var etiquetas = datosAlumnos.map(alumno => alumno.nombre);
         var notas = datosAlumnos.map(alumno => alumno.nota);
+        var nombres = Object.keys(datosTareasEntregadasATiempoPorAlumno);
+        var tareasEntregadasATiempo = nombres.map(nombre => datosTareasEntregadasATiempoPorAlumno[nombre]);
         var coloresFondo = notas.map(nota => colorPorNota(nota)); // Asignar un color basado en la nota
-
+        var coloresFondoTareas = tareasEntregadasATiempo.map(() => 'rgba(8,202,0,0.5)'); // Color para las tareas entregadas a tiempo
+        console.log(datosTareasEntregadasATiempoPorAlumno);
         var configuracion = {
             type: 'bar',
             data: {
@@ -158,8 +170,15 @@
                     data: notas,
                     backgroundColor: coloresFondo, // Usar los colores asignados
                     borderColor: 'rgb(0,97,161)',
-                    borderWidth: 2
-                }]
+                    borderWidth: 1
+                },
+                    {
+                        label: 'Tareas entregadas a tiempo',
+                        data: tareasEntregadasATiempo,
+                        backgroundColor: coloresFondoTareas, // Usar los colores asignados para las tareas
+                        borderColor: 'rgb(0,123,255)',
+                        borderWidth: 1
+                    }]
             },
             options: {
                 scales: {
@@ -174,6 +193,7 @@
         var graficoNotas = new Chart(ctx, configuracion);
     });
 </script>
+</script>
 
 <script>
     function colorPorNota(nota) {
@@ -183,7 +203,6 @@
         else return 'rgba(255, 99, 132, 0.2)'; // Rojo para notas bajas
     }
 </script>
-
 
 
 <footer>

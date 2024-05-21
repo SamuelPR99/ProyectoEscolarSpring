@@ -19,5 +19,22 @@ body {
     max-height: 1000px; /* Ajusta este valor según el contenido */
 }
 
+.asignarTarea input, .asignarTarea select {
+    /* Hacer que los campos de entrada y los selectores sean más grandes y más fáciles de leer */
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+input[type="date"], select {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
 
 

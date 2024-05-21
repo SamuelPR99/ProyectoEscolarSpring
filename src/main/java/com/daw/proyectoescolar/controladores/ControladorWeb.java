@@ -1,11 +1,12 @@
 package com.daw.proyectoescolar.controladores;
 
 import java.sql.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.daw.proyectoescolar.entidades.Alumno;
+import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.repositorio.FechaYHora;
-import com.daw.proyectoescolar.repositorio.TemasRepo;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,6 @@ import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 @Controller
-
 public class ControladorWeb {
 
 	private GestionUsuarios gestionUsuarios = new GestionUsuarios();
@@ -41,6 +41,7 @@ public class ControladorWeb {
 	@PostMapping("registro")
 	public ModelAndView registrarUsuario(@RequestParam String nombre, @RequestParam String dni,
 			@RequestParam String contrasena, @RequestParam String tipo) {
+
 		ModelAndView mav = new ModelAndView();
 		List<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
 
@@ -65,7 +66,6 @@ public class ControladorWeb {
 		if (usuario != null) {
 			int id = usuario.getUsuarioId();
 			GestionTemas gt = new GestionTemas();
-
 			session.setAttribute("usuario", usuario); // Guardar el usuario en la sesión
 			mav.addObject("usuario", usuario); // Añadimos el usuario a la vista para poder mostrar su nombre
 			if (usuario.getTipoUsuario().equals("Administrador")) {
@@ -77,8 +77,17 @@ public class ControladorWeb {
 				mav.addObject("fechaActual", FechaYHora.fechaActual()); // Añadir la fecha actual a la vista
 			} else if (usuario.getTipoUsuario().equals("Profesor")) {
 				mav.setViewName("profesor");
-				mav.addObject("alumnos", gestionUsuarios.obtenerAlumnos(usuarios));
+				List<Alumno> alumnos = gestionUsuarios.obtenerAlumnos(usuarios);
+				mav.addObject("alumnos", alumnos);
 				mav.addObject("temas", gt.obtenerTemas());
+				// Añadir la lista de tareas entregadas a tiempo por cada alumno
+				LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno = new LinkedHashMap<>(); // LinkedHashMap para mantener el orden de inserción
+				for (Alumno alumno : alumnos) {
+					int idAlumno = alumno.getUsuarioId();
+					List<Tarea> tareasEntregadasATiempo = gt.tareasEntregadasConNota(idAlumno);
+					tareasEntregadasATiempoPorAlumno.put(alumno, tareasEntregadasATiempo.size());
+				}
+				mav.addObject("tareasEntregadasATiempoPorAlumno", tareasEntregadasATiempoPorAlumno);
 			} else {
 				mav.addObject("mensaje", "Usuario o contraseña incorrectos");
 				mav.setViewName("login");
@@ -92,6 +101,7 @@ public class ControladorWeb {
 
 	@PostMapping("entregarTarea")
 	public ModelAndView entregarTarea(@RequestParam int idTarea, @RequestParam int idAlumno) {
+
 		ModelAndView mav = new ModelAndView();
 		GestionTemas gt = new GestionTemas();
 		gt.entregarTarea(idTarea, idAlumno);
@@ -101,6 +111,7 @@ public class ControladorWeb {
 
 	@PostMapping("cambiarNota")
 	public ModelAndView cambiarNota(@RequestParam int idAlumno, @RequestParam double nota) {
+
 		ModelAndView mav = new ModelAndView();
 		GestionUsuarios gu = new GestionUsuarios();
 		gu.modificarNotaAlumno(idAlumno, nota);
@@ -110,6 +121,7 @@ public class ControladorWeb {
 
 	@PostMapping("asignarTarea")
 	public ModelAndView asignarTarea(@RequestParam int idTarea, @RequestParam Date fechaExpiracion, HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
 		GestionUsuarios gu = new GestionUsuarios();
 		GestionTemas gt = new GestionTemas();
@@ -134,6 +146,7 @@ public class ControladorWeb {
 
 	@GetMapping("alumno")
 	public ModelAndView alumno(HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
 		int id = usuario.getUsuarioId();
@@ -152,14 +165,25 @@ public class ControladorWeb {
 
 	@GetMapping("profesor")
 	public ModelAndView profesor(HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
 		GestionTemas gt = new GestionTemas();
+		List<Alumno> alumnos = gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios());
+
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
 		if (usuario != null) {
 			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
 			mav.setViewName("profesor");
 			mav.addObject("alumnos", gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios()));
 			mav.addObject("temas", gt.obtenerTemas());
+			// Añadir la lista de tareas entregadas a tiempo por cada alumno
+			LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno = new LinkedHashMap<>();
+			for (Alumno alumno : alumnos) {
+				int idAlumno = alumno.getUsuarioId();
+				List<Tarea> tareasEntregadasATiempo = gt.tareasEntregadasConNota(idAlumno);
+				tareasEntregadasATiempoPorAlumno.put(alumno, tareasEntregadasATiempo.size());
+			}
+			mav.addObject("tareasEntregadasATiempoPorAlumno", tareasEntregadasATiempoPorAlumno);
 		} else {
 			mav.setViewName("error");
 		}
