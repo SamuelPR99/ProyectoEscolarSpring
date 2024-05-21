@@ -174,4 +174,11 @@ public class GestionTemas {
 	public void entregarTarea(int idTarea, int idAlumno) {
 		tRepo.entregarTarea(idTarea, idAlumno);
 	}
+
+	// asignarTarea para modelo vista controlador
+	public void asignarTarea(int idTarea, int idAlumno, int idProfesor, Date fechaExpiracion) {
+		tRepo.asignarTarea(idTarea, idAlumno, idProfesor, fechaExpiracion);
+	}
 }
+
+

@@ -1,8 +1,11 @@
 package com.daw.proyectoescolar.controladores;
 
+import java.sql.Date;
 import java.util.List;
 
+import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.repositorio.FechaYHora;
+import com.daw.proyectoescolar.repositorio.TemasRepo;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,6 +104,20 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 		GestionUsuarios gu = new GestionUsuarios();
 		gu.modificarNotaAlumno(idAlumno, nota);
+		mav.setViewName("redirect:profesor"); // Redirige de nuevo a la página del profesor
+		return mav;
+	}
+
+	@PostMapping("asignarTarea")
+	public ModelAndView asignarTarea(@RequestParam int idTarea, @RequestParam Date fechaExpiracion, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		GestionUsuarios gu = new GestionUsuarios();
+		GestionTemas gt = new GestionTemas();
+		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
+		List<Alumno> alumnos = gu.obtenerAlumnos(gu.obtenerUsuarios());
+		for (Alumno alumno : alumnos) {
+			gt.asignarTarea(idTarea, alumno.getUsuarioId(), usuario.getUsuarioId(), fechaExpiracion);
+		}
 		mav.setViewName("redirect:profesor"); // Redirige de nuevo a la página del profesor
 		return mav;
 	}

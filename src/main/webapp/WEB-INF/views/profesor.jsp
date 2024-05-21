@@ -48,9 +48,29 @@
     <section class="collapsible-section">
         <h2 class="collapsible-header">Asignar Tarea</h2>
         <div class="collapsible-content">
-            // Formulario para asignar tarea
+            <form id="asignarTareaForm" action="asignarTarea" method="post">
+                <label for="idTarea"><strong>Tarea:</strong></label>
+                <select id="idTarea" name="idTarea">
+                    <c:forEach var="tema" items="${temas}">
+                        <c:forEach var="tarea" items="${tema.listaTareas}">
+                            <option value="${tarea.tareaId}">${tarea.nombre}</option>
+                        </c:forEach>
+                    </c:forEach>
+                </select>
+                <br>
+                <label for="fechaExpiracion"><strong>Fecha de Expiración:</strong></label>
+                <input type="date" id="fechaExpiracion" name="fechaExpiracion" required>
+
+                <input type="submit" value="Asignar tarea">
+            </form>
         </div>
     </section>
+
+    <script>
+        document.getElementById('asignarTareaForm').addEventListener('submit', function() {
+            alert('La tarea ha sido asignada correctamente.');
+        });
+    </script>
 
     <!-- Sección para cambiar la nota al alumno -->
     <section class="collapsible-section">
