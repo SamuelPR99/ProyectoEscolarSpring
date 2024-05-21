@@ -1,2 +1,6 @@
 Alumno;hola, grasias;2024-05-10 20:54:55;5
 Alumno;los muertos;2024-05-20 21:56:46;5
+Alumno;hola soy Hugo esto es una prueba JEJEJEJE;2024-05-21 08:39:42;7
+Alumno;jeeje;2024-05-21 12:28:03;7
+Alumno;sdfsdfsdf;2024-05-21 12:28:13;7
+Alumno;despues del arraylist;2024-05-21 13:40:55;7

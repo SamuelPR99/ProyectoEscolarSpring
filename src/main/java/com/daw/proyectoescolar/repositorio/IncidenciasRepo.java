@@ -13,10 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.daw.proyectoescolar.entidades.Administrador;
+import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
 import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
 import com.daw.proyectoescolar.entidades.IncidenciaProfesor;
 import com.daw.proyectoescolar.entidades.Incidencias;
+import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class IncidenciasRepo {
@@ -50,7 +53,8 @@ public class IncidenciasRepo {
 			}
 		} catch (IOException e) {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
-			GestionLogs.errorLogs("Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
 		} finally {
 			try {
 				if (null != fr) {
@@ -58,7 +62,8 @@ public class IncidenciasRepo {
 				}
 			} catch (IOException e2) {
 				System.err.println("Error al cerrar el archivo: " + e2.getMessage());
-				GestionLogs.errorLogs("Error al cerrar el archivo: " + e2.getMessage() + " No se han cargado los usuarios por defecto.");
+				GestionLogs.errorLogs("Error al cerrar el archivo: " + e2.getMessage()
+						+ " No se han cargado los usuarios por defecto.");
 			}
 		}
 		return listaIncidencias;
@@ -72,7 +77,8 @@ public class IncidenciasRepo {
 			File file = new File(Constantes.RUTA_INCIDENCIAS);
 			fw = new FileWriter(file, true);
 			bw = new BufferedWriter(fw);
-			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + ";" + FechaYHora.fechaActual() + ";" + usuarioId + "\n");
+			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + ";" + FechaYHora.fechaActual()
+					+ ";" + usuarioId + "\n");
 			bw.flush();
 			fw.close();
 		} catch (IOException e) {
@@ -125,21 +131,92 @@ public class IncidenciasRepo {
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
 		String sql = "INSERT INTO incidencia (tipo, incidencia, fecha, usuario_id) VALUES (?, ?, ?, ?)";
+		int filasAfectadas = 0;
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(sql);
-			for(Incidencias incidencia : incidencias) {
+			for (Incidencias incidencia : incidencias) {
 				ps.setString(1, incidencia.getTipoIncidencia());
 				ps.setString(2, incidencia.getIncidencia());
 				ps.setString(3, incidencia.getFechaIncidencia());
 				ps.setInt(4, incidencia.getUsuarioId());
-				ps.executeUpdate();
+				filasAfectadas = ps.executeUpdate();
+
 			}
+
+			if (filasAfectadas > 0) {
+				System.out.println("Se han añadido " + filasAfectadas + " incidencias");
+			} else {
+				System.out.println("No se ha añadido ninguna incidencia");
+			}
+			ps.close();
+
 		} catch (SQLException e) {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
-			GestionLogs.errorLogs("Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 	}
+
+	public List<Incidencias> listarIncidenciasBBDD() {
+
+		ArrayList<Incidencias> incidencias = (ArrayList<Incidencias>) leerIncidencias();
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+		String sql = "SELECT * FROM incidencia";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				int incidencia_id = rs.getInt("incidencia_id");
+				String tipoIncidencia = rs.getString("tipo");
+				String descripcionIncidencia = rs.getString("incidencia");
+				int usuario_id = rs.getInt("usuario_id");
+				String fechaIncidencia = rs.getString("fecha");
+
+				switch (tipoIncidencia) {
+				case Constantes.INCI_PROFESOR:
+					incidencias.add(
+							new IncidenciaProfesor(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
+					break;
+
+				case Constantes.INCI_ALUMNO:
+					incidencias.add(
+							new IncidenciaAlumno(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
+					break;
+
+				case Constantes.INCI_APLICACION:
+					incidencias.add(new IncidenciaAplicacion(incidencia_id, descripcionIncidencia, fechaIncidencia,
+							usuario_id));
+					break;
+
+				default:
+					System.err.println("Tipo de incidencia desconocido: " + tipoIncidencia);
+					break;
+				}
+
+			}
+
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			System.err.println("Error al leer el archivo: " + e.getMessage());
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+
+		return incidencias;
+
+	}
+
 }

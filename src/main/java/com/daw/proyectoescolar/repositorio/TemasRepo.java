@@ -24,7 +24,7 @@ public class TemasRepo {
 
 	// Metodos
 
-	// Lee el archivo de temas y crea un array de temas
+	// Lee el archivo de temas y crea un array de tareas
 	public List<Temas> archivoTemas() {
 
 		List<Temas> temas = new ArrayList<>();

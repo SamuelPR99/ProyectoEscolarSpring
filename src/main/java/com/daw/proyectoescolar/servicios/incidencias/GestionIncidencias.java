@@ -17,7 +17,7 @@ public class GestionIncidencias {
 	
 	// Atributos
 	private IncidenciasRepo iRepo = new IncidenciasRepo();
-	private List<Incidencias> listaIncidencias = iRepo.leerIncidencias();
+	private List<Incidencias> listaIncidencias = iRepo.listarIncidenciasBBDD();
 
 	// Constructores
 	public GestionIncidencias() {
