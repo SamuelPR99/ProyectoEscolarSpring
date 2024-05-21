@@ -15,6 +15,11 @@ public class Constantes {
 	public static final String PROFESOR = "Profesor";
 	public static final String ADMINISTRADOR = "Administrador";
 
+	// Tipos de incidencias
+	public static final String INCI_ALUMNO = "Alumno";
+	public static final String INCI_PROFESOR = "Profesor";
+	public static final String INCI_APLICACION = "Aplicacion";
+	
 	// Mensajes
 	public static final String VALID = "Tipo de usuario no valido.";
 	public static final String NUM_TAREA_VALID = "Numero de tarea no valido.";
