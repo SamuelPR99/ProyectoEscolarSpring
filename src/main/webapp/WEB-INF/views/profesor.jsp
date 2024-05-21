@@ -134,11 +134,11 @@
             data: {
                 labels: etiquetas,
                 datasets: [{
-                    label: 'Notas de los Alumnos',
+                    label: 'Nota del alumno',
                     data: notas,
                     backgroundColor: coloresFondo, // Usar los colores asignados
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
+                    borderColor: 'rgb(0,97,161)',
+                    borderWidth: 2
                 }]
             },
             options: {
