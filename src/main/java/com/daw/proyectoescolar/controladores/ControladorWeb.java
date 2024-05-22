@@ -60,35 +60,19 @@ public class ControladorWeb {
 	public ModelAndView loguearUsuario(@RequestParam String nombre, @RequestParam String contrasena, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		List<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
 
+		List<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
 		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
 
 		if (usuario != null) {
-			int id = usuario.getUsuarioId();
-			GestionTemas gt = new GestionTemas();
 			session.setAttribute("usuario", usuario); // Guardar el usuario en la sesión
-			mav.addObject("usuario", usuario); // Añadimos el usuario a la vista para poder mostrar su nombre
+			mav.addObject("usuario", usuario); // Para poder mostrar su nombre
 			if (usuario.getTipoUsuario().equals("Administrador")) {
-				mav.setViewName("administrador");
+				mav.setViewName("redirect:/administrador");
 			} else if (usuario.getTipoUsuario().equals("Alumno")) {
-				mav.setViewName("alumno");
-				mav.addObject("tareasAsignadas", gt.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
-				mav.addObject("tareasEntregadas", gt.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
-				mav.addObject("fechaActual", FechaYHora.fechaActual()); // Añadir la fecha actual a la vista
+				mav.setViewName("redirect:/alumno");
 			} else if (usuario.getTipoUsuario().equals("Profesor")) {
-				mav.setViewName("profesor");
-				List<Alumno> alumnos = gestionUsuarios.obtenerAlumnos(usuarios);
-				mav.addObject("alumnos", alumnos);
-				mav.addObject("temas", gt.obtenerTemas());
-				// Añadir la lista de tareas entregadas a tiempo por cada alumno
-				LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno = new LinkedHashMap<>(); // LinkedHashMap para mantener el orden de inserción
-				for (Alumno alumno : alumnos) {
-					int idAlumno = alumno.getUsuarioId();
-					List<Tarea> tareasEntregadasATiempo = gt.tareasEntregadasConNota(idAlumno);
-					tareasEntregadasATiempoPorAlumno.put(alumno, tareasEntregadasATiempo.size());
-				}
-				mav.addObject("tareasEntregadasATiempoPorAlumno", tareasEntregadasATiempoPorAlumno);
+				mav.setViewName("redirect:/profesor");
 			} else {
 				mav.addObject("mensaje", "Usuario o contraseña incorrectos");
 				mav.setViewName("login");
@@ -106,7 +90,7 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 
 		gestionTemas.entregarTarea(idTarea, idAlumno);
-		mav.setViewName("redirect:/alumno"); // Redirige de nuevo a la página del alumno
+		mav.setViewName("redirect:/alumno");
 		return mav;
 	}
 
@@ -116,7 +100,7 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 
 		gestionUsuarios.modificarNotaAlumno(idAlumno, nota);
-		mav.setViewName("redirect:profesor"); // Redirige de nuevo a la página del profesor
+		mav.setViewName("redirect:profesor");
 		return mav;
 	}
 
@@ -130,7 +114,7 @@ public class ControladorWeb {
 		for (Alumno alumno : alumnos) {
 			gestionTemas.asignarTarea(idTarea, alumno.getUsuarioId(), usuario.getUsuarioId(), fechaExpiracion);
 		}
-		mav.setViewName("redirect:profesor"); // Redirige de nuevo a la página del profesor
+		mav.setViewName("redirect:profesor");
 		return mav;
 	}
 
