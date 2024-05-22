@@ -120,7 +120,19 @@ public class ControladorWeb {
 
 	@GetMapping("administrador")
 	public ModelAndView admin(HttpSession session) {
-		return new ModelAndView("admin");
+
+		ModelAndView mav = new ModelAndView();
+		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
+		if (usuario != null) {
+			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
+			mav.setViewName("administrador");
+			mav.addObject("usuarios", gestionUsuarios.obtenerUsuarios());
+		} else {
+			mav.setViewName("error");
+		}
+
+
+		return mav;
 	}
 
 	@GetMapping("alumno")
