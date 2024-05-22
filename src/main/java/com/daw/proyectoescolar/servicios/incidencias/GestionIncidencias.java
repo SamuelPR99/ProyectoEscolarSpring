@@ -159,6 +159,20 @@ public class GestionIncidencias {
 		}
 
 	}
+	
+	public void verIncidenciasAplicacion(int usuarioId) {
+
+		if (getListaIncidencias().isEmpty()) {
+			System.err.println("\nLo siento. No hay incidencias de profesores registradas.\n");
+		} else {
+			for (Incidencias incidencia : getListaIncidencias()) {
+				if (incidencia.getTipoIncidencia().equals("Aplicacion") && incidencia.getUsuarioId() == usuarioId) {
+					System.out.println(incidencia);
+				}
+			}
+		}
+
+	}
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -281,8 +295,7 @@ public class GestionIncidencias {
 			for (int i = 0; i < getListaIncidencias().size(); i++) {
 				if (getListaIncidencias().get(i).getTipoIncidencia().equals("Alumno")) {
 					getListaIncidencias().remove(i);
-					System.out.println(
-							Colores.ANSI_GREEN + "\nIncidencias de alumnos eliminadas con exito!" + Colores.ANSI_RESET);
+					System.out.println(Colores.ANSI_GREEN + "\nIncidencias de alumnos eliminadas con exito!" + Colores.ANSI_RESET);
 				}
 			}
 		}
@@ -297,8 +310,7 @@ public class GestionIncidencias {
 			for (int i = 0; i < getListaIncidencias().size(); i++) {
 				if (getListaIncidencias().get(i).getTipoIncidencia().equals("Profesor")) {
 					getListaIncidencias().remove(i);
-					System.out.println(Colores.ANSI_GREEN + "\nIncidencias de profesores eliminadas con exito!"
-							+ Colores.ANSI_RESET);
+					System.out.println(Colores.ANSI_GREEN + "\nIncidencias de profesores eliminadas con exito!" + Colores.ANSI_RESET);
 				}
 			}
 		}
@@ -313,8 +325,7 @@ public class GestionIncidencias {
 			for (int i = 0; i < getListaIncidencias().size(); i++) {
 				if (getListaIncidencias().get(i).getTipoIncidencia().equals("Aplicacion")) {
 					getListaIncidencias().remove(i);
-					System.out.println(Colores.ANSI_GREEN + "\nIncidencias de aplicacion eliminadas con exito!"
-							+ Colores.ANSI_RESET);
+					System.out.println(Colores.ANSI_GREEN + "\nIncidencias de aplicacion eliminadas con exito!" + Colores.ANSI_RESET);
 				}
 			}
 		}

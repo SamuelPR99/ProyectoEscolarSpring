@@ -183,18 +183,15 @@ public class IncidenciasRepo {
 
 				switch (tipoIncidencia) {
 				case Constantes.INCI_PROFESOR:
-					incidencias.add(
-							new IncidenciaProfesor(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
+					incidencias.add(new IncidenciaProfesor(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
 					break;
 
 				case Constantes.INCI_ALUMNO:
-					incidencias.add(
-							new IncidenciaAlumno(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
+					incidencias.add(new IncidenciaAlumno(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
 					break;
 
 				case Constantes.INCI_APLICACION:
-					incidencias.add(new IncidenciaAplicacion(incidencia_id, descripcionIncidencia, fechaIncidencia,
-							usuario_id));
+					incidencias.add(new IncidenciaAplicacion(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
 					break;
 
 				default:

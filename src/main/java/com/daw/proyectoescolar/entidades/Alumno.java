@@ -83,6 +83,7 @@ public class Alumno extends UsuarioBase {
 		GestionIncidencias gestionIncidencias = new GestionIncidencias();
 
 		String opcion;
+		String opcion2;
 
 		do {
 
@@ -97,12 +98,24 @@ public class Alumno extends UsuarioBase {
 				case "1", "ver incidencias":
 					GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Ver incidencias");
 					gestionIncidencias.verIncidenciasAlumno(usuario.getUsuarioId());
+					gestionIncidencias.verIncidenciasAplicacion(usuario.getUsuarioId());
 					break;
 
 				case "2", "crear incidencia":
 					GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Crear incidencia");
-					gestionIncidencias.crearIncidenciaAlumno(sc, usuario.getUsuarioId());
-					break;
+				System.out.println(Colores.ANSI_PURPLE + Colores.ANSI_UNDERLINE + "Elige el tipo de incidencia que quieres crear: \n"
+						+ Colores.ANSI_RESET + "\n1 - Incidencia de Alumno\n2 - Incidencia de Aplicacion");
+				
+				opcion2 = sc.nextLine().toLowerCase();
+				
+				if(opcion2.equals("1") || opcion2.equals("incidencia de alumno")) {
+				gestionIncidencias.crearIncidenciaAlumno(sc, usuario.getUsuarioId());
+				} else if(opcion2.equals("2") || opcion2.equals("incidencia de aplicacion")) {
+				gestionIncidencias.crearIncidenciaAplicacion(sc, usuario.getUsuarioId());
+				} else {
+					System.err.println("Por favor, introduce una opción válida");
+				}
+				break;
 
 				case "3", "salir del menu", "salir", "salir del":
 					GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Salir del menu");

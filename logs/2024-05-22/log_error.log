@@ -1,0 +1,7 @@
+[2024-05-22 17:11:34] ERROR: (conn=16) Unknown column 'numero_tema' in 'field list'
+[2024-05-22 17:31:10] ERROR: (conn=28) Unknown column 'numero_tema' in 'field list'
+[2024-05-22 17:38:15] ERROR: (conn=36) Unknown column 'numero_tema' in 'field list'
+[2024-05-22 17:38:55] ERROR: Opcion no valida seleccionada en el menu de incidencias. 4 no es una opcion valida.
+[2024-05-22 18:56:45] ERROR: (conn=45) Unknown column 'numero_tema' in 'field list'
+[2024-05-22 18:57:49] ERROR: Opcion no valida seleccionada en el menu de incidencias. 4 no es una opcion valida.
+[2024-05-22 19:00:33] ERROR: (conn=53) Unknown column 'numero_tema' in 'field list'

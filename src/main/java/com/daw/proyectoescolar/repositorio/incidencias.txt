@@ -4,3 +4,7 @@ Alumno;hola soy Hugo esto es una prueba JEJEJEJE;2024-05-21 08:39:42;7
 Alumno;jeeje;2024-05-21 12:28:03;7
 Alumno;sdfsdfsdf;2024-05-21 12:28:13;7
 Alumno;despues del arraylist;2024-05-21 13:40:55;7
+Alumno;prueba incidencia usuario PAULA;2024-05-22 17:14:05;6
+Profesor;el Hugo no sabe programar;2024-05-22 17:31:53;1
+Alumno;jejejejejejejeeeejejejeje;2024-05-22 17:39:19;7
+Aplicacion;se me ha crasheado esto pisha;2024-05-22 18:57:31;1
