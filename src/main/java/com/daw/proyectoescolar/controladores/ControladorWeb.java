@@ -21,7 +21,8 @@ import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 @Controller
 public class ControladorWeb {
 
-	private GestionUsuarios gestionUsuarios = new GestionUsuarios();
+	private final GestionUsuarios gestionUsuarios = new GestionUsuarios();
+	private final GestionTemas gestionTemas = new GestionTemas();
 
 	@GetMapping("login")
 	public ModelAndView login() {
@@ -103,8 +104,8 @@ public class ControladorWeb {
 	public ModelAndView entregarTarea(@RequestParam int idTarea, @RequestParam int idAlumno) {
 
 		ModelAndView mav = new ModelAndView();
-		GestionTemas gt = new GestionTemas();
-		gt.entregarTarea(idTarea, idAlumno);
+
+		gestionTemas.entregarTarea(idTarea, idAlumno);
 		mav.setViewName("redirect:/alumno"); // Redirige de nuevo a la página del alumno
 		return mav;
 	}
@@ -113,8 +114,8 @@ public class ControladorWeb {
 	public ModelAndView cambiarNota(@RequestParam int idAlumno, @RequestParam double nota) {
 
 		ModelAndView mav = new ModelAndView();
-		GestionUsuarios gu = new GestionUsuarios();
-		gu.modificarNotaAlumno(idAlumno, nota);
+
+		gestionUsuarios.modificarNotaAlumno(idAlumno, nota);
 		mav.setViewName("redirect:profesor"); // Redirige de nuevo a la página del profesor
 		return mav;
 	}
@@ -123,20 +124,14 @@ public class ControladorWeb {
 	public ModelAndView asignarTarea(@RequestParam int idTarea, @RequestParam Date fechaExpiracion, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		GestionUsuarios gu = new GestionUsuarios();
-		GestionTemas gt = new GestionTemas();
+
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
-		List<Alumno> alumnos = gu.obtenerAlumnos(gu.obtenerUsuarios());
+		List<Alumno> alumnos = gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios());
 		for (Alumno alumno : alumnos) {
-			gt.asignarTarea(idTarea, alumno.getUsuarioId(), usuario.getUsuarioId(), fechaExpiracion);
+			gestionTemas.asignarTarea(idTarea, alumno.getUsuarioId(), usuario.getUsuarioId(), fechaExpiracion);
 		}
 		mav.setViewName("redirect:profesor"); // Redirige de nuevo a la página del profesor
 		return mav;
-	}
-
-	@GetMapping("loginExitoso")
-	public ModelAndView loginExitoso() {
-		return new ModelAndView("loginExitoso");
 	}
 
 	@GetMapping("administrador")
@@ -150,12 +145,12 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
 		int id = usuario.getUsuarioId();
-		GestionTemas gt = new GestionTemas();
+
 		if (usuario != null) {
 			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
 			mav.setViewName("alumno");
-			mav.addObject("tareasAsignadas", gt.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
-			mav.addObject("tareasEntregadas", gt.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
+			mav.addObject("tareasAsignadas", gestionTemas.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
+			mav.addObject("tareasEntregadas", gestionTemas.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
 			mav.addObject("fechaActual", FechaYHora.fechaActual()); // Añadir la fecha actual a la vista
 		} else {
 			mav.setViewName("error");
@@ -167,7 +162,6 @@ public class ControladorWeb {
 	public ModelAndView profesor(HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		GestionTemas gt = new GestionTemas();
 		List<Alumno> alumnos = gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios());
 
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
@@ -175,12 +169,12 @@ public class ControladorWeb {
 			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
 			mav.setViewName("profesor");
 			mav.addObject("alumnos", gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios()));
-			mav.addObject("temas", gt.obtenerTemas());
+			mav.addObject("temas", gestionTemas.obtenerTemas());
 			// Añadir la lista de tareas entregadas a tiempo por cada alumno
 			LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno = new LinkedHashMap<>();
 			for (Alumno alumno : alumnos) {
 				int idAlumno = alumno.getUsuarioId();
-				List<Tarea> tareasEntregadasATiempo = gt.tareasEntregadasConNota(idAlumno);
+				List<Tarea> tareasEntregadasATiempo = gestionTemas.tareasEntregadasConNota(idAlumno);
 				tareasEntregadasATiempoPorAlumno.put(alumno, tareasEntregadasATiempo.size());
 			}
 			mav.addObject("tareasEntregadasATiempoPorAlumno", tareasEntregadasATiempoPorAlumno);
@@ -188,11 +182,6 @@ public class ControladorWeb {
 			mav.setViewName("error");
 		}
 		return mav;
-	}
-
-	@GetMapping("logout")
-	public ModelAndView logout() {
-		return new ModelAndView("logout");
 	}
 
 	@GetMapping("error")
