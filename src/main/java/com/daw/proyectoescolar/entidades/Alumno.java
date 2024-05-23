@@ -97,8 +97,8 @@ public class Alumno extends UsuarioBase {
 
 				case "1", "ver incidencias":
 					GestionLogs.logOpcionMenu(Constantes.MENU_ALUMNOS, "Ver incidencias");
-					gestionIncidencias.verIncidenciasAlumno(usuario.getUsuarioId(), usuario.getNombre());
-					gestionIncidencias.verIncidenciasAplicacion(usuario.getUsuarioId(), usuario.getNombre());
+					gestionIncidencias.verIncidenciasAlumno(usuario.getUsuarioId(), this.nombre);
+					gestionIncidencias.verIncidenciasAplicacion(usuario.getUsuarioId(), this.nombre);
 					break;
 
 				case "2", "crear incidencia":

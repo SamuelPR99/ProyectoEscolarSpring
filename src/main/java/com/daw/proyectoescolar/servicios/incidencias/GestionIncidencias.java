@@ -131,42 +131,42 @@ public class GestionIncidencias {
 
 	}
 
-	public void verIncidenciasAlumno(int usuarioId, String nombreUsuario) {
+	public void verIncidenciasAlumno(int usuarioId, String nombre) {
 
 		if (getListaIncidencias().isEmpty()) {
 			System.err.println("\nLo siento. No hay incidencias de alumnos registradas.\n");
 		} else {
 			for (Incidencias incidencia : getListaIncidencias()) {
 				if (incidencia.getTipoIncidencia().equals("Alumno") && incidencia.getUsuarioId() == usuarioId) {
-					System.out.println(incidencia);
+					System.out.println(incidencia + " - " + nombre);
 				}
 			}
 		}
 
 	}
 
-	public void verIncidenciasProfesor(int usuarioId, String nombreUsuario) {
+	public void verIncidenciasProfesor(int usuarioId, String nombre) {
 
 		if (getListaIncidencias().isEmpty()) {
 			System.err.println("\nLo siento. No hay incidencias de profesores registradas.\n");
 		} else {
 			for (Incidencias incidencia : getListaIncidencias()) {
 				if (incidencia.getTipoIncidencia().equals("Profesor") && incidencia.getUsuarioId() == usuarioId) {
-					System.out.println(incidencia);
+					System.out.println(incidencia + " - " + nombre);
 				}
 			}
 		}
 
 	}
 	
-	public void verIncidenciasAplicacion(int usuarioId, String nombreUsuario) {
+	public void verIncidenciasAplicacion(int usuarioId, String nombre) {
 
 		if (getListaIncidencias().isEmpty()) {
 			System.err.println("\nLo siento. No hay incidencias de profesores registradas.\n");
 		} else {
 			for (Incidencias incidencia : getListaIncidencias()) {
 				if (incidencia.getTipoIncidencia().equals("Aplicacion") && incidencia.getUsuarioId() == usuarioId) {
-					System.out.println(incidencia);
+					System.out.println(incidencia + " - " + nombre);
 				}
 			}
 		}
