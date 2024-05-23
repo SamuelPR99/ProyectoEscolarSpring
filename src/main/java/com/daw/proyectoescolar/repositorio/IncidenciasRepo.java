@@ -20,6 +20,7 @@ import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
 import com.daw.proyectoescolar.entidades.IncidenciaProfesor;
 import com.daw.proyectoescolar.entidades.Incidencias;
 import com.daw.proyectoescolar.entidades.Profesor;
+import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 
 public class IncidenciasRepo {
@@ -78,7 +79,7 @@ public class IncidenciasRepo {
 			fw = new FileWriter(file, true);
 			bw = new BufferedWriter(fw);
 			bw.write(incidencia.getTipoIncidencia() + ";" + incidencia.getIncidencia() + ";" + FechaYHora.fechaActual()
-					+ ";" + usuarioId + "\n");
+					+ ";" + usuarioId  + "\n");
 			bw.flush();
 			fw.close();
 		} catch (IOException e) {

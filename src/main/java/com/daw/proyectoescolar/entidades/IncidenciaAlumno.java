@@ -1,5 +1,8 @@
 package com.daw.proyectoescolar.entidades;
 
+import java.util.List;
+import java.util.Scanner;
+
 import com.daw.proyectoescolar.repositorio.Colores;
 
 public class IncidenciaAlumno extends Incidencias {
@@ -37,7 +40,8 @@ public class IncidenciaAlumno extends Incidencias {
 
 	@Override
 	public String toString() { // Metodo que devuelve un mensaje con el tipo de incidencia y la incidencia en si
-		return Colores.ANSI_CYAN + "Incidencias de Alumnos: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_RESET;
+		return Colores.ANSI_CYAN + "Incidencias de Alumnos: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_GREEN + 
+				" Nombre del usuario que asignó la incidencia: " + usuarioId + Colores.ANSI_RESET;
 	}
 	
 }

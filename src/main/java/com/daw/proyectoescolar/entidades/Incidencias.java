@@ -1,7 +1,7 @@
 package com.daw.proyectoescolar.entidades;
 
 public abstract class Incidencias {
-
+	
 	// Atributos
 	protected int incidenciaId;
 	protected String incidencia;
@@ -40,7 +40,7 @@ public abstract class Incidencias {
 		this.fechaIncidencia = fechaIncidencia;
 		this.usuarioId = usuarioId;
 	}
-
+	
 	// Getters y Setters
 
 	public int getIncidenciaId() {
@@ -80,7 +80,7 @@ public abstract class Incidencias {
 	@Override
 	public String toString() {
 		return "Incidencias [incidenciaId=" + incidenciaId + ", incidencia=" + incidencia + ", fechaIncidencia="
-				+ fechaIncidencia + "]";
+				+ fechaIncidencia + usuarioId + "]";
 	}
 	
 	public abstract String getTipoIncidencia();

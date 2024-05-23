@@ -8,6 +8,7 @@ import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
 import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
 import com.daw.proyectoescolar.entidades.IncidenciaProfesor;
 import com.daw.proyectoescolar.entidades.Incidencias;
+import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.IncidenciasRepo;
@@ -58,8 +59,7 @@ public class GestionIncidencias {
 		iRepo.insertarIncidenciasBBDD(); // Reemplazarlo por el metodo de insertar una incidencia en la base de datos
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Profesor");
 
-		System.out.println(
-				Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
+		System.out.println(Colores.ANSI_GREEN + "\nIncidencia de profesor añadida con exito!" + Colores.ANSI_RESET);
 	}
 
 	// esto metelo en los menus de incidencias de los usuarios que ya me ha dao un poco de pereza
@@ -73,8 +73,7 @@ public class GestionIncidencias {
 		iRepo.insertarIncidenciasBBDD(); // Reemplazarlo por el metodo de insertar una incidencia en la base de datos
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Aplicacion");
 
-		System.out.println(
-				Colores.ANSI_GREEN + "\nIncidencia de aplicacion añadida con exito!" + Colores.ANSI_RESET);
+		System.out.println(Colores.ANSI_GREEN + "\nIncidencia de aplicacion añadida con exito!" + Colores.ANSI_RESET);
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -132,7 +131,7 @@ public class GestionIncidencias {
 
 	}
 
-	public void verIncidenciasAlumno(int usuarioId) {
+	public void verIncidenciasAlumno(int usuarioId, String nombreUsuario) {
 
 		if (getListaIncidencias().isEmpty()) {
 			System.err.println("\nLo siento. No hay incidencias de alumnos registradas.\n");
@@ -146,7 +145,7 @@ public class GestionIncidencias {
 
 	}
 
-	public void verIncidenciasProfesor(int usuarioId) {
+	public void verIncidenciasProfesor(int usuarioId, String nombreUsuario) {
 
 		if (getListaIncidencias().isEmpty()) {
 			System.err.println("\nLo siento. No hay incidencias de profesores registradas.\n");
@@ -160,7 +159,7 @@ public class GestionIncidencias {
 
 	}
 	
-	public void verIncidenciasAplicacion(int usuarioId) {
+	public void verIncidenciasAplicacion(int usuarioId, String nombreUsuario) {
 
 		if (getListaIncidencias().isEmpty()) {
 			System.err.println("\nLo siento. No hay incidencias de profesores registradas.\n");

@@ -1,0 +1,4 @@
+[2024-05-23 09:31:57] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getNombre()" because "this.usuario" is null
+[2024-05-23 09:32:13] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getNombre()" because "this.usuario" is null
+[2024-05-23 09:33:50] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getNombre()" because "this.usuario" is null
+[2024-05-23 09:36:00] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getNombre()" because "this.usuario" is null

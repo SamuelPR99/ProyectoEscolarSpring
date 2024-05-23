@@ -61,8 +61,8 @@ public class Profesor extends UsuarioBase {
 
 				case "1", "mostrar incidencias":
 					GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Mostrar incidencias");
-					gestor.verIncidenciasProfesor(usuario.getUsuarioId());
-					gestor.verIncidenciasAplicacion(usuario.getUsuarioId());
+					gestor.verIncidenciasProfesor(usuario.getUsuarioId(), usuario.getNombre());
+					gestor.verIncidenciasAplicacion(usuario.getUsuarioId(), usuario.getNombre());
 					break;
 
 				case "2", "crear incidencia":
