@@ -2,6 +2,7 @@ package com.daw.proyectoescolar.servicios.temas;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -153,6 +154,38 @@ public class GestionTemas {
 		// Marcar la tarea como completada
 		tRepo.entregarTarea(idTarea, idAlumno);
 		System.out.println(Colores.ANSI_GREEN + "Tarea entregada con exito. 😎" + Colores.ANSI_RESET);
+	}
+
+	public double calcularMediaNotasAlumno(int idAlumno) {
+		TemasRepo tRepo = new TemasRepo();
+		List<Tarea> tareasEntregadas = tRepo.tareasEntregadas(idAlumno);
+
+		if (tareasEntregadas.isEmpty()) {
+			return 0.0; // Si el alumno no ha entregado ninguna tarea, la media es 0
+		}
+
+		double sumaNotas = 0.0;
+		for (Tarea tarea : tareasEntregadas) {
+			sumaNotas += tarea.getPuntuacion();
+		}
+
+		return sumaNotas / tareasEntregadas.size();
+	}
+
+	// Añadir la lista de tareas entregadas a tiempo por cada alumno
+	public LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno() {
+
+		UsuariosRepo uRepo = new UsuariosRepo();
+		List<Alumno> alumnos = uRepo.obtenerAlumnos();
+		LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno = new LinkedHashMap<>();
+
+		for (Alumno alumno : alumnos) {
+			int idAlumno = alumno.getUsuarioId();
+			List<Tarea> tareasEntregadasATiempo = tareasEntregadasConNota(idAlumno);
+			tareasEntregadasATiempoPorAlumno.put(alumno, tareasEntregadasATiempo.size());
+		}
+
+		return tareasEntregadasATiempoPorAlumno;
 	}
 
 	// obtenerTemas para mostrarlos en la vista

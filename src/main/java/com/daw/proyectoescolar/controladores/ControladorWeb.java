@@ -166,7 +166,6 @@ public class ControladorWeb {
 	public ModelAndView profesor(HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		List<Alumno> alumnos = gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios());
 
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
 		if (usuario != null) {
@@ -174,14 +173,8 @@ public class ControladorWeb {
 			mav.setViewName("profesor");
 			mav.addObject("alumnos", gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios()));
 			mav.addObject("temas", gestionTemas.obtenerTemas());
-			// Añadir la lista de tareas entregadas a tiempo por cada alumno
-			LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno = new LinkedHashMap<>();
-			for (Alumno alumno : alumnos) {
-				int idAlumno = alumno.getUsuarioId();
-				List<Tarea> tareasEntregadasATiempo = gestionTemas.tareasEntregadasConNota(idAlumno);
-				tareasEntregadasATiempoPorAlumno.put(alumno, tareasEntregadasATiempo.size());
-			}
-			mav.addObject("tareasEntregadasATiempoPorAlumno", tareasEntregadasATiempoPorAlumno);
+			mav.addObject("tareasEntregadasATiempoPorAlumno", gestionTemas.tareasEntregadasATiempoPorAlumno());
+			mav.addObject("notaMediaPorAlumno", gestionUsuarios.obtenerNotaMediaTareasEntregadas());
 		} else {
 			mav.setViewName("error");
 		}

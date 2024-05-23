@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.servicios.usuarios;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ import com.daw.proyectoescolar.entidades.Profesor;
 import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.repositorio.*;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
+import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 
 public class GestionUsuarios {
 
@@ -392,6 +394,22 @@ public class GestionUsuarios {
 	// Borrar usuario vista administrador
 	public void borrarUsuario(int usuarioId) {
 		uRepo.borrarUsuarioBBDD(usuarioId);
+	}
+
+
+	public LinkedHashMap<Alumno, Double> obtenerNotaMediaTareasEntregadas() {
+		LinkedHashMap<Alumno, Double> notaMediaPorAlumno = new LinkedHashMap<>();
+		List<UsuarioBase> usuarios = obtenerUsuarios();
+
+		for (UsuarioBase usuario : usuarios) {
+			if (usuario instanceof Alumno) {
+				Alumno alumno = (Alumno) usuario;
+				double notaMedia = new GestionTemas().calcularMediaNotasAlumno(alumno.getUsuarioId());
+				notaMediaPorAlumno.put(alumno, notaMedia);
+			}
+		}
+
+		return notaMediaPorAlumno;
 	}
 
 }
