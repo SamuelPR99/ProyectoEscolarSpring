@@ -389,5 +389,9 @@ public class GestionUsuarios {
 		uRepo.modificarNotaAlumno(idAlumno, nota);
 	}
 
+	// Borrar usuario vista administrador
+	public void borrarUsuario(int usuarioId) {
+		uRepo.borrarUsuarioBBDD(usuarioId);
+	}
 
 }

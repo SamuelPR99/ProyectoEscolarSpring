@@ -131,7 +131,15 @@ public class ControladorWeb {
 			mav.setViewName("error");
 		}
 
+		return mav;
+	}
 
+	@PostMapping("borrarUsuario")
+	public ModelAndView borrarUsuario(@RequestParam int usuarioId) {
+
+		ModelAndView mav = new ModelAndView();
+		gestionUsuarios.borrarUsuario(usuarioId);
+		mav.setViewName("redirect:administrador");
 		return mav;
 	}
 
