@@ -464,4 +464,27 @@ public class UsuariosRepo {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 	}
+
+	// Borrar un usuario de la BBDD
+	public void borrarUsuarioBBDD (int usuarioId) {
+
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+
+		String sql = "DELETE FROM usuario WHERE usuario_id = ?";
+
+		try {
+
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setInt(1, usuarioId);
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			GestionLogs.errorLogs("Error al borrar usuario con id: " + usuarioId + " " + e.getMessage());
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+	}
+
 }

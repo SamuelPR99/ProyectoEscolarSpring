@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>IES Murcia - Administrador</title>
@@ -15,7 +16,34 @@
     </nav>
 </header>
 <main>
-QUE FEOOOO
+    <section>
+        <h2>Lista de usuarios</h2>
+        <div>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Tipo de usuario</th>
+                    <th>DNI</th>
+                    <th>Borrar usuario</th>
+                </tr>
+                <c:forEach var="usuario" items="${usuarios}">
+                    <tr>
+                        <td>${usuario.usuarioId}</td>
+                        <td>${usuario.nombre}</td>
+                        <td>${usuario.tipoUsuario}</td>
+                        <td>${usuario.dni}</td>
+                        <td>
+                            <form action="borrarUsuario" method="post">
+                                <input type="hidden" name="usuarioId" value="${usuario.usuarioId}">
+                                <input type="submit" value="❌" class="${usuario.tipoUsuario == 'Administrador' ? 'btn-disabled' : ''}" ${usuario.tipoUsuario == 'Administrador' ? 'disabled' : ''}>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </section>
 </main>
 <footer>
     <p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>
