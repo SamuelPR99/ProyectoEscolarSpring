@@ -1,11 +1,8 @@
 package com.daw.proyectoescolar.controladores;
 
 import java.sql.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 import com.daw.proyectoescolar.entidades.Alumno;
-import com.daw.proyectoescolar.entidades.Tarea;
 import com.daw.proyectoescolar.repositorio.FechaYHora;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import org.springframework.stereotype.Controller;
@@ -44,11 +41,10 @@ public class ControladorWeb {
 			@RequestParam String contrasena, @RequestParam String tipo) {
 
 		ModelAndView mav = new ModelAndView();
-		List<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
 
 		if (gestionUsuarios.validarNombreUsuario(nombre) && gestionUsuarios.validarContrasena(contrasena)
 				&& gestionUsuarios.validarDNI(dni)) {
-			gestionUsuarios.registro(nombre, dni, contrasena, tipo, usuarios);
+			gestionUsuarios.registro(nombre, dni, contrasena, tipo, gestionUsuarios.obtenerUsuarios());
 			mav.setViewName("registroExitoso");
 		} else {
 			mav.addObject("mensaje", "Error en algun campo, vuelve a registrarte");
@@ -60,9 +56,7 @@ public class ControladorWeb {
 	public ModelAndView loguearUsuario(@RequestParam String nombre, @RequestParam String contrasena, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-
-		List<UsuarioBase> usuarios = gestionUsuarios.obtenerUsuarios();
-		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, usuarios);
+		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, gestionUsuarios.obtenerUsuarios());
 
 		if (usuario != null) {
 			session.setAttribute("usuario", usuario); // Guardar el usuario en la sesión
@@ -110,8 +104,7 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
-		List<Alumno> alumnos = gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios());
-		for (Alumno alumno : alumnos) {
+		for (Alumno alumno : gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios())) {
 			gestionTemas.asignarTarea(idTarea, alumno.getUsuarioId(), usuario.getUsuarioId(), fechaExpiracion);
 		}
 		mav.setViewName("redirect:profesor");
