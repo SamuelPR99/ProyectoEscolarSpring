@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    background-color: rgba(0, 18, 101, 0.2);
+    background-color: rgba(0, 18, 101, 0.6);
     color: white;
     padding: 1rem 2rem;
     display: flex;
@@ -88,7 +88,7 @@ button:hover {
 }
 
 footer {
-    background-color: rgba(0, 18, 101, 0.2);
+    background-color: rgba(0, 18, 101, 0.6);
     color: white;
     text-align: center;
     padding: 1rem 2rem;

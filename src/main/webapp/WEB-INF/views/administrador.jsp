@@ -16,6 +16,7 @@
     </nav>
 </header>
 <main>
+    <h1>Bienvenid@, ${usuario.nombre}</h1>
     <section>
         <h2>Lista de usuarios</h2>
         <div>
@@ -44,13 +45,17 @@
             </table>
         </div>
     </section>
+
+    <section>
+        <h2>Incidencias</h2>
+    </section>
 </main>
 <footer>
     <p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>
     <p>
         <a href="#">Política de Privacidad</a> |
         <a href="#">Términos de Servicio</a> |
-        <a href="#">Contacto</a>
+        <a href="incidencias">Incidencias</a>
     </p>
 </footer>
 </body>
