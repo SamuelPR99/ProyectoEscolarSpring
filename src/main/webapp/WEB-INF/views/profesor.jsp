@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!DOCTYPE html>
 <html>
 <head>
     <title>IES Murcia - Profesor</title>
@@ -66,13 +68,6 @@
         </div>
     </section>
 
-    <script>
-        document.getElementById('asignarTareaForm').addEventListener('submit', function() {
-            alert('La tarea ha sido asignada correctamente.');
-        });
-    </script>
-
-    <!-- Sección para cambiar la nota al alumno -->
     <section class="collapsible-section">
         <h2 class="collapsible-header">Lista de Alumnos</h2>
         <div class="collapsible-content">
@@ -80,12 +75,14 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Nota</th>
+                    <th>Nota Media de las tareas</th>
                     <th>Cambiar nota</th>
                 </tr>
-                <c:forEach var="alumno" items="${alumnos}">
+                <c:forEach var="entry" items="${notaMediaPorAlumno}">
                     <tr>
-                        <td>${alumno.nombre}</td>
-                        <td>${alumno.nota}</td>
+                        <td>${entry.key.nombre}</td>
+                        <td>${entry.key.nota}</td>
+                        <td><fmt:formatNumber value="${entry.value}" type="number" maxFractionDigits="2" minFractionDigits="1"/></td>
                         <td>
                             <form action="cambiarNota" method="post">
                                 <input type="hidden" name="idAlumno" value="${alumno.usuarioId}">
@@ -111,99 +108,29 @@
 </main>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const sectionHeaders = document.querySelectorAll(".collapsible-header");
-
-        // Toggle section content visibility
-        sectionHeaders.forEach(function(header) {
-            header.addEventListener("click", function() {
-                var section = header.parentElement;
-                var content = section.querySelector(".collapsible-content");
-
-                // Toggle the open class
-                section.classList.toggle("open");
-
-                // Adjust max-height for smooth transitions
-                if (section.classList.contains("open")) {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } else {
-                    content.style.maxHeight = "0";
-                }
-            });
-        });
-    });
-</script>
-
-<script>
     // Convertir los datos de JSTL a JavaScript
     var datosAlumnos = [
         <c:forEach var="alumno" items="${alumnos}" varStatus="status">
         { nombre: "${alumno.nombre}", nota: ${alumno.nota}}<c:if test="${!status.last}">,</c:if>
         </c:forEach>
     ];
-</script>
 
-<script>
     // Convertir los datos de JSTL a JavaScript
     var datosTareasEntregadasATiempoPorAlumno = {
         <c:forEach var="entry" items="${tareasEntregadasATiempoPorAlumno}" varStatus="status">
         "${entry.key.nombre}": ${entry.value}<c:if test="${!status.last}">,</c:if>
         </c:forEach>
     };
+
+    // Convertir los datos de JSTL a JavaScript
+    var datosNotaMediaPorAlumno = {
+        <c:forEach var="entry" items="${notaMediaPorAlumno}" varStatus="status">
+        "${entry.key.nombre}": ${entry.value}<c:if test="${!status.last}">,</c:if>
+        </c:forEach>
+    };
 </script>
 
-<script>
-    $(document).ready(function () {
-        var etiquetas = datosAlumnos.map(alumno => alumno.nombre);
-        var notas = datosAlumnos.map(alumno => alumno.nota);
-        var nombres = Object.keys(datosTareasEntregadasATiempoPorAlumno);
-        var tareasEntregadasATiempo = nombres.map(nombre => datosTareasEntregadasATiempoPorAlumno[nombre]);
-        var coloresFondo = notas.map(nota => colorPorNota(nota)); // Asignar un color basado en la nota
-        var coloresFondoTareas = tareasEntregadasATiempo.map(() => 'rgba(8,202,0,0.5)'); // Color para las tareas entregadas a tiempo
-        console.log(datosTareasEntregadasATiempoPorAlumno);
-        var configuracion = {
-            type: 'bar',
-            data: {
-                labels: etiquetas,
-                datasets: [{
-                    label: 'Nota del alumno',
-                    data: notas,
-                    backgroundColor: coloresFondo, // Usar los colores asignados
-                    borderColor: 'rgb(0,97,161)',
-                    borderWidth: 1
-                },
-                    {
-                        label: 'Tareas entregadas a tiempo',
-                        data: tareasEntregadasATiempo,
-                        backgroundColor: coloresFondoTareas, // Usar los colores asignados para las tareas
-                        borderColor: 'rgb(0,123,255)',
-                        borderWidth: 1
-                    }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        };
-
-        var ctx = document.getElementById('graficoNotas').getContext('2d');
-        var graficoNotas = new Chart(ctx, configuracion);
-    });
-</script>
-</script>
-
-<script>
-    function colorPorNota(nota) {
-        if (nota >= 9) return 'rgba(75, 192, 192, 0.2)'; // Verde claro para notas altas
-        else if (nota >= 7) return 'rgba(54, 162, 235, 0.2)'; // Azul para notas medias
-        else if (nota >= 5) return 'rgba(255, 206, 86, 0.2)'; // Amarillo para notas suficientes
-        else return 'rgba(255, 99, 132, 0.2)'; // Rojo para notas bajas
-    }
-</script>
-
+<script src="../JS/profesor.js"></script>
 
 <footer>
     <p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>

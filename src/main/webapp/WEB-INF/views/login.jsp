@@ -1,31 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
-
-
-
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
+	<title>IES Murcia - Profesor</title>
 	<link rel="stylesheet" href="../CSS/loginStyle.css">
+	<link rel="stylesheet" href="../CSS/styles.css">
 </head>
 
 <body>
-<div class="prin">
-	<div class="todo">
-		<div class="logo" style="overflow: hidden;"></div>
-		<div>
-			<h1 class="mensaje">¡Bienvenido!</h1>
-		</div>
-
+	<header>
+		<h1>IES Murcia</h1>
+	</header>
 		<form id="loginForm" action="login" method="post">
-			<div class="BotonUsuario">
+			<div>
 				<label class="usuario" for="nombre"></label>
 				<input placeholder="Usuario..." type="text" id="nombre" name="nombre" required>
 			</div>
-			<div class="BotonContraseña">
+			<div>
 				<label for="contrasena"></label>
 				<input placeholder="Contraseña..." type="password" id="contrasena" name="contrasena" required>
 			</div>
@@ -33,29 +25,15 @@
 				<button type="submit">Login</button>
 			</div>
 			<h5>${mensaje}</h5>
-			<a href="registro" target="_blank"><h5>¿No estas registrado?</h5></a>
+			<a href="registro" target="_blank"><h4>¿No estas registrado?</h4></a>
 		</form>
-	</div>
-</div>
+	<footer>
+		<p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>
+		<p>
+			<a href="#">Política de Privacidad</a> |
+			<a href="#">Términos de Servicio</a> |
+			<a href="incidencias">Incidencias</a>
+		</p>
+	</footer>
 </body>
-
-<footer>
-	<div class="fot">
-		<div class="cards">
-
-			<div class="card">
-				<h4>Sobre nosotros</h4>
-			</div>
-
-			<div class="card">
-				<h4>Recomendaciones</h4>
-			</div>
-
-			<div class="card">
-				<h4>Preguntas y respuestas</h4>
-			</div>
-		</div>
-	</div>
-</footer>
-
 </html>
