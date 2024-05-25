@@ -1,28 +1,58 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 30px;
-    background-color: #f0f0f0;
-    background-image: url(../IMG/fondoReg.jpg);
+    background-image: url(../IMG/1.jpg);
+    display: flex;
+    justify-content: center;
+    height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la vista */
+    margin: 0; /* Elimina los márgenes predeterminados */
 }
 
-form {
-    position: relative;
-    place-items: center;
+#registroForm {
+    background-color: rgba(0, 18, 101, 0.6);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0px 3px 10px 10px rgba(0, 0, 0, 0.2);
     width: 300px;
-    margin: 0 auto;
-    background-color: rgb(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    margin: auto;
 }
 
-.cuerpo {
-    position: relative;
-    display: grid;
-    place-items: center;
-    margin-top: 300px;
+#registroForm input[type="text"], #registroForm input[type="password"], #registroForm select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+#registroForm input[type="submit"] {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #004a99;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#registroForm input[type="submit"]:hover {
+    background-color: #4CAF50;
+}
+
+#registroForm a {
+    text-decoration: none;
+    color: #0066cc;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    transition: color 0.3s ease;
+}
+
+#registroForm a:hover {
+    color: #ff3b30;
+}
+
+#registroForm label, #registroForm input {
+    color: white;
 }
 
 .desplegable {
@@ -40,36 +70,6 @@ form {
     opacity: 0;
     animation: mostrarDesplegable2 1s forwards;
     animation-play-state: paused;
-}
-
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-select{
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-
-input[type="submit"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
 }
 
 .mostrar-desplegable {
@@ -99,9 +99,4 @@ input[type="submit"]:hover {
         opacity: 1;
         left: calc(10% + 20px);
     }
-}
-
-h2{
-    font-family:monaco;
-
 }
