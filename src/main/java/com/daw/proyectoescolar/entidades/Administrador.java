@@ -48,7 +48,7 @@ public class Administrador extends UsuarioBase {
 
             System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE + "\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
                     + "1. Mostrar incidencias\n"
-                    + "2. Crear incidencia\n"
+                    + "2. Borrar incidencia\n"
                     + "3. Salir del menu" + Colores.ANSI_RESET);
 
             opcion = sc.nextLine().toLowerCase();

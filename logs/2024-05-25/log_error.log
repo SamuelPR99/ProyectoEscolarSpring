@@ -1,0 +1,52 @@
+[2024-05-25 11:59:22] ERROR: (conn=7) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 12:19:45] ERROR: (conn=15) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 12:21:27] ERROR: (conn=23) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 12:21:44] ERROR: Error al leer el archivo: (conn=27) (conn=27) execute() is called on closed statement No se han cargado los usuarios por defecto.
+[2024-05-25 12:32:35] ERROR: (conn=31) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 12:33:00] ERROR: Error al leer el archivo: (conn=35) (conn=35) execute() is called on closed statement No se han cargado los usuarios por defecto.
+[2024-05-25 13:02:45] ERROR: (conn=38) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 13:03:06] ERROR: Error al leer el archivo: (conn=42) (conn=42) execute() is called on closed statement No se han cargado los usuarios por defecto.
+[2024-05-25 16:37:53] ERROR: (conn=45) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 16:39:15] ERROR: (conn=51) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 16:39:25] ERROR: Error al borrar la incidencia con id: 1 (conn=55) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= 1' at line 1
+[2024-05-25 16:39:25] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 16:41:22] ERROR: (conn=58) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 16:41:40] ERROR: Error al borrar la incidencia con id: 5 (conn=62) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= 5' at line 1
+[2024-05-25 16:41:40] ERROR: Error al iniciar sesion. Error: Scanner closed
+[2024-05-25 17:06:29] ERROR: (conn=65) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:06:36] ERROR: Error al iniciar sesion. Error: Scanner closed
+[2024-05-25 17:06:54] ERROR: (conn=72) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:07:02] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 17:07:52] ERROR: (conn=79) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:08:01] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 17:08:40] ERROR: (conn=86) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:08:51] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 17:11:13] ERROR: (conn=93) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:11:21] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 17:18:39] ERROR: (conn=100) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:19:11] ERROR: (conn=106) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:30:50] ERROR: (conn=111) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:34:04] ERROR: (conn=118) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:34:10] ERROR: Opcion no valida en el menu de alumno. 15 no es una opcion valida.
+[2024-05-25 17:34:22] ERROR: Error al leer el archivo: (conn=122) Could not set parameter at position 4 (values was 7)
+Query - conn:122(M)  - "INSERT INTO incidencia (tipo, incidencia, fecha, usuario_id) VALUES (?, ?, NOW(), ?)" No se han cargado los usuarios por defecto.
+[2024-05-25 17:36:58] ERROR: (conn=125) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:37:11] ERROR: Error al leer el archivo: (conn=129) Could not set parameter at position 4 (values was 7)
+Query - conn:129(M)  - "INSERT INTO incidencia (tipo, incidencia, fecha, usuario_id) VALUES (?, ?, NOW(), ?)" No se han cargado los usuarios por defecto.
+[2024-05-25 17:46:05] ERROR: (conn=132) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 17:59:04] ERROR: (conn=139) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 18:06:57] ERROR: (conn=146) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 18:07:07] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 18:07:43] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 18:11:10] ERROR: (conn=154) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 18:11:31] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 18:11:51] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 18:12:22] ERROR: (conn=162) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 18:12:29] ERROR: Error al iniciar sesion. Error: null
+[2024-05-25 18:12:29] ERROR: Opcion no valida seleccionada en el menu principal. Opcion: hola
+[2024-05-25 18:15:34] ERROR: (conn=168) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 18:15:42] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 18:17:06] ERROR: (conn=174) Unknown column 'numero_tema' in 'field list'
+[2024-05-25 18:17:16] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 18:17:20] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-25 18:17:24] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
