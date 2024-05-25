@@ -3,3 +3,15 @@
 [2024-05-23 09:33:50] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getNombre()" because "this.usuario" is null
 [2024-05-23 09:36:00] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getNombre()" because "this.usuario" is null
 [2024-05-23 10:16:33] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
+[2024-05-23 16:48:27] ERROR: (conn=5) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 16:54:00] ERROR: (conn=11) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 16:58:11] ERROR: (conn=21) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 16:58:45] ERROR: Opcion no valida seleccionada en el menu de incidencias. 4 no es una opcion valida.
+[2024-05-23 17:02:35] ERROR: (conn=29) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 17:09:09] ERROR: (conn=37) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 17:14:08] ERROR: (conn=45) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 17:17:36] ERROR: (conn=53) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 17:44:26] ERROR: (conn=61) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 17:53:54] ERROR: (conn=69) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 18:45:49] ERROR: (conn=77) Unknown column 'numero_tema' in 'field list'
+[2024-05-23 18:46:08] ERROR: (conn=82) Unknown column 'numero_tema' in 'field list'

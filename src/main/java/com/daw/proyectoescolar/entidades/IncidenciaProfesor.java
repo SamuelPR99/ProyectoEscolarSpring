@@ -36,7 +36,8 @@ public class IncidenciaProfesor extends Incidencias {
 	}
 
 	@Override
-	public String toString() { // Metodo "toString" que imprime cada incidencia que se va añadiendo al ArrayList.
-		return Colores.ANSI_CYAN + "Incidencias de Profesores: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_GREEN + "ID Usuario: " + usuarioId + Colores.ANSI_RESET;
+	public String toString() { // Metodo que devuelve un mensaje con el tipo de incidencia y la incidencia en si
+		return Colores.ANSI_CYAN + "Incidencias de Profesores: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_GREEN + 
+				" Nombre del usuario: " + usuarioId + Colores.ANSI_RESET;
 	}
 }

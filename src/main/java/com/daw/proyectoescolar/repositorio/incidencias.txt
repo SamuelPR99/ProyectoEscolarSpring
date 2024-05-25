@@ -8,3 +8,11 @@ Alumno;prueba incidencia usuario PAULA;2024-05-22 17:14:05;6
 Profesor;el Hugo no sabe programar;2024-05-22 17:31:53;1
 Alumno;jejejejejejejeeeejejejeje;2024-05-22 17:39:19;7
 Aplicacion;se me ha crasheado esto pisha;2024-05-22 18:57:31;1
+Aplicacion;se le ha crasheao esto al Hugo killo;2024-05-23 16:55:05;7
+Aplicacion;otra ve una incidencia ;2024-05-23 17:03:02;7
+Alumno;UNICA INCIDENCIA PRUEBA;2024-05-23 17:09:33;7
+Alumno;UNICA INCIDENCIA PRUEBA 2;2024-05-23 17:14:32;7
+Alumno;UNICA INCIDENCIA PRUEBA 3;2024-05-23 17:17:48;7
+Alumno;UNICA INCIDENCIA PRUEBA 4;2024-05-23 17:44:41;7
+Alumno;UNICA INCIDENCIA PRUEBA 5;2024-05-23 17:54:06;7
+Alumno;UNICA INCIDENCIA PRUEBA 6;2024-05-23 18:46:27;7

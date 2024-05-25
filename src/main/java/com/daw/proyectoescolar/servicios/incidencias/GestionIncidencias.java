@@ -43,7 +43,7 @@ public class GestionIncidencias {
 		incidenciaAlumno.setIncidencia(sc.nextLine());
 		incidenciaAlumno.setUsuarioId(usuarioId);
 		iRepo.escribirIncidencia(incidenciaAlumno, usuarioId);
-		iRepo.insertarIncidenciasBBDD(); // Reemplazarlo por el metodo de insertar una incidencia en la base de datos
+		iRepo.insertarUnicaIncidenciaBBDD(incidenciaAlumno); // Reemplazarlo por el metodo de insertar una incidencia en la base de datos
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Alumno");
 
 		System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
@@ -131,6 +131,8 @@ public class GestionIncidencias {
 
 	}
 
+	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
 	public void verIncidenciasAlumno(int usuarioId, String nombre) {
 
 		if (getListaIncidencias().isEmpty()) {

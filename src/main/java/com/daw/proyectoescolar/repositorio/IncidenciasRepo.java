@@ -3,6 +3,7 @@ package com.daw.proyectoescolar.repositorio;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,6 +31,8 @@ public class IncidenciasRepo {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
+		
+		String ultimoRegistro = leerUltimoRegistroFichero();
 
 		List<Incidencias> listaIncidencias = new ArrayList<>();
 
@@ -39,8 +42,9 @@ public class IncidenciasRepo {
 			br = new BufferedReader(fr);
 
 			String linea;
+			
 			while ((linea = br.readLine()) != null) {
-				String[] datos = linea.split(";");
+				String[] datos = ultimoRegistro.split(";");
 				if (datos[0].equals("Alumno")) {
 					Incidencias incidencia = new IncidenciaAlumno(datos[1], datos[2], Integer.parseInt(datos[3]));
 					listaIncidencias.add(incidencia);
@@ -69,6 +73,40 @@ public class IncidenciasRepo {
 		}
 		return listaIncidencias;
 	}
+	
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	public String leerUltimoRegistroFichero() {
+		
+		String ultimoRegistro = null;
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		String linea = null;
+		
+		try {
+			
+			archivo = new File(Constantes.RUTA_INCIDENCIAS);
+			fr = new FileReader(archivo);
+			br = new BufferedReader(fr);
+			
+				while ((linea = br.readLine()) != null) {
+					
+					ultimoRegistro = linea;
+					
+				}
+				
+				br.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		return ultimoRegistro;
+		
+	}
+	
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 	public void escribirIncidencia(Incidencias incidencia, int usuarioId) {
 		BufferedWriter bw = null;
@@ -94,6 +132,8 @@ public class IncidenciasRepo {
 			}
 		}
 	}
+	
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 	// Comprobar si hay datos en incidencias con count
 	public boolean comprobarDatos() {
@@ -125,6 +165,8 @@ public class IncidenciasRepo {
 		return false;
 	}
 
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
 	public void insertarIncidenciasBBDD() {
 
 		List<Incidencias> incidencias = leerIncidencias();
@@ -160,10 +202,52 @@ public class IncidenciasRepo {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 	}
+	
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	public void insertarUnicaIncidenciaBBDD(Incidencias unicaIncidencia) {
+		
+		List<Incidencias> incidencias = leerIncidencias();
+		
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+		String sql = "INSERT INTO incidencia (tipo, incidencia, fecha, usuario_id) VALUES (?, ?, ?, ?)";
+		int filasAfectadas = 0;
 
+		try {
+			
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			for (Incidencias incidencia : incidencias) {
+				ps.setString(1, incidencia.getTipoIncidencia());
+				ps.setString(2, incidencia.getIncidencia());
+				ps.setString(3, incidencia.getFechaIncidencia());
+				ps.setInt(4, incidencia.getUsuarioId());
+				filasAfectadas = ps.executeUpdate();
+				
+			}
+
+			if (filasAfectadas > 0) {
+				System.out.println("Se han añadido " + filasAfectadas + " incidencias");
+			} else {
+				System.out.println("No se ha añadido ninguna incidencia");
+			}
+			ps.close();
+
+		} catch (SQLException e) {
+			System.err.println("Error al leer el archivo: " + e.getMessage());
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+		
+	}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
 	public List<Incidencias> listarIncidenciasBBDD() {
 
-		ArrayList<Incidencias> incidencias = (ArrayList<Incidencias>) leerIncidencias();
+		List<Incidencias> incidencias = leerIncidencias();
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
