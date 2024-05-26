@@ -1,0 +1,44 @@
+[2024-05-26 15:07:51] ERROR: (conn=5) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:09:03] ERROR: (conn=12) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:09:06] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
+[2024-05-26 15:41:53] ERROR: (conn=21) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:43:47] ERROR: (conn=28) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:45:01] ERROR: (conn=35) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:46:20] ERROR: (conn=42) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:49:36] ERROR: (conn=49) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:50:20] ERROR: (conn=56) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:50:53] ERROR: (conn=63) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:52:41] ERROR: (conn=70) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:54:15] ERROR: (conn=77) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:56:10] ERROR: (conn=84) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:56:49] ERROR: (conn=91) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:58:06] ERROR: (conn=98) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 15:58:37] ERROR: (conn=105) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:00:05] ERROR: (conn=112) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:04:59] ERROR: (conn=119) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:07:00] ERROR: (conn=124) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:07:29] ERROR: (conn=131) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:09:03] ERROR: (conn=138) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:09:57] ERROR: (conn=145) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:18:06] ERROR: (conn=152) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:20:50] ERROR: (conn=161) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:55:12] ERROR: (conn=168) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:58:18] ERROR: (conn=178) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 16:58:24] ERROR: Usuario o contraseña incorrectos. Cannot invoke "com.daw.proyectoescolar.entidades.UsuarioBase.getTipoUsuario()" because "usuario" is null
+[2024-05-26 16:59:22] ERROR: (conn=185) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 17:33:32] ERROR: (conn=192) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 17:33:48] ERROR: (conn=198) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 17:53:45] ERROR: (conn=205) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 17:53:56] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-26 18:13:29] ERROR: (conn=212) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 18:13:42] ERROR: Error al leer el archivo: (conn=216) Unknown column 'usuarioId' in 'field list' No se han cargado los usuarios por defecto.
+[2024-05-26 18:13:42] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-26 18:33:21] ERROR: (conn=219) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 18:33:33] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-26 18:35:09] ERROR: (conn=226) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 18:35:21] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-26 18:36:34] ERROR: (conn=233) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 18:36:43] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-26 18:38:05] ERROR: (conn=240) Unknown column 'numero_tema' in 'field list'
+[2024-05-26 18:38:46] ERROR: Opcion no valida seleccionada en el menu de incidencias.  no es una opcion valida.
+[2024-05-26 18:39:32] ERROR: (conn=251) Unknown column 'numero_tema' in 'field list'

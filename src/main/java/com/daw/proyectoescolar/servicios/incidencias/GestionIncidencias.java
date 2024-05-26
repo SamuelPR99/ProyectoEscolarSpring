@@ -1,7 +1,9 @@
 package com.daw.proyectoescolar.servicios.incidencias;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
@@ -13,12 +15,14 @@ import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.IncidenciasRepo;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
+import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 public class GestionIncidencias {
 	
 	// Atributos
 	private IncidenciasRepo iRepo = new IncidenciasRepo();
 	private List<Incidencias> listaIncidencias = iRepo.listarIncidenciasBBDD();
+	private GestionUsuarios gestionUsuarios = new GestionUsuarios();
 
 	// Constructores
 	public GestionIncidencias() {
@@ -242,5 +246,45 @@ public class GestionIncidencias {
 	} else {
 		iRepo.eliminarIncidenciasBBDD(incidenciaId);
 	}
+	}
+	
+	public Map<UsuarioBase, Incidencias> hashMapUsuariosIncidencias() {
+		
+		List<UsuarioBase> listaUsuarios = gestionUsuarios.obtenerUsuarios();
+		List<Incidencias> listaIncidencias = iRepo.leerIncidenciasParaHashMap();
+		
+		Map<UsuarioBase, Incidencias> hashMapUsuariosIncidencias = new HashMap<>();
+		
+		// Recorrer la lista de Usuarios y la de Incidencias para mapear el HashMap
+		for(UsuarioBase usuarios : listaUsuarios) {
+			for(Incidencias incidencias : listaIncidencias) {
+				hashMapUsuariosIncidencias.put(usuarios, incidencias);
+			}
+		}
+		
+		// Imprimir HashMap de Usuarios e Incidencias clasificando las incidencias imprimidas por cada usuario usando su ID.
+		for(UsuarioBase usuarios : listaUsuarios) {
+			System.out.println(Colores.ANSI_YELLOW + "\nUsuario: \n" + Colores.ANSI_WHITE + usuarios.getNombre() + Colores.ANSI_YELLOW + " con ID " 
+							+ Colores.ANSI_WHITE + usuarios.getUsuarioId() + Colores.ANSI_RESET);
+		for(Incidencias incidencias : listaIncidencias) {
+			if(usuarios.getUsuarioId() == incidencias.getUsuarioId()) {
+				System.out.println(Colores.ANSI_CYAN + " Incidencias de este usuario - " + Colores.ANSI_WHITE + incidencias.getIncidencia() + Colores.ANSI_RESET);
+			} 
+			
+			}
+		}
+		
+		return hashMapUsuariosIncidencias;
+	}
+	
+	public void buscadorDeIncidencias(Scanner sc) {
+		
+		System.out.println("Introduce el ID de la incidencia que quieres buscar: ");
+		int incidenciaId = sc.nextInt();
+	    if(incidenciaId <= 0) {
+			System.err.println("No existe ningún ID de incidencia por debajo de 1.");
+		} else {
+			iRepo.buscadorDeIncidenciasBBDD(incidenciaId);
+		}
 	}
 }

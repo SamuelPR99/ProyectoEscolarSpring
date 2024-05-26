@@ -77,6 +77,56 @@ public class IncidenciasRepo {
 	
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	
+	public List<Incidencias> leerIncidenciasParaHashMap() {
+
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+
+		List<Incidencias> listaIncidencias = new ArrayList<>();
+
+		try {
+			archivo = new File(Constantes.RUTA_INCIDENCIAS);
+			fr = new FileReader(archivo);
+			br = new BufferedReader(fr);
+
+			String linea;
+			
+			while ((linea = br.readLine()) != null) {
+				String[] datos = linea.split(";");
+				if (datos[0].equals("Alumno")) {
+					Incidencias incidencia = new IncidenciaAlumno(datos[1], datos[2], Integer.parseInt(datos[3]));
+					listaIncidencias.add(incidencia);
+				} else if (datos[0].equals("Profesor")) {
+					Incidencias incidencia = new IncidenciaProfesor(datos[1], datos[2], Integer.parseInt(datos[3]));
+					listaIncidencias.add(incidencia);
+				} else if (datos[0].equals("Aplicacion")) {
+					Incidencias incidencia = new IncidenciaAplicacion(datos[1], datos[2], Integer.parseInt(datos[3]));
+					listaIncidencias.add(incidencia);
+				}
+			}
+		} catch (IOException e) {
+			System.err.println("Error al leer el archivo: " + e.getMessage());
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+		} finally {
+			try {
+				if (null != fr) {
+					fr.close();
+				}
+			} catch (IOException e2) {
+				System.err.println("Error al cerrar el archivo: " + e2.getMessage());
+				GestionLogs.errorLogs("Error al cerrar el archivo: " + e2.getMessage()
+						+ " No se han cargado los usuarios por defecto.");
+			}
+		}
+		
+		return listaIncidencias;
+		
+	}
+	
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
 	public String leerUltimoRegistroFichero(String texto) {
 		
 		String ultimoRegistro = null;
@@ -231,19 +281,8 @@ public class IncidenciasRepo {
 		
 	}
 	
-	public Map<UsuarioBase, Incidencias> hashMapUsuariosIncidenciasBBDD() {
-		
-		List<UsuarioBase> listaUsuarios = gestionUsuarios.obtenerUsuarios();
-		List<Incidencias> listaIncidencias = leerIncidencias();
-		
-		Map<UsuarioBase, Incidencias> cositas = new HashMap<>();
-		
-		//String sql = "SELECT * FROM incidencia INNER JOIN usuario.usuario_id ON incidencia.incidencia_id = usuario.usuario_id";
-		
-		return cositas;
-	}
-	
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 	
 	public void eliminarIncidenciasBBDD(int incidenciaId) {
 		
@@ -331,6 +370,45 @@ public class IncidenciasRepo {
 
 		return incidencias;
 
+	}
+	
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	public void buscadorDeIncidenciasBBDD(int incidenciaId) {
+
+		List<Incidencias> incidencias = leerIncidencias();
+		
+		ConexionBBDD conexionBBDD = new ConexionBBDD();
+		Connection conexion = conexionBBDD.conectar();
+		
+		String sql = "SELECT incidencia_id, tipo, incidencia, usuario_id, fecha FROM incidencia WHERE incidencia_id = ?";
+		
+		try {
+			
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setInt(1, incidenciaId);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+			incidenciaId = rs.getInt("incidencia_id");
+			String tipo = rs.getString("tipo");
+			String descripcionIncidencia = rs.getString("incidencia");
+			String fecha = rs.getString("fecha");
+			int usuarioId = rs.getInt("usuario_id");
+			
+			}
+			
+			rs.close();
+			ps.close();
+			
+		} catch (SQLException e) {
+			System.err.println("Error al leer el archivo: " + e.getMessage());
+			GestionLogs.errorLogs("Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+		} finally {
+			conexionBBDD.cerrarConexion(conexion);
+		}
+		
 	}
 
 }

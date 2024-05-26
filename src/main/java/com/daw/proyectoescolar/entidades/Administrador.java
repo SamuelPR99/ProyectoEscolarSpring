@@ -49,7 +49,9 @@ public class Administrador extends UsuarioBase {
             System.out.println(Colores.ANSI_YELLOW + Colores.ANSI_UNDERLINE + "\nSeleccione una opcion:\n" + Colores.ANSI_RESET + Colores.ANSI_YELLOW
                     + "1. Mostrar incidencias\n"
                     + "2. Borrar incidencia\n"
-                    + "3. Salir del menu" + Colores.ANSI_RESET);
+                    + "3. Buscar incidencia\n"
+                    + "4. Mostrar Usuarios e Incidencias\n"
+                    + "5. Salir del menu" + Colores.ANSI_RESET);
 
             opcion = sc.nextLine().toLowerCase();
 
@@ -65,7 +67,17 @@ public class Administrador extends UsuarioBase {
                     gestor.eliminarIncidencias(sc);
                     break;
 
-                case "3", "salir del menu", "salir", "salir del":
+                case "3", "buscar incidencia", "buscar":
+                    GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Buscador de incidencias");
+                    gestor.buscadorDeIncidencias(sc);
+                    break;
+                    
+                case "4", "mostrar usuarios e incidencias":
+                	GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Mostrar Usuarios e Incidencias");
+                	gestor.hashMapUsuariosIncidencias();
+                	break;
+                	
+                case "5", "salir del menu", "salir", "salir del":
                     GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Salir del menu");
                     System.out.println(Colores.ANSI_BOLD + "Saliendo del menu de incidencias..." + Colores.ANSI_RESET);
                     break;
@@ -75,7 +87,7 @@ public class Administrador extends UsuarioBase {
                     GestionLogs.errorLogs("Opcion no valida seleccionada en el menu de incidencias. " + opcion + " no es una opcion valida.");
             }
 
-        } while (!opcion.equals("3") && !opcion.contains("salir"));
+        } while (!opcion.equals("5") && !opcion.contains("salir"));
     }
     
     // Menu administrador
