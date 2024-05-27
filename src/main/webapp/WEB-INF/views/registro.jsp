@@ -21,16 +21,15 @@
 	</select><br>
 	<label>Contraseña:</label> <input type="password" name="contrasena" required>
 	<input type="submit" value="Registrarse">
-	${mensaje}
 	<br>
+	<h5>${mensaje}</h5>
 	<a href="login">Iniciar sesión</a>
 </form>
 <footer>
 	<p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>
 	<p>
 		<a href="#">Política de Privacidad</a> |
-		<a href="#">Términos de Servicio</a> |
-		<a href="incidencias">Incidencias</a>
+		<a href="#">Términos de Servicio</a>
 	</p>
 </footer>
 </body>

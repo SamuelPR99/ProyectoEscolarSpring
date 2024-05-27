@@ -75,11 +75,11 @@ body {
 
 /* Estilos de validación */
 #nombre:valid, #contrasena:valid {
-    border-color: #34c759; /* verde */
+    border-color: #34c759;
 }
 
 #nombre:invalid, #contrasena:invalid {
-    border-color: #ff3b30; /* rojo */
+    border-color: #ff3b30;
 }
 
 /* Transiciones suaves */

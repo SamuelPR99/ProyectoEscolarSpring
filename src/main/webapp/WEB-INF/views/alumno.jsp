@@ -180,7 +180,7 @@
     <p>
         <a href="#">Política de Privacidad</a> |
         <a href="#">Términos de Servicio</a> |
-        <a href="#">Contacto</a>
+        <a href="incidencias">Incidencias</a>
     </p>
 </footer>
 

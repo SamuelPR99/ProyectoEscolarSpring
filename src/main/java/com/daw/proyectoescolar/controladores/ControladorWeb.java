@@ -174,6 +174,16 @@ public class ControladorWeb {
 		return mav;
 	}
 
+	@GetMapping("incidencias")
+	public ModelAndView incidencias(HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
+		mav.addObject("usuario", usuario);
+
+		return mav;
+	}
+
 	@GetMapping("error")
 	public ModelAndView error() {
 		return new ModelAndView("error");
