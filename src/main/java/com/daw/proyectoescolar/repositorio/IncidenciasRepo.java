@@ -376,28 +376,37 @@ public class IncidenciasRepo {
 	
 	public void buscadorDeIncidenciasBBDD(int incidenciaId) {
 
-		List<Incidencias> incidencias = leerIncidencias();
+		List<Incidencias> incidencias = new ArrayList<Incidencias>();
+		
+		Incidencias incidencia = null;
+		String tipo = "";
+		String descripcionIncidencia = "";
+		int usuarioId = 0;
+		String fecha = "";
 		
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
 		
-		String sql = "SELECT incidencia_id, tipo, incidencia, usuario_id, fecha FROM incidencia WHERE incidencia_id = ?";
+		String sql = "SELECT * FROM incidencia WHERE incidencia_id = ?";
 		
 		try {
 			
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ps.setInt(1, incidenciaId);
+			ps.setString(2, tipo);
+			ps.setString(3, descripcionIncidencia);
+			ps.setString(4, fecha);
+			ps.setInt(5, usuarioId);
 			
 			ResultSet rs = ps.executeQuery();
 			
-			if(rs.next()) {
-			incidenciaId = rs.getInt("incidencia_id");
-			String tipo = rs.getString("tipo");
-			String descripcionIncidencia = rs.getString("incidencia");
-			String fecha = rs.getString("fecha");
-			int usuarioId = rs.getInt("usuario_id");
-			
-			}
+			 if ("alumno".equalsIgnoreCase(tipo)) {
+                 incidencia = new IncidenciaAlumno(incidenciaId, descripcionIncidencia, fecha, usuarioId);
+             } else if ("profesor".equalsIgnoreCase(tipo)) {
+            	 incidencia = new IncidenciaProfesor(incidenciaId, descripcionIncidencia, fecha, usuarioId);
+             } else if ("aplicacion".equalsIgnoreCase(tipo)) {
+            	 incidencia = new IncidenciaAplicacion(incidenciaId, descripcionIncidencia, fecha, usuarioId);
+             }
 			
 			rs.close();
 			ps.close();
