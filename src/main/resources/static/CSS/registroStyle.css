@@ -1,21 +1,35 @@
 body {
     background-image: url(../IMG/fondoReg.jpg);
-    display: flex;
-    justify-content: center;
-    height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la vista */
-    margin: 0; /* Elimina los márgenes predeterminados */
 }
 
-#registroForm {
+body::after {
+    content: "";
+    background: url(../IMG/fondoReg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(2.5px);
+    filter: contrast(0.8);
+}
+
+#regForm {
     background-color: rgba(0, 18, 101, 0.6);
     padding: 2rem;
     border-radius: 20px;
     box-shadow: 0px 3px 10px 10px rgba(0, 0, 0, 0.2);
     width: 300px;
     margin: auto;
+    color: white;
 }
 
-#registroForm input[type="text"], #registroForm input[type="password"], #registroForm select {
+#regForm input[type="text"], #regForm input[type="password"] {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
@@ -23,7 +37,7 @@ body {
     border: 1px solid #ddd;
 }
 
-#registroForm input[type="submit"] {
+#regForm button {
     width: 100%;
     padding: 0.5rem;
     background-color: #004a99;
@@ -34,69 +48,69 @@ body {
     transition: background-color 0.3s ease;
 }
 
-#registroForm input[type="submit"]:hover {
+#regForm button:hover {
     background-color: #4CAF50;
 }
 
-#registroForm a {
+#regForm h5 {
+    text-align: center;
+    color: red;
+    margin-top: 1rem;
+}
+
+#regForm a {
     text-decoration: none;
     color: #0066cc;
     display: block;
     text-align: center;
     margin-top: 1rem;
-    transition: color 0.3s ease;
 }
 
-#registroForm a:hover {
+/* Estilos para los campos de entrada */
+#nombre, #contrasena {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Estilos de foco para los campos de entrada */
+#nombre:focus, #contrasena:focus {
+    border-color: #0066cc;
+    outline: none;
+    box-shadow: 0 0 5px #0066cc;
+}
+
+/* Estilos de validación */
+#nombre:valid, #contrasena:valid {
+    border-color: #34c759; /* verde */
+}
+
+#nombre:invalid, #contrasena:invalid {
+    border-color: #ff3b30; /* rojo */
+}
+
+/* Transiciones suaves */
+#nombre, #contrasena {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilos para el botón de envío */
+#loginForm button:active {
+    background-color: #002233;
+    transform: scale(0.95);
+}
+
+#loginForm a {
+    text-decoration: none;
+    color: #0066cc;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    transition: color 0.3s ease; /* Agrega esta línea */
+}
+
+#loginForm a:hover {
     color: #ff3b30;
-}
-
-#registroForm label, #registroForm input {
-    color: white;
-}
-
-.desplegable {
-    position: absolute;
-    top: calc(50% - 6%);
-    display: grid;
-    place-items: center;
-    width: 300px;
-    height: 20%;
-    background-color: #45a049;
-    padding: 20px;
-    border-radius: 10px 40px;
-    box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    opacity: 0;
-    animation: mostrarDesplegable2 1s forwards;
-    animation-play-state: paused;
-}
-
-.mostrar-desplegable {
-    animation: mostrarDesplegable 1s forwards;
-    animation-play-state: running;
-}
-
-@keyframes mostrarDesplegable2{
-    0%{
-        opacity: 0;
-        left: 0;
-    }
-    50%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 1;
-        left: calc(20%);
-    }
-}
-
-@keyframes mostrarDesplegable {
-    0% {
-        left: 0;
-    }
-    100% {
-        opacity: 1;
-        left: calc(10% + 20px);
-    }
 }

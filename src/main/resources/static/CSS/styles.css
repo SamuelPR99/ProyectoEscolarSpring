@@ -19,15 +19,11 @@ header {
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     top: 0; /* Esto coloca el encabezado en la parte superior de la página */
-
-
 }
 
 header, footer {
     opacity: 0; /* Inicialmente oculto */
     transition: opacity 1s ease-in-out; /* Transición de 1 segundo */
-    position: fixed;
-    width: 100%;
     z-index: 1; /* Esto asegura que el encabezado y el pie de página estén siempre en la parte superior */
 }
 

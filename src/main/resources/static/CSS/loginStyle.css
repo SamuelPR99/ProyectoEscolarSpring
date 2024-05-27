@@ -19,7 +19,6 @@ body::after {
     filter: contrast(0.8);
 }
 
-
 #loginForm {
     background-color: rgba(0, 18, 101, 0.6);
     padding: 2rem;
