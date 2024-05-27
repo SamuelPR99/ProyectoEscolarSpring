@@ -265,10 +265,13 @@ public class GestionIncidencias {
 		// Imprimir HashMap de Usuarios e Incidencias clasificando las incidencias imprimidas por cada usuario usando su ID.
 		for(UsuarioBase usuarios : listaUsuarios) {
 			System.out.println(Colores.ANSI_YELLOW + "\nUsuario: \n" + Colores.ANSI_WHITE + usuarios.getNombre() + Colores.ANSI_YELLOW + " con ID " 
-							+ Colores.ANSI_WHITE + usuarios.getUsuarioId() + Colores.ANSI_RESET);
+							+ Colores.ANSI_WHITE + usuarios.getUsuarioId() + " - " + Colores.ANSI_YELLOW + "Usuario de tipo " 
+							+ usuarios.getTipoUsuario() + "\n" + Colores.ANSI_RESET);
+			
 		for(Incidencias incidencias : listaIncidencias) {
 			if(usuarios.getUsuarioId() == incidencias.getUsuarioId()) {
-				System.out.println(Colores.ANSI_CYAN + " Incidencias de este usuario - " + Colores.ANSI_WHITE + incidencias.getIncidencia() + Colores.ANSI_RESET);
+				System.out.println(Colores.ANSI_CYAN + " Incidencias de este usuario - " + Colores.ANSI_WHITE + incidencias.getIncidencia() + " - " 
+				+ Colores.ANSI_GREEN + "Incidencia de tipo: " + Colores.ANSI_WHITE + incidencias.getTipoIncidencia() + "\n" + Colores.ANSI_RESET);
 			} 
 			
 			}
