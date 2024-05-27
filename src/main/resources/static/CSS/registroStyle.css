@@ -35,6 +35,10 @@ body {
     background-color: #4CAF50;
 }
 
+#regForm input[type="submit"]:hover {
+    background-color: #4CAF50; /* Cambia a un tono de verde */
+}
+
 #regForm h5 {
     text-align: center;
     color: red;
@@ -47,6 +51,10 @@ body {
     display: block;
     text-align: center;
     margin-top: 1rem;
+}
+
+#regForm a:hover {
+    color: #ffffff;
 }
 
 /* Estilos para los campos de entrada */
@@ -96,4 +104,12 @@ body {
 
 #loginForm a:hover {
     color: #ff3b30;
+}
+
+#regForm select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
 }
