@@ -2,23 +2,6 @@ body {
     background-image: url(../IMG/fondoReg.jpg);
 }
 
-body::after {
-    content: "";
-    background: url(../IMG/fondoReg.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    filter: blur(2.5px);
-    filter: contrast(0.8);
-}
-
 #regForm {
     background-color: rgba(0, 18, 101, 0.6);
     padding: 2rem;
