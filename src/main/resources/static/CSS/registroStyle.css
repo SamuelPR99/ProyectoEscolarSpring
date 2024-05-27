@@ -2,23 +2,6 @@ body {
     background-image: url(../IMG/fondoReg.jpg);
 }
 
-body::after {
-    content: "";
-    background: url(../IMG/fondoReg.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    filter: blur(2.5px);
-    filter: contrast(0.8);
-}
-
 #regForm {
     background-color: rgba(0, 18, 101, 0.6);
     padding: 2rem;
@@ -52,6 +35,10 @@ body::after {
     background-color: #4CAF50;
 }
 
+#regForm input[type="submit"]:hover {
+    background-color: #4CAF50; /* Cambia a un tono de verde */
+}
+
 #regForm h5 {
     text-align: center;
     color: red;
@@ -64,6 +51,10 @@ body::after {
     display: block;
     text-align: center;
     margin-top: 1rem;
+}
+
+#regForm a:hover {
+    color: #ffffff;
 }
 
 /* Estilos para los campos de entrada */
@@ -84,11 +75,11 @@ body::after {
 
 /* Estilos de validación */
 #nombre:valid, #contrasena:valid {
-    border-color: #34c759; /* verde */
+    border-color: #34c759;
 }
 
 #nombre:invalid, #contrasena:invalid {
-    border-color: #ff3b30; /* rojo */
+    border-color: #ff3b30;
 }
 
 /* Transiciones suaves */
@@ -113,4 +104,12 @@ body::after {
 
 #loginForm a:hover {
     color: #ff3b30;
+}
+
+#regForm select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
 }
