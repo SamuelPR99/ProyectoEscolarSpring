@@ -1,10 +1,7 @@
 package com.daw.proyectoescolar.servicios.temas;
 
 import java.sql.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Tarea;
@@ -157,6 +154,7 @@ public class GestionTemas {
 	}
 
 	public double calcularMediaNotasAlumno(int idAlumno) {
+
 		TemasRepo tRepo = new TemasRepo();
 		List<Tarea> tareasEntregadas = tRepo.tareasEntregadas(idAlumno);
 
@@ -173,11 +171,11 @@ public class GestionTemas {
 	}
 
 	// Añadir la lista de tareas entregadas a tiempo por cada alumno
-	public LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno() {
+	public Map<Alumno, Integer> tareasEntregadasATiempoPorAlumno() {
 
 		UsuariosRepo uRepo = new UsuariosRepo();
 		List<Alumno> alumnos = uRepo.obtenerAlumnos();
-		LinkedHashMap<Alumno, Integer> tareasEntregadasATiempoPorAlumno = new LinkedHashMap<>();
+		Map<Alumno, Integer> tareasEntregadasATiempoPorAlumno = new LinkedHashMap<>();
 
 		for (Alumno alumno : alumnos) {
 			int idAlumno = alumno.getUsuarioId();

@@ -48,6 +48,32 @@
 
     <section>
         <h2>Incidencias</h2>
+        <div>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Resolver incidencia</th>
+                </tr>
+                <!-- hashmap incidencias -->
+                <c:forEach var="incidencia" items="${incidencias}">
+                    <tr>
+                        <td>${incidencia.key}</td>
+                        <td>${incidencia.value.usuarioId}</td>
+                        <td>${incidencia.value.fechaIncidencia}</td>
+                        <td>${incidencia.value.incidencia}</td>
+                        <td>${incidencia.value.tipoIncidencia}</td>
+                        <td>
+                            <form action="resolverIncidencia" method="post">
+                                <input type="hidden" name="incidenciaId" value="${incidencia.key}">
+                                <input type="submit" value="✅">
+                            </form>
+                        </td>
+                    </tr>
+            </table>
     </section>
 </main>
 <footer>

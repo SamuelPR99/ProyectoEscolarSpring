@@ -1,9 +1,6 @@
 package com.daw.proyectoescolar.servicios.usuarios;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.entidades.Profesor;
@@ -397,12 +394,13 @@ public class GestionUsuarios {
 	}
 
 
-	public LinkedHashMap<Alumno, Double> obtenerNotaMediaTareasEntregadas() {
-		LinkedHashMap<Alumno, Double> notaMediaPorAlumno = new LinkedHashMap<>();
+	public Map<Alumno, Double> obtenerNotaMediaTareasEntregadas() {
+
+		Map<Alumno, Double> notaMediaPorAlumno = new LinkedHashMap<>();
 		List<UsuarioBase> usuarios = obtenerUsuarios();
 
 		for (UsuarioBase usuario : usuarios) {
-			if (usuario instanceof Alumno) {
+			if (usuario.getTipoUsuario().equals("Alumno")) {
 				Alumno alumno = (Alumno) usuario;
 				double notaMedia = new GestionTemas().calcularMediaNotasAlumno(alumno.getUsuarioId());
 				notaMediaPorAlumno.put(alumno, notaMedia);

@@ -192,7 +192,6 @@ public class UsuariosRepo {
 		String sqlInsertNota = "INSERT INTO nota (usuario_id, nota) VALUES (?, ?)";
 
 		try {
-
 			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
 
 			for (UsuarioBase usuario : usuarios) {
@@ -240,7 +239,6 @@ public class UsuariosRepo {
 		String sql = "SELECT * FROM usuario";
 
 		try {
-
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
@@ -300,7 +298,6 @@ public class UsuariosRepo {
 		String sqlDeleteUsuario = "DELETE FROM usuario";
 
 		try {
-
 			PreparedStatement psDeleteNota = conexion.prepareStatement(sqlDeleteNota);
 			psDeleteNota.executeUpdate();
 
@@ -324,7 +321,6 @@ public class UsuariosRepo {
 		String sql = "SELECT COUNT(*) FROM usuario";
 
 		try {
-
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
@@ -357,7 +353,6 @@ public class UsuariosRepo {
 		String sqlInsertNota = "INSERT INTO nota (usuario_id, nota) VALUES (?, ?)";
 
 		try {
-
 			PreparedStatement psInsert = conexion.prepareStatement(sqlInsert);
 			psInsert.setString(1, usuario.getNombre());
 			psInsert.setString(2, usuario.getContrasena());
@@ -396,7 +391,6 @@ public class UsuariosRepo {
 		String sql = "UPDATE usuario SET contrasena = ? WHERE nombre = ?";
 		
 		try {
-
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ps.setString(1, usuario.getContrasena());
 			ps.setString(2, usuario.getNombre());
@@ -451,7 +445,6 @@ public class UsuariosRepo {
 		String sql = "UPDATE nota SET nota = ? WHERE usuario_id = ?";
 
 		try {
-
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ps.setDouble(1, nota);
 			ps.setInt(2, usuarioId);
@@ -474,7 +467,6 @@ public class UsuariosRepo {
 		String sql = "DELETE FROM usuario WHERE usuario_id = ?";
 
 		try {
-
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ps.setInt(1, usuarioId);
 			ps.executeUpdate();

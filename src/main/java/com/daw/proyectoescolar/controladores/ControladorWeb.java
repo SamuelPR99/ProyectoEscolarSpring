@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.repositorio.FechaYHora;
+import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class ControladorWeb {
 
 	private final GestionUsuarios gestionUsuarios = new GestionUsuarios();
 	private final GestionTemas gestionTemas = new GestionTemas();
+	private final GestionIncidencias gestionIncidencias = new GestionIncidencias();
 
 	@GetMapping("login")
 	public ModelAndView login() {
@@ -120,6 +122,7 @@ public class ControladorWeb {
 			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
 			mav.setViewName("administrador");
 			mav.addObject("usuarios", gestionUsuarios.obtenerUsuarios());
+			mav.addObject("incidencia", gestionIncidencias.hashMapUsuariosIncidencias());
 		} else {
 			mav.setViewName("error");
 		}
