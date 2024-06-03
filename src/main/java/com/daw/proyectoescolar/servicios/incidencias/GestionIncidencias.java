@@ -34,10 +34,6 @@ public class GestionIncidencias {
 		return listaIncidencias;
 	}
 
-	public void setListaIncidencias(List<Incidencias> listaIncidencias) {
-		this.listaIncidencias = listaIncidencias;
-	}
-
 	// Metodos
 
 	public void crearIncidenciaAlumno(Scanner sc, int usuarioId) {
@@ -243,9 +239,9 @@ public class GestionIncidencias {
         int incidenciaId = sc.nextInt();
         if(incidenciaId <= 0) {
 		System.err.println("No existe ningún ID de incidencia por debajo de 1.");
-	} else {
-		iRepo.eliminarIncidenciasBBDD(incidenciaId);
-	}
+		} else {
+			iRepo.eliminarIncidenciasBBDD(incidenciaId);
+		}
 	}
 	
 	public Map<UsuarioBase, Incidencias> hashMapUsuariosIncidencias() {
