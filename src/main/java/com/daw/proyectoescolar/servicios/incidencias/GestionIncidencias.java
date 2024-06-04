@@ -277,14 +277,17 @@ public class GestionIncidencias {
 	}
 
 	public void buscadorDeIncidencias(Scanner sc) {
-		System.out.println("Introduce el ID de la incidencia a buscar: ");
-		int incidenciaId = sc.nextInt();
-		sc.nextLine();
-		if(incidenciaId <= 0) {
-		System.err.println("No existe ningún ID de incidencia por debajo de 1.");
+
+		System.out.println("Introduce la clave de busqueda de la incidencia a buscar: ");
+		String busqueda = sc.nextLine();
+		List<Incidencias> listaBusqueda = iRepo.buscadorDeIncidenciasBBDD(busqueda);
+
+		if(listaBusqueda.isEmpty()) {
+			System.err.println("Busqueda vacia");
 		} else {
-			Incidencias incidencia = iRepo.buscadorDeIncidenciasBBDD(incidenciaId);
-			System.out.println(incidencia);
+			for(Incidencias incidencias : listaBusqueda) {
+				System.out.println(incidencias);
+			}
 		}
 	}
 }

@@ -379,20 +379,23 @@ public class IncidenciasRepo {
 	
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-	public Incidencias buscadorDeIncidenciasBBDD(int incidenciaId) {
+	public List<Incidencias> buscadorDeIncidenciasBBDD(String busqueda) {
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
 
-		String sql = "SELECT * FROM incidencia WHERE incidencia_id = ?";
+		String sql = "SELECT * FROM incidencia WHERE incidencia LIKE ?";
+
+		List<Incidencias> incidenciasList = new ArrayList<>();
 
 		try {
 
 			PreparedStatement ps = conexion.prepareStatement(sql);
-			ps.setInt(1, incidenciaId);
+			ps.setString(1, "%" + busqueda + "%");
 			ResultSet rs = ps.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
+				int incidenciaId = rs.getInt("incidencia_id");
 				String tipoIncidencia = rs.getString("tipo");
 				String descripcionIncidencia = rs.getString("incidencia");
 				int usuario_id = rs.getInt("usuario_id");
@@ -402,14 +405,16 @@ public class IncidenciasRepo {
 
 				switch (tipoIncidencia) {
 					case Constantes.INCI_PROFESOR:
-						return new IncidenciaProfesor(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario);
+						incidenciasList.add(new IncidenciaProfesor(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario));
+						break;
 					case Constantes.INCI_ALUMNO:
-						return new IncidenciaAlumno(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario);
+						incidenciasList.add(new IncidenciaAlumno(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario));
+						break;
 					case Constantes.INCI_APLICACION:
-						return new IncidenciaAplicacion(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario);
+						incidenciasList.add(new IncidenciaAplicacion(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario));
+						break;
 					default:
 						System.err.println("Tipo de incidencia desconocido: " + tipoIncidencia);
-						return null;
 				}
 			}
 
@@ -424,7 +429,7 @@ public class IncidenciasRepo {
 			conexionBBDD.cerrarConexion(conexion);
 		}
 
-		return null;
+		return incidenciasList;
 	}
 
 }
