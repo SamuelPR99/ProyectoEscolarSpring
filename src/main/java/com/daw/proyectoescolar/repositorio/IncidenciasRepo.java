@@ -43,17 +43,18 @@ public class IncidenciasRepo {
 			br = new BufferedReader(fr);
 
 			String linea;
-			
+
 			while ((linea = br.readLine()) != null) {
 				String[] datos = leerUltimoRegistroFichero(ultimoRegistro).split(";");
+				UsuarioBase usuario = gestionUsuarios.getUsuarioPorId(Integer.parseInt(datos[3]));
 				if (datos[0].equals("Alumno")) {
-					Incidencias incidencia = new IncidenciaAlumno(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaAlumno(datos[1], datos[2], usuario);
 					listaIncidencias.add(incidencia);
 				} else if (datos[0].equals("Profesor")) {
-					Incidencias incidencia = new IncidenciaProfesor(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaProfesor(datos[1], datos[2], usuario);
 					listaIncidencias.add(incidencia);
 				} else if (datos[0].equals("Aplicacion")) {
-					Incidencias incidencia = new IncidenciaAplicacion(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaAplicacion(datos[1], datos[2], usuario);
 					listaIncidencias.add(incidencia);
 				}
 			}
@@ -91,17 +92,18 @@ public class IncidenciasRepo {
 			br = new BufferedReader(fr);
 
 			String linea;
-			
+
 			while ((linea = br.readLine()) != null) {
 				String[] datos = linea.split(";");
+				UsuarioBase usuario = gestionUsuarios.getUsuarioPorId(Integer.parseInt(datos[3]));
 				if (datos[0].equals("Alumno")) {
-					Incidencias incidencia = new IncidenciaAlumno(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaAlumno(datos[1], datos[2], usuario);
 					listaIncidencias.add(incidencia);
 				} else if (datos[0].equals("Profesor")) {
-					Incidencias incidencia = new IncidenciaProfesor(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaProfesor(datos[1], datos[2], usuario);
 					listaIncidencias.add(incidencia);
 				} else if (datos[0].equals("Aplicacion")) {
-					Incidencias incidencia = new IncidenciaAplicacion(datos[1], datos[2], Integer.parseInt(datos[3]));
+					Incidencias incidencia = new IncidenciaAplicacion(datos[1], datos[2], usuario);
 					listaIncidencias.add(incidencia);
 				}
 			}
@@ -233,7 +235,7 @@ public class IncidenciasRepo {
 				ps.setString(1, incidencia.getTipoIncidencia());
 				ps.setString(2, incidencia.getIncidencia());
 				ps.setString(3, incidencia.getFechaIncidencia());
-				ps.setInt(4, incidencia.getUsuarioId());
+				ps.setInt(4, incidencia.getUsuario().getUsuarioId());
 				filasAfectadas = ps.executeUpdate();
 
 			}
@@ -268,7 +270,7 @@ public class IncidenciasRepo {
 			
 				ps.setString(1, unicaIncidencia.getTipoIncidencia());
 				ps.setString(2, unicaIncidencia.getIncidencia());
-				ps.setInt(3, unicaIncidencia.getUsuarioId());
+				ps.setInt(3, unicaIncidencia.getUsuario().getUsuarioId());
 				ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -315,10 +317,11 @@ public class IncidenciasRepo {
 	}
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-	
+
 	public List<Incidencias> listarIncidenciasBBDD() {
 
 		List<Incidencias> incidencias = leerIncidencias();
+		GestionUsuarios gestionUsuarios = new GestionUsuarios();
 
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
@@ -337,22 +340,24 @@ public class IncidenciasRepo {
 				int usuario_id = rs.getInt("usuario_id");
 				String fechaIncidencia = rs.getString("fecha");
 
+				UsuarioBase usuario = gestionUsuarios.getUsuarioPorId(usuario_id);
+
 				switch (tipoIncidencia) {
-				case Constantes.INCI_PROFESOR:
-					incidencias.add(new IncidenciaProfesor(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
-					break;
+					case Constantes.INCI_PROFESOR:
+						incidencias.add(new IncidenciaProfesor(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario));
+						break;
 
-				case Constantes.INCI_ALUMNO:
-					incidencias.add(new IncidenciaAlumno(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
-					break;
+					case Constantes.INCI_ALUMNO:
+						incidencias.add(new IncidenciaAlumno(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario));
+						break;
 
-				case Constantes.INCI_APLICACION:
-					incidencias.add(new IncidenciaAplicacion(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario_id));
-					break;
+					case Constantes.INCI_APLICACION:
+						incidencias.add(new IncidenciaAplicacion(incidencia_id, descripcionIncidencia, fechaIncidencia, usuario));
+						break;
 
-				default:
-					System.err.println("Tipo de incidencia desconocido: " + tipoIncidencia);
-					break;
+					default:
+						System.err.println("Tipo de incidencia desconocido: " + tipoIncidencia);
+						break;
 				}
 
 			}
@@ -373,51 +378,53 @@ public class IncidenciasRepo {
 	}
 	
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-	
-	public void buscadorDeIncidenciasBBDD(int incidenciaId) {
 
-		List<Incidencias> incidencias = new ArrayList<Incidencias>();
-		
-		Incidencias incidencia = null;
-		String tipo = "";
-		String descripcionIncidencia = "";
-		int usuarioId = 0;
-		String fecha = "";
-		
+	public Incidencias buscadorDeIncidenciasBBDD(int incidenciaId) {
+
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
-		
+
 		String sql = "SELECT * FROM incidencia WHERE incidencia_id = ?";
-		
+
 		try {
-			
+
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ps.setInt(1, incidenciaId);
-			ps.setString(2, tipo);
-			ps.setString(3, descripcionIncidencia);
-			ps.setString(4, fecha);
-			ps.setInt(5, usuarioId);
-			
 			ResultSet rs = ps.executeQuery();
-			
-			 if ("alumno".equalsIgnoreCase(tipo)) {
-                 incidencia = new IncidenciaAlumno(incidenciaId, descripcionIncidencia, fecha, usuarioId);
-             } else if ("profesor".equalsIgnoreCase(tipo)) {
-            	 incidencia = new IncidenciaProfesor(incidenciaId, descripcionIncidencia, fecha, usuarioId);
-             } else if ("aplicacion".equalsIgnoreCase(tipo)) {
-            	 incidencia = new IncidenciaAplicacion(incidenciaId, descripcionIncidencia, fecha, usuarioId);
-             }
-			
+
+			if (rs.next()) {
+				String tipoIncidencia = rs.getString("tipo");
+				String descripcionIncidencia = rs.getString("incidencia");
+				int usuario_id = rs.getInt("usuario_id");
+				String fechaIncidencia = rs.getString("fecha");
+
+				UsuarioBase usuario = gestionUsuarios.getUsuarioPorId(usuario_id);
+
+				switch (tipoIncidencia) {
+					case Constantes.INCI_PROFESOR:
+						return new IncidenciaProfesor(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario);
+					case Constantes.INCI_ALUMNO:
+						return new IncidenciaAlumno(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario);
+					case Constantes.INCI_APLICACION:
+						return new IncidenciaAplicacion(incidenciaId, descripcionIncidencia, fechaIncidencia, usuario);
+					default:
+						System.err.println("Tipo de incidencia desconocido: " + tipoIncidencia);
+						return null;
+				}
+			}
+
 			rs.close();
 			ps.close();
-			
+
 		} catch (SQLException e) {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
-			GestionLogs.errorLogs("Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
+			GestionLogs.errorLogs(
+					"Error al leer el archivo: " + e.getMessage() + " No se han cargado los usuarios por defecto.");
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
-		
+
+		return null;
 	}
 
 }

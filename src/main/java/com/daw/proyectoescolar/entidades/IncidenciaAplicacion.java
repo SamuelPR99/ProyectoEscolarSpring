@@ -21,12 +21,12 @@ public class IncidenciaAplicacion extends Incidencias {
 		super(incidenciaId, incidencia, fechaIncidencia);
 	}
 
-	public IncidenciaAplicacion(int incidenciaId, String incidencia, String fechaIncidencia, int usuarioId) {
-		super(incidenciaId, incidencia, fechaIncidencia, usuarioId);
+	public IncidenciaAplicacion(int incidenciaId, String incidencia, String fechaIncidencia, UsuarioBase usuario) {
+		super(incidenciaId, incidencia, fechaIncidencia, usuario);
 	}
 
-	public IncidenciaAplicacion(String incidencia, String fechaIncidencia, int usuarioId) {
-		super(incidencia, fechaIncidencia, usuarioId);
+	public IncidenciaAplicacion(String incidencia, String fechaIncidencia, UsuarioBase usuario) {
+		super(incidencia, fechaIncidencia, usuario);
 	}
 
 	// Metodos
@@ -38,7 +38,7 @@ public class IncidenciaAplicacion extends Incidencias {
 	@Override
 	public String toString() { // Metodo que devuelve un mensaje con el tipo de incidencia y la incidencia en si
 		return Colores.ANSI_CYAN + "Incidencias de Aplicación: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_GREEN + 
-				" Nombre del usuario: " + usuarioId + Colores.ANSI_RESET;
+				" Nombre del usuario: " + usuario.getNombre() + Colores.ANSI_RESET;
 	}
 
 }

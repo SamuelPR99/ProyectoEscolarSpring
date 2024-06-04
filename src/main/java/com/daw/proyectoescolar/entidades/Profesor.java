@@ -73,9 +73,9 @@ public class Profesor extends UsuarioBase {
 					opcion2 = sc.nextLine().toLowerCase();
 					
 					if(opcion2.equals("1") || opcion2.equals("incidencia de profesor")) {
-					gestor.crearIncidenciaProfesor(sc, usuario.getUsuarioId());
+					gestor.crearIncidenciaProfesor(sc, this);
 					} else if(opcion2.equals("2") || opcion2.equals("incidencia de aplicacion")) {
-					gestor.crearIncidenciaAplicacion(sc, usuario.getUsuarioId());
+					gestor.crearIncidenciaAplicacion(sc, this);
 					} else {
 						System.err.println("Por favor, introduce una opción válida");
 					}

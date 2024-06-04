@@ -410,4 +410,13 @@ public class GestionUsuarios {
 		return notaMediaPorAlumno;
 	}
 
+	public UsuarioBase getUsuarioPorId(int usuarioId) {
+		for (UsuarioBase usuario : obtenerUsuarios()) {
+			if (usuario.getUsuarioId() == usuarioId) {
+				return usuario;
+			}
+		}
+		return null;
+	}
+
 }

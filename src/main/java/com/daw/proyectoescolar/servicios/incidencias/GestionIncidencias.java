@@ -36,26 +36,26 @@ public class GestionIncidencias {
 
 	// Metodos
 
-	public void crearIncidenciaAlumno(Scanner sc, int usuarioId) {
+	public void crearIncidenciaAlumno(Scanner sc, UsuarioBase usuario) {
 
 		Incidencias incidenciaAlumno = new IncidenciaAlumno();
 		System.out.println("\nIntroduzca la incidencia de alumno: ");
 		incidenciaAlumno.setIncidencia(sc.nextLine());
-		incidenciaAlumno.setUsuarioId(usuarioId);
-		iRepo.escribirIncidencia(incidenciaAlumno, usuarioId);
+		incidenciaAlumno.setUsuario(usuario);
+		iRepo.escribirIncidencia(incidenciaAlumno, usuario.getUsuarioId());
 		iRepo.insertarUnicaIncidenciaBBDD(incidenciaAlumno);
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Alumno");
 
 		System.out.println(Colores.ANSI_GREEN + "\nIncidencia de alumno añadida con exito!" + Colores.ANSI_RESET);
 	}
 
-	public void crearIncidenciaProfesor(Scanner sc, int usuarioId) {
+	public void crearIncidenciaProfesor(Scanner sc, UsuarioBase usuario) {
 
 		Incidencias incidenciaProfesor = new IncidenciaProfesor();
 		System.out.println("\nIntroduzca la incidencia de profesor: ");
 		incidenciaProfesor.setIncidencia(sc.nextLine());
-		incidenciaProfesor.setUsuarioId(usuarioId);
-		iRepo.escribirIncidencia(incidenciaProfesor, usuarioId);
+		incidenciaProfesor.setUsuario(usuario);
+		iRepo.escribirIncidencia(incidenciaProfesor, usuario.getUsuarioId());
 		iRepo.insertarUnicaIncidenciaBBDD(incidenciaProfesor);
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Profesor");
 
@@ -63,13 +63,13 @@ public class GestionIncidencias {
 	}
 
 	// esto metelo en los menus de incidencias de los usuarios que ya me ha dao un poco de pereza
-	public void crearIncidenciaAplicacion(Scanner sc, int usuarioId) {
+	public void crearIncidenciaAplicacion(Scanner sc, UsuarioBase usuario) {
 
 		Incidencias incidenciaAplicacion = new IncidenciaAplicacion();
 		System.out.println("\nIntroduzca la incidencia de aplicacion: ");
 		incidenciaAplicacion.setIncidencia(sc.nextLine());
-		incidenciaAplicacion.setUsuarioId(usuarioId);
-		iRepo.escribirIncidencia(incidenciaAplicacion, usuarioId);
+		incidenciaAplicacion.setUsuario(usuario);
+		iRepo.escribirIncidencia(incidenciaAplicacion, usuario.getUsuarioId());
 		iRepo.insertarUnicaIncidenciaBBDD(incidenciaAplicacion);
 		GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Crear Incidencias de Aplicacion");
 
@@ -139,7 +139,7 @@ public class GestionIncidencias {
 			System.err.println("\nLo siento. No hay incidencias de alumnos registradas.\n");
 		} else {
 			for (Incidencias incidencia : getListaIncidencias()) {
-				if (incidencia.getTipoIncidencia().equals("Alumno") && incidencia.getUsuarioId() == usuarioId) {
+				if (incidencia.getTipoIncidencia().equals("Alumno") && incidencia.getUsuario().getUsuarioId() == usuarioId) {
 					System.out.println(incidencia + " - " + nombre);
 				}
 			}
@@ -153,7 +153,7 @@ public class GestionIncidencias {
 			System.err.println("\nLo siento. No hay incidencias de profesores registradas.\n");
 		} else {
 			for (Incidencias incidencia : getListaIncidencias()) {
-				if (incidencia.getTipoIncidencia().equals("Profesor") && incidencia.getUsuarioId() == usuarioId) {
+				if (incidencia.getTipoIncidencia().equals("Profesor") && incidencia.getUsuario().getUsuarioId() == usuarioId) {
 					System.out.println(incidencia + " - " + nombre);
 				}
 			}
@@ -167,7 +167,7 @@ public class GestionIncidencias {
 			System.err.println("\nLo siento. No hay incidencias de profesores registradas.\n");
 		} else {
 			for (Incidencias incidencia : getListaIncidencias()) {
-				if (incidencia.getTipoIncidencia().equals("Aplicacion") && incidencia.getUsuarioId() == usuarioId) {
+				if (incidencia.getTipoIncidencia().equals("Aplicacion") && incidencia.getUsuario().getUsuarioId() == usuarioId) {
 					System.out.println(incidencia + " - " + nombre);
 				}
 			}
@@ -265,7 +265,7 @@ public class GestionIncidencias {
 							+ usuarios.getTipoUsuario() + "\n" + Colores.ANSI_RESET);
 			
 		for(Incidencias incidencias : listaIncidencias) {
-			if(usuarios.getUsuarioId() == incidencias.getUsuarioId()) {
+			if(usuarios.getUsuarioId() == incidencias.getUsuario().getUsuarioId()) {
 				System.out.println(Colores.ANSI_CYAN + " Incidencias de este usuario - " + Colores.ANSI_WHITE + incidencias.getIncidencia() + " - " 
 				+ Colores.ANSI_GREEN + "Incidencia de tipo: " + Colores.ANSI_WHITE + incidencias.getTipoIncidencia() + "\n" + Colores.ANSI_RESET);
 			} 

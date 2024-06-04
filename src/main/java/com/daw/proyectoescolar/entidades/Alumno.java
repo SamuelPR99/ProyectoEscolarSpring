@@ -109,9 +109,9 @@ public class Alumno extends UsuarioBase {
 				opcion2 = sc.nextLine().toLowerCase();
 				
 				if(opcion2.equals("1") || opcion2.equals("incidencia de alumno")) {
-				gestionIncidencias.crearIncidenciaAlumno(sc, usuario.getUsuarioId());
+				gestionIncidencias.crearIncidenciaAlumno(sc, this);
 				} else if(opcion2.equals("2") || opcion2.equals("incidencia de aplicacion")) {
-				gestionIncidencias.crearIncidenciaAplicacion(sc, usuario.getUsuarioId());
+				gestionIncidencias.crearIncidenciaAplicacion(sc, this);
 				} else {
 					System.err.println("Por favor, introduce una opción válida");
 				}

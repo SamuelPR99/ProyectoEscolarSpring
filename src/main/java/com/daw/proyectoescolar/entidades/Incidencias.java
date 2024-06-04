@@ -6,7 +6,7 @@ public abstract class Incidencias {
 	protected int incidenciaId;
 	protected String incidencia;
 	protected String fechaIncidencia;
-	protected int usuarioId;
+	protected UsuarioBase usuario;
 	
 	// Constructores
 	public Incidencias() {
@@ -28,17 +28,17 @@ public abstract class Incidencias {
 		this.fechaIncidencia = fechaIncidencia;
 	}
 
-	public Incidencias(int incidenciaId, String incidencia, String fechaIncidencia, int usuarioId) {
+	public Incidencias(int incidenciaId, String incidencia, String fechaIncidencia, UsuarioBase usuario) {
 		this.incidenciaId = incidenciaId;
 		this.incidencia = incidencia;
 		this.fechaIncidencia = fechaIncidencia;
-		this.usuarioId = usuarioId;
+		this.usuario = usuario;
 	}
 
-	public Incidencias(String incidencia, String fechaIncidencia, int usuarioId) {
+	public Incidencias(String incidencia, String fechaIncidencia, UsuarioBase usuario) {
 		this.incidencia = incidencia;
 		this.fechaIncidencia = fechaIncidencia;
-		this.usuarioId = usuarioId;
+		this.usuario = usuario;
 	}
 	
 	// Getters y Setters
@@ -67,12 +67,12 @@ public abstract class Incidencias {
 		this.fechaIncidencia = fechaIncidencia;
 	}
 
-	public int getUsuarioId() {
-		return usuarioId;
+	public UsuarioBase getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuarioId(int usuarioId) {
-		this.usuarioId = usuarioId;
+	public void setUsuario(UsuarioBase usuario) {
+		this.usuario = usuario;
 	}
 
 	// Metodos
@@ -80,7 +80,7 @@ public abstract class Incidencias {
 	@Override
 	public String toString() {
 		return "Incidencias [incidenciaId=" + incidenciaId + ", incidencia=" + incidencia + ", fechaIncidencia="
-				+ fechaIncidencia + usuarioId + "]";
+				+ fechaIncidencia + usuario.getNombre() + "]";
 	}
 	
 	public abstract String getTipoIncidencia();
