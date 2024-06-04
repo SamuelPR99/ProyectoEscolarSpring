@@ -275,15 +275,15 @@ public class GestionIncidencias {
 		
 		return hashMapUsuariosIncidencias;
 	}
-	
+
 	public void buscadorDeIncidencias(Scanner sc) {
-		
-		System.out.println("Introduce el ID de la incidencia que quieres buscar: ");
+		System.out.println("Introduce el ID de la incidencia a buscar: ");
 		int incidenciaId = sc.nextInt();
-	    if(incidenciaId <= 0) {
-			System.err.println("No existe ningún ID de incidencia por debajo de 1.");
+		if(incidenciaId <= 0) {
+		System.err.println("No existe ningún ID de incidencia por debajo de 1.");
 		} else {
-			iRepo.buscadorDeIncidenciasBBDD(incidenciaId);
+			Incidencias incidencia = iRepo.buscadorDeIncidenciasBBDD(incidenciaId);
+			System.out.println(incidencia);
 		}
 	}
 }
