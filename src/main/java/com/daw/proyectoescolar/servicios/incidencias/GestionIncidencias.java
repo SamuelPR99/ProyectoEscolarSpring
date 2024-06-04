@@ -285,4 +285,11 @@ public class GestionIncidencias {
 			}
 		}
 	}
+
+	// buscador de incidencias model and view
+	public List<Incidencias> buscadorDeIncidencias(String busqueda) {
+		List<Incidencias> listaBusqueda = iRepo.buscadorDeIncidenciasBBDD(busqueda);
+		return listaBusqueda;
+	}
+
 }
