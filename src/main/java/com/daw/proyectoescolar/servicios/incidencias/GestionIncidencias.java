@@ -296,5 +296,5 @@ public class GestionIncidencias {
 		List<Incidencias> listaBusqueda = iRepo.buscadorDeIncidenciasBBDD(busqueda);
 		return listaBusqueda;
 	}
-	
+
 }
