@@ -247,7 +247,7 @@ public class GestionIncidencias {
 	public Map<UsuarioBase, Incidencias> hashMapUsuariosIncidencias() {
 		
 		List<UsuarioBase> listaUsuarios = gestionUsuarios.obtenerUsuarios();
-		List<Incidencias> listaIncidencias = iRepo.leerIncidenciasParaHashMap();
+		List<Incidencias> listaIncidencias = iRepo.listarIncidenciasBBDD();
 		
 		Map<UsuarioBase, Incidencias> hashMapUsuariosIncidencias = new HashMap<>();
 		
