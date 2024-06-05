@@ -187,6 +187,22 @@ public class ControladorWeb {
 		return mav;
 	}
 
+	@PostMapping("buscarIncidencias")
+	public ModelAndView buscarIncidencias(@RequestParam String busqueda, HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("listaBusqueda", gestionIncidencias.buscadorDeIncidencias(busqueda));
+
+		// Agregar los demás objetos necesarios al modelo
+		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
+		mav.addObject("usuario", usuario);
+		mav.addObject("usuarios", gestionUsuarios.obtenerUsuarios());
+		mav.addObject("incidencia", gestionIncidencias.hashMapUsuariosIncidencias());
+
+		mav.setViewName("administrador");
+		return mav;
+	}
+
 	@GetMapping("error")
 	public ModelAndView error() {
 		return new ModelAndView("error");

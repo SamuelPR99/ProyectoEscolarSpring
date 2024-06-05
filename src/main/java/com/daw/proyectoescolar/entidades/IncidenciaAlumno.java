@@ -40,8 +40,7 @@ public class IncidenciaAlumno extends Incidencias {
 
 	@Override
 	public String toString() { // Metodo que devuelve un mensaje con el tipo de incidencia y la incidencia en si
-		return Colores.ANSI_CYAN + "Incidencias de Alumnos: " + Colores.ANSI_YELLOW + incidencia + Colores.ANSI_GREEN + 
-				" Nombre del usuario: " + usuario.getNombre() + Colores.ANSI_RESET;
+		return Colores.ANSI_CYAN + "Incidencia de " + getTipoIncidencia() + ": " + getIncidencia() + " - " + fechaIncidencia + Colores.ANSI_RESET;
 	}
 	
 }

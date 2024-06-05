@@ -8,3 +8,23 @@ div .btn-disabled {
     color: #666666 !important; /* Color de texto más oscuro */
     cursor: not-allowed !important; /* Cambia el cursor para indicar que el elemento está desactivado */
 }
+
+.busqueda-input {
+    border: 1px solid #004a99;
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 35%;
+}
+
+.busqueda-submit {
+    background-color: #004a99;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.busqueda-submit:hover {
+    background-color: #003366;
+}

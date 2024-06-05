@@ -1,10 +1,7 @@
 package com.daw.proyectoescolar.servicios.incidencias;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
 import com.daw.proyectoescolar.entidades.IncidenciaAlumno;
 import com.daw.proyectoescolar.entidades.IncidenciaAplicacion;
@@ -15,14 +12,12 @@ import com.daw.proyectoescolar.repositorio.Colores;
 import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.IncidenciasRepo;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
-import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 public class GestionIncidencias {
 	
 	// Atributos
-	private IncidenciasRepo iRepo = new IncidenciasRepo();
-	private List<Incidencias> listaIncidencias = iRepo.listarIncidenciasBBDD();
-	private GestionUsuarios gestionUsuarios = new GestionUsuarios();
+	private final IncidenciasRepo iRepo = new IncidenciasRepo();
+	private final List<Incidencias> listaIncidencias = iRepo.listarIncidenciasBBDD();
 
 	// Constructores
 	public GestionIncidencias() {
@@ -92,40 +87,24 @@ public class GestionIncidencias {
 
 		do {
 
-			System.out.println("Elige que lista de incidencias quieres desplegar\n" + "1 - Incidencias de Alumnos\n"
-					+ "2 - Incidencias de Profesores\n" + "3 - Incidencias de Aplicacion\n"
-					+ "4 - Incidencias sin filtrar por tipo\n" + "5 - Volver");
+			System.out.println("""
+                    Elige que lista de incidencias quieres desplegar
+                    1 - Incidencias de Alumnos
+                    2 - Incidencias de Profesores
+                    3 - Incidencias de Aplicacion
+                    4 - Incidencias sin filtrar por tipo
+                    5 - Volver""");
 
 			opcion = sc.nextLine().toLowerCase();
 
-			if (opcion.equals("1") || opcion.equals("incidencias de alumnos")
-					|| opcion.equals("incidencias de alumno")) {
-
-				verIncidenciaAlumno();
-
-			} else if (opcion.equals("2") || opcion.equals("incidencias de profesores")
-					|| opcion.equals("incidencias de profesor")) {
-
-				verIncidenciaProfesor();
-
-			} else if (opcion.equals("3") || opcion.equals("incidencias de aplicacion")) {
-
-				verIncidenciaAplicacion();
-
-			} else if (opcion.equals("4") || opcion.equals("incidencias sin filtrar")
-					|| opcion.equals("incidencias sin filtrar por tipo")) {
-
-				verIncidenciasGenerales();
-
-			} else if (opcion.equals("5") || opcion.equals("volver")) {
-
-				volver = true;
-
-			} else {
-
-				System.err.println("Has introducido una opcion invalida");
-
-			}
+            switch (opcion) {
+                case "1", "incidencias de alumnos", "incidencias de alumno" -> verIncidenciaAlumno();
+                case "2", "incidencias de profesores", "incidencias de profesor" -> verIncidenciaProfesor();
+                case "3", "incidencias de aplicacion" -> verIncidenciaAplicacion();
+                case "4", "incidencias sin filtrar", "incidencias sin filtrar por tipo" -> verIncidenciasGenerales();
+                case "5", "volver" -> volver = true;
+                default -> System.err.println("Has introducido una opcion invalida");
+            }
 
 		} while (!volver);
 
@@ -219,7 +198,7 @@ public class GestionIncidencias {
 		}
 	}
 
-	/* Metodo encargado de imprimir todas las incidencias, 
+	/* Metodo encargado de imprimir todas las incidencias,
 	 * sin filtrarlas por su tipo.
 	 */
 	public void verIncidenciasGenerales() {
@@ -244,31 +223,18 @@ public class GestionIncidencias {
 		}
 	}
 	
-	public Map<UsuarioBase, Incidencias> hashMapUsuariosIncidencias() {
-		
-		List<UsuarioBase> listaUsuarios = gestionUsuarios.obtenerUsuarios();
-		List<Incidencias> listaIncidencias = iRepo.listarIncidenciasBBDD();
-		
-		Map<UsuarioBase, Incidencias> hashMapUsuariosIncidencias = new HashMap<>();
-		
-		// Recorrer la lista de Usuarios y la de Incidencias para mapear el HashMap
-		for(UsuarioBase usuarios : listaUsuarios) {
-			for(Incidencias incidencias : listaIncidencias) {
-				hashMapUsuariosIncidencias.put(usuarios, incidencias);
+	public Map<UsuarioBase, List<Incidencias>> hashMapUsuariosIncidencias() {
+		return iRepo.hashMapUsuariosIncidencias();
+	}
+
+	public void pintarHashIncidencias() {
+
+		for(Entry<UsuarioBase, List<Incidencias>> entry : hashMapUsuariosIncidencias().entrySet()) {
+			System.out.println(entry.getKey().getNombre() + " - ID: " + entry.getKey().getUsuarioId());
+			for (Incidencias incidencias : entry.getValue()) {
+				System.out.println(incidencias);
 			}
 		}
-		
-		// Imprimir HashMap de Usuarios e Incidencias
-		for(Entry<UsuarioBase, Incidencias> entry: hashMapUsuariosIncidencias.entrySet()) {
-			
-			System.out.println(entry.getKey() + ":");
-			for(Incidencias incidencia : listaIncidencias) {
-				System.out.println("\t" + incidencia.getTipoIncidencia() + " -> " + incidencia.getIncidencia());
-			}
-			
-		}
-		
-		return hashMapUsuariosIncidencias;
 	}
 
 	public void buscadorDeIncidencias(Scanner sc) {

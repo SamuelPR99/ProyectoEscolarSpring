@@ -74,7 +74,7 @@ public class Administrador extends UsuarioBase {
                     
                 case "4", "mostrar usuarios e incidencias":
                 	GestionLogs.logOpcionMenu(Constantes.MENU_INCIDENCIAS, "Mostrar Usuarios e Incidencias");
-                	gestor.hashMapUsuariosIncidencias();
+                	gestor.pintarHashIncidencias();
                 	break;
                 	
                 case "5", "salir del menu", "salir", "salir del":

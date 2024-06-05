@@ -20,13 +20,6 @@ Alumno;Pablo;Jeje@jeje;76429588L;0.0
 Profesor;Paquillo;Jaja@jaja;47531515V
 Profesor;Paquillo;Jaja@jaja;47531515V
 Profesor;Agapito;Jeje@jaja;47565853F
-Profesor;Agapito;Jeje@jaja;47565853F
-Profesor;Agapito;Jeje@jaja;47565853F
-Profesor;Agapito;Jeje@jaja;47565853F
-Profesor;Agapito;Jeje@jaja;47565853F
-Profesor;Agapito;Jeje@jaja;47565853F
-Profesor;Agapito;Jeje@jaja;47565853F
-Profesor;Agapito;Jeje@jaja;47565853F
 Profesor;Paquillo;Jaja@jaja;47531515V
 Profesor;Enrique;Jaja@jeje;47531515V
 Alumno;Ismael;pi48ELFC*;48824253Z;0.0

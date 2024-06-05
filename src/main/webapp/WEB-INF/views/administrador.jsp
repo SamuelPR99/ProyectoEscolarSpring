@@ -34,7 +34,7 @@
                         <td>${usuario.nombre}</td>
                         <td>${usuario.tipoUsuario}</td>
                         <td>${usuario.dni}</td>
-                        <td>
+                        <td style="text-align: center">
                             <form action="borrarUsuario" method="post">
                                 <input type="hidden" name="usuarioId" value="${usuario.usuarioId}">
                                 <input type="submit" value="❌" class="${usuario.tipoUsuario == 'Administrador' ? 'btn-disabled' : ''}" ${usuario.tipoUsuario == 'Administrador' ? 'disabled' : ''}>
@@ -55,26 +55,56 @@
                     <th>Usuario</th>
                     <th>Fecha</th>
                     <th>Descripción</th>
-                    <th>Estado</th>
                     <th>Resolver incidencia</th>
                 </tr>
-                <!-- hashmap incidencias -->
-                <c:forEach var="incidencia" items="${incidencias}">
-                    <tr>
-                        <td>${incidencia.key}</td>
-                        <td>${incidencia.value.usuarioId}</td>
-                        <td>${incidencia.value.fechaIncidencia}</td>
-                        <td>${incidencia.value.incidencia}</td>
-                        <td>${incidencia.value.tipoIncidencia}</td>
-                        <td>
-                            <form action="resolverIncidencia" method="post">
-                                <input type="hidden" name="incidenciaId" value="${incidencia.key}">
-                                <input type="submit" value="✅">
-                            </form>
-                        </td>
-                    </tr>
+                <c:forEach var="entry" items="${incidencia}">
+                    <c:forEach var="incidencia" items="${entry.value}">
+                        <tr>
+                            <td>${incidencia.incidenciaId}</td>
+                            <td>${entry.key.nombre}</td>
+                            <td>${incidencia.fechaIncidencia}</td>
+                            <td>${incidencia.incidencia}</td>
+                            <td style="text-align: center">
+                                <form method="post">
+                                    <input type="submit" value="🛠️">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </c:forEach>
             </table>
+
+            <form action="buscarIncidencias" method="post" class="busqueda-incidencias-form">
+                <label>
+                    <input type="text" name="busqueda" placeholder="Buscar incidencias - Palabra clave" class="busqueda-input">
+                </label>
+                <input type="submit" value="Buscar" class="busqueda-submit">
+            </form>
+
+            <c:if test="${not empty listaBusqueda}">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Resolver incidencia</th>
+                    </tr>
+                    <c:forEach var="incidencia" items="${listaBusqueda}">
+                        <tr>
+                            <td>${incidencia.incidenciaId}</td>
+                            <td>${incidencia.usuario.nombre}</td>
+                            <td>${incidencia.fechaIncidencia}</td>
+                            <td>${incidencia.incidencia}</td>
+                            <td style="text-align: center">
+                                <form method="post">
+                                    <input type="submit" value="🛠️">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
         </div>
     </section>
 </main>
@@ -82,8 +112,7 @@
     <p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>
     <p>
         <a href="#">Política de Privacidad</a> |
-        <a href="#">Términos de Servicio</a> |
-        <a href="incidencias">Incidencias</a>
+        <a href="#">Términos de Servicio</a>
     </p>
 </footer>
 </body>
