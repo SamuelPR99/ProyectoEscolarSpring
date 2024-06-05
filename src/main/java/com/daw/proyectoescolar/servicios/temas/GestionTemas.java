@@ -203,10 +203,17 @@ public class GestionTemas {
 
 	// Lista de tareas Entregadas con nota superior a 0 para mostrarlas en la vista
 	public List<Tarea> tareasEntregadasConNota(int idAlumno) {
-
+		
 		List<Tarea> tareasEntregadas = tareasEntregadas(idAlumno);
+		List<Tarea> tareasConNota = new ArrayList<>();
 
-		return tareasEntregadas.stream().filter(t -> t.getPuntuacion() > 0).toList(); // Esto hace que solo se muestren las tareas con nota superior a 0
+		for (Tarea tarea : tareasEntregadas) {
+			if (tarea.getPuntuacion() > 0) {
+				tareasConNota.add(tarea);
+			}
+		}
+
+		return tareasConNota;
 	}
 
 	// entregartarea boton para entregar tarea en la vista
