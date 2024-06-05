@@ -258,4 +258,8 @@ public class GestionIncidencias {
 		return listaBusqueda;
 	}
 
+	public void eliminarIncidencias(int incidenciaId) {
+		iRepo.eliminarIncidenciasBBDD(incidenciaId);
+	}
+
 }

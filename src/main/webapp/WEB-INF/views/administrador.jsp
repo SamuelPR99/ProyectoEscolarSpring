@@ -65,7 +65,8 @@
                             <td>${incidencia.fechaIncidencia}</td>
                             <td>${incidencia.incidencia}</td>
                             <td style="text-align: center">
-                                <form method="post">
+                                <form method="post" action="eliminarIncidencia">
+                                    <input type="hidden" name="incidenciaId" value="${incidencia.incidenciaId}">
                                     <input type="submit" value="🛠️">
                                 </form>
                             </td>
@@ -97,7 +98,8 @@
                             <td>${incidencia.fechaIncidencia}</td>
                             <td>${incidencia.incidencia}</td>
                             <td style="text-align: center">
-                                <form method="post">
+                                <form method="post" action="eliminarIncidencia">
+                                    <input type="hidden" name="incidenciaId" value="${incidencia.incidenciaId}">
                                     <input type="submit" value="🛠️">
                                 </form>
                             </td>

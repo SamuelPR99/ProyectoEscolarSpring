@@ -5,6 +5,7 @@ import java.sql.Date;
 import com.daw.proyectoescolar.entidades.Alumno;
 import com.daw.proyectoescolar.repositorio.FechaYHora;
 import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
+import com.daw.proyectoescolar.servicios.logs.GestionLogs;
 import com.daw.proyectoescolar.servicios.temas.GestionTemas;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,16 +26,19 @@ public class ControladorWeb {
 
 	@GetMapping("login")
 	public ModelAndView login() {
+		GestionLogs.logOpcionMenu("Login", "Login");
 		return new ModelAndView("login");
 	}
 
 	@GetMapping("registro")
 	public ModelAndView registro() {
+		GestionLogs.logOpcionMenu("Registro", "Registro");
 		return new ModelAndView("registro");
 	}
 
 	@GetMapping("registroExitoso")
 	public ModelAndView registroExitoso() {
+		GestionLogs.logOpcionMenu("Registro Exitoso", "Registro Exitoso");
 		return new ModelAndView("registroExitoso");
 	}
 
@@ -48,6 +52,7 @@ public class ControladorWeb {
 				&& gestionUsuarios.validarDNI(dni)) {
 			gestionUsuarios.registro(nombre, dni, contrasena, tipo, gestionUsuarios.obtenerUsuarios());
 			mav.setViewName("registroExitoso");
+			GestionLogs.logOpcionMenu("Registro", "Usuario registrado: " + nombre);
 		} else {
 			mav.addObject("mensaje", "Error en algun campo, vuelve a registrarte");
 		}
@@ -61,6 +66,7 @@ public class ControladorWeb {
 		UsuarioBase usuario = gestionUsuarios.login(nombre, contrasena, gestionUsuarios.obtenerUsuarios());
 
 		if (usuario != null) {
+			GestionLogs.logOpcionMenu("Login", "Usuario logueado: " + usuario.getNombre());
 			session.setAttribute("usuario", usuario); // Guardar el usuario en la sesión
 			mav.addObject("usuario", usuario); // Para poder mostrar su nombre
 			if (usuario.getTipoUsuario().equals("Administrador")) {
@@ -86,6 +92,7 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 
 		gestionTemas.entregarTarea(idTarea, idAlumno);
+		GestionLogs.logOpcionMenu("Entregar Tarea", "Tarea entregada por el alumno con ID: " + idAlumno);
 		mav.setViewName("redirect:/alumno");
 		return mav;
 	}
@@ -96,6 +103,7 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 
 		gestionUsuarios.modificarNotaAlumno(idAlumno, nota);
+		GestionLogs.logOpcionMenu("Cambiar Nota", "Nota cambiada al alumno con ID: " + idAlumno);
 		mav.setViewName("redirect:profesor");
 		return mav;
 	}
@@ -109,6 +117,8 @@ public class ControladorWeb {
 		for (Alumno alumno : gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios())) {
 			gestionTemas.asignarTarea(idTarea, alumno.getUsuarioId(), usuario.getUsuarioId(), fechaExpiracion);
 		}
+
+		GestionLogs.logOpcionMenu("Asignar Tarea", "Tarea asignada a todos los alumnos");
 		mav.setViewName("redirect:profesor");
 		return mav;
 	}
@@ -123,6 +133,7 @@ public class ControladorWeb {
 			mav.setViewName("administrador");
 			mav.addObject("usuarios", gestionUsuarios.obtenerUsuarios());
 			mav.addObject("incidencia", gestionIncidencias.hashMapUsuariosIncidencias());
+			GestionLogs.logOpcionMenu("Administrador", "Administrador logueado: " + usuario.getNombre());
 		} else {
 			mav.setViewName("error");
 		}
@@ -135,6 +146,7 @@ public class ControladorWeb {
 
 		ModelAndView mav = new ModelAndView();
 		gestionUsuarios.borrarUsuario(usuarioId);
+		GestionLogs.logOpcionMenu("Borrar Usuario", "Usuario borrado con ID: " + usuarioId);
 		mav.setViewName("redirect:administrador");
 		return mav;
 	}
@@ -152,6 +164,7 @@ public class ControladorWeb {
 			mav.addObject("tareasAsignadas", gestionTemas.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
 			mav.addObject("tareasEntregadas", gestionTemas.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
 			mav.addObject("fechaActual", FechaYHora.fechaActual()); // Añadir la fecha actual a la vista
+			GestionLogs.logOpcionMenu("Alumno", "Alumno logueado: " + usuario.getNombre());
 		} else {
 			mav.setViewName("error");
 		}
@@ -171,6 +184,7 @@ public class ControladorWeb {
 			mav.addObject("temas", gestionTemas.obtenerTemas());
 			mav.addObject("tareasEntregadasATiempoPorAlumno", gestionTemas.tareasEntregadasATiempoPorAlumno());
 			mav.addObject("notaMediaPorAlumno", gestionUsuarios.obtenerNotaMediaTareasEntregadas());
+			GestionLogs.logOpcionMenu("Profesor", "Profesor logueado: " + usuario.getNombre());
 		} else {
 			mav.setViewName("error");
 		}
@@ -198,8 +212,18 @@ public class ControladorWeb {
 		mav.addObject("usuario", usuario);
 		mav.addObject("usuarios", gestionUsuarios.obtenerUsuarios());
 		mav.addObject("incidencia", gestionIncidencias.hashMapUsuariosIncidencias());
-
+		GestionLogs.logOpcionMenu("Buscar Incidencias", "Incidencias buscadas: " + busqueda);
 		mav.setViewName("administrador");
+		return mav;
+	}
+
+	@PostMapping("eliminarIncidencia")
+	public ModelAndView eliminarIncidencia(@RequestParam int incidenciaId) {
+
+		ModelAndView mav = new ModelAndView();
+		gestionIncidencias.eliminarIncidencias(incidenciaId);
+		GestionLogs.logOpcionMenu("Eliminar Incidencia", "Incidencia eliminada con ID: " + incidenciaId);
+		mav.setViewName("redirect:administrador");
 		return mav;
 	}
 
