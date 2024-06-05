@@ -85,7 +85,7 @@
                         <td><fmt:formatNumber value="${entry.value}" type="number" maxFractionDigits="2" minFractionDigits="1"/></td>
                         <td>
                             <form action="cambiarNota" method="post">
-                                <input type="hidden" name="idAlumno" value="${alumno.usuarioId}">
+                                <input type="hidden" name="idAlumno" value="${entry.key.usuarioId}">
                                 <input type="number" name="nota" min="0" max="10" step="0.1" required>
                                 <input type="submit" value="✅">
                             </form>
