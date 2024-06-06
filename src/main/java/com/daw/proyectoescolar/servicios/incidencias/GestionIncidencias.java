@@ -17,7 +17,7 @@ public class GestionIncidencias {
 	
 	// Atributos
 	private final IncidenciasRepo iRepo = new IncidenciasRepo();
-	private final List<Incidencias> listaIncidencias = iRepo.listarIncidenciasBBDD();
+	private List<Incidencias> listaIncidencias = iRepo.listarIncidenciasBBDD();
 
 	// Constructores
 	public GestionIncidencias() {
@@ -264,6 +264,17 @@ public class GestionIncidencias {
 
 	public void insertarIncidencia(Incidencias incidencia) {
 		iRepo.insertarUnicaIncidenciaBBDD(incidencia);
+		this.listaIncidencias = getListaIncidencias();
 	}
 
+	// obtener lista de incidencias de un usuario en concreto por su ID
+	public List<Incidencias> obtenerIncidenciasUsuario(int usuarioId) {
+		List<Incidencias> listaIncidenciasUsuario = new ArrayList<>();
+		for(Incidencias incidencia : getListaIncidencias()) {
+			if(incidencia.getUsuario().getUsuarioId() == usuarioId) {
+				listaIncidenciasUsuario.add(incidencia);
+			}
+		}
+		return listaIncidenciasUsuario;
+	}
 }

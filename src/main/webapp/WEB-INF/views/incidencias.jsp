@@ -11,7 +11,7 @@
 <header>
     <h1>IES Murcia</h1>
     <nav>
-        <a href="#">Inicio</a> |
+        <a href="<c:choose><c:when test='${usuario.tipoUsuario eq "Administrador"}'>administrador</c:when><c:when test='${usuario.tipoUsuario eq "Alumno"}'>alumno</c:when><c:otherwise>profesor</c:otherwise></c:choose>">Inicio</a> |
         <a href="#">Perfil</a> |
         <a href="login">Cerrar sesión</a>
     </nav>
@@ -39,6 +39,22 @@
         <span id="charCount">0 / 255 Caracteres</span>
         <input type="submit" value="Añadir Incidencia">
     </form>
+
+    <h2>Mis Incidencias</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+        </tr>
+        <c:forEach var="incidencia" items="${incidencias}">
+            <tr>
+                <td>${incidencia.incidenciaId}</td>
+                <td>${incidencia.incidencia}</td>
+                <td>${incidencia.fechaIncidencia}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </main>
 
 <script src="../JS/incidencias.js"></script>

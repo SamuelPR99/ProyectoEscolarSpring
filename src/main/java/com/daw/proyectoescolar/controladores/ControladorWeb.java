@@ -1,6 +1,7 @@
 package com.daw.proyectoescolar.controladores;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.daw.proyectoescolar.entidades.*;
 import com.daw.proyectoescolar.repositorio.Colores;
@@ -197,7 +198,17 @@ public class ControladorWeb {
 
 		ModelAndView mav = new ModelAndView();
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
+
+		if (usuario == null) {
+			mav.setViewName("error");
+			return mav;
+		}
+
+		// Recuperar la lista de incidencias cada vez que se carga la página
+		List<Incidencias> incidencias = gestionIncidencias.obtenerIncidenciasUsuario(usuario.getUsuarioId());
+
 		mav.addObject("usuario", usuario);
+		mav.addObject("incidencias", incidencias);
 
 		return mav;
 	}

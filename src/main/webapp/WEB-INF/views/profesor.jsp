@@ -14,7 +14,7 @@
 <header>
     <h1>IES Murcia</h1>
     <nav>
-        <a href="#">Inicio</a> |
+        <a href="<c:choose><c:when test='${usuario.tipoUsuario eq "Administrador"}'>administrador</c:when><c:when test='${usuario.tipoUsuario eq "Alumno"}'>alumno</c:when><c:otherwise>profesor</c:otherwise></c:choose>">Inicio</a> |
         <a href="#">Perfil</a> |
         <a href="login">Cerrar sesión</a>
     </nav>
