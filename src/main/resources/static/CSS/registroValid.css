@@ -12,9 +12,9 @@ body {
     text-align: center;
 }
 .circle {
-    width: 350px; /* Aumenté el tamaño del círculo */
-    height: 350px; /* Aumenté el tamaño del círculo */
-    background-color: #659c31; /* Color verde */
+    width: 350px;
+    height: 350px;
+    background-color: #659c31;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -22,8 +22,8 @@ body {
     margin-bottom: 20px;
     position: relative;
     color: white;
-    overflow: hidden; /* Para ocultar el degradado fuera del círculo */
-    transition: transform 0.5s, background 0.5s; /* Transición suave */
+    overflow: hidden;
+    transition: transform 0.5s, background 0.5s;
     cursor: pointer;
 }
 
@@ -36,7 +36,7 @@ body {
     top: -50%;
     left: -50%;
     transform: rotate(45deg);
-    transition: transform 0.5s, background 0.5s; /* Transición suave */
+    transition: transform 0.5s, background 0.5s;
 }
 .circle:hover{
     transform: scale(1.1);
@@ -65,12 +65,12 @@ body {
         background-color: #659c31;
     }
     50% {
-        transform: scale(1.1) rotate(180deg); /* Rotación mientras se hace más pequeño */
+        transform: scale(1.1) rotate(180deg);
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.863);
         background-color: #82ca3f;
     }
     100% {
-        transform: scale(0) rotate(360deg); /* Rotación completa mientras desaparece */
+        transform: scale(0) rotate(360deg);
         box-shadow: 0 0 0 rgba(0, 0, 0, 0);
         background-color: #659c31;
     }
@@ -83,12 +83,12 @@ body {
         background-color: #659c31;
     }
     50% {
-        transform: scale(1.1); /* Rotación mientras se hace más pequeño */
+        transform: scale(1.1);
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.863);
         background-color: #82ca3f;
     }
     100% {
-        transform: scale(0); /* Rotación completa mientras desaparece */
+        transform: scale(0);
         box-shadow: 0 0 0 rgba(0, 0, 0, 0);
         background-color: #659c31;
     }

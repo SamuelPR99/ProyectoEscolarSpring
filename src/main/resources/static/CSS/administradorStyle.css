@@ -2,11 +2,10 @@ body {
     background-image: url(../IMG/fondoPaula.png);
 }
 
-/* Aumentando la especificidad */
 div .btn-disabled {
-    background-color: #cccccc !important; /* Color de fondo gris */
-    color: #666666 !important; /* Color de texto más oscuro */
-    cursor: not-allowed !important; /* Cambia el cursor para indicar que el elemento está desactivado */
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed !important;
 }
 
 .busqueda-input {

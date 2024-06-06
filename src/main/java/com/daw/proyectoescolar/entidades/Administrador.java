@@ -13,9 +13,7 @@ public class Administrador extends UsuarioBase {
     
     // Constructores
 
-    public Administrador() {
-
-    }
+    public Administrador() {}
     
     public Administrador(String nombre, String contrasena) {
         super(nombre, contrasena);

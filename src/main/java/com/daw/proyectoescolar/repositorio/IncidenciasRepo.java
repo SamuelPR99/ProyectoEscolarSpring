@@ -105,7 +105,7 @@ public class IncidenciasRepo {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Error al comprobar los datos de la tabla incidencia: " + e.getMessage());
+			System.err.println("Error al comprobar los datos de la tabla incidencia: " + e.getMessage());
 			GestionLogs.errorLogs("Error al comprobar los datos de la tabla incidencia: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
@@ -197,7 +197,7 @@ public class IncidenciasRepo {
             }
 			
 		} catch (SQLException e) {
-			System.out.println("Error al borrar la incidencia con id: " + incidenciaId + " " + e.getMessage());
+			System.err.println("Error al borrar la incidencia con id: " + incidenciaId + " " + e.getMessage());
 			GestionLogs.errorLogs("Error al borrar la incidencia con id: " + incidenciaId + " " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);

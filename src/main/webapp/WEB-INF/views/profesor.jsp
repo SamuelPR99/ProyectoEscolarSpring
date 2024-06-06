@@ -9,6 +9,7 @@
     <title>IES Murcia - Profesor</title>
     <link rel="stylesheet" href="../CSS/profesorStyle.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <script src="../JS/profesor.js"></script>
 </head>
 <body>
 <header>
@@ -115,22 +116,18 @@
         </c:forEach>
     ];
 
-    // Convertir los datos de JSTL a JavaScript
     var datosTareasEntregadasATiempoPorAlumno = {
         <c:forEach var="entry" items="${tareasEntregadasATiempoPorAlumno}" varStatus="status">
         "${entry.key.nombre}": ${entry.value}<c:if test="${!status.last}">,</c:if>
         </c:forEach>
     };
 
-    // Convertir los datos de JSTL a JavaScript
     var datosNotaMediaPorAlumno = {
         <c:forEach var="entry" items="${notaMediaPorAlumno}" varStatus="status">
         "${entry.key.nombre}": ${entry.value}<c:if test="${!status.last}">,</c:if>
         </c:forEach>
     };
 </script>
-
-<script src="../JS/profesor.js"></script>
 
 <footer>
     <p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>

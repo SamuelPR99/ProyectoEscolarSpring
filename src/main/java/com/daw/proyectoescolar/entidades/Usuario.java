@@ -16,6 +16,7 @@ public interface Usuario {
 	// Implementa verMenu en los hijos del UsuarioBase
 	public abstract void verMenu(Scanner sc, List<UsuarioBase> usuarios, List<Alumno> alumnos, UsuarioBase usuario);
 
+	// Implementa incidenciasMenu en los hijos del UsuarioBase
 	public abstract void incidenciasMenu(Scanner sc, UsuarioBase usuario);
 
 }

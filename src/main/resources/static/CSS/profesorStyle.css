@@ -2,25 +2,21 @@ body {
     background-image: url(../IMG/fondoProfe.jpg);
 }
 
-/* Estilos para el contenido colapsable */
 .collapsible-content{
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-out;
 }
 
-/* Estilos para los encabezados colapsables */
 .collapsible-header{
     cursor: pointer;
 }
 
-/* Estilos para el contenido abierto */
 .collapsible-section.open .collapsible-content{
-    max-height: 1000px; /* Ajusta este valor según el contenido */
+    max-height: 1000px;
 }
 
 .asignarTarea input, .asignarTarea select {
-    /* Hacer que los campos de entrada y los selectores sean más grandes y más fáciles de leer */
     width: 100%;
     padding: 10px;
     font-size: 1em;

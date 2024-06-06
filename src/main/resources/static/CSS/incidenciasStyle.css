@@ -16,3 +16,29 @@ textarea {
     resize: vertical;
     height: 100px;
 }
+
+label {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 0.3em;
+    color: #004a99;
+}
+
+select, textarea {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #333;
+}
+
+textarea {
+    min-height: 150px;
+}
+
+select:focus, textarea:focus {
+    border-color: #004a99;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,74,153,0.5);
+}

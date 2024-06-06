@@ -186,5 +186,4 @@ public class Alumno extends UsuarioBase {
 		} while (!opcion.equals("6") && !opcion.contains("salir"));
 	}
 
-
 }

@@ -6,6 +6,7 @@
     <title>Incidencias - ${usuario.nombre}</title>
     <link rel="stylesheet" href="../CSS/incidenciasStyle.css">
     <link rel="stylesheet" href="../CSS/styles.css">
+    <script src="../JS/incidencias.js"></script>
 </head>
 <body>
 <header>
@@ -56,8 +57,6 @@
         </c:forEach>
     </table>
 </main>
-
-<script src="../JS/incidencias.js"></script>
 
 <footer>
     <p>&copy; 2024 IES Murcia. Todos los derechos reservados.</p>

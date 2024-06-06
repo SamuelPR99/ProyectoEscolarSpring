@@ -213,6 +213,7 @@ public class GestionIncidencias {
 		}
 	}
 
+	// Metodo encargado de eliminar incidencias por scanner
 	public void eliminarIncidencias(Scanner sc) {
 		System.out.println("Introduce el ID de la incidencia a eliminar: ");
         int incidenciaId = sc.nextInt();
@@ -222,11 +223,13 @@ public class GestionIncidencias {
 			iRepo.eliminarIncidenciasBBDD(incidenciaId);
 		}
 	}
-	
+
+	// Metodo encargado de imprimir las incidencias para un usuario en concreto en la web
 	public Map<UsuarioBase, List<Incidencias>> hashMapUsuariosIncidencias() {
 		return iRepo.hashMapUsuariosIncidencias();
 	}
 
+	// Metodo encargado de imprimir el HashMap de incidencias de los usuarios
 	public void pintarHashIncidencias() {
 
 		for(Entry<UsuarioBase, List<Incidencias>> entry : hashMapUsuariosIncidencias().entrySet()) {
@@ -237,6 +240,7 @@ public class GestionIncidencias {
 		}
 	}
 
+	// Buscador de incidencias scanner
 	public void buscadorDeIncidencias(Scanner sc) {
 
 		System.out.println("Introduce la clave de busqueda de la incidencia a buscar: ");
@@ -252,22 +256,23 @@ public class GestionIncidencias {
 		}
 	}
 
-	// buscador de incidencias model and view
+	// Buscador de incidencias model and view
 	public List<Incidencias> buscadorDeIncidencias(String busqueda) {
-		List<Incidencias> listaBusqueda = iRepo.buscadorDeIncidenciasBBDD(busqueda);
-		return listaBusqueda;
+        return iRepo.buscadorDeIncidenciasBBDD(busqueda);
 	}
 
+	// Eliminar incidencias de la BBDD
 	public void eliminarIncidencias(int incidenciaId) {
 		iRepo.eliminarIncidenciasBBDD(incidenciaId);
 	}
 
+	// Insertar incidencia en la BBDD
 	public void insertarIncidencia(Incidencias incidencia) {
 		iRepo.insertarUnicaIncidenciaBBDD(incidencia);
-		this.listaIncidencias = getListaIncidencias();
+		this.listaIncidencias = getListaIncidencias(); // Actualizar la lista de incidencias, aunque creo que no funciona creo
 	}
 
-	// obtener lista de incidencias de un usuario en concreto por su ID
+	// Obtener lista de incidencias de un usuario en concreto por su ID
 	public List<Incidencias> obtenerIncidenciasUsuario(int usuarioId) {
 		List<Incidencias> listaIncidenciasUsuario = new ArrayList<>();
 		for(Incidencias incidencia : getListaIncidencias()) {

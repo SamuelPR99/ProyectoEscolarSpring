@@ -1,11 +1,9 @@
 package com.daw.proyectoescolar.controladores;
 
 import java.sql.Date;
-import java.util.List;
 
 import com.daw.proyectoescolar.entidades.*;
 import com.daw.proyectoescolar.repositorio.Colores;
-import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.FechaYHora;
 import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
@@ -57,6 +55,7 @@ public class ControladorWeb {
 			GestionLogs.logOpcionMenu("Registro", "Usuario registrado: " + nombre);
 		} else {
 			mav.addObject("mensaje", "Error en algun campo, vuelve a registrarte");
+			GestionLogs.errorLogs("Error en el controlador de registro" + nombre + " " + dni + " " + tipo);
 		}
 		return mav;
 	}
@@ -70,7 +69,7 @@ public class ControladorWeb {
 		if (usuario != null) {
 			GestionLogs.logOpcionMenu("Login", "Usuario logueado: " + usuario.getNombre());
 			session.setAttribute("usuario", usuario); // Guardar el usuario en la sesión
-			mav.addObject("usuario", usuario); // Para poder mostrar su nombre
+			mav.addObject("usuario", usuario);
 			if (usuario.getTipoUsuario().equals("Administrador")) {
 				mav.setViewName("redirect:/administrador");
 			} else if (usuario.getTipoUsuario().equals("Alumno")) {
@@ -83,6 +82,7 @@ public class ControladorWeb {
 			}
 		} else {
 			mav.addObject("mensaje", "Usuario o contraseña incorrectos");
+			GestionLogs.errorLogs("Error en el controlador de login" + nombre + " " + contrasena);
 			mav.setViewName("login");
 		}
 		return mav;
@@ -131,12 +131,13 @@ public class ControladorWeb {
 		ModelAndView mav = new ModelAndView();
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
 		if (usuario != null) {
-			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
+			mav.addObject("usuario", usuario);
 			mav.setViewName("administrador");
 			mav.addObject("usuarios", gestionUsuarios.obtenerUsuarios());
 			mav.addObject("incidencia", gestionIncidencias.hashMapUsuariosIncidencias());
 			GestionLogs.logOpcionMenu("Administrador", "Administrador logueado: " + usuario.getNombre());
 		} else {
+			GestionLogs.errorLogs("Error en el controlador de administrador");
 			mav.setViewName("error");
 		}
 
@@ -161,13 +162,14 @@ public class ControladorWeb {
 		int id = usuario.getUsuarioId();
 
 		if (usuario != null) {
-			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
+			mav.addObject("usuario", usuario);
 			mav.setViewName("alumno");
 			mav.addObject("tareasAsignadas", gestionTemas.tareasAsignadas(id)); // Añadimos las tareas asignadas al alumno
 			mav.addObject("tareasEntregadas", gestionTemas.tareasEntregadas(id)); // Añadimos las tareas entregadas por el alumno
 			mav.addObject("fechaActual", FechaYHora.fechaActual()); // Añadir la fecha actual a la vista
 			GestionLogs.logOpcionMenu("Alumno", "Alumno logueado: " + usuario.getNombre());
 		} else {
+			GestionLogs.errorLogs("Error en el controlador de alumno" + usuario.getNombre());
 			mav.setViewName("error");
 		}
 		return mav;
@@ -180,7 +182,7 @@ public class ControladorWeb {
 
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario"); // Recuperar el usuario de la sesión
 		if (usuario != null) {
-			mav.addObject("usuario", usuario); // Añadir el usuario a la vista
+			mav.addObject("usuario", usuario);
 			mav.setViewName("profesor");
 			mav.addObject("alumnos", gestionUsuarios.obtenerAlumnos(gestionUsuarios.obtenerUsuarios()));
 			mav.addObject("temas", gestionTemas.obtenerTemas());
@@ -188,6 +190,7 @@ public class ControladorWeb {
 			mav.addObject("notaMediaPorAlumno", gestionUsuarios.obtenerNotaMediaTareasEntregadas());
 			GestionLogs.logOpcionMenu("Profesor", "Profesor logueado: " + usuario.getNombre());
 		} else {
+			GestionLogs.errorLogs("Error en el controlador de profesor" + usuario.getNombre());
 			mav.setViewName("error");
 		}
 		return mav;
@@ -198,17 +201,15 @@ public class ControladorWeb {
 
 		ModelAndView mav = new ModelAndView();
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
-
+		GestionLogs.logOpcionMenu("Incidencias", "Incidencias" + usuario.getNombre());
 		if (usuario == null) {
+			GestionLogs.errorLogs("Error en el controlador de incidencias" + usuario.getNombre());
 			mav.setViewName("error");
 			return mav;
 		}
 
-		// Recuperar la lista de incidencias cada vez que se carga la página
-		List<Incidencias> incidencias = gestionIncidencias.obtenerIncidenciasUsuario(usuario.getUsuarioId());
-
 		mav.addObject("usuario", usuario);
-		mav.addObject("incidencias", incidencias);
+		mav.addObject("incidencias", gestionIncidencias.obtenerIncidenciasUsuario(usuario.getUsuarioId()));
 
 		return mav;
 	}
@@ -246,6 +247,7 @@ public class ControladorWeb {
 		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
 
 		if (usuario == null) {
+			GestionLogs.errorLogs("Error en el controlador de añadir incidencia" + usuario.getNombre());
 			mav.setViewName("error");
 			return mav;
 		}

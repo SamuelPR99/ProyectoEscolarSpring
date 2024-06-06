@@ -65,7 +65,6 @@ body::after {
     margin-top: 1rem;
 }
 
-/* Estilos para los campos de entrada */
 #nombre, #contrasena {
     width: 100%;
     padding: 0.5rem;
@@ -74,35 +73,30 @@ body::after {
     margin-bottom: 1rem;
 }
 
-/* Estilos para las etiquetas */
 .usuario {
     display: block;
     margin-bottom: 0.5rem;
     color: #333;
 }
 
-/* Estilos de foco para los campos de entrada */
 #nombre:focus, #contrasena:focus {
     border-color: #0066cc;
     outline: none;
     box-shadow: 0 0 5px #0066cc;
 }
 
-/* Estilos de validación */
 #nombre:valid, #contrasena:valid {
-    border-color: #34c759; /* verde */
+    border-color: #34c759;
 }
 
 #nombre:invalid, #contrasena:invalid {
-    border-color: #ff3b30; /* rojo */
+    border-color: #ff3b30;
 }
 
-/* Transiciones suaves */
 #nombre, #contrasena {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Estilos para el botón de envío */
 #loginForm button:active {
     background-color: #002233;
     transform: scale(0.95);
@@ -114,7 +108,7 @@ body::after {
     display: block;
     text-align: center;
     margin-top: 1rem;
-    transition: color 0.3s ease; /* Agrega esta línea */
+    transition: color 0.3s ease;
 }
 
 #loginForm a:hover {

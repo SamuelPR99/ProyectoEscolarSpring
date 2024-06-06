@@ -61,7 +61,7 @@ public class TemasRepo {
 			br.close();
 
 		} catch (IOException e) {
-			System.out.println(Constantes.ERROR_LEER_ARCHIVO);
+			System.err.println(Constantes.ERROR_LEER_ARCHIVO);
 			GestionLogs.errorLogs(Constantes.ERROR_LEER_ARCHIVO + e.getMessage());
 		}
 
@@ -94,7 +94,7 @@ public class TemasRepo {
 			br.close();
 
 		} catch (IOException e) {
-			System.out.println("Error al leer el archivo");
+			System.err.println(Constantes.ERROR_LEER_ARCHIVO + e.getMessage());
 			GestionLogs.errorLogs(Constantes.ERROR_LEER_ARCHIVO + e.getMessage());
 		}
 
@@ -178,8 +178,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al insertar los temas y tareas en la base de datos. " + e.getMessage());
+			GestionLogs.errorLogs("Error al insertar los temas y tareas en la base de datos. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -207,8 +207,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al comprobar si hay datos en la tabla temas. " + e.getMessage());
+			GestionLogs.errorLogs("Error al comprobar si hay datos en la tabla temas. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -248,8 +248,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al asignar la tarea a los alumnos. " + e.getMessage());
+			GestionLogs.errorLogs("Error al asignar la tarea a los alumnos. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -289,8 +289,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al obtener las tareas asignadas al alumno. " + e.getMessage());
+			GestionLogs.errorLogs("Error al obtener las tareas asignadas al alumno. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -336,8 +336,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al entregar la tarea. " + e.getMessage());
+			GestionLogs.errorLogs("Error al entregar la tarea. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -378,8 +378,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al obtener la dificultad de la tarea. " + e.getMessage());
+			GestionLogs.errorLogs("Error al obtener la dificultad de la tarea. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 
@@ -422,8 +422,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al obtener las tareas entregadas. " + e.getMessage());
+			GestionLogs.errorLogs("Error al obtener las tareas entregadas. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -459,8 +459,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al obtener los temas de la base de datos. " + e.getMessage());
+			GestionLogs.errorLogs("Error al obtener los temas de la base de datos. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}
@@ -495,8 +495,8 @@ public class TemasRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			GestionLogs.errorLogs(e.getMessage());
+			System.err.println("Error al obtener las tareas de la base de datos. " + e.getMessage());
+			GestionLogs.errorLogs("Error al obtener las tareas de la base de datos. " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
 		}

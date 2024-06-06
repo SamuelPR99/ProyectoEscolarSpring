@@ -73,6 +73,5 @@ public abstract class UsuarioBase implements Usuario {
 			this.dni = dni;
 		}
 
-	// Metodos
 }
 

@@ -221,7 +221,7 @@ public class UsuariosRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error al insertar los usuarios en la base de datos: " + e.getMessage());
 			GestionLogs.errorLogs("Error al insertar los usuarios en la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
@@ -279,7 +279,7 @@ public class UsuariosRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error al obtener los usuarios de la base de datos: " + e.getMessage());
 			GestionLogs.errorLogs("Error al obtener los usuarios de la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
@@ -305,7 +305,7 @@ public class UsuariosRepo {
 			psDeleteUsuario.executeUpdate();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error al borrar los usuarios de la base de datos: " + e.getMessage());
 			GestionLogs.errorLogs("Error al borrar los usuarios de la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
@@ -333,7 +333,7 @@ public class UsuariosRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error al comprobar los datos de la base de datos: " + e.getMessage());
 			GestionLogs.errorLogs("Error al comprobar los datos de la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
@@ -375,7 +375,7 @@ public class UsuariosRepo {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error al insertar el usuario en la base de datos: " + e.getMessage());
 			GestionLogs.errorLogs("Error al insertar el usuario en la base de datos: " + e.getMessage());
 		}
 		finally {
@@ -397,7 +397,7 @@ public class UsuariosRepo {
 			ps.executeUpdate();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error al cambiar la contraseña en la base de datos: " + e.getMessage());
 			GestionLogs.errorLogs("Error al cambiar la contraseña en la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
@@ -428,7 +428,7 @@ public class UsuariosRepo {
 	        }
 
 	    } catch (Exception e) {
-	        e.printStackTrace();
+			System.err.println("Error al obtener los alumnos de la base de datos: " + e.getMessage());
 	    } finally {
 	        conexionBBDD.cerrarConexion(conexion);
 	    }
@@ -451,7 +451,7 @@ public class UsuariosRepo {
 			ps.executeUpdate();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error al modificar la nota del alumno en la base de datos: " + e.getMessage());
 			GestionLogs.errorLogs("Error al modificar la nota del alumno en la base de datos: " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);
@@ -472,7 +472,7 @@ public class UsuariosRepo {
 			ps.executeUpdate();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error al borrar usuario con id: " + usuarioId + " " + e.getMessage());
 			GestionLogs.errorLogs("Error al borrar usuario con id: " + usuarioId + " " + e.getMessage());
 		} finally {
 			conexionBBDD.cerrarConexion(conexion);

@@ -18,16 +18,17 @@
 </div>
 
 <script>
+	// Funcion para desaparecer el círculo de carga
 	function desaparecer() {
 		var circle = document.querySelector('.circle');
 		circle.style.transition = 'transform 1s, opacity 1s';
 		circle.style.transform = 'scale(0) rotate(360deg)';
 		circle.style.opacity = '0';
 	}
-	// Esperar a que la animación termine antes de redirigir
+
 	setTimeout(function() {
-		window.location.href = 'login'; // Asegúrate de que la ruta 'login' sea correcta según tu configuración de rutas
-	}, 3000); // Espera 1 segundo, que es la duración de la animación
+		window.location.href = 'login';
+	}, 3000);
 </script>
 
 </body>

@@ -13,7 +13,7 @@ import com.daw.proyectoescolar.repositorio.UsuariosRepo;
 public class GestionTemas {
 
 	TemasRepo tRepo = new TemasRepo();
-	private List<Tarea> listaDeTareas = new TemasRepo().archivoTareas();
+	private final List<Tarea> listaDeTareas = new TemasRepo().archivoTareas();
 
 	// Constructores
 	public GestionTemas() {
@@ -33,8 +33,10 @@ public class GestionTemas {
 
 	}
 
-	// Muestra el menu de temas y tareas y permite seleccionar un tema y ver sus
-	// tareas asociadas
+	/*
+	Muestra el menu de temas y tareas y permite seleccionar un tema
+	y ver sus tareas asociadas
+	 */
 	public void menuTemas(Scanner sc) {
 
 		System.out.println(Colores.ANSI_UNDERLINE + Colores.ANSI_YELLOW + "Seleccione un tema: " + Colores.ANSI_RESET);
@@ -71,8 +73,10 @@ public class GestionTemas {
 			}
 		}
 
-		// Si no hay tareas del tipo que se recomienda, busca la primera tarea de
-		// cualquier tipo
+		/*
+		Si no hay tareas del tipo que se recomienda, busca la primera tarea de
+		cualquier tipo
+		 */
 		if (!listaDeTareas.isEmpty()) {
 			Tarea tareaRecomendada = listaDeTareas.get(0);
 			alumno.agregarTarea(tareaRecomendada);
@@ -153,6 +157,7 @@ public class GestionTemas {
 		System.out.println(Colores.ANSI_GREEN + "Tarea entregada con exito. 😎" + Colores.ANSI_RESET);
 	}
 
+	// Calcular la media de las notas de un alumno en las tareas entregadas con nota
 	public double calcularMediaNotasAlumno(int idAlumno) {
 
 		TemasRepo tRepo = new TemasRepo();

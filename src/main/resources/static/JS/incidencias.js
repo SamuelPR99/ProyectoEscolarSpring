@@ -7,7 +7,6 @@ window.onload = function() {
     });
 }
 
-// Obtén los elementos del DOM
 var textarea = document.getElementById('descripcionIncidencia');
 var charCount = document.getElementById('charCount');
 

@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>IES Murcia - Alumno</title>
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="../CSS/alumnoStyle.css">
+    <script src="../JS/alumno.js"></script>
 </head>
 <body>
 <header>
@@ -139,40 +139,6 @@
             </c:forEach>
         </c:otherwise>
     </c:choose>
-
-    <!-- JavaScript para mostrar y ocultar los detalles de las tareas -->
-    <script>
-        function toggleDetails(element) {
-            var details = element.nextElementSibling;
-            if (details.style.maxHeight === "0px" || details.style.maxHeight === "") {
-                details.style.display = "block"; // Asegura que el elemento se muestre antes de iniciar la transición
-                setTimeout(function() { // Introduce un breve retraso para asegurar que la transición se aplique
-                    details.style.opacity = "1";
-                    details.style.maxHeight = "500px"; // Ajusta este valor según tu contenido
-                    details.style.visibility = "visible"; // Asegura que el elemento sea visible durante la transición
-                }, 10); // Un retraso mínimo es suficiente para permitir que el navegador aplique el display: block
-            } else {
-                details.style.opacity = "0";
-                details.style.maxHeight = "0";
-                details.style.visibility = "hidden"; // Inicia el proceso de hacer el elemento no visible
-                setTimeout(function() {
-                    if (details.style.opacity === "0") { // Verifica nuevamente para evitar ocultarlo si el usuario hizo clic nuevamente durante la transición
-                        details.style.display = "none";
-                    }
-                }, 500); // La duración de este temporizador debe coincidir con la duración de la transición CSS
-            }
-        }
-    </script>
-
-    <!-- Otra forma de hacerlo, sin necesidad de temporizadores -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() { // Espera a que el DOM esté completamente cargado
-            var detalles = document.querySelectorAll('.tarea > div:nth-child(2)'); // Selecciona todos los elementos que se desplegarán
-            detalles.forEach(function(detalle) { // Itera sobre cada elemento
-                detalle.style.maxHeight = "0px"; // Inicializa max-height a 0
-            });
-        });
-    </script>
 </main>
 </body>
 <footer>

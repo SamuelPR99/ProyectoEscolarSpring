@@ -40,7 +40,6 @@ body {
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-
 .tarea {
     background-color: #f1f1f1;
     padding: 1rem;
@@ -65,7 +64,6 @@ body {
     justify-content: flex-end;
 }
 
-/* Specific Style for Task Details */
 .tarea div[style*="max-height: 0px;"],
 .tarea div[style*="max-height: 0;"] {
     opacity: 0;

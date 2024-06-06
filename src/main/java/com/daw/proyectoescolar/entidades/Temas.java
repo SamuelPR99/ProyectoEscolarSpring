@@ -86,6 +86,4 @@ public class Temas {
 		return "Temas [nombre=" + nombre + ", descripcion=" + descripcion + ", listaTareas=" + listaTareas + "]";
 	}
 
-	
-
 }

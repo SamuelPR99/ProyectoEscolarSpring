@@ -96,7 +96,8 @@ public class GestionUsuarios {
 
 		return login(nombre, contrasena, usuarios);
 	}
-	
+
+	// Iniciar sesion con nombre y contrasena y lista de usuarios como parametros
 	public UsuarioBase login(String nombre, String contrasena, List<UsuarioBase> usuarios) {
 
 		for (UsuarioBase usuario : usuarios) {
@@ -245,6 +246,7 @@ public class GestionUsuarios {
 
 	}
 
+	// Cambiar la contraseña en la base de datos
 	public void cambiarContrasena(String nuevaContrasena, UsuarioBase usuario) {
 
 		usuario.setContrasena(nuevaContrasena);
@@ -266,14 +268,17 @@ public class GestionUsuarios {
 		return usuario.length() >= 3 && !usuario.contains(" ");
 	}
 
-	// Debe contener 6 caracteres, no puede tener espacios, y debe contener minimo
-	// un caracter especial y una mayuscula
+	/*
+		Debe contener 6 caracteres, no puede tener espacios, y debe contener minimo
+		un caracter especial y una mayuscula
+	 */
 	public boolean validarContrasena(String contrasena) {
 
 		return contrasena.length() >= 6 && !contrasena.contains(" ") && contrasena.matches(".*[!@#$%^&*].*")
 				&& contrasena.matches(".*[A-Z].*");
 	}
-	
+
+	// Inicializar la base de datos con los datos de los archivos
 	public void inicializarBBDD() {
 		
 		if (!uRepo.comprobarDatos()) { // si la bbdd esta vacia
@@ -393,7 +398,7 @@ public class GestionUsuarios {
 		uRepo.borrarUsuarioBBDD(usuarioId);
 	}
 
-
+	// Obtener la nota media de las tareas entregadas por los alumnos
 	public Map<Alumno, Double> obtenerNotaMediaTareasEntregadas() {
 
 		Map<Alumno, Double> notaMediaPorAlumno = new LinkedHashMap<>();
@@ -410,6 +415,7 @@ public class GestionUsuarios {
 		return notaMediaPorAlumno;
 	}
 
+	// Obtener un usuario por su id
 	public UsuarioBase getUsuarioPorId(int usuarioId) {
 		for (UsuarioBase usuario : obtenerUsuarios()) {
 			if (usuario.getUsuarioId() == usuarioId) {
