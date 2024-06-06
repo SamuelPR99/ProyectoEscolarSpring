@@ -262,4 +262,8 @@ public class GestionIncidencias {
 		iRepo.eliminarIncidenciasBBDD(incidenciaId);
 	}
 
+	public void insertarIncidencia(Incidencias incidencia) {
+		iRepo.insertarUnicaIncidenciaBBDD(incidencia);
+	}
+
 }

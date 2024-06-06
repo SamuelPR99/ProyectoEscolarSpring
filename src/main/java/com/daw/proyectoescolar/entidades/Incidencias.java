@@ -40,7 +40,12 @@ public abstract class Incidencias {
 		this.fechaIncidencia = fechaIncidencia;
 		this.usuario = usuario;
 	}
-	
+
+	public Incidencias(String incidencia, UsuarioBase usuario) {
+		this.incidencia = incidencia;
+		this.usuario = usuario;
+	}
+
 	// Getters y Setters
 
 	public int getIncidenciaId() {

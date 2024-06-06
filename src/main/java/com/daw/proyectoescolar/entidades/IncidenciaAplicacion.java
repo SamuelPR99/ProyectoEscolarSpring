@@ -29,6 +29,10 @@ public class IncidenciaAplicacion extends Incidencias {
 		super(incidencia, fechaIncidencia, usuario);
 	}
 
+	public IncidenciaAplicacion(String incidencia, UsuarioBase usuario) {
+		super(incidencia, usuario);
+	}
+
 	// Metodos
 	@Override
 	public String getTipoIncidencia() {

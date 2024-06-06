@@ -2,7 +2,9 @@ package com.daw.proyectoescolar.controladores;
 
 import java.sql.Date;
 
-import com.daw.proyectoescolar.entidades.Alumno;
+import com.daw.proyectoescolar.entidades.*;
+import com.daw.proyectoescolar.repositorio.Colores;
+import com.daw.proyectoescolar.repositorio.Constantes;
 import com.daw.proyectoescolar.repositorio.FechaYHora;
 import com.daw.proyectoescolar.servicios.incidencias.GestionIncidencias;
 import com.daw.proyectoescolar.servicios.logs.GestionLogs;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
-import com.daw.proyectoescolar.entidades.UsuarioBase;
 import com.daw.proyectoescolar.servicios.usuarios.GestionUsuarios;
 
 @Controller
@@ -224,6 +225,43 @@ public class ControladorWeb {
 		gestionIncidencias.eliminarIncidencias(incidenciaId);
 		GestionLogs.logOpcionMenu("Eliminar Incidencia", "Incidencia eliminada con ID: " + incidenciaId);
 		mav.setViewName("redirect:administrador");
+		return mav;
+	}
+
+	@PostMapping("addIncidencia")
+	public ModelAndView addIncidencia(@RequestParam String tipoIncidencia, @RequestParam String descripcionIncidencia, HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+		UsuarioBase usuario = (UsuarioBase) session.getAttribute("usuario");
+
+		if (usuario == null) {
+			mav.setViewName("error");
+			return mav;
+		}
+
+		switch (tipoIncidencia) {
+			case "IncidenciaAlumno":
+				Incidencias incidenciaAlumno = new IncidenciaAlumno(descripcionIncidencia, usuario);
+				gestionIncidencias.insertarIncidencia(incidenciaAlumno);
+				System.out.println(Colores.ANSI_GREEN + "Incidencia de alumno añadida correctamente" + Colores.ANSI_RESET);
+				break;
+			case "IncidenciaProfesor":
+				Incidencias incidenciaProfesor = new IncidenciaProfesor(descripcionIncidencia, usuario);
+				gestionIncidencias.insertarIncidencia(incidenciaProfesor);
+				System.out.println(Colores.ANSI_GREEN + "Incidencia de profesor añadida correctamente" + Colores.ANSI_RESET);
+				break;
+			case "IncidenciaAplicacion":
+				Incidencias incidenciaAplicacion = new IncidenciaAplicacion(descripcionIncidencia, usuario);
+				gestionIncidencias.insertarIncidencia(incidenciaAplicacion);
+				System.out.println(Colores.ANSI_GREEN + "Incidencia de aplicacion añadida correctamente" + Colores.ANSI_RESET);
+				break;
+			default:
+				GestionLogs.errorLogs("Tipo de incidencia no válido " + tipoIncidencia);
+		}
+
+		GestionLogs.logOpcionMenu("Añadir Incidencia", "Incidencia añadida por el usuario con ID: " + usuario.getUsuarioId());
+		mav.setViewName("redirect:incidencias");
+
 		return mav;
 	}
 

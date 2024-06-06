@@ -1,3 +1,18 @@
 body {
     background-image: url(../IMG/fondoInci.jpg);
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+textarea {
+    margin-top: 5px;
+    resize: vertical;
+    height: 100px;
+}
