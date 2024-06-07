@@ -121,6 +121,7 @@ public class IncidenciasRepo {
 		ConexionBBDD conexionBBDD = new ConexionBBDD();
 		Connection conexion = conexionBBDD.conectar();
 		String sql = "INSERT INTO incidencia (tipo, incidencia, fecha, usuario_id) VALUES (?, ?, ?, ?)";
+
 		int filasAfectadas = 0;
 
 		try {

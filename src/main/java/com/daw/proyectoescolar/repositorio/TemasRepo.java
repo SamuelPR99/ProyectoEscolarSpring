@@ -263,7 +263,11 @@ public class TemasRepo {
 
 		List<Tarea> tareas = new ArrayList<>();
 
-		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio, asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion, asignartarea.estado, asignartarea.puntuacion FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id WHERE asignartarea.alumno_id = ? AND asignartarea.estado != 1";
+		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio," +
+				" asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion, " +
+				"asignartarea.estado, asignartarea.puntuacion " +
+				"FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id " +
+				"WHERE asignartarea.alumno_id = ? AND asignartarea.estado != 1";
 
 		try {
 
@@ -396,7 +400,11 @@ public class TemasRepo {
 
 		List<Tarea> tareas = new ArrayList<>();
 
-		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio, asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion, asignartarea.estado, asignartarea.puntuacion FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id WHERE asignartarea.alumno_id = ? AND asignartarea.estado = 1";
+		String sql = "SELECT tarea.tarea_id, tarea.titulo, tarea.descripcion, tarea.dificultad, asignartarea.fecha_inicio, " +
+				"asignartarea.fecha_expiracion, asignartarea.fecha_entrega, asignartarea.puntuacion, " +
+				"asignartarea.estado, asignartarea.puntuacion " +
+				"FROM tarea INNER JOIN asignartarea ON tarea.tarea_id = asignartarea.tarea_id " +
+				"WHERE asignartarea.alumno_id = ? AND asignartarea.estado = 1";
 
 		try {
 
